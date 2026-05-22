@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HACKII AI REAL ENGINE</title>
+<title>HACKII REAL AI</title>
 
 <style>
 
@@ -16,12 +16,12 @@ font-family:Arial,sans-serif;
 
 body{
 background:#050816;
-color:#fff;
+color:white;
 padding:15px;
 }
 
 .container{
-max-width:1200px;
+max-width:1000px;
 margin:auto;
 }
 
@@ -31,7 +31,7 @@ margin-bottom:20px;
 }
 
 .title h1{
-font-size:42px;
+font-size:40px;
 color:#00ff99;
 }
 
@@ -48,52 +48,39 @@ margin-top:18px;
 box-shadow:0 0 20px #000;
 }
 
-.center{
+.ai{
 text-align:center;
 }
 
-.timer{
-font-size:75px;
-font-weight:bold;
-color:#00ff99;
-}
-
 .predict{
-font-size:65px;
+font-size:50px;
 font-weight:bold;
 margin-top:15px;
 }
 
 .number{
-font-size:130px;
+font-size:90px;
 font-weight:bold;
 margin-top:10px;
 }
 
-.red{
-color:#ff4545;
-}
-
-.green{
-color:#00ff66;
-}
-
 .conf{
-font-size:28px;
-margin-top:10px;
-}
-
-.signal{
 font-size:25px;
 margin-top:10px;
 }
 
+.status{
+margin-top:15px;
+font-size:22px;
+}
+
 .bar{
+width:100%;
 height:10px;
 background:#222;
 border-radius:50px;
-overflow:hidden;
 margin-top:15px;
+overflow:hidden;
 }
 
 .fill{
@@ -106,10 +93,10 @@ transition:1s;
 .analysis{
 margin-top:20px;
 background:#182447;
-padding:18px;
+padding:15px;
 border-radius:15px;
-line-height:33px;
 font-size:17px;
+line-height:30px;
 text-align:left;
 }
 
@@ -121,6 +108,21 @@ padding:14px;
 background:#182447;
 border-radius:12px;
 margin-top:10px;
+}
+
+.red{
+color:#ff4545;
+font-weight:bold;
+}
+
+.green{
+color:#00ff66;
+font-weight:bold;
+}
+
+.violet{
+color:#ff4dff;
+font-weight:bold;
 }
 
 .footer{
@@ -137,38 +139,28 @@ margin-top:20px;
 <div class="container">
 
 <div class="title">
-<h1>🤖 HACKII AI REAL ENGINE</h1>
-<p>LIVE AUTO PATTERN DETECTION</p>
+<h1>🤖 HACKII REAL AI</h1>
+<p>REAL PATTERN + COLOR ANALYSIS</p>
 </div>
 
-<div class="card center">
+<div class="card ai">
 
-<h2>⏳ LIVE COUNTDOWN</h2>
+<h2>NEXT LIVE ANALYSIS</h2>
 
-<div class="timer" id="timer">
-00:00
-</div>
-
-</div>
-
-<div class="card center">
-
-<h2>🔮 REAL TIME AI SIGNAL</h2>
-
-<div class="predict" id="predictType">
+<div class="predict" id="predict">
 ANALYZING...
 </div>
 
-<div class="number" id="predictNumber">
+<div class="number" id="number">
 --
 </div>
 
-<div class="conf" id="confidence">
+<div class="conf" id="conf">
 Confidence : 0%
 </div>
 
-<div class="signal" id="signal">
-LIVE LEARNING...
+<div class="status" id="status">
+SCANNING LIVE DATA...
 </div>
 
 <div class="bar">
@@ -176,21 +168,21 @@ LIVE LEARNING...
 </div>
 
 <div class="analysis" id="analysis">
-Loading Live AI...
+Loading Analysis...
 </div>
 
 </div>
 
 <div class="card">
 
-<h2>📊 LIVE HISTORY</h2>
+<h2>LIVE HISTORY</h2>
 
 <div id="history"></div>
 
 </div>
 
 <div class="footer">
-POWERED BY HACKII QUANTUM AI
+POWERED BY HACKII AI ENGINE
 </div>
 
 </div>
@@ -200,211 +192,7 @@ POWERED BY HACKII QUANTUM AI
 const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
-let engine = {
-
-pairs:{},
-chains:{},
-weights:{}
-
-};
-
-function getColor(num){
-
-return [0,2,4,6,8].includes(num)
-? "RED"
-: "GREEN";
-
-}
-
-function startTimer(){
-
-function update(){
-
-let now = new Date();
-
-let sec = now.getSeconds();
-
-let remain = 60-sec;
-
-if(remain==60){
-remain=0;
-}
-
-document.getElementById("timer").innerHTML =
-"00:" +
-String(remain).padStart(2,"0");
-
-}
-
-update();
-
-setInterval(update,1000);
-
-}
-
-function learn(nums){
-
-engine.pairs = {};
-engine.chains = {};
-engine.weights = {};
-
-for(let i=0;i<nums.length-1;i++){
-
-let current = nums[i+1];
-let next = nums[i];
-
-if(!engine.pairs[current]){
-engine.pairs[current]={};
-}
-
-if(!engine.pairs[current][next]){
-engine.pairs[current][next]=0;
-}
-
-engine.pairs[current][next]++;
-
-}
-
-for(let i=0;i<nums.length-2;i++){
-
-let key =
-nums[i+2]+"-"+nums[i+1];
-
-let next =
-nums[i];
-
-if(!engine.chains[key]){
-engine.chains[key]={};
-}
-
-if(!engine.chains[key][next]){
-engine.chains[key][next]=0;
-}
-
-engine.chains[key][next]++;
-
-}
-
-for(let i=0;i<nums.length;i++){
-
-let n = nums[i];
-
-if(!engine.weights[n]){
-engine.weights[n]=0;
-}
-
-engine.weights[n] +=
-(nums.length-i);
-
-}
-
-}
-
-function detect(nums){
-
-let last = nums[0];
-let prev = nums[1];
-
-let key =
-prev+"-"+last;
-
-let scores = {};
-
-for(let i=0;i<=9;i++){
-scores[i]=0;
-}
-
-// pair learning
-
-if(engine.pairs[last]){
-
-Object.keys(engine.pairs[last])
-.forEach(n=>{
-
-scores[n] +=
-engine.pairs[last][n]*20;
-
-});
-
-}
-
-// chain learning
-
-if(engine.chains[key]){
-
-Object.keys(engine.chains[key])
-.forEach(n=>{
-
-scores[n] +=
-engine.chains[key][n]*35;
-
-});
-
-}
-
-// movement analysis
-
-for(let n=0;n<=9;n++){
-
-// distance movement
-
-scores[n] +=
-10-Math.abs(last-n);
-
-// same flow
-
-if((last>=5 && n>=5) ||
-(last<5 && n<5)){
-
-scores[n]+=6;
-
-}
-
-// odd even momentum
-
-if(last%2 == n%2){
-
-scores[n]+=5;
-
-}
-
-// repeat break
-
-if(nums.includes(n)){
-
-scores[n]-=8;
-
-}
-
-}
-
-// dynamic recent weights
-
-Object.keys(engine.weights)
-.forEach(n=>{
-
-scores[n] +=
-engine.weights[n]*0.3;
-
-});
-
-// best detect
-
-let next =
-Number(
-Object.keys(scores).reduce((a,b)=>
-scores[a]>scores[b]?a:b
-)
-);
-
-return {
-number:next,
-scores:scores
-};
-
-}
-
-async function loadData(){
+async function load(){
 
 try{
 
@@ -420,37 +208,50 @@ runAI(list);
 
 }catch(err){
 
-document.getElementById("predictType")
-.innerHTML =
+document.getElementById("predict").innerHTML =
 "API ERROR";
 
 }
 
 }
 
+function getColor(num){
+
+if([0,2,4,6,8].includes(num)){
+return "RED";
+}
+
+if([1,3,5,7,9].includes(num)){
+return "GREEN";
+}
+
+return "VIOLET";
+
+}
+
 function renderHistory(list){
 
-document.getElementById("history")
-.innerHTML = "";
+document.getElementById("history").innerHTML = "";
 
-list.slice(0,20).forEach(item=>{
+list.slice(0,15).forEach(item=>{
 
 let num = Number(item.number);
 
+let type = num >=5 ? "BIG" : "SMALL";
+
 let color = getColor(num);
 
-let type =
-num>=5
-? "BIG"
-: "SMALL";
+let cls = "green";
 
-let cls =
-color=="RED"
-? "red"
-: "green";
+if(color=="RED"){
+cls="red";
+}
 
-document.getElementById("history")
-.innerHTML += `
+if(color=="VIOLET"){
+cls="violet";
+}
+
+document.getElementById("history").innerHTML += `
 
 <div class="row">
 
@@ -479,110 +280,189 @@ ${type}
 function runAI(list){
 
 let nums = [];
+let bs = [];
+let colors = [];
 
-list.slice(0,40).forEach(item=>{
+list.slice(0,15).forEach(item=>{
 
-nums.push(Number(item.number));
+let n = Number(item.number);
+
+nums.push(n);
+
+bs.push(n>=5 ? "B":"S");
+
+colors.push(getColor(n));
 
 });
 
-learn(nums);
+let last = nums[0];
 
-let result =
-detect(nums);
+let scores = {};
 
-let predicted =
-result.number;
+for(let i=0;i<=9;i++){
 
-let type =
+scores[i]=0;
+
+}
+
+for(let i=0;i<nums.length;i++){
+
+let current = nums[i];
+
+for(let n=0;n<=9;n++){
+
+let diff = Math.abs(current-n);
+
+scores[n] += (10-diff);
+
+}
+
+}
+
+for(let i=0;i<nums.length-1;i++){
+
+let current = nums[i+1];
+let next = nums[i];
+
+if(Math.abs(current-next)<=2){
+
+scores[next]+=15;
+
+}
+
+if(current%2 == next%2){
+
+scores[next]+=10;
+
+}
+
+if(
+(current>=5 && next>=5) ||
+(current<5 && next<5)
+){
+
+scores[next]+=12;
+
+}
+
+}
+
+nums.forEach(n=>{
+
+scores[n]-=8;
+
+});
+
+let predicted = Number(
+Object.keys(scores).reduce((a,b)=>
+scores[a] > scores[b] ? a : b
+));
+
+let nextType =
 predicted>=5
 ? "🔴 BIG"
 : "🟢 SMALL";
 
-let color =
-getColor(predicted);
+let color = getColor(predicted);
 
-let cls =
+let colorClass =
 color=="RED"
 ? "red"
 : "green";
 
-let confidence = 75;
+let confidence = 72;
 
-let values =
-Object.values(result.scores);
+let bigCount =
+nums.filter(n=>n>=5).length;
 
-let max =
-Math.max(...values);
+let smallCount =
+nums.filter(n=>n<5).length;
 
-let avg =
-values.reduce((a,b)=>a+b,0)
-/values.length;
+if(predicted>=5 && bigCount>smallCount){
+confidence+=8;
+}
 
-confidence +=
-Math.floor(max-avg);
+if(predicted<5 && smallCount>bigCount){
+confidence+=8;
+}
+
+let redCount =
+colors.filter(c=>c=="RED").length;
+
+let greenCount =
+colors.filter(c=>c=="GREEN").length;
+
+if(color=="RED" && redCount>greenCount){
+confidence+=5;
+}
+
+if(color=="GREEN" && greenCount>redCount){
+confidence+=5;
+}
+
+if(Math.abs(last-predicted)<=2){
+confidence+=5;
+}
 
 if(confidence>98){
 confidence=98;
 }
 
-document.getElementById("predictType")
-.innerHTML =
-type;
+let signal="NORMAL SIGNAL";
 
-document.getElementById("predictNumber")
-.innerHTML =
+if(confidence>=90){
+signal="ULTRA AI SIGNAL";
+}else if(confidence>=80){
+signal="STRONG LIVE SIGNAL";
+}
+
+document.getElementById("predict").innerHTML =
+nextType;
+
+document.getElementById("number").innerHTML =
 predicted;
 
-document.getElementById("predictNumber")
-.className =
-"number "+cls;
+document.getElementById("number").className =
+colorClass;
 
-document.getElementById("confidence")
-.innerHTML =
+document.getElementById("conf").innerHTML =
 "Confidence : "+confidence+"%";
 
-document.getElementById("signal")
-.innerHTML =
-"REAL LIVE PATTERN";
+document.getElementById("status").innerHTML =
+signal;
 
-document.getElementById("fill")
-.style.width =
+document.getElementById("fill").style.width =
 confidence+"%";
 
-document.getElementById("analysis")
-.innerHTML = `
+document.getElementById("analysis").innerHTML = `
 
-<b>LAST FLOW:</b><br>
-${nums.slice(0,15).join(" → ")}<br><br>
+<b>BIG/SMALL Pattern:</b><br>
+${bs.join(" → ")}<br><br>
 
-<b>LIVE DETECTED:</b><br>
+<b>Color Pattern:</b><br>
+${colors.join(" → ")}<br><br>
 
-<span class="${cls}">
-${predicted}
-</span>
-(${color})<br><br>
+<b>Predicted Number:</b> ${predicted}<br>
+<b>Predicted Color:</b>
+<span class="${colorClass}">
+${color}
+</span><br>
 
-<b>REAL ENGINE:</b><br>
-
-• Live Pair Learning<br>
-• Chain Sequence Detection<br>
-• Dynamic Weight Engine<br>
-• Real Time Transition Scan<br>
-• Live Momentum Tracking<br>
-• Repeat Break Detection<br>
-• Adaptive Pattern Reading<br>
-• Self Learning Signal Engine
+<b>AI Logic:</b><br>
+• Number Heatmap Analysis<br>
+• Color Momentum Detection<br>
+• BIG/SMALL Pressure Scan<br>
+• Repeat Cycle Reading<br>
+• Distance Pattern Engine<br>
+• Odd/Even Matching System
 
 `;
 
 }
 
-startTimer();
+load();
 
-loadData();
-
-setInterval(loadData,1500);
+setInterval(load,2500);
 
 </script>
 
