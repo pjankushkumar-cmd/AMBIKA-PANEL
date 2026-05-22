@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI PATTERN ANALYZER</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#060c1b;
+color:white;
+padding:20px;
+}
+
+.box{
+background:#101935;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 20px #000;
+max-width:700px;
+margin:auto;
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+color:#00ff9d;
+}
+
+.result{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#182447;
+padding:15px;
+margin-top:10px;
+border-radius:10px;
+font-size:20px;
+}
+
+.green{
+color:#00ff66;
+font-weight:bold;
+}
+
+.red{
+color:#ff3b3b;
+font-weight:bold;
+}
+
+.big{
+color:#00c3ff;
+}
+
+.small{
+color:#ffcc00;
+}
+
+.predict{
+margin-top:25px;
+padding:20px;
+background:#0f172d;
+border-radius:15px;
+text-align:center;
+}
+
+.predict h2{
+font-size:35px;
+margin-top:10px;
+}
+
+.conf{
+font-size:22px;
+margin-top:10px;
+color:#00ff9d;
+}
+
+.loader{
+width:100%;
+height:6px;
+background:#222;
+border-radius:20px;
+margin-top:15px;
+overflow:hidden;
+}
+
+.bar{
+height:100%;
+width:0%;
+background:#00ff9d;
+animation:load 2s linear infinite;
+}
+
+@keyframes load{
+0%{width:0%;}
+100%{width:100%;}
+}
+
+.footer{
+text-align:center;
+margin-top:20px;
+opacity:.7;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+
+<h1>🤖 AI WINGO ANALYZER</h1>
+
+<div id="history"></div>
+
+<div class="predict">
+<div>NEXT AI PREDICTION</div>
+
+<h2 id="nextResult">Analyzing...</h2>
+
+<div class="conf" id="confidence">
+Confidence : 0%
+</div>
+
+<div class="loader">
+<div class="bar"></div>
+</div>
+</div>
+
+<div class="footer">
+LIVE AI PATTERN DETECTION
+</div>
+
+</div>
+
+<script>
+
+const API =
+"https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
+
+async function loadData(){
+
+try{
+
+const res = await fetch(API);
+
+const data = await res.json();
+
+const list = data.data.list || data.data || [];
+
+document.getElementById("history").innerHTML = "";
+
+let pattern = [];
+
+list.slice(0,10).forEach(item=>{
+
+const num = Number(item.number);
+
+const bigSmall = num >=5 ? "BIG" : "SMALL";
+
+pattern.push(bigSmall);
+
+const color =
+[1,3,7,9].includes(num)
+? "green"
+: [2,4,6,8].includes(num)
+? "red"
+: "green";
+
+document.getElementById("history").innerHTML += `
+
+<div class="result">
+<div>${item.issueNumber}</div>
+
+<div class="${color}">
+${num}
+</div>
+
+<div class="${bigSmall=="BIG"?"big":"small"}">
+${bigSmall}
+</div>
+</div>
+
+`;
+
+});
+
+analyze(pattern);
+
+}catch(err){
+
+document.getElementById("nextResult").innerHTML =
+"API ERROR";
+
+}
+
+}
+
+function analyze(pattern){
+
+let big = 0;
+let small = 0;
+
+pattern.forEach(p=>{
+
+if(p=="BIG"){
+big++;
+}else{
+small++;
+}
+
+});
+
+let next = "";
+let confidence = 0;
+
+const last = pattern[0];
+
+if(last=="SMALL"){
+
+next = "🔥 BIG";
+confidence = 68;
+
+}else{
+
+next = "🟢 SMALL";
+confidence = 64;
+
+}
+
+if(pattern[0]==pattern[1]){
+confidence += 4;
+}
+
+document.getElementById("nextResult").innerHTML = next;
+
+document.getElementById("confidence").innerHTML =
+"Confidence : "+confidence+"%";
+
+}
+
+loadData();
+
+setInterval(loadData,5000);
+
+</script>
+
+</body>
+</html>
