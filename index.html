@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AI PATTERN ANALYZER</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HACKII ULTRA AI</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -14,35 +15,90 @@ font-family:Arial;
 }
 
 body{
-background:#060c1b;
+background:#040816;
 color:white;
-padding:20px;
+padding:15px;
 }
 
-.box{
-background:#101935;
-padding:20px;
-border-radius:15px;
-box-shadow:0 0 20px #000;
-max-width:700px;
+.container{
+max-width:850px;
 margin:auto;
 }
 
-h1{
+.title{
 text-align:center;
 margin-bottom:20px;
-color:#00ff9d;
 }
 
-.result{
+.title h1{
+font-size:38px;
+color:#00ff99;
+}
+
+.title p{
+opacity:.7;
+margin-top:5px;
+}
+
+.card{
+background:#0e1730;
+padding:18px;
+border-radius:18px;
+margin-top:18px;
+box-shadow:0 0 15px #000;
+}
+
+.ai{
+text-align:center;
+}
+
+.predict{
+font-size:42px;
+font-weight:bold;
+margin-top:15px;
+}
+
+.number{
+font-size:70px;
+font-weight:bold;
+color:#00ff99;
+margin-top:10px;
+}
+
+.conf{
+font-size:24px;
+margin-top:10px;
+}
+
+.bar{
+width:100%;
+height:10px;
+background:#222;
+border-radius:50px;
+margin-top:15px;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+width:0%;
+background:#00ff99;
+transition:1s;
+}
+
+.status{
+margin-top:15px;
+font-size:20px;
+}
+
+.row{
 display:flex;
 justify-content:space-between;
 align-items:center;
+padding:14px;
 background:#182447;
-padding:15px;
+border-radius:12px;
 margin-top:10px;
-border-radius:10px;
-font-size:20px;
 }
 
 .green{
@@ -51,89 +107,79 @@ font-weight:bold;
 }
 
 .red{
-color:#ff3b3b;
+color:#ff4b4b;
+font-weight:bold;
+}
+
+.violet{
+color:#ff4dff;
 font-weight:bold;
 }
 
 .big{
-color:#00c3ff;
+color:#00c8ff;
+font-weight:bold;
 }
 
 .small{
-color:#ffcc00;
-}
-
-.predict{
-margin-top:25px;
-padding:20px;
-background:#0f172d;
-border-radius:15px;
-text-align:center;
-}
-
-.predict h2{
-font-size:35px;
-margin-top:10px;
-}
-
-.conf{
-font-size:22px;
-margin-top:10px;
-color:#00ff9d;
-}
-
-.loader{
-width:100%;
-height:6px;
-background:#222;
-border-radius:20px;
-margin-top:15px;
-overflow:hidden;
-}
-
-.bar{
-height:100%;
-width:0%;
-background:#00ff9d;
-animation:load 2s linear infinite;
-}
-
-@keyframes load{
-0%{width:0%;}
-100%{width:100%;}
+color:#ffd000;
+font-weight:bold;
 }
 
 .footer{
 text-align:center;
+opacity:.6;
 margin-top:20px;
-opacity:.7;
 }
+
 </style>
 </head>
+
 <body>
 
-<div class="box">
+<div class="container">
 
-<h1>🤖 AI WINGO ANALYZER</h1>
+<div class="title">
+<h1>🤖 HACKII ULTRA AI</h1>
+<p>ADVANCED NUMBER ANALYZER</p>
+</div>
 
-<div id="history"></div>
+<div class="card ai">
 
-<div class="predict">
-<div>NEXT AI PREDICTION</div>
+<h2>LIVE NEXT PREDICTION</h2>
 
-<h2 id="nextResult">Analyzing...</h2>
+<div class="predict" id="predict">
+ANALYZING...
+</div>
 
-<div class="conf" id="confidence">
+<div class="number" id="number">
+--
+</div>
+
+<div class="conf" id="conf">
 Confidence : 0%
 </div>
 
-<div class="loader">
-<div class="bar"></div>
+<div class="status" id="status">
+WAITING...
 </div>
+
+<div class="bar">
+<div class="fill" id="fill"></div>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>LIVE HISTORY</h2>
+
+<div id="history"></div>
+
 </div>
 
 <div class="footer">
-LIVE AI PATTERN DETECTION
+POWERED BY HACKII AI ENGINE
 </div>
 
 </div>
@@ -143,7 +189,7 @@ LIVE AI PATTERN DETECTION
 const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
-async function loadData(){
+async function load(){
 
 try{
 
@@ -153,100 +199,280 @@ const data = await res.json();
 
 const list = data.data.list || data.data || [];
 
-document.getElementById("history").innerHTML = "";
+showHistory(list);
 
-let pattern = [];
-
-list.slice(0,10).forEach(item=>{
-
-const num = Number(item.number);
-
-const bigSmall = num >=5 ? "BIG" : "SMALL";
-
-pattern.push(bigSmall);
-
-const color =
-[1,3,7,9].includes(num)
-? "green"
-: [2,4,6,8].includes(num)
-? "red"
-: "green";
-
-document.getElementById("history").innerHTML += `
-
-<div class="result">
-<div>${item.issueNumber}</div>
-
-<div class="${color}">
-${num}
-</div>
-
-<div class="${bigSmall=="BIG"?"big":"small"}">
-${bigSmall}
-</div>
-</div>
-
-`;
-
-});
-
-analyze(pattern);
+analyze(list);
 
 }catch(err){
 
-document.getElementById("nextResult").innerHTML =
+document.getElementById("predict").innerHTML =
 "API ERROR";
 
 }
 
 }
 
-function analyze(pattern){
+function showHistory(list){
 
-let big = 0;
-let small = 0;
+document.getElementById("history").innerHTML = "";
 
-pattern.forEach(p=>{
+list.slice(0,10).forEach(item=>{
 
-if(p=="BIG"){
-big++;
+let num = Number(item.number);
+
+let bs = num >= 5 ? "BIG" : "SMALL";
+
+let color = "green";
+
+if([2,4,6,8].includes(num)){
+color = "red";
+}
+
+if(num == 0 || num == 5){
+color = "violet";
+}
+
+document.getElementById("history").innerHTML += `
+
+<div class="row">
+
+<div>${item.issueNumber}</div>
+
+<div class="${color}">
+${num}
+</div>
+
+<div class="${bs=="BIG"?"big":"small"}">
+${bs}
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+function analyze(list){
+
+let nums = [];
+
+list.slice(0,10).forEach(item=>{
+
+nums.push(Number(item.number));
+
+});
+
+let last = nums[0];
+let prev = nums[1];
+
+let sum = nums.reduce((a,b)=>a+b,0);
+
+let avg = sum / nums.length;
+
+let odd = 0;
+let even = 0;
+
+nums.forEach(n=>{
+
+if(n % 2 == 0){
+even++;
 }else{
-small++;
+odd++;
 }
 
 });
 
-let next = "";
-let confidence = 0;
+let big = nums.filter(n=>n>=5).length;
+let small = nums.filter(n=>n<5).length;
 
-const last = pattern[0];
+let hotMap = {};
 
-if(last=="SMALL"){
+nums.forEach(n=>{
 
-next = "🔥 BIG";
-confidence = 68;
+hotMap[n] = (hotMap[n] || 0) + 1;
+
+});
+
+let hotNumber = Object.keys(hotMap).reduce((a,b)=>
+hotMap[a] > hotMap[b] ? a : b
+);
+
+let predictType = "";
+let nextNum = "";
+let conf = 70;
+
+if(last < 5){
+
+predictType = "🔥 BIG";
+
+if(avg >= 5){
+
+nextNum = predictBigStrong(nums);
+
+conf += 10;
 
 }else{
 
-next = "🟢 SMALL";
-confidence = 64;
+nextNum = predictBigMedium(nums);
+
+conf += 5;
 
 }
 
-if(pattern[0]==pattern[1]){
-confidence += 4;
+}else{
+
+predictType = "🟢 SMALL";
+
+nextNum = predictSmall(nums);
+
+conf += 6;
+
 }
 
-document.getElementById("nextResult").innerHTML = next;
+if(last == prev){
+conf += 5;
+}
 
-document.getElementById("confidence").innerHTML =
-"Confidence : "+confidence+"%";
+if(hotNumber == last){
+conf += 4;
+}
+
+if(big > small){
+conf += 3;
+}
+
+if(odd > even){
+conf += 2;
+}
+
+if(conf > 98){
+conf = 98;
+}
+
+let trend = "";
+
+if(conf >= 90){
+
+trend = "ULTRA STRONG SIGNAL";
+
+}else if(conf >= 80){
+
+trend = "STRONG AI SIGNAL";
+
+}else{
+
+trend = "NORMAL SIGNAL";
 
 }
 
-loadData();
+document.getElementById("predict").innerHTML =
+predictType;
 
-setInterval(loadData,5000);
+document.getElementById("number").innerHTML =
+nextNum;
+
+document.getElementById("conf").innerHTML =
+"Confidence : "+conf+"%";
+
+document.getElementById("status").innerHTML =
+trend;
+
+document.getElementById("fill").style.width =
+conf+"%";
+
+}
+
+function predictBigStrong(nums){
+
+let arr = [7,8,9];
+
+let score = {};
+
+arr.forEach(n=>{
+
+score[n] = 0;
+
+nums.forEach(v=>{
+
+if(Math.abs(v-n)<=2){
+score[n]+=2;
+}
+
+if(v==n){
+score[n]-=1;
+}
+
+});
+
+});
+
+return Object.keys(score).reduce((a,b)=>
+score[a] > score[b] ? a : b
+);
+
+}
+
+function predictBigMedium(nums){
+
+let arr = [5,6,7];
+
+let score = {};
+
+arr.forEach(n=>{
+
+score[n] = 0;
+
+nums.forEach(v=>{
+
+if(v<n){
+score[n]+=1;
+}
+
+});
+
+});
+
+return Object.keys(score).reduce((a,b)=>
+score[a] > score[b] ? a : b
+);
+
+}
+
+function predictSmall(nums){
+
+let arr = [1,2,3,4];
+
+let score = {};
+
+arr.forEach(n=>{
+
+score[n] = 0;
+
+nums.forEach(v=>{
+
+if(v>n){
+score[n]+=1;
+}
+
+if(v==n){
+score[n]-=1;
+}
+
+});
+
+});
+
+return Object.keys(score).reduce((a,b)=>
+score[a] > score[b] ? a : b
+);
+
+}
+
+load();
+
+setInterval(load,3000);
 
 </script>
 
