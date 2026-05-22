@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HACKII REAL AI</title>
+<title>HACKII LIVE AI PRO</title>
 
 <style>
 
@@ -110,18 +110,28 @@ border-radius:12px;
 margin-top:10px;
 }
 
-.red{
-color:#ff4545;
-font-weight:bold;
-}
-
 .green{
 color:#00ff66;
 font-weight:bold;
 }
 
+.red{
+color:#ff4545;
+font-weight:bold;
+}
+
 .violet{
 color:#ff4dff;
+font-weight:bold;
+}
+
+.big{
+color:#ff4545;
+font-weight:bold;
+}
+
+.small{
+color:#00ff66;
 font-weight:bold;
 }
 
@@ -139,8 +149,8 @@ margin-top:20px;
 <div class="container">
 
 <div class="title">
-<h1>🤖 HACKII REAL AI</h1>
-<p>REAL PATTERN + COLOR ANALYSIS</p>
+<h1>🤖 HACKII LIVE AI PRO</h1>
+<p>REAL TIME ADVANCED PATTERN ANALYSIS</p>
 </div>
 
 <div class="card ai">
@@ -160,7 +170,7 @@ Confidence : 0%
 </div>
 
 <div class="status" id="status">
-SCANNING LIVE DATA...
+READING LIVE PATTERN...
 </div>
 
 <div class="bar">
@@ -168,7 +178,7 @@ SCANNING LIVE DATA...
 </div>
 
 <div class="analysis" id="analysis">
-Loading Analysis...
+Loading AI...
 </div>
 
 </div>
@@ -215,20 +225,6 @@ document.getElementById("predict").innerHTML =
 
 }
 
-function getColor(num){
-
-if([0,2,4,6,8].includes(num)){
-return "RED";
-}
-
-if([1,3,5,7,9].includes(num)){
-return "GREEN";
-}
-
-return "VIOLET";
-
-}
-
 function renderHistory(list){
 
 document.getElementById("history").innerHTML = "";
@@ -237,18 +233,16 @@ list.slice(0,15).forEach(item=>{
 
 let num = Number(item.number);
 
-let type = num >=5 ? "BIG" : "SMALL";
+let type = num >= 5 ? "BIG" : "SMALL";
 
-let color = getColor(num);
+let color = "green";
 
-let cls = "green";
-
-if(color=="RED"){
-cls="red";
+if([6,7,8,9].includes(num)){
+color = "red";
 }
 
-if(color=="VIOLET"){
-cls="violet";
+if(num == 0 || num == 5){
+color = "violet";
 }
 
 document.getElementById("history").innerHTML += `
@@ -257,15 +251,11 @@ document.getElementById("history").innerHTML += `
 
 <div>${item.issueNumber}</div>
 
-<div class="${cls}">
+<div class="${color}">
 ${num}
 </div>
 
-<div class="${cls}">
-${color}
-</div>
-
-<div class="${type=="BIG"?"red":"green"}">
+<div class="${type=="BIG"?"big":"small"}">
 ${type}
 </div>
 
@@ -281,7 +271,6 @@ function runAI(list){
 
 let nums = [];
 let bs = [];
-let colors = [];
 
 list.slice(0,15).forEach(item=>{
 
@@ -291,86 +280,70 @@ nums.push(n);
 
 bs.push(n>=5 ? "B":"S");
 
-colors.push(getColor(n));
-
 });
 
 let last = nums[0];
 
-let scores = {};
-
-for(let i=0;i<=9;i++){
-
-scores[i]=0;
-
-}
-
-for(let i=0;i<nums.length;i++){
-
-let current = nums[i];
-
-for(let n=0;n<=9;n++){
-
-let diff = Math.abs(current-n);
-
-scores[n] += (10-diff);
-
-}
-
-}
+let transitions = {};
 
 for(let i=0;i<nums.length-1;i++){
 
 let current = nums[i+1];
 let next = nums[i];
 
-if(Math.abs(current-next)<=2){
+if(!transitions[current]){
+transitions[current] = {};
+}
 
-scores[next]+=15;
+if(!transitions[current][next]){
+transitions[current][next] = 0;
+}
+
+transitions[current][next]++;
 
 }
 
-if(current%2 == next%2){
+let heatMap = {};
 
-scores[next]+=10;
+for(let n=0;n<=9;n++){
 
-}
+heatMap[n] = 0;
 
-if(
-(current>=5 && next>=5) ||
-(current<5 && next<5)
-){
+nums.forEach(v=>{
 
-scores[next]+=12;
+let diff = Math.abs(v-n);
 
-}
-
-}
-
-nums.forEach(n=>{
-
-scores[n]-=8;
+heatMap[n] += (10-diff);
 
 });
 
-let predicted = Number(
-Object.keys(scores).reduce((a,b)=>
-scores[a] > scores[b] ? a : b
+if(nums.includes(n)){
+heatMap[n] -= 5;
+}
+
+}
+
+if(transitions[last]){
+
+Object.keys(transitions[last]).forEach(k=>{
+
+heatMap[k] += transitions[last][k]*18;
+
+});
+
+}
+
+let nextNumber = Number(
+Object.keys(heatMap).reduce((a,b)=>
+heatMap[a] > heatMap[b] ? a : b
 ));
 
 let nextType =
-predicted>=5
+nextNumber >=5
 ? "🔴 BIG"
 : "🟢 SMALL";
 
-let color = getColor(predicted);
-
-let colorClass =
-color=="RED"
-? "red"
-: "green";
-
-let confidence = 72;
+let confidence = 70;
 
 let bigCount =
 nums.filter(n=>n>=5).length;
@@ -378,52 +351,71 @@ nums.filter(n=>n>=5).length;
 let smallCount =
 nums.filter(n=>n<5).length;
 
-if(predicted>=5 && bigCount>smallCount){
-confidence+=8;
+if(nextNumber>=5 && bigCount>smallCount){
+confidence += 8;
 }
 
-if(predicted<5 && smallCount>bigCount){
-confidence+=8;
+if(nextNumber<5 && smallCount>bigCount){
+confidence += 8;
 }
 
-let redCount =
-colors.filter(c=>c=="RED").length;
-
-let greenCount =
-colors.filter(c=>c=="GREEN").length;
-
-if(color=="RED" && redCount>greenCount){
-confidence+=5;
+if(Math.abs(last-nextNumber)<=2){
+confidence += 6;
 }
 
-if(color=="GREEN" && greenCount>redCount){
-confidence+=5;
+if(transitions[last] &&
+transitions[last][nextNumber]){
+confidence +=
+transitions[last][nextNumber]*5;
 }
 
-if(Math.abs(last-predicted)<=2){
-confidence+=5;
+let repeat = 0;
+let switchs = 0;
+
+for(let i=0;i<bs.length-1;i++){
+
+if(bs[i]==bs[i+1]){
+repeat++;
+}else{
+switchs++;
+}
+
+}
+
+if(repeat>switchs){
+confidence += 5;
 }
 
 if(confidence>98){
-confidence=98;
+confidence = 98;
 }
 
-let signal="NORMAL SIGNAL";
+let signal = "";
 
-if(confidence>=90){
-signal="ULTRA AI SIGNAL";
-}else if(confidence>=80){
-signal="STRONG LIVE SIGNAL";
+if(confidence>=92){
+
+signal = "ULTRA HIGH AI SIGNAL";
+
+}else if(confidence>=82){
+
+signal = "STRONG LIVE SIGNAL";
+
+}else{
+
+signal = "NORMAL PATTERN";
+
 }
 
 document.getElementById("predict").innerHTML =
 nextType;
 
 document.getElementById("number").innerHTML =
-predicted;
+nextNumber;
 
-document.getElementById("number").className =
-colorClass;
+document.getElementById("number").style.color =
+nextNumber>=5
+? "#ff4545"
+: "#00ff66";
 
 document.getElementById("conf").innerHTML =
 "Confidence : "+confidence+"%";
@@ -436,25 +428,22 @@ confidence+"%";
 
 document.getElementById("analysis").innerHTML = `
 
-<b>BIG/SMALL Pattern:</b><br>
+<b>Pattern:</b>
 ${bs.join(" → ")}<br><br>
 
-<b>Color Pattern:</b><br>
-${colors.join(" → ")}<br><br>
+<b>BIG Count:</b> ${bigCount}<br>
+<b>SMALL Count:</b> ${smallCount}<br><br>
 
-<b>Predicted Number:</b> ${predicted}<br>
-<b>Predicted Color:</b>
-<span class="${colorClass}">
-${color}
-</span><br>
+<b>Last Number:</b> ${last}<br>
+<b>Predicted Number:</b> ${nextNumber}<br><br>
 
-<b>AI Logic:</b><br>
-• Number Heatmap Analysis<br>
-• Color Momentum Detection<br>
-• BIG/SMALL Pressure Scan<br>
-• Repeat Cycle Reading<br>
-• Distance Pattern Engine<br>
-• Odd/Even Matching System
+<b>Live AI Analysis:</b><br>
+• Transition Pattern Scan<br>
+• BIG/SMALL Pressure Reading<br>
+• Repeat Cycle Detection<br>
+• Heatmap Number Analysis<br>
+• Live Momentum Tracking<br>
+• Adaptive Confidence Engine
 
 `;
 
