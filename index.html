@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HACKII ULTRA AI</title>
+<title>HACKII REAL AI ANALYZER</title>
 
 <style>
 
@@ -15,13 +15,13 @@ font-family:Arial;
 }
 
 body{
-background:#040816;
+background:#050816;
 color:white;
 padding:15px;
 }
 
 .container{
-max-width:850px;
+max-width:900px;
 margin:auto;
 }
 
@@ -41,61 +41,18 @@ margin-top:5px;
 }
 
 .card{
-background:#0e1730;
+background:#101935;
 padding:18px;
 border-radius:18px;
 margin-top:18px;
-box-shadow:0 0 15px #000;
-}
-
-.ai{
-text-align:center;
-}
-
-.predict{
-font-size:42px;
-font-weight:bold;
-margin-top:15px;
-}
-
-.number{
-font-size:70px;
-font-weight:bold;
-color:#00ff99;
-margin-top:10px;
-}
-
-.conf{
-font-size:24px;
-margin-top:10px;
-}
-
-.bar{
-width:100%;
-height:10px;
-background:#222;
-border-radius:50px;
-margin-top:15px;
-overflow:hidden;
-}
-
-.fill{
-height:100%;
-width:0%;
-background:#00ff99;
-transition:1s;
-}
-
-.status{
-margin-top:15px;
-font-size:20px;
+box-shadow:0 0 20px #000;
 }
 
 .row{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:14px;
+padding:13px;
 background:#182447;
 border-radius:12px;
 margin-top:10px;
@@ -126,10 +83,53 @@ color:#ffd000;
 font-weight:bold;
 }
 
+.ai{
+text-align:center;
+}
+
+.predict{
+font-size:42px;
+font-weight:bold;
+margin-top:15px;
+}
+
+.number{
+font-size:70px;
+font-weight:bold;
+margin-top:10px;
+color:#00ff99;
+}
+
+.conf{
+font-size:24px;
+margin-top:10px;
+}
+
+.status{
+margin-top:15px;
+font-size:20px;
+}
+
+.bar{
+width:100%;
+height:10px;
+background:#222;
+border-radius:50px;
+margin-top:15px;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+width:0%;
+background:#00ff99;
+transition:1s;
+}
+
 .footer{
 text-align:center;
-opacity:.6;
 margin-top:20px;
+opacity:.6;
 }
 
 </style>
@@ -140,13 +140,13 @@ margin-top:20px;
 <div class="container">
 
 <div class="title">
-<h1>🤖 HACKII ULTRA AI</h1>
-<p>ADVANCED NUMBER ANALYZER</p>
+<h1>🤖 HACKII REAL AI</h1>
+<p>REAL PATTERN DETECTION ENGINE</p>
 </div>
 
 <div class="card ai">
 
-<h2>LIVE NEXT PREDICTION</h2>
+<h2>NEXT ANALYSIS</h2>
 
 <div class="predict" id="predict">
 ANALYZING...
@@ -161,7 +161,7 @@ Confidence : 0%
 </div>
 
 <div class="status" id="status">
-WAITING...
+READING PATTERN...
 </div>
 
 <div class="bar">
@@ -179,7 +179,7 @@ WAITING...
 </div>
 
 <div class="footer">
-POWERED BY HACKII AI ENGINE
+POWERED BY HACKII PATTERN AI
 </div>
 
 </div>
@@ -201,7 +201,7 @@ const list = data.data.list || data.data || [];
 
 showHistory(list);
 
-analyze(list);
+realAnalyze(list);
 
 }catch(err){
 
@@ -254,7 +254,7 @@ ${bs}
 
 }
 
-function analyze(list){
+function realAnalyze(list){
 
 let nums = [];
 
@@ -264,209 +264,135 @@ nums.push(Number(item.number));
 
 });
 
-let last = nums[0];
-let prev = nums[1];
+let transitions = {};
+let repeats = {};
+let movementScore = {};
 
-let sum = nums.reduce((a,b)=>a+b,0);
+for(let i=0;i<nums.length-1;i++){
 
-let avg = sum / nums.length;
+let current = nums[i+1];
+let next = nums[i];
 
-let odd = 0;
-let even = 0;
+if(!transitions[current]){
+transitions[current] = {};
+}
+
+if(!transitions[current][next]){
+transitions[current][next] = 0;
+}
+
+transitions[current][next]++;
+
+}
 
 nums.forEach(n=>{
 
-if(n % 2 == 0){
-even++;
-}else{
-odd++;
+repeats[n] = (repeats[n] || 0)+1;
+
+});
+
+for(let n=0;n<=9;n++){
+
+movementScore[n] = 0;
+
+for(let i=0;i<nums.length;i++){
+
+let diff = Math.abs(nums[i]-n);
+
+movementScore[n] += (10-diff);
+
+}
+
+}
+
+let last = nums[0];
+
+let nextMap = transitions[last] || {};
+
+let predictedNumber = null;
+let highest = -1;
+
+Object.keys(nextMap).forEach(key=>{
+
+let score = nextMap[key];
+
+score += movementScore[key] || 0;
+
+score -= (repeats[key] || 0)*2;
+
+if(score > highest){
+
+highest = score;
+predictedNumber = Number(key);
+
 }
 
 });
 
-let big = nums.filter(n=>n>=5).length;
-let small = nums.filter(n=>n<5).length;
+if(predictedNumber == null){
 
-let hotMap = {};
-
-nums.forEach(n=>{
-
-hotMap[n] = (hotMap[n] || 0) + 1;
-
-});
-
-let hotNumber = Object.keys(hotMap).reduce((a,b)=>
-hotMap[a] > hotMap[b] ? a : b
+predictedNumber =
+Object.keys(movementScore).reduce((a,b)=>
+movementScore[a] > movementScore[b] ? a : b
 );
 
-let predictType = "";
-let nextNum = "";
-let conf = 70;
-
-if(last < 5){
-
-predictType = "🔥 BIG";
-
-if(avg >= 5){
-
-nextNum = predictBigStrong(nums);
-
-conf += 10;
-
-}else{
-
-nextNum = predictBigMedium(nums);
-
-conf += 5;
-
 }
 
-}else{
+predictedNumber = Number(predictedNumber);
 
-predictType = "🟢 SMALL";
+let type =
+predictedNumber >=5
+? "🔥 BIG"
+: "🟢 SMALL";
 
-nextNum = predictSmall(nums);
+let confidence = 65;
 
-conf += 6;
-
+if(repeats[predictedNumber]){
+confidence += 5;
 }
 
-if(last == prev){
-conf += 5;
+if(nextMap[predictedNumber]){
+confidence += nextMap[predictedNumber]*8;
 }
 
-if(hotNumber == last){
-conf += 4;
+if(movementScore[predictedNumber] > 60){
+confidence += 10;
 }
 
-if(big > small){
-conf += 3;
-}
-
-if(odd > even){
-conf += 2;
-}
-
-if(conf > 98){
-conf = 98;
+if(confidence > 97){
+confidence = 97;
 }
 
 let trend = "";
 
-if(conf >= 90){
+if(confidence >= 90){
 
-trend = "ULTRA STRONG SIGNAL";
+trend = "ULTRA AI DETECTED";
 
-}else if(conf >= 80){
+}else if(confidence >= 80){
 
-trend = "STRONG AI SIGNAL";
+trend = "STRONG PATTERN";
 
 }else{
 
-trend = "NORMAL SIGNAL";
+trend = "NORMAL TREND";
 
 }
 
 document.getElementById("predict").innerHTML =
-predictType;
+type;
 
 document.getElementById("number").innerHTML =
-nextNum;
+predictedNumber;
 
 document.getElementById("conf").innerHTML =
-"Confidence : "+conf+"%";
+"Confidence : "+confidence+"%";
 
 document.getElementById("status").innerHTML =
 trend;
 
 document.getElementById("fill").style.width =
-conf+"%";
-
-}
-
-function predictBigStrong(nums){
-
-let arr = [7,8,9];
-
-let score = {};
-
-arr.forEach(n=>{
-
-score[n] = 0;
-
-nums.forEach(v=>{
-
-if(Math.abs(v-n)<=2){
-score[n]+=2;
-}
-
-if(v==n){
-score[n]-=1;
-}
-
-});
-
-});
-
-return Object.keys(score).reduce((a,b)=>
-score[a] > score[b] ? a : b
-);
-
-}
-
-function predictBigMedium(nums){
-
-let arr = [5,6,7];
-
-let score = {};
-
-arr.forEach(n=>{
-
-score[n] = 0;
-
-nums.forEach(v=>{
-
-if(v<n){
-score[n]+=1;
-}
-
-});
-
-});
-
-return Object.keys(score).reduce((a,b)=>
-score[a] > score[b] ? a : b
-);
-
-}
-
-function predictSmall(nums){
-
-let arr = [1,2,3,4];
-
-let score = {};
-
-arr.forEach(n=>{
-
-score[n] = 0;
-
-nums.forEach(v=>{
-
-if(v>n){
-score[n]+=1;
-}
-
-if(v==n){
-score[n]-=1;
-}
-
-});
-
-});
-
-return Object.keys(score).reduce((a,b)=>
-score[a] > score[b] ? a : b
-);
+confidence+"%";
 
 }
 
