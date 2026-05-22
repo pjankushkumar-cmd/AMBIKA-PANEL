@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HACKII REALTIME AI</title>
+<title>HACKII AI REAL ENGINE</title>
 
 <style>
 
@@ -16,12 +16,12 @@ font-family:Arial,sans-serif;
 
 body{
 background:#050816;
-color:white;
+color:#fff;
 padding:15px;
 }
 
 .container{
-max-width:1100px;
+max-width:1200px;
 margin:auto;
 }
 
@@ -52,21 +52,20 @@ box-shadow:0 0 20px #000;
 text-align:center;
 }
 
-.countdown{
-font-size:70px;
+.timer{
+font-size:75px;
 font-weight:bold;
 color:#00ff99;
-margin-top:10px;
 }
 
 .predict{
-font-size:60px;
+font-size:65px;
 font-weight:bold;
 margin-top:15px;
 }
 
 .number{
-font-size:120px;
+font-size:130px;
 font-weight:bold;
 margin-top:10px;
 }
@@ -85,14 +84,14 @@ margin-top:10px;
 }
 
 .signal{
-margin-top:15px;
-font-size:24px;
+font-size:25px;
+margin-top:10px;
 }
 
 .bar{
 height:10px;
 background:#222;
-border-radius:30px;
+border-radius:50px;
 overflow:hidden;
 margin-top:15px;
 }
@@ -107,9 +106,9 @@ transition:1s;
 .analysis{
 margin-top:20px;
 background:#182447;
-padding:15px;
+padding:18px;
 border-radius:15px;
-line-height:32px;
+line-height:33px;
 font-size:17px;
 text-align:left;
 }
@@ -122,7 +121,6 @@ padding:14px;
 background:#182447;
 border-radius:12px;
 margin-top:10px;
-font-size:17px;
 }
 
 .footer{
@@ -139,15 +137,15 @@ margin-top:20px;
 <div class="container">
 
 <div class="title">
-<h1>🤖 HACKII REALTIME AI</h1>
-<p>LIVE SELF LEARNING PATTERN ENGINE</p>
+<h1>🤖 HACKII AI REAL ENGINE</h1>
+<p>LIVE AUTO PATTERN DETECTION</p>
 </div>
 
 <div class="card center">
 
-<h2>⏳ NEXT ROUND</h2>
+<h2>⏳ LIVE COUNTDOWN</h2>
 
-<div class="countdown" id="timer">
+<div class="timer" id="timer">
 00:00
 </div>
 
@@ -155,10 +153,10 @@ margin-top:20px;
 
 <div class="card center">
 
-<h2>🔮 LIVE DETECTION</h2>
+<h2>🔮 REAL TIME AI SIGNAL</h2>
 
 <div class="predict" id="predictType">
-WAITING...
+ANALYZING...
 </div>
 
 <div class="number" id="predictNumber">
@@ -170,7 +168,7 @@ Confidence : 0%
 </div>
 
 <div class="signal" id="signal">
-LEARNING LIVE PATTERNS...
+LIVE LEARNING...
 </div>
 
 <div class="bar">
@@ -202,19 +200,19 @@ POWERED BY HACKII QUANTUM AI
 const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
-const memory = {
+let engine = {
 
-transitions:{}
+pairs:{},
+chains:{},
+weights:{}
 
 };
 
 function getColor(num){
 
-if([0,2,4,6,8].includes(num)){
-return "RED";
-}
-
-return "GREEN";
+return [0,2,4,6,8].includes(num)
+? "RED"
+: "GREEN";
 
 }
 
@@ -244,43 +242,165 @@ setInterval(update,1000);
 
 }
 
-function learnPatterns(nums){
+function learn(nums){
 
-memory.transitions = {};
+engine.pairs = {};
+engine.chains = {};
+engine.weights = {};
 
-for(let i=nums.length-1;i>0;i--){
+for(let i=0;i<nums.length-1;i++){
 
-const prev = nums[i];
-const next = nums[i-1];
+let current = nums[i+1];
+let next = nums[i];
 
-if(!memory.transitions[prev]){
-memory.transitions[prev] = {};
+if(!engine.pairs[current]){
+engine.pairs[current]={};
 }
 
-if(!memory.transitions[prev][next]){
-memory.transitions[prev][next] = 0;
+if(!engine.pairs[current][next]){
+engine.pairs[current][next]=0;
 }
 
-memory.transitions[prev][next]++;
+engine.pairs[current][next]++;
+
+}
+
+for(let i=0;i<nums.length-2;i++){
+
+let key =
+nums[i+2]+"-"+nums[i+1];
+
+let next =
+nums[i];
+
+if(!engine.chains[key]){
+engine.chains[key]={};
+}
+
+if(!engine.chains[key][next]){
+engine.chains[key][next]=0;
+}
+
+engine.chains[key][next]++;
+
+}
+
+for(let i=0;i<nums.length;i++){
+
+let n = nums[i];
+
+if(!engine.weights[n]){
+engine.weights[n]=0;
+}
+
+engine.weights[n] +=
+(nums.length-i);
 
 }
 
 }
 
-function detectNext(last){
+function detect(nums){
 
-if(!memory.transitions[last]){
-return null;
+let last = nums[0];
+let prev = nums[1];
+
+let key =
+prev+"-"+last;
+
+let scores = {};
+
+for(let i=0;i<=9;i++){
+scores[i]=0;
 }
 
-let map = memory.transitions[last];
+// pair learning
 
-let best =
-Object.keys(map).reduce((a,b)=>
-map[a] > map[b] ? a : b
+if(engine.pairs[last]){
+
+Object.keys(engine.pairs[last])
+.forEach(n=>{
+
+scores[n] +=
+engine.pairs[last][n]*20;
+
+});
+
+}
+
+// chain learning
+
+if(engine.chains[key]){
+
+Object.keys(engine.chains[key])
+.forEach(n=>{
+
+scores[n] +=
+engine.chains[key][n]*35;
+
+});
+
+}
+
+// movement analysis
+
+for(let n=0;n<=9;n++){
+
+// distance movement
+
+scores[n] +=
+10-Math.abs(last-n);
+
+// same flow
+
+if((last>=5 && n>=5) ||
+(last<5 && n<5)){
+
+scores[n]+=6;
+
+}
+
+// odd even momentum
+
+if(last%2 == n%2){
+
+scores[n]+=5;
+
+}
+
+// repeat break
+
+if(nums.includes(n)){
+
+scores[n]-=8;
+
+}
+
+}
+
+// dynamic recent weights
+
+Object.keys(engine.weights)
+.forEach(n=>{
+
+scores[n] +=
+engine.weights[n]*0.3;
+
+});
+
+// best detect
+
+let next =
+Number(
+Object.keys(scores).reduce((a,b)=>
+scores[a]>scores[b]?a:b
+)
 );
 
-return Number(best);
+return {
+number:next,
+scores:scores
+};
 
 }
 
@@ -296,11 +416,12 @@ const list = json.data.list || json.data || [];
 
 renderHistory(list);
 
-runRealtimeAI(list);
+runAI(list);
 
 }catch(err){
 
-document.getElementById("predictType").innerHTML =
+document.getElementById("predictType")
+.innerHTML =
 "API ERROR";
 
 }
@@ -309,25 +430,27 @@ document.getElementById("predictType").innerHTML =
 
 function renderHistory(list){
 
-document.getElementById("history").innerHTML = "";
+document.getElementById("history")
+.innerHTML = "";
 
 list.slice(0,20).forEach(item=>{
 
 let num = Number(item.number);
+
+let color = getColor(num);
 
 let type =
 num>=5
 ? "BIG"
 : "SMALL";
 
-let color = getColor(num);
-
 let cls =
 color=="RED"
 ? "red"
 : "green";
 
-document.getElementById("history").innerHTML += `
+document.getElementById("history")
+.innerHTML += `
 
 <div class="row">
 
@@ -353,100 +476,103 @@ ${type}
 
 }
 
-function runRealtimeAI(list){
+function runAI(list){
 
 let nums = [];
 
-list.slice(0,30).forEach(item=>{
+list.slice(0,40).forEach(item=>{
 
 nums.push(Number(item.number));
 
 });
 
-learnPatterns(nums);
+learn(nums);
 
-let last = nums[0];
+let result =
+detect(nums);
 
-let predicted = detectNext(last);
-
-if(predicted==null){
-
-document.getElementById("predictType").innerHTML =
-"NO SIGNAL";
-
-return;
-
-}
+let predicted =
+result.number;
 
 let type =
 predicted>=5
 ? "🔴 BIG"
 : "🟢 SMALL";
 
-let color = getColor(predicted);
+let color =
+getColor(predicted);
 
 let cls =
 color=="RED"
 ? "red"
 : "green";
 
-let confidence = 70;
+let confidence = 75;
 
-let map =
-memory.transitions[last];
+let values =
+Object.values(result.scores);
 
-if(map && map[predicted]){
+let max =
+Math.max(...values);
 
-confidence += map[predicted]*8;
+let avg =
+values.reduce((a,b)=>a+b,0)
+/values.length;
 
-}
+confidence +=
+Math.floor(max-avg);
 
 if(confidence>98){
 confidence=98;
 }
 
-document.getElementById("predictType").innerHTML =
+document.getElementById("predictType")
+.innerHTML =
 type;
 
-document.getElementById("predictNumber").innerHTML =
+document.getElementById("predictNumber")
+.innerHTML =
 predicted;
 
-document.getElementById("predictNumber").className =
+document.getElementById("predictNumber")
+.className =
 "number "+cls;
 
-document.getElementById("confidence").innerHTML =
+document.getElementById("confidence")
+.innerHTML =
 "Confidence : "+confidence+"%";
 
-document.getElementById("signal").innerHTML =
-"REALTIME LIVE SIGNAL";
+document.getElementById("signal")
+.innerHTML =
+"REAL LIVE PATTERN";
 
-document.getElementById("fill").style.width =
+document.getElementById("fill")
+.style.width =
 confidence+"%";
 
-document.getElementById("analysis").innerHTML = `
+document.getElementById("analysis")
+.innerHTML = `
 
-<b>LIVE LAST NUMBER:</b>
-${last}<br><br>
+<b>LAST FLOW:</b><br>
+${nums.slice(0,15).join(" → ")}<br><br>
 
-<b>UPCOMING DETECTED:</b><br>
+<b>LIVE DETECTED:</b><br>
 
 <span class="${cls}">
 ${predicted}
-</span><br><br>
+</span>
+(${color})<br><br>
 
-<b>REALTIME ANALYSIS:</b><br>
+<b>REAL ENGINE:</b><br>
 
-• Self Learning Engine<br>
-• Live Transition Tracking<br>
-• Real Time Pattern Reading<br>
-• Auto Adaptive Detection<br>
-• Dynamic Sequence Learning<br>
-• Live API Flow Scan<br>
-• Real Signal Detection<br><br>
-
-<b>Transition Memory:</b><br>
-
-${JSON.stringify(memory.transitions[last],null,2)}
+• Live Pair Learning<br>
+• Chain Sequence Detection<br>
+• Dynamic Weight Engine<br>
+• Real Time Transition Scan<br>
+• Live Momentum Tracking<br>
+• Repeat Break Detection<br>
+• Adaptive Pattern Reading<br>
+• Self Learning Signal Engine
 
 `;
 
@@ -456,7 +582,7 @@ startTimer();
 
 loadData();
 
-setInterval(loadData,2000);
+setInterval(loadData,1500);
 
 </script>
 
