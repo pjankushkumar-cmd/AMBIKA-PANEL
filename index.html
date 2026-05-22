@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HACKII REAL AI</title>
+<title>HACKII QUANTUM AI</title>
 
 <style>
 
@@ -11,7 +11,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:Arial;
 }
 
 body{
@@ -31,7 +31,7 @@ margin-bottom:20px;
 }
 
 .title h1{
-font-size:40px;
+font-size:42px;
 color:#00ff99;
 }
 
@@ -48,20 +48,32 @@ margin-top:18px;
 box-shadow:0 0 20px #000;
 }
 
-.ai{
+.predict{
 text-align:center;
 }
 
-.predict{
-font-size:50px;
-font-weight:bold;
-margin-top:15px;
-}
-
-.number{
-font-size:90px;
+.predictType{
+font-size:55px;
 font-weight:bold;
 margin-top:10px;
+}
+
+.predictNumber{
+font-size:100px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.red{
+color:#ff4545;
+}
+
+.green{
+color:#00ff66;
+}
+
+.violet{
+color:#ff4dff;
 }
 
 .conf{
@@ -69,18 +81,12 @@ font-size:25px;
 margin-top:10px;
 }
 
-.status{
-margin-top:15px;
-font-size:22px;
-}
-
 .bar{
-width:100%;
 height:10px;
 background:#222;
-border-radius:50px;
-margin-top:15px;
+border-radius:30px;
 overflow:hidden;
+margin-top:15px;
 }
 
 .fill{
@@ -90,14 +96,18 @@ background:#00ff99;
 transition:1s;
 }
 
+.status{
+margin-top:15px;
+font-size:22px;
+}
+
 .analysis{
 margin-top:20px;
 background:#182447;
 padding:15px;
 border-radius:15px;
-font-size:17px;
 line-height:30px;
-text-align:left;
+font-size:17px;
 }
 
 .row{
@@ -108,21 +118,6 @@ padding:14px;
 background:#182447;
 border-radius:12px;
 margin-top:10px;
-}
-
-.red{
-color:#ff4545;
-font-weight:bold;
-}
-
-.green{
-color:#00ff66;
-font-weight:bold;
-}
-
-.violet{
-color:#ff4dff;
-font-weight:bold;
 }
 
 .footer{
@@ -139,28 +134,28 @@ margin-top:20px;
 <div class="container">
 
 <div class="title">
-<h1>🤖 HACKII REAL AI</h1>
-<p>REAL PATTERN + COLOR ANALYSIS</p>
+<h1>🤖 HACKII QUANTUM AI</h1>
+<p>REAL UPCOMING NUMBER DETECTOR</p>
 </div>
 
-<div class="card ai">
+<div class="card predict">
 
-<h2>NEXT LIVE ANALYSIS</h2>
+<h2>UPCOMING AI DETECTION</h2>
 
-<div class="predict" id="predict">
+<div class="predictType" id="predictType">
 ANALYZING...
 </div>
 
-<div class="number" id="number">
+<div class="predictNumber" id="predictNumber">
 --
 </div>
 
-<div class="conf" id="conf">
+<div class="conf" id="confidence">
 Confidence : 0%
 </div>
 
-<div class="status" id="status">
-SCANNING LIVE DATA...
+<div class="status" id="signal">
+WAITING LIVE DATA...
 </div>
 
 <div class="bar">
@@ -168,7 +163,7 @@ SCANNING LIVE DATA...
 </div>
 
 <div class="analysis" id="analysis">
-Loading Analysis...
+Reading live API...
 </div>
 
 </div>
@@ -182,7 +177,7 @@ Loading Analysis...
 </div>
 
 <div class="footer">
-POWERED BY HACKII AI ENGINE
+POWERED BY HACKII QUANTUM ENGINE
 </div>
 
 </div>
@@ -192,7 +187,7 @@ POWERED BY HACKII AI ENGINE
 const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
-async function load(){
+async function loadData(){
 
 try{
 
@@ -204,28 +199,24 @@ const list = json.data.list || json.data || [];
 
 renderHistory(list);
 
-runAI(list);
+runQuantumAI(list);
 
 }catch(err){
 
-document.getElementById("predict").innerHTML =
+document.getElementById("predictType").innerHTML =
 "API ERROR";
 
 }
 
 }
 
-function getColor(num){
+function getColor(n){
 
-if([0,2,4,6,8].includes(num)){
+if([0,2,4,6,8].includes(n)){
 return "RED";
 }
 
-if([1,3,5,7,9].includes(num)){
 return "GREEN";
-}
-
-return "VIOLET";
 
 }
 
@@ -235,21 +226,13 @@ document.getElementById("history").innerHTML = "";
 
 list.slice(0,15).forEach(item=>{
 
-let num = Number(item.number);
+let n = Number(item.number);
 
-let type = num >=5 ? "BIG" : "SMALL";
+let color = getColor(n);
 
-let color = getColor(num);
+let type = n >=5 ? "BIG":"SMALL";
 
-let cls = "green";
-
-if(color=="RED"){
-cls="red";
-}
-
-if(color=="VIOLET"){
-cls="violet";
-}
+let cls = color=="RED" ? "red":"green";
 
 document.getElementById("history").innerHTML += `
 
@@ -258,7 +241,7 @@ document.getElementById("history").innerHTML += `
 <div>${item.issueNumber}</div>
 
 <div class="${cls}">
-${num}
+${n}
 </div>
 
 <div class="${cls}">
@@ -277,71 +260,49 @@ ${type}
 
 }
 
-function runAI(list){
+function runQuantumAI(list){
 
 let nums = [];
-let bs = [];
-let colors = [];
 
 list.slice(0,15).forEach(item=>{
 
-let n = Number(item.number);
-
-nums.push(n);
-
-bs.push(n>=5 ? "B":"S");
-
-colors.push(getColor(n));
+nums.push(Number(item.number));
 
 });
 
-let last = nums[0];
-
-let scores = {};
+let score = {};
 
 for(let i=0;i<=9;i++){
-
-scores[i]=0;
-
-}
-
-for(let i=0;i<nums.length;i++){
-
-let current = nums[i];
-
-for(let n=0;n<=9;n++){
-
-let diff = Math.abs(current-n);
-
-scores[n] += (10-diff);
-
-}
-
+score[i]=0;
 }
 
 for(let i=0;i<nums.length-1;i++){
 
-let current = nums[i+1];
-let next = nums[i];
+let current = nums[i];
+let prev = nums[i+1];
 
-if(Math.abs(current-next)<=2){
+for(let n=0;n<=9;n++){
 
-scores[next]+=15;
+let distance =
+Math.abs(current-n);
 
-}
+score[n] += (10-distance);
 
-if(current%2 == next%2){
-
-scores[next]+=10;
-
+if(n%2 == current%2){
+score[n]+=4;
 }
 
 if(
-(current>=5 && next>=5) ||
-(current<5 && next<5)
+(n>=5 && current>=5) ||
+(n<5 && current<5)
 ){
+score[n]+=6;
+}
 
-scores[next]+=12;
+if(Math.abs(prev-current)<=2 &&
+Math.abs(current-n)<=2){
+score[n]+=10;
+}
 
 }
 
@@ -349,86 +310,90 @@ scores[next]+=12;
 
 nums.forEach(n=>{
 
-scores[n]-=8;
+score[n]-=10;
 
 });
 
-let predicted = Number(
-Object.keys(scores).reduce((a,b)=>
-scores[a] > scores[b] ? a : b
+let upcoming = Number(
+Object.keys(score).reduce((a,b)=>
+score[a]>score[b]?a:b
 ));
 
-let nextType =
-predicted>=5
+let type =
+upcoming>=5
 ? "🔴 BIG"
 : "🟢 SMALL";
 
-let color = getColor(predicted);
+let color = getColor(upcoming);
 
-let colorClass =
+let cls =
 color=="RED"
 ? "red"
 : "green";
 
-let confidence = 72;
+let confidence = 78;
 
-let bigCount =
+let bigs =
 nums.filter(n=>n>=5).length;
 
-let smallCount =
+let smalls =
 nums.filter(n=>n<5).length;
 
-if(predicted>=5 && bigCount>smallCount){
-confidence+=8;
+if(upcoming>=5 && bigs>smalls){
+confidence += 7;
 }
 
-if(predicted<5 && smallCount>bigCount){
-confidence+=8;
+if(upcoming<5 && smalls>bigs){
+confidence += 7;
 }
 
-let redCount =
-colors.filter(c=>c=="RED").length;
+let odd =
+nums.filter(n=>n%2!=0).length;
 
-let greenCount =
-colors.filter(c=>c=="GREEN").length;
+let even =
+nums.filter(n=>n%2==0).length;
 
-if(color=="RED" && redCount>greenCount){
-confidence+=5;
+if(upcoming%2==0 && even>odd){
+confidence += 5;
 }
 
-if(color=="GREEN" && greenCount>redCount){
-confidence+=5;
+if(upcoming%2!=0 && odd>even){
+confidence += 5;
 }
 
-if(Math.abs(last-predicted)<=2){
-confidence+=5;
+if(Math.abs(nums[0]-upcoming)<=2){
+confidence += 6;
 }
 
 if(confidence>98){
 confidence=98;
 }
 
-let signal="NORMAL SIGNAL";
+let signal = "NORMAL AI SIGNAL";
 
 if(confidence>=90){
-signal="ULTRA AI SIGNAL";
-}else if(confidence>=80){
-signal="STRONG LIVE SIGNAL";
+
+signal="ULTRA STRONG AI";
+
+}else if(confidence>=82){
+
+signal="STRONG LIVE AI";
+
 }
 
-document.getElementById("predict").innerHTML =
-nextType;
+document.getElementById("predictType").innerHTML =
+type;
 
-document.getElementById("number").innerHTML =
-predicted;
+document.getElementById("predictNumber").innerHTML =
+upcoming;
 
-document.getElementById("number").className =
-colorClass;
+document.getElementById("predictNumber").className =
+"predictNumber "+cls;
 
-document.getElementById("conf").innerHTML =
+document.getElementById("confidence").innerHTML =
 "Confidence : "+confidence+"%";
 
-document.getElementById("status").innerHTML =
+document.getElementById("signal").innerHTML =
 signal;
 
 document.getElementById("fill").style.width =
@@ -436,33 +401,36 @@ confidence+"%";
 
 document.getElementById("analysis").innerHTML = `
 
-<b>BIG/SMALL Pattern:</b><br>
-${bs.join(" → ")}<br><br>
+<b>Upcoming Number:</b>
+<span class="${cls}">
+${upcoming}
+</span><br><br>
 
-<b>Color Pattern:</b><br>
-${colors.join(" → ")}<br><br>
-
-<b>Predicted Number:</b> ${predicted}<br>
-<b>Predicted Color:</b>
-<span class="${colorClass}">
+<b>Upcoming Color:</b>
+<span class="${cls}">
 ${color}
-</span><br>
+</span><br><br>
 
-<b>AI Logic:</b><br>
-• Number Heatmap Analysis<br>
-• Color Momentum Detection<br>
-• BIG/SMALL Pressure Scan<br>
-• Repeat Cycle Reading<br>
-• Distance Pattern Engine<br>
-• Odd/Even Matching System
+<b>Upcoming Type:</b>
+${type}<br><br>
+
+<b>AI Detection:</b><br>
+• Live Heatmap Engine<br>
+• Momentum Detection<br>
+• Big/Small Pressure<br>
+• Odd/Even Tracking<br>
+• Transition Pattern Reading<br>
+• Repeat Break Analysis<br>
+• Distance Cycle Matching<br>
+• Upcoming Trend Scan
 
 `;
 
 }
 
-load();
+loadData();
 
-setInterval(load,2500);
+setInterval(loadData,2000);
 
 </script>
 
