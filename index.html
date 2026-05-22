@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HACKII AI LIVE</title>
+<title>HACKII REALTIME AI</title>
 
 <style>
 
@@ -18,7 +18,6 @@ body{
 background:#050816;
 color:white;
 padding:15px;
-overflow-x:hidden;
 }
 
 .container{
@@ -54,7 +53,7 @@ text-align:center;
 }
 
 .countdown{
-font-size:65px;
+font-size:70px;
 font-weight:bold;
 color:#00ff99;
 margin-top:10px;
@@ -67,7 +66,7 @@ margin-top:15px;
 }
 
 .number{
-font-size:110px;
+font-size:120px;
 font-weight:bold;
 margin-top:10px;
 }
@@ -140,13 +139,13 @@ margin-top:20px;
 <div class="container">
 
 <div class="title">
-<h1>🤖 HACKII AI LIVE</h1>
-<p>REAL TIME AI + COUNTDOWN DETECTOR</p>
+<h1>🤖 HACKII REALTIME AI</h1>
+<p>LIVE SELF LEARNING PATTERN ENGINE</p>
 </div>
 
 <div class="card center">
 
-<h2>⏳ NEXT ROUND COUNTDOWN</h2>
+<h2>⏳ NEXT ROUND</h2>
 
 <div class="countdown" id="timer">
 00:00
@@ -156,10 +155,10 @@ margin-top:20px;
 
 <div class="card center">
 
-<h2>🔮 UPCOMING AI DETECTION</h2>
+<h2>🔮 LIVE DETECTION</h2>
 
 <div class="predict" id="predictType">
-ANALYZING...
+WAITING...
 </div>
 
 <div class="number" id="predictNumber">
@@ -171,7 +170,7 @@ Confidence : 0%
 </div>
 
 <div class="signal" id="signal">
-READING LIVE PATTERN...
+LEARNING LIVE PATTERNS...
 </div>
 
 <div class="bar">
@@ -179,7 +178,7 @@ READING LIVE PATTERN...
 </div>
 
 <div class="analysis" id="analysis">
-Loading AI Analysis...
+Loading Live AI...
 </div>
 
 </div>
@@ -193,7 +192,7 @@ Loading AI Analysis...
 </div>
 
 <div class="footer">
-POWERED BY HACKII QUANTUM ENGINE
+POWERED BY HACKII QUANTUM AI
 </div>
 
 </div>
@@ -202,6 +201,12 @@ POWERED BY HACKII QUANTUM ENGINE
 
 const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
+
+const memory = {
+
+transitions:{}
+
+};
 
 function getColor(num){
 
@@ -221,25 +226,61 @@ let now = new Date();
 
 let sec = now.getSeconds();
 
-let remain = 60 - sec;
+let remain = 60-sec;
 
-if(remain == 60){
-remain = 0;
+if(remain==60){
+remain=0;
 }
 
-let min = Math.floor(remain/60);
-let seconds = remain % 60;
-
 document.getElementById("timer").innerHTML =
-String(min).padStart(2,'0') +
-":" +
-String(seconds).padStart(2,'0');
+"00:" +
+String(remain).padStart(2,"0");
 
 }
 
 update();
 
 setInterval(update,1000);
+
+}
+
+function learnPatterns(nums){
+
+memory.transitions = {};
+
+for(let i=nums.length-1;i>0;i--){
+
+const prev = nums[i];
+const next = nums[i-1];
+
+if(!memory.transitions[prev]){
+memory.transitions[prev] = {};
+}
+
+if(!memory.transitions[prev][next]){
+memory.transitions[prev][next] = 0;
+}
+
+memory.transitions[prev][next]++;
+
+}
+
+}
+
+function detectNext(last){
+
+if(!memory.transitions[last]){
+return null;
+}
+
+let map = memory.transitions[last];
+
+let best =
+Object.keys(map).reduce((a,b)=>
+map[a] > map[b] ? a : b
+);
+
+return Number(best);
 
 }
 
@@ -255,7 +296,7 @@ const list = json.data.list || json.data || [];
 
 renderHistory(list);
 
-runAI(list);
+runRealtimeAI(list);
 
 }catch(err){
 
@@ -270,13 +311,16 @@ function renderHistory(list){
 
 document.getElementById("history").innerHTML = "";
 
-list.slice(0,15).forEach(item=>{
+list.slice(0,20).forEach(item=>{
 
 let num = Number(item.number);
 
-let color = getColor(num);
+let type =
+num>=5
+? "BIG"
+: "SMALL";
 
-let type = num >=5 ? "BIG":"SMALL";
+let color = getColor(num);
 
 let cls =
 color=="RED"
@@ -309,88 +353,30 @@ ${type}
 
 }
 
-function runAI(list){
+function runRealtimeAI(list){
 
 let nums = [];
 
-list.slice(0,15).forEach(item=>{
+list.slice(0,30).forEach(item=>{
 
 nums.push(Number(item.number));
 
 });
 
-let scores = {};
-
-for(let i=0;i<=9;i++){
-scores[i]=0;
-}
+learnPatterns(nums);
 
 let last = nums[0];
 
-let transitions = {};
+let predicted = detectNext(last);
 
-for(let i=0;i<nums.length-1;i++){
+if(predicted==null){
 
-let current = nums[i+1];
-let next = nums[i];
+document.getElementById("predictType").innerHTML =
+"NO SIGNAL";
 
-if(!transitions[current]){
-transitions[current]={};
-}
-
-if(!transitions[current][next]){
-transitions[current][next]=0;
-}
-
-transitions[current][next]++;
+return;
 
 }
-
-for(let n=0;n<=9;n++){
-
-for(let i=0;i<nums.length;i++){
-
-let current = nums[i];
-
-let diff = Math.abs(current-n);
-
-scores[n] += (10-diff);
-
-if(n%2 == current%2){
-scores[n]+=5;
-}
-
-if(
-(n>=5 && current>=5) ||
-(n<5 && current<5)
-){
-scores[n]+=7;
-}
-
-if(Math.abs(current-n)<=1){
-scores[n]+=9;
-}
-
-}
-
-if(transitions[last] &&
-transitions[last][n]){
-
-scores[n] +=
-transitions[last][n]*20;
-
-}
-
-if(nums.includes(n)){
-scores[n]-=12;
-}
-
-}
-
-let predicted = Number(
-Object.keys(scores).reduce((a,b)=>
-scores[a]>scores[b]?a:b
-));
 
 let type =
 predicted>=5
@@ -404,60 +390,19 @@ color=="RED"
 ? "red"
 : "green";
 
-let confidence = 80;
+let confidence = 70;
 
-let bigCount =
-nums.filter(n=>n>=5).length;
+let map =
+memory.transitions[last];
 
-let smallCount =
-nums.filter(n=>n<5).length;
+if(map && map[predicted]){
 
-if(predicted>=5 && bigCount>smallCount){
-confidence+=7;
-}
+confidence += map[predicted]*8;
 
-if(predicted<5 && smallCount>bigCount){
-confidence+=7;
-}
-
-let odd =
-nums.filter(n=>n%2!=0).length;
-
-let even =
-nums.filter(n=>n%2==0).length;
-
-if(predicted%2==0 && even>odd){
-confidence+=5;
-}
-
-if(predicted%2!=0 && odd>even){
-confidence+=5;
-}
-
-if(Math.abs(last-predicted)<=2){
-confidence+=6;
-}
-
-if(transitions[last] &&
-transitions[last][predicted]){
-confidence +=
-transitions[last][predicted]*4;
 }
 
 if(confidence>98){
 confidence=98;
-}
-
-let signal = "NORMAL AI SIGNAL";
-
-if(confidence>=92){
-
-signal="ULTRA HIGH SIGNAL";
-
-}else if(confidence>=85){
-
-signal="STRONG LIVE SIGNAL";
-
 }
 
 document.getElementById("predictType").innerHTML =
@@ -473,38 +418,35 @@ document.getElementById("confidence").innerHTML =
 "Confidence : "+confidence+"%";
 
 document.getElementById("signal").innerHTML =
-signal;
+"REALTIME LIVE SIGNAL";
 
 document.getElementById("fill").style.width =
 confidence+"%";
 
 document.getElementById("analysis").innerHTML = `
 
-<b>Upcoming Number:</b>
+<b>LIVE LAST NUMBER:</b>
+${last}<br><br>
+
+<b>UPCOMING DETECTED:</b><br>
+
 <span class="${cls}">
 ${predicted}
 </span><br><br>
 
-<b>Upcoming Color:</b>
-<span class="${cls}">
-${color}
-</span><br><br>
+<b>REALTIME ANALYSIS:</b><br>
 
-<b>Upcoming Type:</b>
-${type}<br><br>
+• Self Learning Engine<br>
+• Live Transition Tracking<br>
+• Real Time Pattern Reading<br>
+• Auto Adaptive Detection<br>
+• Dynamic Sequence Learning<br>
+• Live API Flow Scan<br>
+• Real Signal Detection<br><br>
 
-<b>AI Detection Engine:</b><br>
-• Transition Mapping<br>
-• Repeat Break Scan<br>
-• Odd/Even Detection<br>
-• Big/Small Pressure<br>
-• Distance Matching<br>
-• Live Heatmap Reading<br>
-• Momentum Tracking<br>
-• Upcoming Trend Analysis<br><br>
+<b>Transition Memory:</b><br>
 
-<b>Last Numbers:</b><br>
-${nums.join(" → ")}
+${JSON.stringify(memory.transitions[last],null,2)}
 
 `;
 
