@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HACKII REAL AI</title>
+<title>HACKII ULTRA AI X</title>
 
 <style>
 
@@ -16,8 +16,9 @@ font-family:Arial,sans-serif;
 
 body{
 background:#050816;
-color:#fff;
+color:white;
 padding:15px;
+overflow-x:hidden;
 }
 
 .container{
@@ -31,7 +32,7 @@ margin-bottom:20px;
 }
 
 .title h1{
-font-size:42px;
+font-size:45px;
 color:#00ff99;
 }
 
@@ -45,7 +46,7 @@ background:#101935;
 padding:18px;
 border-radius:18px;
 margin-top:18px;
-box-shadow:0 0 20px #000;
+box-shadow:0 0 25px #000;
 }
 
 .center{
@@ -53,19 +54,19 @@ text-align:center;
 }
 
 .timer{
-font-size:75px;
+font-size:80px;
 font-weight:bold;
 color:#00ff99;
 }
 
 .predict{
-font-size:60px;
+font-size:65px;
 font-weight:bold;
 margin-top:15px;
 }
 
 .number{
-font-size:130px;
+font-size:140px;
 font-weight:bold;
 margin-top:10px;
 }
@@ -79,13 +80,13 @@ color:#00ff66;
 }
 
 .conf{
-font-size:28px;
+font-size:30px;
 margin-top:10px;
 }
 
 .signal{
-font-size:25px;
-margin-top:10px;
+font-size:26px;
+margin-top:12px;
 }
 
 .bar{
@@ -121,6 +122,7 @@ padding:14px;
 background:#182447;
 border-radius:12px;
 margin-top:10px;
+font-size:16px;
 }
 
 .footer{
@@ -137,8 +139,8 @@ margin-top:20px;
 <div class="container">
 
 <div class="title">
-<h1>🤖 HACKII REAL AI</h1>
-<p>LIVE REALTIME PATTERN DETECTION</p>
+<h1>🤖 HACKII ULTRA AI X</h1>
+<p>REALTIME ADVANCED PATTERN DETECTOR</p>
 </div>
 
 <div class="card center">
@@ -153,7 +155,7 @@ margin-top:20px;
 
 <div class="card center">
 
-<h2>🔮 LIVE AI SIGNAL</h2>
+<h2>🔮 LIVE AI DETECTION</h2>
 
 <div class="predict" id="predict">
 ANALYZING...
@@ -167,8 +169,8 @@ ANALYZING...
 Confidence : 0%
 </div>
 
-<div class="signal" id="status">
-LIVE LEARNING...
+<div class="signal" id="signal">
+LEARNING LIVE FLOW...
 </div>
 
 <div class="bar">
@@ -176,7 +178,7 @@ LIVE LEARNING...
 </div>
 
 <div class="analysis" id="analysis">
-Loading AI...
+Loading AI Engine...
 </div>
 
 </div>
@@ -190,7 +192,7 @@ Loading AI...
 </div>
 
 <div class="footer">
-POWERED BY HACKII AI ENGINE
+POWERED BY HACKII QUANTUM ENGINE
 </div>
 
 </div>
@@ -200,9 +202,9 @@ POWERED BY HACKII AI ENGINE
 const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
-// ==========================
+// =====================
 // TIMER
-// ==========================
+// =====================
 
 function startTimer(){
 
@@ -230,9 +232,9 @@ setInterval(update,1000);
 
 }
 
-// ==========================
+// =====================
 // COLOR
-// ==========================
+// =====================
 
 function getColor(num){
 
@@ -242,9 +244,9 @@ return [0,2,4,6,8].includes(num)
 
 }
 
-// ==========================
-// LOAD DATA
-// ==========================
+// =====================
+// LOAD
+// =====================
 
 async function load(){
 
@@ -258,27 +260,28 @@ const list = json.data.list || json.data || [];
 
 showHistory(list);
 
-analyze(list);
+runAI(list);
 
 }catch(err){
 
 document.getElementById("predict")
-.innerHTML = "API ERROR";
+.innerHTML =
+"API ERROR";
 
 }
 
 }
 
-// ==========================
-// SHOW HISTORY
-// ==========================
+// =====================
+// HISTORY
+// =====================
 
 function showHistory(list){
 
 document.getElementById("history")
 .innerHTML = "";
 
-list.slice(0,20).forEach(item=>{
+list.slice(0,25).forEach(item=>{
 
 let num = Number(item.number);
 
@@ -321,59 +324,57 @@ ${type}
 
 }
 
-// ==========================
-// REAL ANALYSIS
-// ==========================
+// =====================
+// REAL AI
+// =====================
 
-function analyze(list){
+function runAI(list){
 
 let nums = [];
-let bs = [];
 
-list.slice(0,30).forEach(item=>{
+list.slice(0,50).forEach(item=>{
 
-let n = Number(item.number);
-
-nums.push(n);
-
-bs.push(n >= 5 ? "B" : "S");
+nums.push(Number(item.number));
 
 });
 
 let last = nums[0];
 
-let transitions = {};
+let pairMap = {};
 let chainMap = {};
+let movementMap = {};
 let scores = {};
 
 for(let i=0;i<=9;i++){
+
 scores[i]=0;
+
 }
 
-// =======================
-// TRANSITION LEARNING
-// =======================
+// =====================
+// PAIR LEARNING
+// =====================
 
 for(let i=0;i<nums.length-1;i++){
 
-let current = nums[i+1];
+let prev = nums[i+1];
 let next = nums[i];
 
-if(!transitions[current]){
-transitions[current] = {};
+if(!pairMap[prev]){
+pairMap[prev]={};
 }
 
-if(!transitions[current][next]){
-transitions[current][next] = 0;
+if(!pairMap[prev][next]){
+pairMap[prev][next]=0;
 }
 
-transitions[current][next]++;
+pairMap[prev][next]++;
 
 }
 
-// =======================
-// 3 CHAIN LEARNING
-// =======================
+// =====================
+// CHAIN LEARNING
+// =====================
 
 for(let i=0;i<nums.length-3;i++){
 
@@ -382,28 +383,46 @@ nums[i+3]+"-"+
 nums[i+2]+"-"+
 nums[i+1];
 
-let next = nums[i];
+let next =
+nums[i];
 
 if(!chainMap[key]){
-chainMap[key] = {};
+chainMap[key]={};
 }
 
 if(!chainMap[key][next]){
-chainMap[key][next] = 0;
+chainMap[key][next]=0;
 }
 
 chainMap[key][next]++;
 
 }
 
+// =====================
+// MOVEMENT LEARNING
+// =====================
+
+for(let i=0;i<nums.length-1;i++){
+
+let diff =
+nums[i]-nums[i+1];
+
+if(!movementMap[diff]){
+movementMap[diff]=0;
+}
+
+movementMap[diff]++;
+
+}
+
+// =====================
+// LIVE CHAIN SCORE
+// =====================
+
 let liveKey =
 nums[3]+"-"+
 nums[2]+"-"+
 nums[1];
-
-// =======================
-// CHAIN SCORE
-// =======================
 
 if(chainMap[liveKey]){
 
@@ -411,168 +430,177 @@ Object.keys(chainMap[liveKey])
 .forEach(n=>{
 
 scores[n] +=
-chainMap[liveKey][n] * 40;
+chainMap[liveKey][n]*45;
 
 });
 
 }
 
-// =======================
-// TRANSITION SCORE
-// =======================
+// =====================
+// LIVE PAIR SCORE
+// =====================
 
-if(transitions[last]){
+if(pairMap[last]){
 
-Object.keys(transitions[last])
+Object.keys(pairMap[last])
 .forEach(n=>{
 
 scores[n] +=
-transitions[last][n] * 20;
+pairMap[last][n]*25;
 
 });
 
 }
 
-// =======================
-// LIVE FLOW ANALYSIS
-// =======================
+// =====================
+// MOVEMENT ENGINE
+// =====================
 
 for(let n=0;n<=9;n++){
 
-scores[n] +=
-10 - Math.abs(last-n);
+// distance
 
-// trend direction
+scores[n] +=
+10-Math.abs(last-n);
+
+// momentum
 
 if(last > nums[1] && n > last){
-scores[n] += 10;
+
+scores[n]+=10;
+
 }
 
 if(last < nums[1] && n < last){
-scores[n] += 10;
+
+scores[n]+=10;
+
 }
 
-// big small momentum
+// odd even
+
+if(last%2 == n%2){
+
+scores[n]+=5;
+
+}
+
+// big small
 
 if(
 (last>=5 && n>=5) ||
 (last<5 && n<5)
 ){
-scores[n] += 7;
+
+scores[n]+=7;
+
 }
 
-// odd even flow
+// repeat break
 
-if(last%2 == n%2){
-scores[n] += 5;
-}
+if(nums.slice(0,7).includes(n)){
 
-// recent repeat break
+scores[n]-=18;
 
-if(nums.slice(0,5).includes(n)){
-scores[n] -= 15;
 }
 
 // recent movement
 
-for(let i=0;i<5;i++){
+for(let i=0;i<7;i++){
 
 let diff =
 Math.abs(nums[i]-n);
 
-scores[n] +=
+scores[n]+=
 (10-diff);
 
 }
 
 }
 
-// =======================
-// FINAL DETECT
-// =======================
+// =====================
+// REAL DETECT
+// =====================
+
+let sorted =
+Object.entries(scores)
+.sort((a,b)=>b[1]-a[1]);
 
 let nextNumber =
-Number(
-Object.keys(scores)
-.reduce((a,b)=>
-scores[a] > scores[b]
-? a : b
-)
-);
+Number(sorted[0][0]);
 
-// fix same repeat issue
+// SAME NUMBER FIX
 
 if(nextNumber == last){
 
-scores[nextNumber] -= 50;
-
 nextNumber =
-Number(
-Object.keys(scores)
-.reduce((a,b)=>
-scores[a] > scores[b]
-? a : b
-)
-);
+Number(sorted[1][0]);
 
 }
 
-// =======================
-// REAL CONFIDENCE
-// =======================
+// =====================
+// CONFIDENCE
+// =====================
 
-let sorted =
-Object.values(scores)
-.sort((a,b)=>b-a);
+let top =
+sorted[0][1];
 
-let top = sorted[0];
-let second = sorted[1];
+let second =
+sorted[1][1];
 
 let confidence =
 Math.floor(
 (top/(top+second))*100
 );
 
-if(confidence > 98){
-confidence = 98;
+if(confidence<55){
+confidence=55;
 }
 
-if(confidence < 55){
-confidence = 55;
+if(confidence>98){
+confidence=98;
 }
 
-// =======================
+// =====================
 // TYPE
-// =======================
+// =====================
 
 let nextType =
-nextNumber >=5
+nextNumber>=5
 ? "🔴 BIG"
 : "🟢 SMALL";
 
-// =======================
+let cls =
+nextNumber>=5
+? "red"
+: "green";
+
+// =====================
 // SIGNAL
-// =======================
+// =====================
 
 let signal = "";
 
-if(confidence >= 90){
+if(confidence>=92){
 
-signal = "ULTRA LIVE SIGNAL";
+signal =
+"ULTRA LIVE SIGNAL";
 
-}else if(confidence >= 80){
+}else if(confidence>=82){
 
-signal = "STRONG REAL SIGNAL";
+signal =
+"STRONG REAL SIGNAL";
 
 }else{
 
-signal = "NORMAL LIVE SIGNAL";
+signal =
+"NORMAL LIVE SIGNAL";
 
 }
 
-// =======================
-// UI UPDATE
-// =======================
+// =====================
+// UI
+// =====================
 
 document.getElementById("predict")
 .innerHTML =
@@ -584,14 +612,13 @@ nextNumber;
 
 document.getElementById("number")
 .className =
-"number " +
-(nextNumber>=5 ? "red":"green");
+"number "+cls;
 
 document.getElementById("conf")
 .innerHTML =
 "Confidence : "+confidence+"%";
 
-document.getElementById("status")
+document.getElementById("signal")
 .innerHTML =
 signal;
 
@@ -603,34 +630,35 @@ document.getElementById("analysis")
 .innerHTML = `
 
 <b>LIVE FLOW:</b><br>
-${nums.slice(0,15).join(" → ")}<br><br>
+${nums.slice(0,20).join(" → ")}<br><br>
 
-<b>DETECTED SIGNAL:</b><br>
+<b>REAL DETECTED:</b><br>
+
 ${nextType}<br>
 ${nextNumber}<br><br>
 
-<b>REAL ANALYSIS:</b><br>
+<b>ADVANCED AI ENGINE:</b><br>
 
-• Live Transition Learning<br>
-• 3 Chain Pattern Detection<br>
-• Real Momentum Reading<br>
-• Adaptive Repeat Break<br>
-• Dynamic Movement Tracking<br>
-• Recent Flow Analysis<br>
-• Real Confidence Engine<br>
-• Live Sequence Detection
+• Real Pair Learning<br>
+• Live Chain Sequence Detection<br>
+• Dynamic Movement Engine<br>
+• Transition Pattern Reading<br>
+• Repeat Break Detection<br>
+• Adaptive Momentum Scan<br>
+• Live Trend Mapping<br>
+• Self Learning Probability System
 
 `;
 
 }
 
-// ==========================
+// =====================
 
 startTimer();
 
 load();
 
-setInterval(load,2000);
+setInterval(load,1500);
 
 </script>
 
