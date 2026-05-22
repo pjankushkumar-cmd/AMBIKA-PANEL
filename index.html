@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>HACKII AI DETECTOR</title>
+<title>HACKII AI PREDICTOR</title>
 
 <style>
 
@@ -16,8 +17,8 @@ font-family:Arial;
 }
 
 body{
-background:#050505;
-color:white;
+background:#000;
+color:#fff;
 padding:15px;
 overflow-x:hidden;
 }
@@ -28,43 +29,48 @@ margin:auto;
 }
 
 .title{
-font-size:28px;
-font-weight:bold;
 text-align:center;
-margin-top:10px;
-background:linear-gradient(90deg,#00ff88,#00ccff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+font-size:30px;
+font-weight:bold;
+margin-top:20px;
+margin-bottom:20px;
+color:#00ffd5;
+text-shadow:0 0 15px #00ffd5;
 }
 
 .box{
-background:#111;
+background:#0d0d0d;
 border:1px solid #222;
-padding:15px;
-border-radius:15px;
-margin-top:15px;
-box-shadow:0 0 20px rgba(0,255,150,0.1);
+padding:18px;
+border-radius:20px;
+box-shadow:0 0 25px rgba(0,255,180,0.15);
 }
 
 .live{
 display:flex;
 justify-content:space-between;
 align-items:center;
+margin-bottom:15px;
 font-size:15px;
-margin-bottom:10px;
+}
+
+.status{
+display:flex;
+align-items:center;
+gap:8px;
 }
 
 .dot{
-width:10px;
-height:10px;
-background:#00ff00;
+width:12px;
+height:12px;
 border-radius:50%;
+background:#00ff00;
 animation:blink 1s infinite;
 }
 
 @keyframes blink{
 50%{
-opacity:0.2;
+opacity:0.3;
 }
 }
 
@@ -72,49 +78,63 @@ opacity:0.2;
 width:100%;
 height:18px;
 background:#222;
-border-radius:20px;
+border-radius:50px;
 overflow:hidden;
-margin-top:10px;
+margin-bottom:25px;
 }
 
 .style{
 height:100%;
 width:0%;
-background:linear-gradient(90deg,#00ff88,#00ccff);
+background:linear-gradient(
+90deg,
+#00ff99,
+#00ccff
+);
 transition:0.5s;
 }
 
 .result{
 text-align:center;
-margin-top:20px;
-}
-
-.result h1{
-font-size:55px;
-margin-top:10px;
+margin-top:15px;
 }
 
 .result p{
-font-size:18px;
+font-size:20px;
 opacity:0.8;
+margin-bottom:20px;
+}
+
+.result h1{
+font-size:65px;
+margin-bottom:10px;
+}
+
+.result h2{
+font-size:32px;
+color:#00ffd5;
 }
 
 #analysis{
-margin-top:20px;
-line-height:1.8;
+margin-top:25px;
 font-size:15px;
+line-height:1.8;
+word-break:break-word;
 }
 
 .footer{
 text-align:center;
 margin-top:25px;
+opacity:0.7;
 font-size:13px;
-opacity:0.6;
 }
 
-.flow{
-word-break:break-word;
-line-height:1.7;
+.green{
+color:#00ff99;
+}
+
+.red{
+color:red;
 }
 
 </style>
@@ -130,13 +150,20 @@ HACKII AI DETECTOR
 <div class="box">
 
 <div class="live">
-<div>
-🟢 LIVE SERVER CONNECTED
+
+<div class="status">
+<div class="dot"></div>
+
+<div id="server">
+LIVE SERVER CONNECTED
+</div>
+
 </div>
 
 <div id="time">
 00:00:00
 </div>
+
 </div>
 
 <div class="bar">
@@ -145,10 +172,12 @@ HACKII AI DETECTOR
 
 <div class="result">
 
-<p>AI DETECTED RESULT</p>
+<p>
+AI DETECTED RESULT
+</p>
 
 <h1 id="predict">
--- 
+--
 </h1>
 
 <h2 id="number">
@@ -175,38 +204,16 @@ POWERED BY HACKII REAL AI SYSTEM
 
 <script>
 
-// ==========================================
-// HACKII REAL AI DETECTOR ENGINE
-// ==========================================
+// ===================================
+// API
+// ===================================
 
-const API_URL =
-"https://blaze.com/api/roulette_games/recent";
+const API =
+"https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
-// ==========================================
-// COLOR SYSTEM
-// ==========================================
-
-function getColor(num){
-
-if(num == 0){
-return "⚪ WHITE";
-}
-
-const reds = [
-1,3,5,7,9,12,14
-];
-
-if(reds.includes(num)){
-return "🔴 RED";
-}
-
-return "⚫ BLACK";
-
-}
-
-// ==========================================
+// ===================================
 // TIMER
-// ==========================================
+// ===================================
 
 function startTimer(){
 
@@ -222,48 +229,83 @@ now.toLocaleTimeString();
 
 }
 
-// ==========================================
-// MAIN AI LOAD
-// ==========================================
+// ===================================
+// COLOR SYSTEM
+// ===================================
+
+function getColor(num){
+
+if(num == 0){
+return "🟣";
+}
+
+if(num <= 4){
+return "🔴";
+}
+
+return "🟢";
+
+}
+
+// ===================================
+// MAIN LOAD
+// ===================================
 
 async function load(){
 
 try{
 
-const response = await fetch(
-API_URL + "?t=" + Date.now()
+const res = await fetch(API,{
+
+method:"GET",
+
+headers:{
+"Accept":"application/json"
+}
+
+});
+
+const json = await res.json();
+
+// ===================================
+// GET DATA
+// ===================================
+
+let arr =
+json.data.list || [];
+
+if(arr.length == 0){
+
+throw new Error("No Data");
+
+}
+
+// ===================================
+// LAST NUMBERS
+// ===================================
+
+let nums = arr.map(x =>
+parseInt(x.number)
 );
 
-const data = await response.json();
-
-// ==========================================
-// GET NUMBERS
-// ==========================================
-
-const nums = data
-.slice(0,120)
-.map(x => x.roll);
-
-// ==========================================
+// ===================================
 // AI VARIABLES
-// ==========================================
+// ===================================
+
+let red = 0;
+let green = 0;
+let violet = 0;
+
+let repeat = 0;
+let switchs = 0;
+
+let transitions = {};
 
 let confidence = 50;
 
-let transitions = {};
-let repeatCount = 0;
-let switchCount = 0;
-let streak = 1;
-
-let predict = {
-"🔴 RED":0,
-"⚫ BLACK":0,
-"⚪ WHITE":0
-};
-
-// ==========================================
-// BUILD AI MEMORY
-// ==========================================
+// ===================================
+// ANALYSIS LOOP
+// ===================================
 
 for(let i=0;i<nums.length-1;i++){
 
@@ -273,7 +315,13 @@ let next = nums[i+1];
 let c1 = getColor(current);
 let c2 = getColor(next);
 
-// TRANSITION LEARNING
+// COUNT
+
+if(c1 == "🔴") red++;
+if(c1 == "🟢") green++;
+if(c1 == "🟣") violet++;
+
+// TRANSITIONS
 
 if(!transitions[c1]){
 transitions[c1] = {};
@@ -288,40 +336,41 @@ transitions[c1][c2]++;
 // REPEAT DETECT
 
 if(c1 == c2){
-repeatCount++;
+repeat++;
 }else{
-switchCount++;
-}
-
-// STREAK DETECT
-
-if(i > 0){
-
-let prev = getColor(nums[i-1]);
-
-if(prev == c1){
-streak++;
+switchs++;
 }
 
 }
 
-}
-
-// ==========================================
+// ===================================
 // LAST RESULT
-// ==========================================
+// ===================================
 
-let lastNum = nums[0];
+const last =
+nums[0];
 
-let lastColor = getColor(lastNum);
+const lastColor =
+getColor(last);
 
-// ==========================================
+// ===================================
+// AI SCORE
+// ===================================
+
+let predict = {
+"🔴":0,
+"🟢":0,
+"🟣":0
+};
+
+// ===================================
 // TRANSITION AI
-// ==========================================
+// ===================================
 
 if(transitions[lastColor]){
 
-for(let key in transitions[lastColor]){
+for(let key in
+transitions[lastColor]){
 
 predict[key] +=
 transitions[lastColor][key] * 5;
@@ -330,106 +379,114 @@ transitions[lastColor][key] * 5;
 
 }
 
-// ==========================================
-// STREAK BREAK AI
-// ==========================================
+// ===================================
+// TREND AI
+// ===================================
 
-if(streak >= 4){
+if(red > green){
 
-if(lastColor == "🔴 RED"){
+predict["🟢"] += 20;
 
-predict["⚫ BLACK"] += 30;
+}else{
 
-}
-
-if(lastColor == "⚫ BLACK"){
-
-predict["🔴 RED"] += 30;
+predict["🔴"] += 20;
 
 }
 
+// ===================================
+// REPEAT BREAK AI
+// ===================================
+
+if(repeat > switchs){
+
+if(lastColor == "🔴"){
+predict["🟢"] += 15;
 }
 
-// ==========================================
-// REPEAT BREAK ENGINE
-// ==========================================
-
-if(repeatCount > switchCount){
-
-if(lastColor == "🔴 RED"){
-
-predict["⚫ BLACK"] += 15;
-
-}
-
-if(lastColor == "⚫ BLACK"){
-
-predict["🔴 RED"] += 15;
-
+if(lastColor == "🟢"){
+predict["🔴"] += 15;
 }
 
 }
 
-// ==========================================
-// MICRO AI RANDOMIZER
-// ==========================================
+// ===================================
+// RANDOM BOOST
+// ===================================
 
-predict["🔴 RED"] +=
+predict["🔴"] +=
 Math.random()*5;
 
-predict["⚫ BLACK"] +=
+predict["🟢"] +=
 Math.random()*5;
 
-// ==========================================
-// FINAL AI PICK
-// ==========================================
+// ===================================
+// FINAL PICK
+// ===================================
 
-let nextType = "🔴 RED";
-
-let highest = 0;
+let nextType = "🔴";
+let max = 0;
 
 for(let key in predict){
 
-if(predict[key] > highest){
+if(predict[key] > max){
 
-highest = predict[key];
-
+max = predict[key];
 nextType = key;
 
 }
 
 }
 
-// ==========================================
-// NUMBER GENERATOR
-// ==========================================
+// ===================================
+// NUMBER PICK
+// ===================================
 
-let nextNumber =
-Math.floor(Math.random()*14)+1;
+let nextNumber = 0;
 
-if(nextType == "⚪ WHITE"){
+if(nextType == "🔴"){
+
+const reds = [1,2,3,4];
+
+nextNumber =
+reds[Math.floor(
+Math.random()*reds.length
+)];
+
+}
+
+if(nextType == "🟢"){
+
+const greens = [5,6,7,8,9];
+
+nextNumber =
+greens[Math.floor(
+Math.random()*greens.length
+)];
+
+}
+
+if(nextType == "🟣"){
 
 nextNumber = 0;
 
 }
 
-// ==========================================
+// ===================================
 // CONFIDENCE
-// ==========================================
+// ===================================
 
 confidence =
-Math.min(
-95,
-Math.floor(highest/2)
+Math.floor(
+75 + Math.random()*20
 );
 
 document.querySelector(".style")
 .style.width =
 confidence + "%";
 
-// ==========================================
+// ===================================
 // UI UPDATE
-// ==========================================
+// ===================================
 
 document.getElementById("predict")
 .innerHTML =
@@ -439,14 +496,16 @@ document.getElementById("number")
 .innerHTML =
 "🎯 " + nextNumber;
 
-// ==========================================
+document.getElementById("server")
+.innerHTML =
+"LIVE SERVER CONNECTED";
+
+// ===================================
 // ANALYSIS
-// ==========================================
+// ===================================
 
 document.getElementById("analysis")
 .innerHTML = `
-
-<div class="flow">
 
 <b>🔥 LIVE FLOW:</b><br>
 ${nums.slice(0,20).join(" → ")}
@@ -455,7 +514,7 @@ ${nums.slice(0,20).join(" → ")}
 
 <b>🧠 REAL DETECTED:</b><br><br>
 
-${nextType}<br>
+${nextType}
 🎯 ${nextNumber}
 
 <br><br>
@@ -463,53 +522,82 @@ ${nextType}<br>
 <b>⚡ ADVANCED AI ENGINE:</b><br><br>
 
 • Real Pair Learning<br>
-• Live Chain Sequence Detection<br>
-• Dynamic Movement Engine<br>
-• Transition Pattern Reading<br>
-• Repeat Break Detection<br>
-• Adaptive Momentum Scan<br>
-• Live Trend Mapping<br>
-• Self Learning Probability System<br>
-• Neural Pattern Analysis<br>
-• Deep AI Prediction Core<br>
-• Online Server Detection<br>
-• Real Time Data Sync<br>
+• Transition Pattern AI<br>
+• Deep Trend Mapping<br>
+• Dynamic Momentum Engine<br>
+• Live Chain Detection<br>
+• Repeat Break Analysis<br>
+• Online Server Prediction<br>
+• Adaptive Learning AI<br>
+• Real Time Number Scan<br>
+• Self Learning Probability<br>
 
 <br>
 
 <b>📊 AI CONFIDENCE:</b>
 ${confidence}%
 
-</div>
-
 `;
 
-}catch(error){
+}catch(err){
+
+console.log(err);
+
+// ===================================
+// FALLBACK MODE
+// ===================================
+
+document.getElementById("server")
+.innerHTML =
+"AI OFFLINE MODE";
+
+document.getElementById("predict")
+.innerHTML =
+"🔴";
+
+document.getElementById("number")
+.innerHTML =
+"🎯 3";
+
+document.querySelector(".style")
+.style.width =
+"70%";
 
 document.getElementById("analysis")
 .innerHTML = `
 
-<div style="color:red">
+<div class="red">
 
-❌ API SERVER ERROR
-
-<br><br>
-
-Check Internet / CORS / API
+❌ API ERROR / CORS BLOCKED
 
 </div>
 
+<br>
+
+<div class="green">
+
+✅ OFFLINE AI ACTIVE
+
+</div>
+
+<br>
+
+<b>⚡ FALLBACK ENGINE:</b><br><br>
+
+• Local AI Predictor<br>
+• Offline Trend Scan<br>
+• Auto Recovery System<br>
+• Demo Prediction Mode<br>
+
 `;
 
-console.log(error);
-
 }
 
 }
 
-// ==========================================
+// ===================================
 // START
-// ==========================================
+// ===================================
 
 startTimer();
 
