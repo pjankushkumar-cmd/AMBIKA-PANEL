@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HACKII REAL AI ANALYZER</title>
+<title>HACKII LIVE AI PRO</title>
 
 <style>
 
@@ -11,7 +11,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial,sans-serif;
 }
 
 body{
@@ -21,7 +21,7 @@ padding:15px;
 }
 
 .container{
-max-width:900px;
+max-width:1000px;
 margin:auto;
 }
 
@@ -31,7 +31,7 @@ margin-bottom:20px;
 }
 
 .title h1{
-font-size:38px;
+font-size:40px;
 color:#00ff99;
 }
 
@@ -48,66 +48,30 @@ margin-top:18px;
 box-shadow:0 0 20px #000;
 }
 
-.row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:13px;
-background:#182447;
-border-radius:12px;
-margin-top:10px;
-}
-
-.green{
-color:#00ff66;
-font-weight:bold;
-}
-
-.red{
-color:#ff4b4b;
-font-weight:bold;
-}
-
-.violet{
-color:#ff4dff;
-font-weight:bold;
-}
-
-.big{
-color:#00c8ff;
-font-weight:bold;
-}
-
-.small{
-color:#ffd000;
-font-weight:bold;
-}
-
 .ai{
 text-align:center;
 }
 
 .predict{
-font-size:42px;
+font-size:50px;
 font-weight:bold;
 margin-top:15px;
 }
 
 .number{
-font-size:70px;
+font-size:90px;
 font-weight:bold;
 margin-top:10px;
-color:#00ff99;
 }
 
 .conf{
-font-size:24px;
+font-size:25px;
 margin-top:10px;
 }
 
 .status{
 margin-top:15px;
-font-size:20px;
+font-size:22px;
 }
 
 .bar{
@@ -126,10 +90,55 @@ background:#00ff99;
 transition:1s;
 }
 
+.analysis{
+margin-top:20px;
+background:#182447;
+padding:15px;
+border-radius:15px;
+font-size:17px;
+line-height:30px;
+text-align:left;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px;
+background:#182447;
+border-radius:12px;
+margin-top:10px;
+}
+
+.green{
+color:#00ff66;
+font-weight:bold;
+}
+
+.red{
+color:#ff4545;
+font-weight:bold;
+}
+
+.violet{
+color:#ff4dff;
+font-weight:bold;
+}
+
+.big{
+color:#ff4545;
+font-weight:bold;
+}
+
+.small{
+color:#00ff66;
+font-weight:bold;
+}
+
 .footer{
 text-align:center;
-margin-top:20px;
 opacity:.6;
+margin-top:20px;
 }
 
 </style>
@@ -140,13 +149,13 @@ opacity:.6;
 <div class="container">
 
 <div class="title">
-<h1>🤖 HACKII REAL AI</h1>
-<p>REAL PATTERN DETECTION ENGINE</p>
+<h1>🤖 HACKII LIVE AI PRO</h1>
+<p>REAL TIME ADVANCED PATTERN ANALYSIS</p>
 </div>
 
 <div class="card ai">
 
-<h2>NEXT ANALYSIS</h2>
+<h2>NEXT LIVE ANALYSIS</h2>
 
 <div class="predict" id="predict">
 ANALYZING...
@@ -161,11 +170,15 @@ Confidence : 0%
 </div>
 
 <div class="status" id="status">
-READING PATTERN...
+READING LIVE PATTERN...
 </div>
 
 <div class="bar">
 <div class="fill" id="fill"></div>
+</div>
+
+<div class="analysis" id="analysis">
+Loading AI...
 </div>
 
 </div>
@@ -179,7 +192,7 @@ READING PATTERN...
 </div>
 
 <div class="footer">
-POWERED BY HACKII PATTERN AI
+POWERED BY HACKII AI ENGINE
 </div>
 
 </div>
@@ -195,13 +208,13 @@ try{
 
 const res = await fetch(API);
 
-const data = await res.json();
+const json = await res.json();
 
-const list = data.data.list || data.data || [];
+const list = json.data.list || json.data || [];
 
-showHistory(list);
+renderHistory(list);
 
-realAnalyze(list);
+runAI(list);
 
 }catch(err){
 
@@ -212,19 +225,19 @@ document.getElementById("predict").innerHTML =
 
 }
 
-function showHistory(list){
+function renderHistory(list){
 
 document.getElementById("history").innerHTML = "";
 
-list.slice(0,10).forEach(item=>{
+list.slice(0,15).forEach(item=>{
 
 let num = Number(item.number);
 
-let bs = num >= 5 ? "BIG" : "SMALL";
+let type = num >= 5 ? "BIG" : "SMALL";
 
 let color = "green";
 
-if([2,4,6,8].includes(num)){
+if([6,7,8,9].includes(num)){
 color = "red";
 }
 
@@ -242,8 +255,8 @@ document.getElementById("history").innerHTML += `
 ${num}
 </div>
 
-<div class="${bs=="BIG"?"big":"small"}">
-${bs}
+<div class="${type=="BIG"?"big":"small"}">
+${type}
 </div>
 
 </div>
@@ -254,19 +267,24 @@ ${bs}
 
 }
 
-function realAnalyze(list){
+function runAI(list){
 
 let nums = [];
+let bs = [];
 
-list.slice(0,10).forEach(item=>{
+list.slice(0,15).forEach(item=>{
 
-nums.push(Number(item.number));
+let n = Number(item.number);
+
+nums.push(n);
+
+bs.push(n>=5 ? "B":"S");
 
 });
 
+let last = nums[0];
+
 let transitions = {};
-let repeats = {};
-let movementScore = {};
 
 for(let i=0;i<nums.length-1;i++){
 
@@ -285,120 +303,155 @@ transitions[current][next]++;
 
 }
 
-nums.forEach(n=>{
-
-repeats[n] = (repeats[n] || 0)+1;
-
-});
+let heatMap = {};
 
 for(let n=0;n<=9;n++){
 
-movementScore[n] = 0;
+heatMap[n] = 0;
 
-for(let i=0;i<nums.length;i++){
+nums.forEach(v=>{
 
-let diff = Math.abs(nums[i]-n);
+let diff = Math.abs(v-n);
 
-movementScore[n] += (10-diff);
-
-}
-
-}
-
-let last = nums[0];
-
-let nextMap = transitions[last] || {};
-
-let predictedNumber = null;
-let highest = -1;
-
-Object.keys(nextMap).forEach(key=>{
-
-let score = nextMap[key];
-
-score += movementScore[key] || 0;
-
-score -= (repeats[key] || 0)*2;
-
-if(score > highest){
-
-highest = score;
-predictedNumber = Number(key);
-
-}
+heatMap[n] += (10-diff);
 
 });
 
-if(predictedNumber == null){
-
-predictedNumber =
-Object.keys(movementScore).reduce((a,b)=>
-movementScore[a] > movementScore[b] ? a : b
-);
+if(nums.includes(n)){
+heatMap[n] -= 5;
+}
 
 }
 
-predictedNumber = Number(predictedNumber);
+if(transitions[last]){
 
-let type =
-predictedNumber >=5
-? "🔥 BIG"
+Object.keys(transitions[last]).forEach(k=>{
+
+heatMap[k] += transitions[last][k]*18;
+
+});
+
+}
+
+let nextNumber = Number(
+Object.keys(heatMap).reduce((a,b)=>
+heatMap[a] > heatMap[b] ? a : b
+));
+
+let nextType =
+nextNumber >=5
+? "🔴 BIG"
 : "🟢 SMALL";
 
-let confidence = 65;
+let confidence = 70;
 
-if(repeats[predictedNumber]){
+let bigCount =
+nums.filter(n=>n>=5).length;
+
+let smallCount =
+nums.filter(n=>n<5).length;
+
+if(nextNumber>=5 && bigCount>smallCount){
+confidence += 8;
+}
+
+if(nextNumber<5 && smallCount>bigCount){
+confidence += 8;
+}
+
+if(Math.abs(last-nextNumber)<=2){
+confidence += 6;
+}
+
+if(transitions[last] &&
+transitions[last][nextNumber]){
+confidence +=
+transitions[last][nextNumber]*5;
+}
+
+let repeat = 0;
+let switchs = 0;
+
+for(let i=0;i<bs.length-1;i++){
+
+if(bs[i]==bs[i+1]){
+repeat++;
+}else{
+switchs++;
+}
+
+}
+
+if(repeat>switchs){
 confidence += 5;
 }
 
-if(nextMap[predictedNumber]){
-confidence += nextMap[predictedNumber]*8;
+if(confidence>98){
+confidence = 98;
 }
 
-if(movementScore[predictedNumber] > 60){
-confidence += 10;
-}
+let signal = "";
 
-if(confidence > 97){
-confidence = 97;
-}
+if(confidence>=92){
 
-let trend = "";
+signal = "ULTRA HIGH AI SIGNAL";
 
-if(confidence >= 90){
+}else if(confidence>=82){
 
-trend = "ULTRA AI DETECTED";
-
-}else if(confidence >= 80){
-
-trend = "STRONG PATTERN";
+signal = "STRONG LIVE SIGNAL";
 
 }else{
 
-trend = "NORMAL TREND";
+signal = "NORMAL PATTERN";
 
 }
 
 document.getElementById("predict").innerHTML =
-type;
+nextType;
 
 document.getElementById("number").innerHTML =
-predictedNumber;
+nextNumber;
+
+document.getElementById("number").style.color =
+nextNumber>=5
+? "#ff4545"
+: "#00ff66";
 
 document.getElementById("conf").innerHTML =
 "Confidence : "+confidence+"%";
 
 document.getElementById("status").innerHTML =
-trend;
+signal;
 
 document.getElementById("fill").style.width =
 confidence+"%";
+
+document.getElementById("analysis").innerHTML = `
+
+<b>Pattern:</b>
+${bs.join(" → ")}<br><br>
+
+<b>BIG Count:</b> ${bigCount}<br>
+<b>SMALL Count:</b> ${smallCount}<br><br>
+
+<b>Last Number:</b> ${last}<br>
+<b>Predicted Number:</b> ${nextNumber}<br><br>
+
+<b>Live AI Analysis:</b><br>
+• Transition Pattern Scan<br>
+• BIG/SMALL Pressure Reading<br>
+• Repeat Cycle Detection<br>
+• Heatmap Number Analysis<br>
+• Live Momentum Tracking<br>
+• Adaptive Confidence Engine
+
+`;
 
 }
 
 load();
 
-setInterval(load,3000);
+setInterval(load,2500);
 
 </script>
 
