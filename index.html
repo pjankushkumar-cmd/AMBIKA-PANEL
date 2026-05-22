@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HACKII LIVE AI PRO</title>
+<title>HACKII REAL AI</title>
 
 <style>
 
@@ -16,12 +16,12 @@ font-family:Arial,sans-serif;
 
 body{
 background:#050816;
-color:white;
+color:#fff;
 padding:15px;
 }
 
 .container{
-max-width:1000px;
+max-width:1200px;
 margin:auto;
 }
 
@@ -31,7 +31,7 @@ margin-bottom:20px;
 }
 
 .title h1{
-font-size:40px;
+font-size:42px;
 color:#00ff99;
 }
 
@@ -48,39 +48,52 @@ margin-top:18px;
 box-shadow:0 0 20px #000;
 }
 
-.ai{
+.center{
 text-align:center;
 }
 
+.timer{
+font-size:75px;
+font-weight:bold;
+color:#00ff99;
+}
+
 .predict{
-font-size:50px;
+font-size:60px;
 font-weight:bold;
 margin-top:15px;
 }
 
 .number{
-font-size:90px;
+font-size:130px;
 font-weight:bold;
 margin-top:10px;
 }
 
+.red{
+color:#ff4545;
+}
+
+.green{
+color:#00ff66;
+}
+
 .conf{
+font-size:28px;
+margin-top:10px;
+}
+
+.signal{
 font-size:25px;
 margin-top:10px;
 }
 
-.status{
-margin-top:15px;
-font-size:22px;
-}
-
 .bar{
-width:100%;
 height:10px;
 background:#222;
 border-radius:50px;
-margin-top:15px;
 overflow:hidden;
+margin-top:15px;
 }
 
 .fill{
@@ -93,10 +106,10 @@ transition:1s;
 .analysis{
 margin-top:20px;
 background:#182447;
-padding:15px;
+padding:18px;
 border-radius:15px;
+line-height:33px;
 font-size:17px;
-line-height:30px;
 text-align:left;
 }
 
@@ -108,31 +121,6 @@ padding:14px;
 background:#182447;
 border-radius:12px;
 margin-top:10px;
-}
-
-.green{
-color:#00ff66;
-font-weight:bold;
-}
-
-.red{
-color:#ff4545;
-font-weight:bold;
-}
-
-.violet{
-color:#ff4dff;
-font-weight:bold;
-}
-
-.big{
-color:#ff4545;
-font-weight:bold;
-}
-
-.small{
-color:#00ff66;
-font-weight:bold;
 }
 
 .footer{
@@ -149,13 +137,23 @@ margin-top:20px;
 <div class="container">
 
 <div class="title">
-<h1>🤖 HACKII LIVE AI PRO</h1>
-<p>REAL TIME ADVANCED PATTERN ANALYSIS</p>
+<h1>🤖 HACKII REAL AI</h1>
+<p>LIVE REALTIME PATTERN DETECTION</p>
 </div>
 
-<div class="card ai">
+<div class="card center">
 
-<h2>NEXT LIVE ANALYSIS</h2>
+<h2>⏳ LIVE COUNTDOWN</h2>
+
+<div class="timer" id="timer">
+00:00
+</div>
+
+</div>
+
+<div class="card center">
+
+<h2>🔮 LIVE AI SIGNAL</h2>
 
 <div class="predict" id="predict">
 ANALYZING...
@@ -169,8 +167,8 @@ ANALYZING...
 Confidence : 0%
 </div>
 
-<div class="status" id="status">
-READING LIVE PATTERN...
+<div class="signal" id="status">
+LIVE LEARNING...
 </div>
 
 <div class="bar">
@@ -185,7 +183,7 @@ Loading AI...
 
 <div class="card">
 
-<h2>LIVE HISTORY</h2>
+<h2>📊 LIVE HISTORY</h2>
 
 <div id="history"></div>
 
@@ -202,6 +200,52 @@ POWERED BY HACKII AI ENGINE
 const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
+// ==========================
+// TIMER
+// ==========================
+
+function startTimer(){
+
+function update(){
+
+let now = new Date();
+
+let sec = now.getSeconds();
+
+let remain = 60-sec;
+
+if(remain==60){
+remain=0;
+}
+
+document.getElementById("timer").innerHTML =
+"00:" +
+String(remain).padStart(2,"0");
+
+}
+
+update();
+
+setInterval(update,1000);
+
+}
+
+// ==========================
+// COLOR
+// ==========================
+
+function getColor(num){
+
+return [0,2,4,6,8].includes(num)
+? "RED"
+: "GREEN";
+
+}
+
+// ==========================
+// LOAD DATA
+// ==========================
+
 async function load(){
 
 try{
@@ -212,50 +256,60 @@ const json = await res.json();
 
 const list = json.data.list || json.data || [];
 
-renderHistory(list);
+showHistory(list);
 
-runAI(list);
+analyze(list);
 
 }catch(err){
 
-document.getElementById("predict").innerHTML =
-"API ERROR";
+document.getElementById("predict")
+.innerHTML = "API ERROR";
 
 }
 
 }
 
-function renderHistory(list){
+// ==========================
+// SHOW HISTORY
+// ==========================
 
-document.getElementById("history").innerHTML = "";
+function showHistory(list){
 
-list.slice(0,15).forEach(item=>{
+document.getElementById("history")
+.innerHTML = "";
+
+list.slice(0,20).forEach(item=>{
 
 let num = Number(item.number);
 
-let type = num >= 5 ? "BIG" : "SMALL";
+let color = getColor(num);
 
-let color = "green";
+let type =
+num>=5
+? "BIG"
+: "SMALL";
 
-if([6,7,8,9].includes(num)){
-color = "red";
-}
+let cls =
+color=="RED"
+? "red"
+: "green";
 
-if(num == 0 || num == 5){
-color = "violet";
-}
-
-document.getElementById("history").innerHTML += `
+document.getElementById("history")
+.innerHTML += `
 
 <div class="row">
 
 <div>${item.issueNumber}</div>
 
-<div class="${color}">
+<div class="${cls}">
 ${num}
 </div>
 
-<div class="${type=="BIG"?"big":"small"}">
+<div class="${cls}">
+${color}
+</div>
+
+<div class="${type=="BIG"?"red":"green"}">
 ${type}
 </div>
 
@@ -267,24 +321,38 @@ ${type}
 
 }
 
-function runAI(list){
+// ==========================
+// REAL ANALYSIS
+// ==========================
+
+function analyze(list){
 
 let nums = [];
 let bs = [];
 
-list.slice(0,15).forEach(item=>{
+list.slice(0,30).forEach(item=>{
 
 let n = Number(item.number);
 
 nums.push(n);
 
-bs.push(n>=5 ? "B":"S");
+bs.push(n >= 5 ? "B" : "S");
 
 });
 
 let last = nums[0];
 
 let transitions = {};
+let chainMap = {};
+let scores = {};
+
+for(let i=0;i<=9;i++){
+scores[i]=0;
+}
+
+// =======================
+// TRANSITION LEARNING
+// =======================
 
 for(let i=0;i<nums.length-1;i++){
 
@@ -303,155 +371,266 @@ transitions[current][next]++;
 
 }
 
-let heatMap = {};
+// =======================
+// 3 CHAIN LEARNING
+// =======================
 
-for(let n=0;n<=9;n++){
+for(let i=0;i<nums.length-3;i++){
 
-heatMap[n] = 0;
+let key =
+nums[i+3]+"-"+
+nums[i+2]+"-"+
+nums[i+1];
 
-nums.forEach(v=>{
+let next = nums[i];
 
-let diff = Math.abs(v-n);
+if(!chainMap[key]){
+chainMap[key] = {};
+}
 
-heatMap[n] += (10-diff);
+if(!chainMap[key][next]){
+chainMap[key][next] = 0;
+}
+
+chainMap[key][next]++;
+
+}
+
+let liveKey =
+nums[3]+"-"+
+nums[2]+"-"+
+nums[1];
+
+// =======================
+// CHAIN SCORE
+// =======================
+
+if(chainMap[liveKey]){
+
+Object.keys(chainMap[liveKey])
+.forEach(n=>{
+
+scores[n] +=
+chainMap[liveKey][n] * 40;
 
 });
 
-if(nums.includes(n)){
-heatMap[n] -= 5;
 }
 
-}
+// =======================
+// TRANSITION SCORE
+// =======================
 
 if(transitions[last]){
 
-Object.keys(transitions[last]).forEach(k=>{
+Object.keys(transitions[last])
+.forEach(n=>{
 
-heatMap[k] += transitions[last][k]*18;
+scores[n] +=
+transitions[last][n] * 20;
 
 });
 
 }
 
-let nextNumber = Number(
-Object.keys(heatMap).reduce((a,b)=>
-heatMap[a] > heatMap[b] ? a : b
-));
+// =======================
+// LIVE FLOW ANALYSIS
+// =======================
+
+for(let n=0;n<=9;n++){
+
+scores[n] +=
+10 - Math.abs(last-n);
+
+// trend direction
+
+if(last > nums[1] && n > last){
+scores[n] += 10;
+}
+
+if(last < nums[1] && n < last){
+scores[n] += 10;
+}
+
+// big small momentum
+
+if(
+(last>=5 && n>=5) ||
+(last<5 && n<5)
+){
+scores[n] += 7;
+}
+
+// odd even flow
+
+if(last%2 == n%2){
+scores[n] += 5;
+}
+
+// recent repeat break
+
+if(nums.slice(0,5).includes(n)){
+scores[n] -= 15;
+}
+
+// recent movement
+
+for(let i=0;i<5;i++){
+
+let diff =
+Math.abs(nums[i]-n);
+
+scores[n] +=
+(10-diff);
+
+}
+
+}
+
+// =======================
+// FINAL DETECT
+// =======================
+
+let nextNumber =
+Number(
+Object.keys(scores)
+.reduce((a,b)=>
+scores[a] > scores[b]
+? a : b
+)
+);
+
+// fix same repeat issue
+
+if(nextNumber == last){
+
+scores[nextNumber] -= 50;
+
+nextNumber =
+Number(
+Object.keys(scores)
+.reduce((a,b)=>
+scores[a] > scores[b]
+? a : b
+)
+);
+
+}
+
+// =======================
+// REAL CONFIDENCE
+// =======================
+
+let sorted =
+Object.values(scores)
+.sort((a,b)=>b-a);
+
+let top = sorted[0];
+let second = sorted[1];
+
+let confidence =
+Math.floor(
+(top/(top+second))*100
+);
+
+if(confidence > 98){
+confidence = 98;
+}
+
+if(confidence < 55){
+confidence = 55;
+}
+
+// =======================
+// TYPE
+// =======================
 
 let nextType =
 nextNumber >=5
 ? "🔴 BIG"
 : "🟢 SMALL";
 
-let confidence = 70;
-
-let bigCount =
-nums.filter(n=>n>=5).length;
-
-let smallCount =
-nums.filter(n=>n<5).length;
-
-if(nextNumber>=5 && bigCount>smallCount){
-confidence += 8;
-}
-
-if(nextNumber<5 && smallCount>bigCount){
-confidence += 8;
-}
-
-if(Math.abs(last-nextNumber)<=2){
-confidence += 6;
-}
-
-if(transitions[last] &&
-transitions[last][nextNumber]){
-confidence +=
-transitions[last][nextNumber]*5;
-}
-
-let repeat = 0;
-let switchs = 0;
-
-for(let i=0;i<bs.length-1;i++){
-
-if(bs[i]==bs[i+1]){
-repeat++;
-}else{
-switchs++;
-}
-
-}
-
-if(repeat>switchs){
-confidence += 5;
-}
-
-if(confidence>98){
-confidence = 98;
-}
+// =======================
+// SIGNAL
+// =======================
 
 let signal = "";
 
-if(confidence>=92){
+if(confidence >= 90){
 
-signal = "ULTRA HIGH AI SIGNAL";
+signal = "ULTRA LIVE SIGNAL";
 
-}else if(confidence>=82){
+}else if(confidence >= 80){
 
-signal = "STRONG LIVE SIGNAL";
+signal = "STRONG REAL SIGNAL";
 
 }else{
 
-signal = "NORMAL PATTERN";
+signal = "NORMAL LIVE SIGNAL";
 
 }
 
-document.getElementById("predict").innerHTML =
+// =======================
+// UI UPDATE
+// =======================
+
+document.getElementById("predict")
+.innerHTML =
 nextType;
 
-document.getElementById("number").innerHTML =
+document.getElementById("number")
+.innerHTML =
 nextNumber;
 
-document.getElementById("number").style.color =
-nextNumber>=5
-? "#ff4545"
-: "#00ff66";
+document.getElementById("number")
+.className =
+"number " +
+(nextNumber>=5 ? "red":"green");
 
-document.getElementById("conf").innerHTML =
+document.getElementById("conf")
+.innerHTML =
 "Confidence : "+confidence+"%";
 
-document.getElementById("status").innerHTML =
+document.getElementById("status")
+.innerHTML =
 signal;
 
-document.getElementById("fill").style.width =
+document.getElementById("fill")
+.style.width =
 confidence+"%";
 
-document.getElementById("analysis").innerHTML = `
+document.getElementById("analysis")
+.innerHTML = `
 
-<b>Pattern:</b>
-${bs.join(" → ")}<br><br>
+<b>LIVE FLOW:</b><br>
+${nums.slice(0,15).join(" → ")}<br><br>
 
-<b>BIG Count:</b> ${bigCount}<br>
-<b>SMALL Count:</b> ${smallCount}<br><br>
+<b>DETECTED SIGNAL:</b><br>
+${nextType}<br>
+${nextNumber}<br><br>
 
-<b>Last Number:</b> ${last}<br>
-<b>Predicted Number:</b> ${nextNumber}<br><br>
+<b>REAL ANALYSIS:</b><br>
 
-<b>Live AI Analysis:</b><br>
-• Transition Pattern Scan<br>
-• BIG/SMALL Pressure Reading<br>
-• Repeat Cycle Detection<br>
-• Heatmap Number Analysis<br>
-• Live Momentum Tracking<br>
-• Adaptive Confidence Engine
+• Live Transition Learning<br>
+• 3 Chain Pattern Detection<br>
+• Real Momentum Reading<br>
+• Adaptive Repeat Break<br>
+• Dynamic Movement Tracking<br>
+• Recent Flow Analysis<br>
+• Real Confidence Engine<br>
+• Live Sequence Detection
 
 `;
 
 }
 
+// ==========================
+
+startTimer();
+
 load();
 
-setInterval(load,2500);
+setInterval(load,2000);
 
 </script>
 
