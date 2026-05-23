@@ -6,7 +6,7 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>ADVANCED AI ANALYZER</title>
+<title>ULTIMATE AI ANALYZER</title>
 
 <style>
 
@@ -15,112 +15,113 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:Arial,sans-serif;
+-webkit-tap-highlight-color:transparent;
 }
 
 body{
-background:#16153c;
-padding:15px;
+background:#17153d;
+padding:10px;
 color:white;
+overflow-x:hidden;
 }
 
 .mainBox{
 background:#221f67;
-border-radius:28px;
-padding:20px;
-margin-bottom:20px;
+border-radius:24px;
+padding:14px;
+margin-bottom:15px;
 }
 
 .title{
 text-align:center;
-font-size:58px;
+font-size:34px;
 font-weight:bold;
 line-height:1.1;
-color:#b689ff;
-margin-bottom:30px;
+color:#bb92ff;
+margin-bottom:20px;
 }
 
 .predictBox{
 background:#342f8f;
-border-radius:22px;
-padding:25px;
+border-radius:18px;
+padding:18px;
 text-align:center;
 }
 
 .predictTitle{
-font-size:22px;
-margin-bottom:12px;
-color:#e5e5ff;
+font-size:20px;
+color:#e7e7ff;
+margin-bottom:8px;
 }
 
 .period{
-font-size:22px;
-margin-bottom:20px;
-word-break:break-all;
+font-size:42px;
+font-weight:bold;
+margin-bottom:18px;
+color:#ffffff;
 }
 
 .predictNum{
-font-size:95px;
+font-size:110px;
 font-weight:bold;
-margin-bottom:15px;
+line-height:1;
+margin-bottom:12px;
 }
 
 .aiText{
-font-size:22px;
-line-height:1.4;
+font-size:20px;
+line-height:1.5;
 color:#ffd76a;
 margin-top:10px;
 }
 
-.timerBox{
-margin-top:25px;
-}
-
 .serverTime{
-font-size:36px;
+font-size:42px;
 font-weight:bold;
 color:#00ffd5;
 margin-top:10px;
 }
 
 .countdown{
-font-size:65px;
+font-size:85px;
 font-weight:bold;
-color:#ffd76a;
+color:#ffd54f;
 margin-top:10px;
 }
 
 .tableBox{
 background:#221f67;
-border-radius:28px;
+border-radius:24px;
 overflow:hidden;
 }
 
 .header{
-background:#4b4598;
+background:#5750b4;
 display:grid;
-grid-template-columns:2.2fr 1fr 1fr 1fr;
-padding:20px;
-font-size:20px;
+grid-template-columns:1.5fr .7fr .9fr .6fr;
+padding:16px 10px;
+font-size:17px;
 font-weight:bold;
 }
 
 .row{
 display:grid;
-grid-template-columns:2.2fr 1fr 1fr 1fr;
-padding:20px;
+grid-template-columns:1.5fr .7fr .9fr .6fr;
+padding:16px 10px;
 align-items:center;
 border-bottom:1px solid rgba(255,255,255,.05);
 }
 
 .periodText{
-font-size:17px;
-word-break:break-all;
+font-size:19px;
+font-weight:bold;
 }
 
 .number{
-font-size:68px;
+font-size:70px;
 font-weight:bold;
 text-align:center;
+line-height:1;
 }
 
 .bs{
@@ -131,63 +132,76 @@ text-align:center;
 .colorWrap{
 display:flex;
 justify-content:center;
-gap:10px;
+align-items:center;
+gap:8px;
 }
 
 .dot{
-width:18px;
-height:18px;
+width:16px;
+height:16px;
 border-radius:50%;
 }
 
 .red{
-background:#ff4b4b;
+background:#ff4d5a;
+box-shadow:0 0 10px #ff4d5a;
 }
 
 .green{
-background:#00d26a;
+background:#00ff99;
+box-shadow:0 0 10px #00ff99;
 }
 
 .violet{
-background:#ff4dff;
+background:#ff5cff;
+box-shadow:0 0 10px #ff5cff;
 }
 
 .pagination{
 background:#221f67;
-margin-top:20px;
-border-radius:28px;
-padding:25px;
+margin-top:15px;
+border-radius:24px;
+padding:18px;
 display:flex;
 justify-content:center;
 align-items:center;
-gap:30px;
+gap:20px;
 }
 
 .btn{
-width:80px;
-height:80px;
+width:70px;
+height:70px;
 border:none;
 border-radius:18px;
-background:#8f7dff;
+background:#8d7dff;
 color:white;
-font-size:45px;
+font-size:42px;
 cursor:pointer;
 }
 
 .page{
-font-size:34px;
+font-size:28px;
+font-weight:bold;
 }
 
 .greenText{
-color:#00ff9d;
+color:#00ff99;
+text-shadow:0 0 15px #00ff99;
 }
 
 .redText{
-color:#ff5c5c;
+color:#ff5566;
+text-shadow:0 0 15px #ff5566;
 }
 
-.violetText{
-color:#ff5cff;
+.loader{
+animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+0%{opacity:1}
+50%{opacity:.5}
+100%{opacity:1}
 }
 
 </style>
@@ -199,8 +213,7 @@ color:#ff5cff;
 <div class="mainBox">
 
 <div class="title">
-ADVANCED AI<br>
-ANALYZER
+ULTIMATE AI ANALYZER
 </div>
 
 <div class="predictBox">
@@ -211,53 +224,39 @@ UPCOMING PERIOD
 
 <div class="period"
 id="upcomingPeriod">
-
-Loading...
-
+0000
 </div>
 
-<div class="predictNum"
+<div class="predictNum loader"
 id="predictNum">
-
 --
-
 </div>
 
 <div class="aiText"
 id="aiText">
-
-AI ANALYZING LIVE TREND...
-
+AI ANALYZING LIVE DATA...
 </div>
 
-<div class="timerBox">
-
-<div style="font-size:22px;">
+<div style="
+margin-top:25px;
+font-size:22px;">
 SERVER TIME
 </div>
 
 <div class="serverTime"
 id="serverTime">
-
 00:00:00
-
 </div>
 
 <div style="
 margin-top:20px;
 font-size:22px;">
-
 NEXT REFRESH IN
-
 </div>
 
 <div class="countdown"
 id="countdown">
-
 60s
-
-</div>
-
 </div>
 
 </div>
@@ -297,9 +296,7 @@ onclick="prevPage()">
 
 <div class="page"
 id="pageNo">
-
 1/50
-
 </div>
 
 <button class="btn"
@@ -315,12 +312,33 @@ const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
 let allHistory = [];
-
 let batches = [];
-
 let currentPage = 0;
-
 let countdown = 60;
+
+/* =========================
+   KEEP SCREEN ACTIVE
+========================= */
+
+async function keepAwake(){
+
+try{
+
+if('wakeLock' in navigator){
+
+await navigator.wakeLock.request('screen');
+
+}
+
+}catch(e){
+
+console.log(e);
+
+}
+
+}
+
+keepAwake();
 
 /* =========================
    BIG SMALL
@@ -367,7 +385,7 @@ return "greenText";
 }
 
 /* =========================
-   MAKE BATCHES
+   MAKE 50 BATCH
 ========================= */
 
 function makeBatches(data){
@@ -393,7 +411,7 @@ batches = temp;
 }
 
 /* =========================
-   ADVANCED AI
+   ADVANCED AI ANALYSIS
 ========================= */
 
 function advancedAI(){
@@ -414,7 +432,6 @@ let weight = 1;
 for(let i=nums.length-1;i>=1;i--){
 
 let current = nums[i];
-
 let prev = nums[i-1];
 
 score[current] += weight;
@@ -439,12 +456,11 @@ score[current] += 2.5;
 
 }
 
-weight += 0.1;
+weight += 0.12;
 
 }
 
 let best = 0;
-
 let high = 0;
 
 for(let n in score){
@@ -452,7 +468,6 @@ for(let n in score){
 if(score[n] > high){
 
 high = score[n];
-
 best = Number(n);
 
 }
@@ -538,7 +553,7 @@ box.innerHTML += `
 
 <div class="periodText">
 
-${item.issueNumber}
+${item.shortPeriod}
 
 </div>
 
@@ -690,11 +705,20 @@ await res.json();
 let list =
 data.data.list || [];
 
+list.sort((a,b)=>
+Number(b.issueNumber)
+-
+Number(a.issueNumber)
+);
+
 allHistory =
 list.map(x=>({
 
 issueNumber:
-x.issueNumber,
+String(x.issueNumber),
+
+shortPeriod:
+String(x.issueNumber).slice(-4),
 
 number:
 Number(x.number)
@@ -709,15 +733,18 @@ advancedAI();
 
 let latest =
 allHistory[0]
-?.issueNumber || 0;
+?.issueNumber || "0";
+
+let nextPeriod =
+String(
+BigInt(latest)+1n
+);
 
 document.getElementById(
 "upcomingPeriod"
 ).innerHTML =
 
-String(
-Number(latest)+1
-);
+nextPeriod.slice(-4);
 
 }catch(e){
 
@@ -726,6 +753,23 @@ console.log(e);
 }
 
 }
+
+/* =========================
+   AUTO BACKGROUND REFRESH
+========================= */
+
+document.addEventListener(
+"visibilitychange",
+()=>{
+
+if(!document.hidden){
+
+loadData();
+
+}
+
+}
+);
 
 /* =========================
    START
