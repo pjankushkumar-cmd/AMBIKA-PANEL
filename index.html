@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>HACKII ULTRA AI DETECTOR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Live Trend Analyzer</title>
 
 <style>
 
@@ -17,808 +15,464 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#000;
-color:#fff;
+background:#081018;
+color:white;
 padding:15px;
-overflow-x:hidden;
-}
-
-.container{
-max-width:520px;
-margin:auto;
 }
 
 .title{
 text-align:center;
-font-size:34px;
+font-size:30px;
 font-weight:bold;
-margin:20px 0;
+margin-bottom:20px;
 color:#00ffd5;
-text-shadow:
-0 0 15px #00ffd5,
-0 0 30px #00ffd5;
 }
 
-.box{
-background:#0d0d0d;
-border:1px solid #222;
+.card{
+background:#101c2b;
+border:1px solid #1d3247;
 padding:18px;
-border-radius:22px;
-box-shadow:
-0 0 20px rgba(0,255,180,0.15),
-0 0 50px rgba(0,255,180,0.05);
+border-radius:18px;
+margin-bottom:15px;
+box-shadow:0 0 15px rgba(0,255,213,.08);
 }
 
 .live{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
-font-size:15px;
-}
-
-.status{
-display:flex;
-align-items:center;
-gap:10px;
-}
-
-.dot{
-width:14px;
-height:14px;
-background:#00ff00;
-border-radius:50%;
-animation:blink 1s infinite;
-}
-
-@keyframes blink{
-
-50%{
-opacity:0.3;
-}
-
-}
-
-.bar{
-width:100%;
-height:18px;
-background:#222;
-border-radius:50px;
-overflow:hidden;
-margin-bottom:25px;
-}
-
-.style{
-height:100%;
-width:0%;
-background:linear-gradient(
-90deg,
-#00ff99,
-#00ccff
-);
-transition:1s;
-}
-
-.result{
+font-size:60px;
+font-weight:bold;
 text-align:center;
-margin-top:20px;
+margin-top:10px;
 }
 
-.result p{
-font-size:20px;
-opacity:0.8;
-margin-bottom:20px;
+.predict{
+font-size:45px;
+font-weight:bold;
+color:#00ffd5;
+text-align:center;
+margin-top:10px;
 }
 
-.result h1{
-font-size:75px;
-margin-bottom:10px;
+.conf{
+text-align:center;
+margin-top:10px;
+font-size:18px;
+color:#ffe066;
 }
 
-.result h2{
-font-size:38px;
+.row{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-top:12px;
+flex-wrap:wrap;
+}
+
+.tag{
+padding:8px 16px;
+border-radius:14px;
+font-weight:bold;
+}
+
+.red{
+background:#ff3b3b;
+}
+
+.green{
+background:#00c853;
+}
+
+.big{
+background:#ff9800;
+}
+
+.small{
+background:#0091ea;
+}
+
+.batch{
+background:#101c2b;
+padding:15px;
+border-radius:18px;
+margin-bottom:15px;
+border:1px solid #1d3247;
+}
+
+.batchTitle{
+font-size:22px;
+margin-bottom:15px;
 color:#00ffd5;
 }
 
-#analysis{
-margin-top:25px;
-font-size:15px;
-line-height:1.9;
-word-break:break-word;
+.numbers{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
 }
 
-.footer{
-text-align:center;
-margin-top:25px;
-font-size:13px;
-opacity:0.7;
+.num{
+width:45px;
+height:45px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:bold;
+font-size:18px;
+background:#18293b;
 }
 
-.good{
-color:#00ff99;
+.arrow{
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+margin-top:15px;
+background:#00ffd5;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
 }
 
-.bad{
-color:red;
+.stats{
+margin-top:15px;
+line-height:1.8;
+font-size:16px;
 }
 
 </style>
 </head>
+
 <body>
 
-<div class="container">
-
 <div class="title">
-HACKII ULTRA AI DETECTOR
+ADVANCED LIVE TREND ANALYZER
 </div>
 
-<div class="box">
+<div class="card">
 
-<div class="live">
-
-<div class="status">
-
-<div class="dot"></div>
-
-<div id="server">
-CONNECTING AI SERVERS...
+<div>
+LIVE RESULT
 </div>
 
-</div>
-
-<div id="time">
-00:00:00
-</div>
-
-</div>
-
-<div class="bar">
-<div class="style"></div>
-</div>
-
-<div class="result">
-
-<p>
-ULTRA AI DETECTED RESULT
-</p>
-
-<h1 id="predict">
+<div class="live" id="liveResult">
 --
-</h1>
+</div>
 
-<h2 id="number">
+</div>
+
+<div class="card">
+
+<div>
+AI NEXT ANALYSIS
+</div>
+
+<div class="predict" id="prediction">
 --
-</h2>
+</div>
+
+<div class="conf" id="confidence">
+Confidence 0%
+</div>
+
+<div class="row">
+
+<div id="sizeType"></div>
+
+<div id="colorType"></div>
 
 </div>
 
-<div id="analysis">
-
-LOADING HIGH LEVEL AI...
+<div class="stats" id="stats"></div>
 
 </div>
 
-</div>
-
-<div class="footer">
-
-POWERED BY HACKII QUANTUM AI ENGINE
-
-</div>
-
-</div>
+<div id="batchContainer"></div>
 
 <script>
-
-// =====================================
-// MAIN API
-// =====================================
 
 const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
-// =====================================
-// GLOBAL MEMORY
-// RESULT WILL NOT CHANGE ON REFRESH
-// =====================================
+let batches = [];
 
-let savedResult =
-localStorage.getItem("hackii_result");
+let currentView = 0;
 
-let savedNumber =
-localStorage.getItem("hackii_number");
+function getColor(n){
 
-let savedPeriod =
-localStorage.getItem("hackii_period");
-
-// =====================================
-// LIVE CLOCK
-// =====================================
-
-function startTimer(){
-
-setInterval(()=>{
-
-const now = new Date();
-
-document.getElementById("time")
-.innerHTML =
-now.toLocaleTimeString();
-
-},1000);
+return [0,2,4,6,8].includes(n)
+? "RED"
+: "GREEN";
 
 }
 
-// =====================================
-// COLOR SYSTEM
-// =====================================
+function getSize(n){
 
-function getColor(num){
-
-if(num == 0){
-
-return "🟣";
+return n <= 4
+? "SMALL"
+: "BIG";
 
 }
 
-if(num >= 1 && num <= 4){
-
-return "🔴";
-
-}
-
-return "🟢";
-
-}
-
-// =====================================
-// SIZE SYSTEM
-// =====================================
-
-function getSize(num){
-
-if(num >= 5){
-
-return "BIG";
-
-}
-
-return "SMALL";
-
-}
-
-// =====================================
-// HIGH LEVEL AI ENGINE
-// =====================================
-
-async function load(){
+async function fetchData(){
 
 try{
 
-// =====================================
-// FETCH LIVE DATA
-// =====================================
+const res = await fetch(API);
 
-const res = await fetch(
-API + "?t=" + Date.now()
+const data = await res.json();
+
+let list =
+data.data.list || [];
+
+let numbers =
+list.map(x=>Number(x.number));
+
+numbers.reverse();
+
+buildBatches(numbers);
+
+renderCurrent();
+
+analyze();
+
+}catch(e){
+
+console.log(e);
+
+}
+
+}
+
+function buildBatches(numbers){
+
+let temp = [];
+
+for(let i=0;i<numbers.length;i+=10){
+
+temp.push(
+numbers.slice(i,i+10)
 );
 
-const json = await res.json();
+}
 
-const arr =
-json?.data?.list || [];
+while(temp.length > 50){
 
-if(arr.length == 0){
-
-throw new Error("NO DATA");
+temp.shift();
 
 }
 
-// =====================================
-// CURRENT PERIOD
-// =====================================
-
-const currentPeriod =
-arr[0].issueNumber || arr[0].issue;
-
-// =====================================
-// IF SAME PERIOD
-// DON'T CHANGE RESULT
-// =====================================
-
-if(savedPeriod == currentPeriod){
-
-document.getElementById("predict")
-.innerHTML =
-savedResult;
-
-document.getElementById("number")
-.innerHTML =
-"🎯 " + savedNumber;
-
-document.getElementById("server")
-.innerHTML =
-"ALL AI SERVERS CONNECTED";
-
-document.querySelector(".style")
-.style.width = "96%";
-
-document.getElementById("analysis")
-.innerHTML = `
-
-<b class="good">
-✅ SAME PERIOD DETECTED
-</b>
-
-<br><br>
-
-🧠 RESULT LOCK ACTIVE
-
-<br><br>
-
-🎯 FINAL RESULT:
-${savedResult}
-${savedNumber}
-
-<br><br>
-
-⚡ HIGH LEVEL AI ACTIVE
-
-`;
-
-return;
+batches = temp;
 
 }
 
-// =====================================
-// GET LAST 100 RESULTS
-// =====================================
+function flatten(){
 
-const nums = arr
-.slice(0,100)
-.map(x =>
-parseInt(x.number)
-);
-
-// =====================================
-// ADVANCED AI VARIABLES
-// =====================================
-
-let red = 0;
-let green = 0;
-let violet = 0;
-
-let big = 0;
-let small = 0;
-
-let repeat = 0;
-let switchs = 0;
-
-let streakRed = 0;
-let streakGreen = 0;
-
-let transitions = {};
-
-let pairMemory = {};
-
-let predict = {
-
-"🔴":0,
-"🟢":0,
-"🟣":0
-
-};
-
-// =====================================
-// FULL AI PATTERN DETECT
-// =====================================
-
-for(let i=0;i<nums.length-1;i++){
-
-let current = nums[i];
-let next = nums[i+1];
-
-let c1 = getColor(current);
-let c2 = getColor(next);
-
-// =====================================
-// COLOR COUNT
-// =====================================
-
-if(c1 == "🔴") red++;
-if(c1 == "🟢") green++;
-if(c1 == "🟣") violet++;
-
-// =====================================
-// BIG SMALL COUNT
-// =====================================
-
-if(getSize(current) == "BIG"){
-
-big++;
-
-}else{
-
-small++;
+return batches.flat();
 
 }
 
-// =====================================
-// TRANSITION MEMORY
-// =====================================
+function analyze(){
 
-if(!transitions[c1]){
+let all = flatten();
 
-transitions[c1] = {};
+if(all.length < 5) return;
 
-}
+let score = {};
 
-if(!transitions[c1][c2]){
+for(let i=0;i<=9;i++){
 
-transitions[c1][c2] = 0;
+score[i] = 0;
 
 }
 
-transitions[c1][c2]++;
+let weight = 1;
 
-// =====================================
-// PAIR MEMORY AI
-// =====================================
+for(let i=1;i<all.length;i++){
 
-let pair =
-current + "-" + next;
+let prev = all[i-1];
 
-if(!pairMemory[pair]){
+let current = all[i];
 
-pairMemory[pair] = 0;
+score[current] += weight;
 
-}
+if(prev === current){
 
-pairMemory[pair]++;
-
-// =====================================
-// REPEAT AI
-// =====================================
-
-if(c1 == c2){
-
-repeat++;
-
-}else{
-
-switchs++;
+score[current] += 3;
 
 }
 
-// =====================================
-// STREAK AI
-// =====================================
+if(getColor(prev) === getColor(current)){
 
-if(c1 == "🔴" &&
-c2 == "🔴"){
-
-streakRed++;
+score[current] += 2;
 
 }
 
-if(c1 == "🟢" &&
-c2 == "🟢"){
+if(getSize(prev) === getSize(current)){
 
-streakGreen++;
+score[current] += 2;
+
+}
+
+weight += 0.05;
+
+}
+
+let best = 0;
+
+let high = 0;
+
+for(let n in score){
+
+if(score[n] > high){
+
+high = score[n];
+
+best = Number(n);
 
 }
 
 }
 
-// =====================================
-// LAST RESULT
-// =====================================
-
-const last =
-nums[0];
-
-const lastColor =
-getColor(last);
-
-// =====================================
-// TRANSITION AI
-// =====================================
-
-if(transitions[lastColor]){
-
-for(let key in
-transitions[lastColor]){
-
-predict[key] +=
-transitions[lastColor][key] * 9;
-
-}
-
-}
-
-// =====================================
-// TREND BREAK AI
-// =====================================
-
-if(red > green){
-
-predict["🟢"] += 25;
-
-}else{
-
-predict["🔴"] += 25;
-
-}
-
-// =====================================
-// STREAK BREAK AI
-// =====================================
-
-if(streakRed >= 2){
-
-predict["🟢"] += 30;
-
-}
-
-if(streakGreen >= 2){
-
-predict["🔴"] += 30;
-
-}
-
-// =====================================
-// REPEAT BREAK ENGINE
-// =====================================
-
-if(repeat > switchs){
-
-if(lastColor == "🔴"){
-
-predict["🟢"] += 20;
-
-}
-
-if(lastColor == "🟢"){
-
-predict["🔴"] += 20;
-
-}
-
-}
-
-// =====================================
-// PAIR MEMORY BOOST
-// =====================================
-
-for(let key in pairMemory){
-
-if(pairMemory[key] >= 2){
-
-if(key.includes("1-2")){
-
-predict["🔴"] += 5;
-
-}
-
-if(key.includes("7-8")){
-
-predict["🟢"] += 5;
-
-}
-
-}
-
-}
-
-// =====================================
-// FINAL AI RESULT
-// =====================================
-
-let nextType = "🔴";
-
-let max = 0;
-
-for(let key in predict){
-
-if(predict[key] > max){
-
-max = predict[key];
-nextType = key;
-
-}
-
-}
-
-// =====================================
-// NUMBER PICK
-// =====================================
-
-let nextNumber = 0;
-
-if(nextType == "🔴"){
-
-const reds =
-[1,2,3,4];
-
-nextNumber =
-reds[Math.floor(
-Math.random()*reds.length
-)];
-
-}
-
-if(nextType == "🟢"){
-
-const greens =
-[5,6,7,8,9];
-
-nextNumber =
-greens[Math.floor(
-Math.random()*greens.length
-)];
-
-}
-
-if(nextType == "🟣"){
-
-nextNumber = 0;
-
-}
-
-// =====================================
-// SAVE RESULT
-// =====================================
-
-localStorage.setItem(
-"hackii_result",
-nextType
-);
-
-localStorage.setItem(
-"hackii_number",
-nextNumber
-);
-
-localStorage.setItem(
-"hackii_period",
-currentPeriod
-);
-
-// =====================================
-// CONFIDENCE
-// =====================================
-
-const confidence =
+let total =
+Object.values(score)
+.reduce((a,b)=>a+b,0);
+
+let conf =
 Math.min(
-99,
-Math.floor(max)
-);
+95,
+((high/total)*100+45)
+).toFixed(1);
 
-// =====================================
-// UPDATE UI
-// =====================================
+document.getElementById("prediction")
+.innerHTML = best;
 
-document.getElementById("predict")
+document.getElementById("confidence")
 .innerHTML =
-nextType;
+"Confidence "+conf+"%";
 
-document.getElementById("number")
+let size = getSize(best);
+
+let color = getColor(best);
+
+document.getElementById("sizeType")
 .innerHTML =
-"🎯 " + nextNumber;
+`<div class="tag ${size.toLowerCase()}">${size}</div>`;
 
-document.querySelector(".style")
-.style.width =
-confidence + "%";
-
-document.getElementById("server")
+document.getElementById("colorType")
 .innerHTML =
-"ALL AI SERVERS CONNECTED";
+`<div class="tag ${color.toLowerCase()}">${color}</div>`;
 
-// =====================================
-// SIZE RESULT
-// =====================================
+let red =
+all.filter(x=>getColor(x)=="RED").length;
 
-const sizeResult =
-getSize(nextNumber);
+let green =
+all.length-red;
 
-// =====================================
-// ANALYSIS
-// =====================================
+let small =
+all.filter(x=>x<=4).length;
 
-document.getElementById("analysis")
+let big =
+all.length-small;
+
+document.getElementById("stats")
 .innerHTML = `
 
-<b>🔥 LIVE FLOW:</b><br>
-${nums.slice(0,30).join(" → ")}
-
-<br><br>
-
-<b>🧠 HIGH LEVEL AI DETECTED:</b><br><br>
-
-${nextType}
-🎯 ${nextNumber}
-📊 ${sizeResult}
-
-<br><br>
-
-<b>⚡ ULTRA AI ENGINE:</b><br><br>
-
-• Quantum Pattern Detection<br>
-• Deep Transition Learning<br>
-• Live Pair Memory AI<br>
-• Repeat Break Engine<br>
-• Dynamic Trend Scanner<br>
-• Advanced Momentum AI<br>
-• Streak Reverse System<br>
-• Self Learning Probability<br>
-• Big Small Analysis<br>
-• Real Time Server Sync<br>
-• Locked Result Protection<br>
-• Refresh Stable Predictor<br>
-
-<br>
-
-<b>📈 LIVE STATS:</b><br><br>
-
-🔴 RED = ${red}<br>
-🟢 GREEN = ${green}<br>
-🟣 VIOLET = ${violet}<br>
-📊 BIG = ${big}<br>
-📉 SMALL = ${small}<br>
-
-<br>
-
-<b>🎯 AI CONFIDENCE:</b>
-${confidence}%
-
-`;
-
-}catch(err){
-
-console.log(err);
-
-document.getElementById("server")
-.innerHTML =
-"SERVER ERROR";
-
-document.getElementById("analysis")
-.innerHTML = `
-
-<div class="bad">
-
-❌ API ERROR / SERVER BLOCK
-
-</div>
-
-<br>
-
-<div class="good">
-
-CHECK INTERNET OR API
-
-</div>
+Total Results: ${all.length}<br>
+RED: ${red}<br>
+GREEN: ${green}<br>
+SMALL: ${small}<br>
+BIG: ${big}
 
 `;
 
 }
 
+function renderCurrent(){
+
+const box =
+document.getElementById("batchContainer");
+
+box.innerHTML = "";
+
+if(!batches[currentView]) return;
+
+let batch =
+batches[currentView];
+
+let latest =
+batch[batch.length-1];
+
+document.getElementById("liveResult")
+.innerHTML = latest;
+
+let html = `
+
+<div class="batch">
+
+<div class="batchTitle">
+
+Batch ${currentView+1}
+
+</div>
+
+<div class="numbers">
+
+`;
+
+batch.forEach(n=>{
+
+let border =
+getColor(n)=="RED"
+? "#ff3b3b"
+: "#00c853";
+
+html += `
+
+<div class="num"
+style="border:2px solid ${border}">
+${n}
+</div>
+
+`;
+
+});
+
+html += `
+
+</div>
+
+<button class="arrow"
+onclick="nextBatch()">
+
+↓ NEXT BATCH
+
+</button>
+
+</div>
+
+`;
+
+box.innerHTML = html;
+
 }
 
-// =====================================
-// START SYSTEM
-// =====================================
+function nextBatch(){
 
-startTimer();
+currentView++;
 
-load();
+if(currentView >= batches.length){
 
-// =====================================
-// AUTO REFRESH EVERY 5 SEC
-// RESULT WILL STAY SAME
-// UNTIL NEW PERIOD COMES
-// =====================================
+currentView = 0;
 
-setInterval(load,5000);
+}
+
+renderCurrent();
+
+}
+
+fetchData();
+
+setInterval(fetchData,60000);
 
 </script>
 
