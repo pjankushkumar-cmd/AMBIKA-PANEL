@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advanced Live Trend Analyzer</title>
+
+<title>ADVANCED AI ANALYZER</title>
 
 <style>
 
@@ -15,62 +16,107 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#081018;
+background:#14133a;
 color:white;
 padding:15px;
 }
 
-.title{
-text-align:center;
+.topBox{
+background:#1e1d55;
+border-radius:22px;
+padding:20px;
+margin-bottom:20px;
+}
+
+.heading{
 font-size:30px;
 font-weight:bold;
+text-align:center;
+color:#b39cff;
 margin-bottom:20px;
-color:#00ffd5;
 }
 
-.card{
-background:#101c2b;
-border:1px solid #1d3247;
-padding:18px;
+.upcomingBox{
+background:#2d2b73;
 border-radius:18px;
+padding:18px;
+text-align:center;
+}
+
+.upcomingTitle{
+font-size:18px;
+margin-bottom:10px;
+color:#ddd;
+}
+
+.upcomingPeriod{
+font-size:20px;
 margin-bottom:15px;
-box-shadow:0 0 15px rgba(0,255,213,.08);
+color:#fff;
+word-break:break-all;
 }
 
-.live{
-font-size:60px;
+.predictNum{
+font-size:65px;
 font-weight:bold;
-text-align:center;
-margin-top:10px;
+color:#00ff9d;
 }
 
-.predict{
-font-size:45px;
-font-weight:bold;
-color:#00ffd5;
-text-align:center;
-margin-top:10px;
-}
-
-.conf{
-text-align:center;
+.aiText{
 margin-top:10px;
 font-size:18px;
-color:#ffe066;
+color:#ffd966;
+}
+
+.batchCard{
+background:#1e1d55;
+border-radius:22px;
+padding:20px;
+margin-bottom:20px;
+}
+
+.tableHeader{
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr;
+margin-bottom:18px;
+font-size:19px;
+color:#d9d9ff;
 }
 
 .row{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-top:12px;
-flex-wrap:wrap;
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr;
+align-items:center;
+padding:16px 0;
+border-bottom:1px solid rgba(255,255,255,.06);
 }
 
-.tag{
-padding:8px 16px;
-border-radius:14px;
+.period{
+font-size:15px;
+word-break:break-all;
+}
+
+.number{
+font-size:55px;
 font-weight:bold;
+text-align:center;
+}
+
+.bigsmall{
+font-size:20px;
+text-align:center;
+}
+
+.colorBox{
+display:flex;
+justify-content:center;
+gap:8px;
+}
+
+.dot{
+width:18px;
+height:18px;
+border-radius:50%;
 }
 
 .red{
@@ -78,65 +124,34 @@ background:#ff3b3b;
 }
 
 .green{
-background:#00c853;
+background:#00d26a;
 }
 
-.big{
-background:#ff9800;
+.violet{
+background:#ff4dff;
 }
 
-.small{
-background:#0091ea;
-}
-
-.batch{
-background:#101c2b;
-padding:15px;
-border-radius:18px;
-margin-bottom:15px;
-border:1px solid #1d3247;
-}
-
-.batchTitle{
-font-size:22px;
-margin-bottom:15px;
-color:#00ffd5;
-}
-
-.numbers{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-}
-
-.num{
-width:45px;
-height:45px;
-border-radius:50%;
+.pagination{
 display:flex;
 justify-content:center;
 align-items:center;
-font-weight:bold;
-font-size:18px;
-background:#18293b;
+gap:25px;
+margin-top:20px;
 }
 
-.arrow{
-width:100%;
-padding:14px;
+.pageBtn{
+width:65px;
+height:65px;
 border:none;
-border-radius:14px;
-margin-top:15px;
-background:#00ffd5;
-font-size:18px;
-font-weight:bold;
+border-radius:16px;
+background:#8f7dff;
+color:white;
+font-size:38px;
 cursor:pointer;
 }
 
-.stats{
-margin-top:15px;
-line-height:1.8;
-font-size:16px;
+.pageCount{
+font-size:28px;
 }
 
 </style>
@@ -144,113 +159,103 @@ font-size:16px;
 
 <body>
 
-<div class="title">
-ADVANCED LIVE TREND ANALYZER
+<div class="topBox">
+
+<div class="heading">
+ADVANCED AI ANALYZER
 </div>
 
-<div class="card">
+<div class="upcomingBox">
 
-<div>
-LIVE RESULT
+<div class="upcomingTitle">
+UPCOMING PERIOD
 </div>
 
-<div class="live" id="liveResult">
+<div class="upcomingPeriod" id="upcomingPeriod">
+Loading...
+</div>
+
+<div class="predictNum" id="prediction">
 --
 </div>
 
+<div class="aiText" id="aiText">
+AI ANALYZING...
 </div>
-
-<div class="card">
-
-<div>
-AI NEXT ANALYSIS
-</div>
-
-<div class="predict" id="prediction">
---
-</div>
-
-<div class="conf" id="confidence">
-Confidence 0%
-</div>
-
-<div class="row">
-
-<div id="sizeType"></div>
-
-<div id="colorType"></div>
 
 </div>
 
-<div class="stats" id="stats"></div>
+</div>
+
+<div class="batchCard">
+
+<div class="tableHeader">
+<div>Period</div>
+<div style="text-align:center;">Number</div>
+<div style="text-align:center;">Big Small</div>
+<div style="text-align:center;">Color</div>
+</div>
+
+<div id="historyTable"></div>
+
+<div class="pagination">
+
+<button class="pageBtn"
+onclick="prevPage()">
+‹
+</button>
+
+<div class="pageCount"
+id="pageCount">
+1/50
+</div>
+
+<button class="pageBtn"
+onclick="nextPage()">
+›
+</button>
 
 </div>
 
-<div id="batchContainer"></div>
+</div>
 
 <script>
 
 const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
+let allResults = [];
+
 let batches = [];
 
-let currentView = 0;
+let currentPage = 0;
+
+function getBigSmall(n){
+
+return n <= 4
+? "Small"
+: "Big";
+
+}
 
 function getColor(n){
 
-return [0,2,4,6,8].includes(n)
-? "RED"
-: "GREEN";
+if([0,2,4,6,8].includes(n)){
+return ["red"];
+}
+
+return ["green"];
 
 }
 
-function getSize(n){
-
-return n <= 4
-? "SMALL"
-: "BIG";
-
-}
-
-async function fetchData(){
-
-try{
-
-const res = await fetch(API);
-
-const data = await res.json();
-
-let list =
-data.data.list || [];
-
-let numbers =
-list.map(x=>Number(x.number));
-
-numbers.reverse();
-
-buildBatches(numbers);
-
-renderCurrent();
-
-analyze();
-
-}catch(e){
-
-console.log(e);
-
-}
-
-}
-
-function buildBatches(numbers){
+function createBatches(data){
 
 let temp = [];
 
-for(let i=0;i<numbers.length;i+=10){
+for(let i=0;i<data.length;i+=10){
 
 temp.push(
-numbers.slice(i,i+10)
+data.slice(i,i+10)
 );
 
 }
@@ -261,218 +266,234 @@ temp.shift();
 
 }
 
-batches = temp;
+batches = temp.reverse();
 
 }
 
-function flatten(){
+function advancedAIAnalysis(){
 
-return batches.flat();
-
-}
-
-function analyze(){
-
-let all = flatten();
-
-if(all.length < 5) return;
+let nums =
+allResults.map(x=>x.number);
 
 let score = {};
 
 for(let i=0;i<=9;i++){
 
-score[i] = 0;
+score[i]=0;
 
 }
 
-let weight = 1;
+let recentWeight = 1;
 
-for(let i=1;i<all.length;i++){
+for(let i=nums.length-1;i>=1;i--){
 
-let prev = all[i-1];
+let current = nums[i];
+let prev = nums[i-1];
 
-let current = all[i];
+score[current] += recentWeight;
 
-score[current] += weight;
+if(current === prev){
 
-if(prev === current){
-
-score[current] += 3;
+score[current] += 5;
 
 }
 
-if(getColor(prev) === getColor(current)){
+if(getBigSmall(current)
+=== getBigSmall(prev)){
 
 score[current] += 2;
 
 }
 
-if(getSize(prev) === getSize(current)){
-
-score[current] += 2;
-
-}
-
-weight += 0.05;
+recentWeight += 0.08;
 
 }
 
 let best = 0;
-
-let high = 0;
+let highest = 0;
 
 for(let n in score){
 
-if(score[n] > high){
+if(score[n] > highest){
 
-high = score[n];
-
+highest = score[n];
 best = Number(n);
 
 }
 
 }
 
-let total =
-Object.values(score)
-.reduce((a,b)=>a+b,0);
-
 let conf =
 Math.min(
 95,
-((high/total)*100+45)
+((highest /
+Object.values(score)
+.reduce((a,b)=>a+b,0)
+)*100 + 50)
 ).toFixed(1);
 
-document.getElementById("prediction")
-.innerHTML = best;
+document.getElementById(
+"prediction"
+).innerHTML = best;
 
-document.getElementById("confidence")
-.innerHTML =
-"Confidence "+conf+"%";
+document.getElementById(
+"aiText"
+).innerHTML =
 
-let size = getSize(best);
-
-let color = getColor(best);
-
-document.getElementById("sizeType")
-.innerHTML =
-`<div class="tag ${size.toLowerCase()}">${size}</div>`;
-
-document.getElementById("colorType")
-.innerHTML =
-`<div class="tag ${color.toLowerCase()}">${color}</div>`;
-
-let red =
-all.filter(x=>getColor(x)=="RED").length;
-
-let green =
-all.length-red;
-
-let small =
-all.filter(x=>x<=4).length;
-
-let big =
-all.length-small;
-
-document.getElementById("stats")
-.innerHTML = `
-
-Total Results: ${all.length}<br>
-RED: ${red}<br>
-GREEN: ${green}<br>
-SMALL: ${small}<br>
-BIG: ${big}
-
-`;
+`AI DETECT:
+${getBigSmall(best)}
+•
+${getColor(best)[0].toUpperCase()}
+•
+${conf}% Confidence`;
 
 }
 
-function renderCurrent(){
+function renderPage(){
 
-const box =
-document.getElementById("batchContainer");
+const table =
+document.getElementById(
+"historyTable"
+);
 
-box.innerHTML = "";
+table.innerHTML = "";
 
-if(!batches[currentView]) return;
+if(!batches[currentPage]) return;
 
-let batch =
-batches[currentView];
+batches[currentPage]
+.forEach(item=>{
 
-let latest =
-batch[batch.length-1];
+let colorClass =
+getColor(item.number)[0];
 
-document.getElementById("liveResult")
-.innerHTML = latest;
+table.innerHTML += `
 
-let html = `
+<div class="row">
 
-<div class="batch">
+<div class="period">
+${item.issueNumber}
+</div>
 
-<div class="batchTitle">
+<div class="number"
+style="color:
+${colorClass==="red"
+? "#ff4b4b"
+: "#00ff9d"}">
 
-Batch ${currentView+1}
+${item.number}
 
 </div>
 
-<div class="numbers">
+<div class="bigsmall">
 
-`;
+${getBigSmall(item.number)}
 
-batch.forEach(n=>{
+</div>
 
-let border =
-getColor(n)=="RED"
-? "#ff3b3b"
-: "#00c853";
+<div class="colorBox">
 
-html += `
+<div class="dot ${colorClass}"></div>
 
-<div class="num"
-style="border:2px solid ${border}">
-${n}
+</div>
+
 </div>
 
 `;
 
 });
 
-html += `
+document.getElementById(
+"pageCount"
+).innerHTML =
 
-</div>
-
-<button class="arrow"
-onclick="nextBatch()">
-
-↓ NEXT BATCH
-
-</button>
-
-</div>
-
-`;
-
-box.innerHTML = html;
+`${currentPage+1}/50`;
 
 }
 
-function nextBatch(){
+function nextPage(){
 
-currentView++;
+currentPage++;
 
-if(currentView >= batches.length){
+if(currentPage >= batches.length){
 
-currentView = 0;
-
-}
-
-renderCurrent();
+currentPage = 0;
 
 }
 
-fetchData();
+renderPage();
 
-setInterval(fetchData,60000);
+}
+
+function prevPage(){
+
+currentPage--;
+
+if(currentPage < 0){
+
+currentPage =
+batches.length-1;
+
+}
+
+renderPage();
+
+}
+
+async function loadData(){
+
+try{
+
+const res =
+await fetch(API);
+
+const data =
+await res.json();
+
+let list =
+data.data.list || [];
+
+allResults = list.map(x=>({
+
+issueNumber:
+x.issueNumber,
+
+number:
+Number(x.number)
+
+}));
+
+allResults.reverse();
+
+createBatches(allResults);
+
+renderPage();
+
+advancedAIAnalysis();
+
+let latestPeriod =
+allResults[
+allResults.length-1
+]?.issueNumber || 0;
+
+document.getElementById(
+"upcomingPeriod"
+).innerHTML =
+
+String(
+Number(latestPeriod)+1
+);
+
+}catch(e){
+
+console.log(e);
+
+}
+
+}
+
+loadData();
+
+setInterval(loadData,60000);
 
 </script>
 
