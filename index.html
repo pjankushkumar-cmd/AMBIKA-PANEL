@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>ADVANCED AI ANALYZER</title>
 
@@ -16,101 +18,120 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#14133a;
-color:white;
+background:#16153c;
 padding:15px;
+color:white;
 }
 
-.topBox{
-background:#1e1d55;
-border-radius:22px;
+.mainBox{
+background:#221f67;
+border-radius:28px;
 padding:20px;
 margin-bottom:20px;
 }
 
-.heading{
-font-size:30px;
+.title{
+text-align:center;
+font-size:58px;
 font-weight:bold;
+line-height:1.1;
+color:#b689ff;
+margin-bottom:30px;
+}
+
+.predictBox{
+background:#342f8f;
+border-radius:22px;
+padding:25px;
 text-align:center;
-color:#b39cff;
+}
+
+.predictTitle{
+font-size:22px;
+margin-bottom:12px;
+color:#e5e5ff;
+}
+
+.period{
+font-size:22px;
 margin-bottom:20px;
-}
-
-.upcomingBox{
-background:#2d2b73;
-border-radius:18px;
-padding:18px;
-text-align:center;
-}
-
-.upcomingTitle{
-font-size:18px;
-margin-bottom:10px;
-color:#ddd;
-}
-
-.upcomingPeriod{
-font-size:20px;
-margin-bottom:15px;
-color:#fff;
 word-break:break-all;
 }
 
 .predictNum{
-font-size:65px;
+font-size:95px;
 font-weight:bold;
-color:#00ff9d;
+margin-bottom:15px;
 }
 
 .aiText{
+font-size:22px;
+line-height:1.4;
+color:#ffd76a;
 margin-top:10px;
-font-size:18px;
-color:#ffd966;
 }
 
-.batchCard{
-background:#1e1d55;
-border-radius:22px;
-padding:20px;
-margin-bottom:20px;
+.timerBox{
+margin-top:25px;
 }
 
-.tableHeader{
+.serverTime{
+font-size:36px;
+font-weight:bold;
+color:#00ffd5;
+margin-top:10px;
+}
+
+.countdown{
+font-size:65px;
+font-weight:bold;
+color:#ffd76a;
+margin-top:10px;
+}
+
+.tableBox{
+background:#221f67;
+border-radius:28px;
+overflow:hidden;
+}
+
+.header{
+background:#4b4598;
 display:grid;
-grid-template-columns:2fr 1fr 1fr 1fr;
-margin-bottom:18px;
-font-size:19px;
-color:#d9d9ff;
+grid-template-columns:2.2fr 1fr 1fr 1fr;
+padding:20px;
+font-size:20px;
+font-weight:bold;
 }
 
 .row{
 display:grid;
-grid-template-columns:2fr 1fr 1fr 1fr;
+grid-template-columns:2.2fr 1fr 1fr 1fr;
+padding:20px;
 align-items:center;
-padding:16px 0;
-border-bottom:1px solid rgba(255,255,255,.06);
+border-bottom:1px solid rgba(255,255,255,.05);
 }
 
-.period{
-font-size:15px;
+.periodText{
+font-size:17px;
 word-break:break-all;
 }
 
 .number{
-font-size:55px;
+font-size:68px;
 font-weight:bold;
 text-align:center;
 }
 
-.bigsmall{
-font-size:20px;
+.bs{
+font-size:22px;
 text-align:center;
 }
 
-.colorBox{
+.colorWrap{
 display:flex;
 justify-content:center;
-gap:8px;
+gap:10px;
 }
 
 .dot{
@@ -120,7 +141,7 @@ border-radius:50%;
 }
 
 .red{
-background:#ff3b3b;
+background:#ff4b4b;
 }
 
 .green{
@@ -132,90 +153,159 @@ background:#ff4dff;
 }
 
 .pagination{
+background:#221f67;
+margin-top:20px;
+border-radius:28px;
+padding:25px;
 display:flex;
 justify-content:center;
 align-items:center;
-gap:25px;
-margin-top:20px;
+gap:30px;
 }
 
-.pageBtn{
-width:65px;
-height:65px;
+.btn{
+width:80px;
+height:80px;
 border:none;
-border-radius:16px;
+border-radius:18px;
 background:#8f7dff;
 color:white;
-font-size:38px;
+font-size:45px;
 cursor:pointer;
 }
 
-.pageCount{
-font-size:28px;
+.page{
+font-size:34px;
+}
+
+.greenText{
+color:#00ff9d;
+}
+
+.redText{
+color:#ff5c5c;
+}
+
+.violetText{
+color:#ff5cff;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="topBox">
+<div class="mainBox">
 
-<div class="heading">
-ADVANCED AI ANALYZER
+<div class="title">
+ADVANCED AI<br>
+ANALYZER
 </div>
 
-<div class="upcomingBox">
+<div class="predictBox">
 
-<div class="upcomingTitle">
+<div class="predictTitle">
 UPCOMING PERIOD
 </div>
 
-<div class="upcomingPeriod" id="upcomingPeriod">
+<div class="period"
+id="upcomingPeriod">
+
 Loading...
+
 </div>
 
-<div class="predictNum" id="prediction">
+<div class="predictNum"
+id="predictNum">
+
 --
-</div>
-
-<div class="aiText" id="aiText">
-AI ANALYZING...
-</div>
 
 </div>
 
+<div class="aiText"
+id="aiText">
+
+AI ANALYZING LIVE TREND...
+
 </div>
 
-<div class="batchCard">
+<div class="timerBox">
 
-<div class="tableHeader">
+<div style="font-size:22px;">
+SERVER TIME
+</div>
+
+<div class="serverTime"
+id="serverTime">
+
+00:00:00
+
+</div>
+
+<div style="
+margin-top:20px;
+font-size:22px;">
+
+NEXT REFRESH IN
+
+</div>
+
+<div class="countdown"
+id="countdown">
+
+60s
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="tableBox">
+
+<div class="header">
+
 <div>Period</div>
-<div style="text-align:center;">Number</div>
-<div style="text-align:center;">Big Small</div>
-<div style="text-align:center;">Color</div>
+
+<div style="text-align:center;">
+Number
 </div>
 
-<div id="historyTable"></div>
+<div style="text-align:center;">
+Big Small
+</div>
+
+<div style="text-align:center;">
+Color
+</div>
+
+</div>
+
+<div id="historyRows"></div>
+
+</div>
 
 <div class="pagination">
 
-<button class="pageBtn"
+<button class="btn"
 onclick="prevPage()">
 ‹
 </button>
 
-<div class="pageCount"
-id="pageCount">
+<div class="page"
+id="pageNo">
+
 1/50
+
 </div>
 
-<button class="pageBtn"
+<button class="btn"
 onclick="nextPage()">
 ›
 </button>
-
-</div>
 
 </div>
 
@@ -224,11 +314,17 @@ onclick="nextPage()">
 const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
-let allResults = [];
+let allHistory = [];
 
 let batches = [];
 
 let currentPage = 0;
+
+let countdown = 60;
+
+/* =========================
+   BIG SMALL
+========================= */
 
 function getBigSmall(n){
 
@@ -238,17 +334,43 @@ return n <= 4
 
 }
 
+/* =========================
+   COLOR
+========================= */
+
 function getColor(n){
 
 if([0,2,4,6,8].includes(n)){
-return ["red"];
-}
 
-return ["green"];
+return "red";
 
 }
 
-function createBatches(data){
+return "green";
+
+}
+
+/* =========================
+   NUMBER COLOR
+========================= */
+
+function getNumberClass(n){
+
+if([0,2,4,6,8].includes(n)){
+
+return "redText";
+
+}
+
+return "greenText";
+
+}
+
+/* =========================
+   MAKE BATCHES
+========================= */
+
+function makeBatches(data){
 
 let temp = [];
 
@@ -266,14 +388,18 @@ temp.shift();
 
 }
 
-batches = temp.reverse();
+batches = temp;
 
 }
 
-function advancedAIAnalysis(){
+/* =========================
+   ADVANCED AI
+========================= */
+
+function advancedAI(){
 
 let nums =
-allResults.map(x=>x.number);
+allHistory.map(x=>x.number);
 
 let score = {};
 
@@ -283,14 +409,15 @@ score[i]=0;
 
 }
 
-let recentWeight = 1;
+let weight = 1;
 
 for(let i=nums.length-1;i>=1;i--){
 
 let current = nums[i];
+
 let prev = nums[i-1];
 
-score[current] += recentWeight;
+score[current] += weight;
 
 if(current === prev){
 
@@ -301,40 +428,56 @@ score[current] += 5;
 if(getBigSmall(current)
 === getBigSmall(prev)){
 
-score[current] += 2;
+score[current] += 2.5;
 
 }
 
-recentWeight += 0.08;
+if(getColor(current)
+=== getColor(prev)){
+
+score[current] += 2.5;
+
+}
+
+weight += 0.1;
 
 }
 
 let best = 0;
-let highest = 0;
+
+let high = 0;
 
 for(let n in score){
 
-if(score[n] > highest){
+if(score[n] > high){
 
-highest = score[n];
+high = score[n];
+
 best = Number(n);
 
 }
 
 }
 
+let total =
+Object.values(score)
+.reduce((a,b)=>a+b,0);
+
 let conf =
 Math.min(
 95,
-((highest /
-Object.values(score)
-.reduce((a,b)=>a+b,0)
-)*100 + 50)
+((high/total)*100+50)
 ).toFixed(1);
 
 document.getElementById(
-"prediction"
+"predictNum"
 ).innerHTML = best;
+
+document.getElementById(
+"predictNum"
+).className =
+
+`predictNum ${getNumberClass(best)}`;
 
 document.getElementById(
 "aiText"
@@ -342,57 +485,78 @@ document.getElementById(
 
 `AI DETECT:
 ${getBigSmall(best)}
-•
-${getColor(best)[0].toUpperCase()}
-•
+ •
+${getColor(best).toUpperCase()}
+ •
 ${conf}% Confidence`;
 
 }
 
+/* =========================
+   RENDER PAGE
+========================= */
+
 function renderPage(){
 
-const table =
+const box =
 document.getElementById(
-"historyTable"
+"historyRows"
 );
 
-table.innerHTML = "";
+box.innerHTML = "";
 
 if(!batches[currentPage]) return;
 
-batches[currentPage]
-.forEach(item=>{
+let batch =
+batches[currentPage];
 
-let colorClass =
-getColor(item.number)[0];
+batch.forEach(item=>{
 
-table.innerHTML += `
+let numberClass =
+getNumberClass(item.number);
+
+let dots = "";
+
+if(item.number == 5){
+
+dots = `
+<div class="dot green"></div>
+<div class="dot violet"></div>
+`;
+
+}else{
+
+dots = `
+<div class="dot ${getColor(item.number)}"></div>
+`;
+
+}
+
+box.innerHTML += `
 
 <div class="row">
 
-<div class="period">
+<div class="periodText">
+
 ${item.issueNumber}
+
 </div>
 
-<div class="number"
-style="color:
-${colorClass==="red"
-? "#ff4b4b"
-: "#00ff9d"}">
+<div class="number ${numberClass}">
 
 ${item.number}
 
 </div>
 
-<div class="bigsmall">
+<div class="bs">
 
 ${getBigSmall(item.number)}
 
 </div>
 
-<div class="colorBox">
+<div class="colorWrap">
 
-<div class="dot ${colorClass}"></div>
+${dots}
 
 </div>
 
@@ -403,12 +567,16 @@ ${getBigSmall(item.number)}
 });
 
 document.getElementById(
-"pageCount"
+"pageNo"
 ).innerHTML =
 
 `${currentPage+1}/50`;
 
 }
+
+/* =========================
+   NEXT PAGE
+========================= */
 
 function nextPage(){
 
@@ -423,6 +591,10 @@ currentPage = 0;
 renderPage();
 
 }
+
+/* =========================
+   PREV PAGE
+========================= */
 
 function prevPage(){
 
@@ -439,12 +611,78 @@ renderPage();
 
 }
 
+/* =========================
+   SERVER CLOCK
+========================= */
+
+function startClock(){
+
+setInterval(()=>{
+
+let now = new Date();
+
+let h =
+String(now.getHours())
+.padStart(2,"0");
+
+let m =
+String(now.getMinutes())
+.padStart(2,"0");
+
+let s =
+String(now.getSeconds())
+.padStart(2,"0");
+
+document.getElementById(
+"serverTime"
+).innerHTML =
+
+`${h}:${m}:${s}`;
+
+},1000);
+
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+function startCountdown(){
+
+setInterval(()=>{
+
+countdown--;
+
+if(countdown <= 0){
+
+countdown = 60;
+
+loadData();
+
+}
+
+document.getElementById(
+"countdown"
+).innerHTML =
+
+countdown + "s";
+
+},1000);
+
+}
+
+/* =========================
+   LOAD DATA
+========================= */
+
 async function loadData(){
 
 try{
 
 const res =
-await fetch(API);
+await fetch(
+API + "?t=" + Date.now()
+);
 
 const data =
 await res.json();
@@ -452,7 +690,8 @@ await res.json();
 let list =
 data.data.list || [];
 
-allResults = list.map(x=>({
+allHistory =
+list.map(x=>({
 
 issueNumber:
 x.issueNumber,
@@ -462,25 +701,22 @@ Number(x.number)
 
 }));
 
-allResults.reverse();
-
-createBatches(allResults);
+makeBatches(allHistory);
 
 renderPage();
 
-advancedAIAnalysis();
+advancedAI();
 
-let latestPeriod =
-allResults[
-allResults.length-1
-]?.issueNumber || 0;
+let latest =
+allHistory[0]
+?.issueNumber || 0;
 
 document.getElementById(
 "upcomingPeriod"
 ).innerHTML =
 
 String(
-Number(latestPeriod)+1
+Number(latest)+1
 );
 
 }catch(e){
@@ -491,9 +727,15 @@ console.log(e);
 
 }
 
-loadData();
+/* =========================
+   START
+========================= */
 
-setInterval(loadData,60000);
+startClock();
+
+startCountdown();
+
+loadData();
 
 </script>
 
