@@ -314,7 +314,7 @@ const API =
 let allHistory = [];
 let batches = [];
 let currentPage = 0;
-let countdown = 60;
+let lastFetchedPeriod = "";
 
 /* =========================
    KEEP SCREEN ACTIVE
@@ -411,7 +411,7 @@ batches = temp;
 }
 
 /* =========================
-   ADVANCED AI ANALYSIS
+   ADVANCED AI
 ========================= */
 
 function advancedAI(){
@@ -627,24 +627,24 @@ renderPage();
 }
 
 /* =========================
-   SERVER CLOCK
+   LIVE CLOCK
 ========================= */
 
 function startClock(){
 
 setInterval(()=>{
 
-let now = new Date();
+const now = new Date();
 
-let h =
+const h =
 String(now.getHours())
 .padStart(2,"0");
 
-let m =
+const m =
 String(now.getMinutes())
 .padStart(2,"0");
 
-let s =
+const s =
 String(now.getSeconds())
 .padStart(2,"0");
 
@@ -654,55 +654,49 @@ document.getElementById(
 
 `${h}:${m}:${s}`;
 
-},1000);
+/* REAL COUNTDOWN */
 
-}
-
-/* =========================
-   COUNTDOWN
-========================= */
-
-function startCountdown(){
-
-setInterval(()=>{
-
-countdown--;
-
-if(countdown <= 0){
-
-countdown = 60;
-
-loadData();
-
-}
+let remain =
+60 - now.getSeconds();
 
 document.getElementById(
 "countdown"
 ).innerHTML =
 
-countdown + "s";
+remain + "s";
+
+/* EXACT AUTO REFRESH */
+
+if(now.getSeconds() === 0){
+
+silentRefresh();
+
+}
 
 },1000);
 
 }
 
 /* =========================
-   LOAD DATA
+   LIVE SERVER FETCH
 ========================= */
 
-async function loadData(){
+async function silentRefresh(){
 
 try{
 
 const res =
 await fetch(
-API + "?t=" + Date.now()
+API + "?t=" + Date.now(),
+{
+cache:"no-store"
+}
 );
 
 const data =
 await res.json();
 
-let list =
+const list =
 data.data.list || [];
 
 list.sort((a,b)=>
@@ -711,6 +705,22 @@ Number(b.issueNumber)
 Number(a.issueNumber)
 );
 
+/* SAME PERIOD CHECK */
+
+if(
+lastFetchedPeriod ===
+list[0]?.issueNumber
+){
+
+return;
+
+}
+
+lastFetchedPeriod =
+list[0]?.issueNumber;
+
+/* SAVE HISTORY */
+
 allHistory =
 list.map(x=>({
 
@@ -718,18 +728,25 @@ issueNumber:
 String(x.issueNumber),
 
 shortPeriod:
-String(x.issueNumber).slice(-4),
+String(x.issueNumber)
+.slice(-4),
 
 number:
 Number(x.number)
 
 }));
 
+/* CREATE BATCHES */
+
 makeBatches(allHistory);
+
+/* RENDER */
 
 renderPage();
 
 advancedAI();
+
+/* NEXT PERIOD */
 
 let latest =
 allHistory[0]
@@ -755,7 +772,17 @@ console.log(e);
 }
 
 /* =========================
-   AUTO BACKGROUND REFRESH
+   BACKGROUND AUTO
+========================= */
+
+setInterval(()=>{
+
+silentRefresh();
+
+},5000);
+
+/* =========================
+   TAB ACTIVE AUTO
 ========================= */
 
 document.addEventListener(
@@ -764,9 +791,22 @@ document.addEventListener(
 
 if(!document.hidden){
 
-loadData();
+silentRefresh();
 
 }
+
+}
+);
+
+/* =========================
+   NETWORK ONLINE AUTO
+========================= */
+
+window.addEventListener(
+"online",
+()=>{
+
+silentRefresh();
 
 }
 );
@@ -777,9 +817,7 @@ loadData();
 
 startClock();
 
-startCountdown();
-
-loadData();
+silentRefresh();
 
 </script>
 
