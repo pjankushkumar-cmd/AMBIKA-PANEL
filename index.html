@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -66,6 +65,7 @@ margin-top:10px;
 font-size:110px;
 font-weight:bold;
 margin-top:10px;
+transition:.3s;
 }
 
 .redText{
@@ -192,6 +192,16 @@ font-size:24px;
 font-weight:bold;
 }
 
+.loader{
+animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+0%{opacity:1}
+50%{opacity:.5}
+100%{opacity:1}
+}
+
 </style>
 
 </head>
@@ -217,7 +227,7 @@ id="upcomingPeriod">
 0000
 </div>
 
-<div class="predict"
+<div class="predict loader"
 id="predictNum">
 --
 </div>
@@ -377,29 +387,33 @@ batches = temp;
 
 function advancedAI(){
 
-if(historyData.length < 50) return;
+if(historyData.length < 30){
+
+document.getElementById(
+"predictNum"
+).innerHTML = "0";
+
+return;
+
+}
 
 let nums =
 historyData.map(x=>x.number);
 
 let score = {};
 let transitions = {};
-let recentFlow = {};
-let cycleMap = {};
-let repeatMap = {};
-let oppositeFlow = {};
-let hotZones = {};
-let trendBoost = {};
+let recent = {};
+let cycles = {};
+let repeats = {};
+let hot = {};
 
 for(let i=0;i<=9;i++){
 
-score[i] = 0;
-recentFlow[i] = 0;
-cycleMap[i] = 0;
-repeatMap[i] = 0;
-oppositeFlow[i] = 0;
-hotZones[i] = 0;
-trendBoost[i] = 0;
+score[i]=0;
+recent[i]=0;
+cycles[i]=0;
+repeats[i]=0;
+hot[i]=0;
 
 }
 
@@ -407,36 +421,34 @@ trendBoost[i] = 0;
 
 for(let i=0;i<nums.length-1;i++){
 
-let current = nums[i];
-let next = nums[i+1];
+let a = nums[i];
+let b = nums[i+1];
 
-if(!transitions[current]){
+if(!transitions[a]){
 
-transitions[current] = {};
-
-}
-
-if(!transitions[current][next]){
-
-transitions[current][next] = 0;
+transitions[a] = {};
 
 }
 
-transitions[current][next]++;
+if(!transitions[a][b]){
+
+transitions[a][b] = 0;
+
+}
+
+transitions[a][b]++;
 
 }
 
 /* RECENT */
 
-let weight = 1;
+let w = 1;
 
 for(let i=nums.length-1;i>=0;i--){
 
-let n = nums[i];
+recent[nums[i]] += w;
 
-recentFlow[n] += weight;
-
-weight += 0.18;
+w += 0.15;
 
 }
 
@@ -444,9 +456,9 @@ weight += 0.18;
 
 for(let i=1;i<nums.length;i++){
 
-if(nums[i] === nums[i-1]){
+if(nums[i]===nums[i-1]){
 
-repeatMap[nums[i]] += 6;
+repeats[nums[i]] += 5;
 
 }
 
@@ -456,27 +468,9 @@ repeatMap[nums[i]] += 6;
 
 for(let i=2;i<nums.length;i++){
 
-if(nums[i] === nums[i-2]){
+if(nums[i]===nums[i-2]){
 
-cycleMap[nums[i]] += 5;
-
-}
-
-}
-
-/* OPPOSITE */
-
-for(let i=1;i<nums.length;i++){
-
-let prev = nums[i-1];
-let current = nums[i];
-
-if(
-getBigSmall(prev)
-!== getBigSmall(current)
-){
-
-oppositeFlow[current] += 2;
+cycles[nums[i]] += 4;
 
 }
 
@@ -484,29 +478,17 @@ oppositeFlow[current] += 2;
 
 /* HOT */
 
-for(let i=nums.length-15;i<nums.length;i++){
+for(let i=nums.length-10;i<nums.length;i++){
 
-if(nums[i] !== undefined){
+if(nums[i]!==undefined){
 
-hotZones[nums[i]] += 4;
-
-}
-
-}
-
-/* TREND */
-
-for(let i=3;i<nums.length;i++){
-
-if(nums[i] === nums[i-3]){
-
-trendBoost[nums[i]] += 3;
+hot[nums[i]] += 3;
 
 }
 
 }
 
-/* LAST */
+/* LAST FLOW */
 
 let last =
 nums[nums.length-1];
@@ -516,7 +498,7 @@ if(transitions[last]){
 for(let n in transitions[last]){
 
 score[n] +=
-transitions[last][n] * 12;
+transitions[last][n] * 10;
 
 }
 
@@ -526,77 +508,18 @@ transitions[last][n] * 12;
 
 for(let i=0;i<=9;i++){
 
-score[i] += recentFlow[i];
-score[i] += cycleMap[i];
-score[i] += repeatMap[i];
-score[i] += oppositeFlow[i];
-score[i] += hotZones[i];
-score[i] += trendBoost[i];
+score[i] += recent[i];
+score[i] += repeats[i];
+score[i] += cycles[i];
+score[i] += hot[i];
 
 }
 
-/* REMOVE SAME */
+/* AVOID SAME */
 
-score[last] *= 0.20;
+score[last] *= 0.25;
 
-/* BIG SMALL BALANCE */
-
-let big =
-nums.filter(x=>x>=5).length;
-
-let small =
-nums.filter(x=>x<=4).length;
-
-if(big > small){
-
-for(let i=0;i<=4;i++){
-
-score[i] += 8;
-
-}
-
-}else{
-
-for(let i=5;i<=9;i++){
-
-score[i] += 8;
-
-}
-
-}
-
-/* COLOR BALANCE */
-
-let red =
-nums.filter(x=>
-[0,2,4,6,8]
-.includes(x)
-).length;
-
-let green =
-nums.length - red;
-
-if(red > green){
-
-[1,3,5,7,9]
-.forEach(n=>{
-
-score[n] += 5;
-
-});
-
-}else{
-
-[0,2,4,6,8]
-.forEach(n=>{
-
-score[n] += 5;
-
-});
-
-}
-
-/* FINAL */
+/* BEST */
 
 let sorted =
 Object.entries(score)
@@ -605,18 +528,22 @@ Object.entries(score)
 let best =
 Number(sorted[0][0]);
 
+/* CONFIDENCE */
+
 let total =
 Object.values(score)
 .reduce((a,b)=>a+b,0);
 
-let confidence =
+let conf =
 Math.min(
 96,
 (
 (score[best]/total)*100
-+ 42
++ 40
 ).toFixed(1)
 );
+
+/* UI */
 
 document.getElementById(
 "predictNum"
@@ -637,7 +564,7 @@ ${getBigSmall(best)}
  •
 ${getColor(best).toUpperCase()}
  •
-${confidence}% Confidence`;
+${conf}% Confidence`;
 
 }
 
@@ -783,7 +710,7 @@ fetchData();
 }
 
 /* =========================
-   FETCH
+   FETCH LIVE DATA
 ========================= */
 
 async function fetchData(){
@@ -804,23 +731,34 @@ await res.json();
 let list =
 data.data.list || [];
 
+if(!list.length){
+
+return;
+
+}
+
 list.sort((a,b)=>
 Number(b.issueNumber)
 -
 Number(a.issueNumber)
 );
 
+/* DUPLICATE CHECK */
+
 if(
 lastPeriod ===
 list[0]?.issueNumber
 ){
 
+advancedAI();
 return;
 
 }
 
 lastPeriod =
 list[0]?.issueNumber;
+
+/* SAVE HISTORY */
 
 historyData =
 list.map(x=>({
@@ -837,11 +775,32 @@ Number(x.number)
 
 }));
 
+/* FILL MEMORY */
+
+while(historyData.length < 500){
+
+historyData.push(
+...historyData
+);
+
+}
+
+historyData =
+historyData.slice(0,500);
+
+/* CREATE BATCH */
+
 makeBatches(historyData);
+
+/* RENDER */
 
 renderPage();
 
+/* AI */
+
 advancedAI();
+
+/* NEXT PERIOD */
 
 let latest =
 historyData[0]
@@ -862,12 +821,18 @@ next.slice(-4);
 
 console.log(e);
 
+document.getElementById(
+"aiText"
+).innerHTML =
+
+"SERVER RECONNECTING...";
+
 }
 
 }
 
 /* =========================
-   BACKGROUND
+   BACKGROUND UPDATE
 ========================= */
 
 setInterval(()=>{
