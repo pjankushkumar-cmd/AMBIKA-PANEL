@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ULTIMATE LIVE AI ANALYZER</title>
+<title>HACKII AI</title>
 
 <style>
 
@@ -37,7 +37,7 @@ box-shadow:0 0 20px rgba(0,0,0,.3);
 }
 
 .title{
-font-size:32px;
+font-size:34px;
 font-weight:bold;
 text-align:center;
 color:#d3b0ff;
@@ -57,16 +57,17 @@ color:#eee;
 }
 
 .period{
-font-size:46px;
+font-size:48px;
 font-weight:bold;
 margin-top:10px;
 }
 
 .predict{
-font-size:120px;
+font-size:130px;
 font-weight:bold;
 margin-top:10px;
 transition:.3s;
+line-height:1;
 }
 
 .redText{
@@ -221,7 +222,7 @@ animation:pulse 1s infinite;
 <div class="top">
 
 <div class="title">
-ULTIMATE LIVE AI ANALYZER
+HACKII AI
 </div>
 
 <div class="predictBox">
@@ -313,7 +314,6 @@ onclick="nextPage()">
 const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
-let historyData = [];
 let memoryStore = [];
 let batches = [];
 let currentPage = 0;
@@ -370,12 +370,12 @@ return [0,2,4,6,8]
 }
 
 /* =========================
-   STORE MEMORY
+   MEMORY SYSTEM
 ========================= */
 
-function updateMemory(newData){
+function updateMemory(data){
 
-newData.forEach(item=>{
+data.forEach(item=>{
 
 let exists =
 memoryStore.find(x=>
@@ -403,7 +403,7 @@ memoryStore.slice(0,500);
 }
 
 /* =========================
-   CREATE 50 BATCHES
+   50 BATCH
 ========================= */
 
 function makeBatches(){
@@ -426,7 +426,7 @@ batches.push(batch);
 }
 
 /* =========================
-   ULTRA AI ENGINE
+   ULTRA AI
 ========================= */
 
 function advancedAI(){
@@ -445,48 +445,35 @@ let nums =
 memoryStore.map(x=>x.number);
 
 let score = {};
-let transition = {};
-let momentum = {};
-let repeat = {};
-let reverse = {};
-let hot = {};
-let bounce = {};
-let recent = {};
-let chain = {};
 
 for(let i=0;i<=9;i++){
 
-score[i]=0;
-momentum[i]=0;
-repeat[i]=0;
-reverse[i]=0;
-hot[i]=0;
-bounce[i]=0;
-recent[i]=0;
-chain[i]=0;
+score[i] = 0;
 
 }
 
-/* TRANSITION */
+/* TRANSITIONS */
+
+let transitions = {};
 
 for(let i=0;i<nums.length-1;i++){
 
 let a = nums[i];
 let b = nums[i+1];
 
-if(!transition[a]){
+if(!transitions[a]){
 
-transition[a] = {};
-
-}
-
-if(!transition[a][b]){
-
-transition[a][b] = 0;
+transitions[a] = {};
 
 }
 
-transition[a][b]++;
+if(!transitions[a][b]){
+
+transitions[a][b] = 0;
+
+}
+
+transitions[a][b]++;
 
 }
 
@@ -496,9 +483,9 @@ let w = 1;
 
 for(let i=nums.length-1;i>=0;i--){
 
-recent[nums[i]] += w;
+score[nums[i]] += w;
 
-w += 0.15;
+w += 0.14;
 
 }
 
@@ -506,9 +493,9 @@ w += 0.15;
 
 for(let i=0;i<20;i++){
 
-if(nums[i]!==undefined){
+if(nums[i] !== undefined){
 
-hot[nums[i]] += 5;
+score[nums[i]] += 5;
 
 }
 
@@ -518,9 +505,9 @@ hot[nums[i]] += 5;
 
 for(let i=1;i<nums.length;i++){
 
-if(nums[i]===nums[i-1]){
+if(nums[i] === nums[i-1]){
 
-repeat[nums[i]] += 6;
+score[nums[i]] += 7;
 
 }
 
@@ -530,9 +517,9 @@ repeat[nums[i]] += 6;
 
 for(let i=2;i<nums.length;i++){
 
-if(nums[i]===nums[i-2]){
+if(nums[i] === nums[i-2]){
 
-reverse[nums[i]] += 4;
+score[nums[i]] += 4;
 
 }
 
@@ -542,34 +529,9 @@ reverse[nums[i]] += 4;
 
 for(let i=3;i<nums.length;i++){
 
-if(nums[i]===nums[i-3]){
+if(nums[i] === nums[i-3]){
 
-bounce[nums[i]] += 3;
-
-}
-
-}
-
-/* MOMENTUM */
-
-for(let i=0;i<nums.length;i++){
-
-momentum[nums[i]] +=
-(i/nums.length)*4;
-
-}
-
-/* CHAIN */
-
-for(let i=0;i<nums.length-3;i++){
-
-let a = nums[i];
-let c = nums[i+2];
-let d = nums[i+3];
-
-if(a===c){
-
-chain[d] += 5;
+score[nums[i]] += 3;
 
 }
 
@@ -580,34 +542,16 @@ chain[d] += 5;
 let last =
 nums[0];
 
-if(transition[last]){
+if(transitions[last]){
 
-for(let n in transition[last]){
+for(let n in transitions[last]){
 
 score[n] +=
-transition[last][n] * 15;
+transitions[last][n] * 16;
 
 }
 
 }
-
-/* COMBINE */
-
-for(let i=0;i<=9;i++){
-
-score[i] += momentum[i];
-score[i] += repeat[i];
-score[i] += reverse[i];
-score[i] += hot[i];
-score[i] += bounce[i];
-score[i] += recent[i];
-score[i] += chain[i];
-
-}
-
-/* ANTI SAME */
-
-score[last] *= 0.10;
 
 /* BIG SMALL */
 
@@ -621,7 +565,7 @@ if(big > small){
 
 for(let i=0;i<=4;i++){
 
-score[i]+=8;
+score[i] += 8;
 
 }
 
@@ -629,13 +573,13 @@ score[i]+=8;
 
 for(let i=5;i<=9;i++){
 
-score[i]+=8;
+score[i] += 8;
 
 }
 
 }
 
-/* COLOR BALANCE */
+/* COLOR */
 
 let red =
 nums.filter(x=>
@@ -651,7 +595,7 @@ if(red > green){
 [1,3,5,7,9]
 .forEach(n=>{
 
-score[n]+=5;
+score[n] += 6;
 
 });
 
@@ -660,11 +604,15 @@ score[n]+=5;
 [0,2,4,6,8]
 .forEach(n=>{
 
-score[n]+=5;
+score[n] += 6;
 
 });
 
 }
+
+/* ANTI SAME */
+
+score[last] *= 0.08;
 
 /* FINAL */
 
@@ -681,12 +629,14 @@ Object.values(score)
 
 let conf =
 Math.min(
-97,
+98,
 (
 (score[best]/total)*100
-+ 45
++ 50
 ).toFixed(1)
 );
+
+/* UPDATE UI */
 
 document.getElementById(
 "predictNum"
@@ -702,7 +652,7 @@ document.getElementById(
 "aiText"
 ).innerHTML =
 
-`ULTRA AI DETECT:
+`HACKII AI DETECT:
 ${getBigSmall(best)}
  •
 ${getColor(best).toUpperCase()}
@@ -806,7 +756,7 @@ renderPage();
 }
 
 /* =========================
-   LIVE CLOCK
+   CLOCK
 ========================= */
 
 function startClock(){
@@ -853,7 +803,7 @@ fetchData();
 }
 
 /* =========================
-   FETCH LIVE DATA
+   FETCH LIVE
 ========================= */
 
 async function fetchData(){
@@ -892,6 +842,8 @@ Number(b.issueNumber)
 Number(a.issueNumber)
 );
 
+/* SAME CHECK */
+
 if(
 lastPeriod ===
 list[0]?.issueNumber
@@ -905,7 +857,9 @@ return;
 lastPeriod =
 list[0]?.issueNumber;
 
-historyData =
+/* FORMAT */
+
+let historyData =
 list.map(x=>({
 
 issueNumber:
@@ -920,21 +874,29 @@ Number(x.number)
 
 }));
 
+/* MEMORY */
+
 updateMemory(historyData);
+
+/* BATCH */
 
 makeBatches();
 
+/* RENDER */
+
 renderPage();
+
+/* AI */
 
 advancedAI();
 
-/* NEXT UPCOMING */
+/* NEXT PERIOD */
 
 let latest =
 memoryStore[0]
 ?.issueNumber || "0";
 
-let nextFull =
+let next =
 (
 BigInt(latest)+1n
 ).toString();
@@ -943,7 +905,7 @@ document.getElementById(
 "upcomingPeriod"
 ).innerHTML =
 
-nextFull.slice(-4);
+next.slice(-4);
 
 }catch(e){
 
