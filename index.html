@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>HACKII AI</title>
 
@@ -81,10 +83,10 @@ text-shadow:0 0 18px #00ff9d;
 }
 
 .ai{
-font-size:20px;
+font-size:18px;
 color:#ffd86a;
 margin-top:15px;
-line-height:1.5;
+line-height:1.6;
 }
 
 .status{
@@ -202,6 +204,7 @@ font-weight:bold;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -307,7 +310,6 @@ let memoryStore = [];
 let batches = [];
 let currentPage = 0;
 let currentIssue = "";
-let nextIssue = "";
 let fetching = false;
 
 /* =========================
@@ -341,7 +343,7 @@ return [0,2,4,6,8]
 }
 
 /* =========================
-   MEMORY
+   MEMORY STORE
 ========================= */
 
 function updateMemory(data){
@@ -374,7 +376,7 @@ memoryStore.slice(0,500);
 }
 
 /* =========================
-   BATCHES
+   CREATE 50 BATCH
 ========================= */
 
 function makeBatches(){
@@ -412,19 +414,43 @@ let nums =
 memoryStore.map(x=>x.number);
 
 let score = {};
+let transitions = {};
 
 for(let i=0;i<=9;i++){
 
-score[i] = 0;
+score[i]=0;
 
 }
 
-/* TREND */
+/* FREQUENCY */
+
+nums.forEach(n=>{
+
+score[n]+=2;
+
+});
+
+/* RECENT */
+
+let w = 1;
 
 for(let i=0;i<nums.length;i++){
 
-score[nums[i]] +=
-(500-i)/20;
+score[nums[i]] += w;
+
+w += 0.08;
+
+}
+
+/* HOT */
+
+for(let i=0;i<20;i++){
+
+if(nums[i]!==undefined){
+
+score[nums[i]] += 5;
+
+}
 
 }
 
@@ -434,7 +460,7 @@ for(let i=1;i<nums.length;i++){
 
 if(nums[i]===nums[i-1]){
 
-score[nums[i]] += 7;
+score[nums[i]] += 6;
 
 }
 
@@ -452,19 +478,46 @@ score[nums[i]] += 4;
 
 }
 
-/* HOT */
+/* TRANSITIONS */
 
-for(let i=0;i<20;i++){
+for(let i=0;i<nums.length-1;i++){
 
-if(nums[i]!==undefined){
+let a = nums[i];
+let b = nums[i+1];
 
-score[nums[i]] += 6;
+if(!transitions[a]){
+
+transitions[a] = {};
+
+}
+
+if(!transitions[a][b]){
+
+transitions[a][b] = 0;
+
+}
+
+transitions[a][b]++;
+
+}
+
+/* LAST FLOW */
+
+let last =
+nums[0];
+
+if(transitions[last]){
+
+for(let n in transitions[last]){
+
+score[n] +=
+transitions[last][n] * 15;
 
 }
 
 }
 
-/* BIG SMALL BALANCE */
+/* BIG SMALL */
 
 let big =
 nums.filter(x=>x>=5).length;
@@ -492,12 +545,9 @@ score[i]+=10;
 
 /* ANTI SAME */
 
-let last =
-nums[0];
-
 score[last] *= 0.10;
 
-/* FINAL */
+/* SORT */
 
 let sorted =
 Object.entries(score)
@@ -506,18 +556,31 @@ Object.entries(score)
 let best =
 Number(sorted[0][0]);
 
+let second =
+Number(sorted[1][0]);
+
+let third =
+Number(sorted[2][0]);
+
+/* PERCENT */
+
 let total =
 Object.values(score)
 .reduce((a,b)=>a+b,0);
 
-let conf =
-Math.min(
-98,
-(
-(score[best]/total)*100
-+ 50
-).toFixed(1)
-);
+let p1 =
+((score[best]/total)*100)
+.toFixed(1);
+
+let p2 =
+((score[second]/total)*100)
+.toFixed(1);
+
+let p3 =
+((score[third]/total)*100)
+.toFixed(1);
+
+/* UPDATE */
 
 document.getElementById(
 "predictNum"
@@ -533,12 +596,17 @@ document.getElementById(
 "aiText"
 ).innerHTML =
 
-`HACKII AI:
+`
+TOP AI TREND<br><br>
+
+${best} → ${p1}%<br>
+${second} → ${p2}%<br>
+${third} → ${p3}%<br><br>
+
 ${getBigSmall(best)}
  •
 ${getColor(best).toUpperCase()}
- •
-${conf}% Confidence`;
+`;
 
 }
 
@@ -670,20 +738,12 @@ document.getElementById(
 
 remain + "s";
 
-/* EXACT UPDATE */
-
-if(remain <= 2){
-
-fetchData();
-
-}
-
 },1000);
 
 }
 
 /* =========================
-   FETCH
+   FETCH DATA
 ========================= */
 
 async function fetchData(){
@@ -700,7 +760,7 @@ document.getElementById(
 
 "LIVE SERVER CONNECTED";
 
-const response =
+const res =
 await fetch(
 API + "?t=" + Date.now(),
 {
@@ -709,7 +769,7 @@ cache:"no-store"
 );
 
 const json =
-await response.json();
+await res.json();
 
 let list =
 json?.data?.list || [];
@@ -730,22 +790,20 @@ Number(a.issueNumber)
 let latest =
 String(list[0].issueNumber);
 
-/* REAL NEXT PERIOD */
+/* UPCOMING */
 
-nextIssue =
+let next =
 (
-BigInt(latest) + 1n
+BigInt(latest)+1n
 ).toString();
-
-/* ALWAYS UPDATE */
 
 document.getElementById(
 "upcomingPeriod"
 ).innerHTML =
 
-nextIssue.slice(-4);
+next.slice(-4);
 
-/* ONLY NEW RESULT */
+/* ONLY NEW */
 
 if(latest !== currentIssue){
 
@@ -793,28 +851,29 @@ document.getElementById(
 }
 
 /* =========================
-   BACKGROUND UPDATE
+   AUTO LOOP
 ========================= */
 
-setInterval(()=>{
+async function autoLoop(){
 
-fetchData();
+await fetchData();
 
-},3000);
+setTimeout(autoLoop,2000);
 
-/* TAB RETURN */
+}
+
+autoLoop();
+
+/* TAB */
 
 document.addEventListener(
 "visibilitychange",
 ()=>{
 
-if(!document.hidden){
-
 fetchData();
 
 }
-
-});
+);
 
 /* NETWORK */
 
@@ -824,13 +883,12 @@ window.addEventListener(
 
 fetchData();
 
-});
+}
+);
 
 /* START */
 
 startClock();
-
-fetchData();
 
 </script>
 
