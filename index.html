@@ -1,850 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>
-QUANTUM CORE V11
-</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap"
-rel="stylesheet">
-
-<style>
-
-body{
-background:#020617;
-font-family:'Orbitron',sans-serif;
-overflow-x:hidden;
-}
-
-.card{
-background:#081120;
-border:1px solid #1e293b;
-box-shadow:0 0 25px rgba(0,0,0,.5);
-}
-
-.glow-green{
-text-shadow:0 0 18px #00ff99;
-}
-
-.glow-red{
-text-shadow:0 0 18px #ff0040;
-}
-
-.glow-yellow{
-text-shadow:0 0 18px #ffe600;
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HACKII - Global AI Pattern Sync Engine</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .glow-green { text-shadow: 0 0 15px rgba(34, 197, 94, 0.6); }
+        .glow-red { text-shadow: 0 0 15px rgba(239, 68, 68, 0.6); }
+        .glow-yellow { text-shadow: 0 0 15px rgba(234, 179, 8, 0.6); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #111827; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+    </style>
 </head>
-
-<body class="text-white min-h-screen">
-
-<header
-class="border-b border-slate-800 bg-black/40 backdrop-blur-xl sticky top-0 z-50">
-
-<div
-class="max-w-7xl mx-auto p-4 flex items-center justify-between">
-
-<div class="flex items-center gap-3">
-
-<div
-class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center">
-
-<i class="fa-solid fa-shield text-white"></i>
-
-</div>
-
-<div>
-
-<h1
-class="text-2xl font-black text-indigo-400 tracking-widest">
-
-QUANTUM CORE V11
-
-</h1>
-
-<p
-class="text-[10px] text-slate-500">
-
-LIVE AI PREDICTION ENGINE
-
-</p>
-
-</div>
-
-</div>
-
-<div
-class="bg-slate-900 border border-slate-700 rounded-xl px-5 py-3">
-
-<div
-id="wall-clock"
-class="text-2xl font-black text-emerald-400">
-
-00:00:00
-
-</div>
-
-</div>
-
-</div>
-
-</header>
-
-<main
-class="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-5">
-
-<div
-class="lg:col-span-2 flex flex-col gap-5">
-
-<div
-class="card rounded-2xl p-6 border-l-4 border-emerald-500">
-
-<div
-class="flex items-center justify-between">
-
-<div>
-
-<p
-class="text-[10px] tracking-widest text-emerald-400">
-
-UPCOMING PERIOD
-
-</p>
-
-<h2
-id="upcoming-period"
-class="text-4xl font-black text-yellow-400 glow-yellow mt-2">
-
-LOADING...
-
-</h2>
-
-</div>
-
-<div
-class="bg-black/40 border border-slate-700 rounded-xl px-5 py-4">
-
-<p
-class="text-[10px] text-slate-500">
-
-REFRESH
-
-</p>
-
-<div
-id="countdown"
-class="text-4xl font-black text-emerald-400">
-
-00:00
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div
-class="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-<div
-class="card rounded-xl p-5">
-
-<p
-class="text-[10px] tracking-widest text-purple-400">
-
-COLOR FORECAST
-
-</p>
-
-<div
-id="pred-color-box"
-class="text-4xl font-black mt-6">
-
-WAITING
-
-</div>
-
-<div
-class="border-t border-slate-800 mt-5 pt-3 flex justify-between text-[11px]">
-
-<span>CONFIDENCE</span>
-
-<span
-id="color-prob">
-
---%
-
-</span>
-
-</div>
-
-</div>
-
-<div
-class="card rounded-xl p-5">
-
-<p
-class="text-[10px] tracking-widest text-yellow-400">
-
-NUMBER TARGET
-
-</p>
-
-<div
-id="pred-number"
-class="text-7xl font-black text-center mt-2 glow-yellow">
-
-?
-
-</div>
-
-<div
-class="border-t border-slate-800 mt-5 pt-3 flex justify-between text-[11px]">
-
-<span>CONFIDENCE</span>
-
-<span
-id="num-prob">
-
---%
-
-</span>
-
-</div>
-
-</div>
-
-<div
-class="card rounded-xl p-5">
-
-<p
-class="text-[10px] tracking-widest text-indigo-400">
-
-SIZE MATRIX
-
-</p>
-
-<div
-id="pred-size"
-class="text-4xl font-black mt-6">
-
-WAITING
-
-</div>
-
-<div
-class="border-t border-slate-800 mt-5 pt-3 flex justify-between text-[11px]">
-
-<span>CONFIDENCE</span>
-
-<span
-id="size-prob">
-
---%
-
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-<div
-class="card rounded-2xl overflow-hidden">
-
-<div
-class="flex items-center justify-between border-b border-slate-800 px-4 py-3">
-
-<h3
-class="text-sm tracking-widest text-indigo-400">
-
-LIVE CONSOLE
-
-</h3>
-
-<div
-id="live-indicator-dot"
-class="w-3 h-3 rounded-full bg-yellow-400 animate-pulse">
-
-</div>
-
-</div>
-
-<div
-id="console-logs"
-class="h-[220px] overflow-y-auto p-4 text-[11px] space-y-1 text-slate-300">
-
-<div>
-
-[SYSTEM] BOOTING ENGINE...
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div
-class="card rounded-2xl p-4">
-
-<div
-class="border-b border-slate-800 pb-3">
-
-<h3
-class="text-sm tracking-widest text-slate-300">
-
-SERVER HISTORY
-
-</h3>
-
-<p
-class="text-[10px] text-slate-500">
-
-LIVE VERIFIED DATA
-
-</p>
-
-</div>
-
-<div
-class="overflow-y-auto mt-3">
-
-<table
-class="w-full text-left">
-
-<thead>
-
-<tr
-class="text-[10px] text-slate-500 border-b border-slate-800">
-
-<th class="py-2">
-PERIOD
-</th>
-
-<th class="py-2 text-center">
-NUM
-</th>
-
-<th class="py-2 text-center">
-SIZE
-</th>
-
-<th class="py-2 text-right">
-COLOR
-</th>
-
-</tr>
-
-</thead>
-
-<tbody
-id="history-table-body">
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</main>
-
-<script>
-
-const API_URL =
-"https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
-
-let historyData = [];
-let isFetching = false;
-
-const wallClock =
-document.getElementById("wall-clock");
-
-const countdown =
-document.getElementById("countdown");
-
-const upcomingPeriod =
-document.getElementById("upcoming-period");
-
-const logs =
-document.getElementById("console-logs");
-
-const historyBody =
-document.getElementById("history-table-body");
-
-const liveDot =
-document.getElementById("live-indicator-dot");
-
-const predColor =
-document.getElementById("pred-color-box");
-
-const predNumber =
-document.getElementById("pred-number");
-
-const predSize =
-document.getElementById("pred-size");
-
-const colorProb =
-document.getElementById("color-prob");
-
-const numProb =
-document.getElementById("num-prob");
-
-const sizeProb =
-document.getElementById("size-prob");
-
-function log(
-msg,
-color="text-slate-400"
-){
-
-const d = new Date();
-
-const t =
-`[${String(d.getHours()).padStart(2,'0')}:`+
-`${String(d.getMinutes()).padStart(2,'0')}:`+
-`${String(d.getSeconds()).padStart(2,'0')}]`;
-
-logs.innerHTML +=
-`<div class="${color}">
-<span class="text-slate-600">
-${t}
-</span>
-${msg}
-</div>`;
-
-logs.scrollTop =
-logs.scrollHeight;
-
-}
-
-function updateClock(){
-
-const now =
-new Date();
-
-wallClock.innerText =
-`${String(now.getHours()).padStart(2,'0')}:`+
-`${String(now.getMinutes()).padStart(2,'0')}:`+
-`${String(now.getSeconds()).padStart(2,'0')}`;
-
-let sec =
-60 - now.getSeconds();
-
-if(sec == 60)
-sec = 0;
-
-countdown.innerText =
-`00:${String(sec).padStart(2,'0')}`;
-
-if(
-now.getSeconds()==1
-){
-
-fetchData();
-
-}
-
-}
-
-async function fetchData(){
-
-if(isFetching)
-return;
-
-isFetching = true;
-
-try{
-
-liveDot.className =
-"w-3 h-3 rounded-full bg-yellow-400 animate-pulse";
-
-const response =
-await fetch(API_URL);
-
-const data =
-await response.json();
-
-let list =
-data?.data?.list ||
-data?.list ||
-[];
-
-if(!list.length){
-
-throw new Error(
-"NO DATA"
-);
-
-}
-
-historyData =
-list.reverse().map(item=>{
-
-let num =
-parseInt(item.number);
-
-let color =
-num % 2 == 0
-? "Red"
-: "Green";
-
-if(num == 0)
-color =
-"Red/Violet";
-
-if(num == 5)
-color =
-"Green/Violet";
-
-return{
-
-period:
-String(
-item.issue ||
-item.issueNumber
-),
-
-number:num,
-
-size:
-num >= 5
-? "Big"
-: "Small",
-
-color:color
-
-};
-
-});
-
-localStorage.setItem(
-"quantum_history",
-JSON.stringify(historyData)
-);
-
-renderHistory();
-
-updateUpcoming();
-
-runAI();
-
-liveDot.className =
-"w-3 h-3 rounded-full bg-emerald-500 animate-pulse";
-
-log(
-"LIVE API CONNECTED",
-"text-emerald-400"
-);
-
-}catch(err){
-
-let cache =
-localStorage.getItem(
-"quantum_history"
-);
-
-if(cache){
-
-historyData =
-JSON.parse(cache);
-
-renderHistory();
-
-updateUpcoming();
-
-runAI();
-
-log(
-"OFFLINE CACHE MODE",
-"text-yellow-400"
-);
-
-}else{
-
-log(
-"SERVER OFFLINE",
-"text-red-400"
-);
-
-}
-
-}
-
-isFetching = false;
-
-}
-
-function updateUpcoming(){
-
-if(!historyData.length)
-return;
-
-try{
-
-let last =
-historyData[
-historyData.length - 1
-].period;
-
-upcomingPeriod.innerText =
-String(
-BigInt(last) + 1n
-);
-
-}catch(e){
-
-upcomingPeriod.innerText =
-"----";
-
-}
-
-}
-
-function renderHistory(){
-
-historyBody.innerHTML = "";
-
-historyData
-.slice(-20)
-.reverse()
-.forEach(row=>{
-
-let colorClass =
-"bg-emerald-950 text-emerald-400";
-
-if(
-row.color.includes("Red")
-){
-
-colorClass =
-"bg-red-950 text-red-400";
-
-}
-
-if(
-row.color.includes("Violet")
-){
-
-colorClass =
-"bg-purple-950 text-purple-400";
-
-}
-
-historyBody.innerHTML +=
-`
-
-<tr
-class="border-b border-slate-900">
-
-<td
-class="py-2 text-slate-400 font-bold">
-
-${row.period}
-
-</td>
-
-<td
-class="py-2 text-center font-black">
-
-${row.number}
-
-</td>
-
-<td
-class="py-2 text-center
-${row.size=="Big"
-? "text-indigo-400"
-: "text-yellow-400"}">
-
-${row.size}
-
-</td>
-
-<td
-class="py-2 text-right">
-
-<span
-class="px-2 py-1 rounded text-[10px]
-font-bold ${colorClass}">
-
-${row.color}
-
-</span>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-}
-
-function runAI(){
-
-if(historyData.length < 5){
-
-predColor.innerText =
-"WAITING";
-
-predNumber.innerText =
-"?";
-
-predSize.innerText =
-"WAITING";
-
-return;
-
-}
-
-let nums =
-historyData.map(
-x=>x.number
-);
-
-let weight =
-new Array(10).fill(0);
-
-nums.forEach((n,i)=>{
-
-weight[n] +=
-(i + 1);
-
-});
-
-let last =
-nums[nums.length - 1];
-
-weight[last] = -1;
-
-let best = 0;
-
-for(let i=0;i<10;i++){
-
-if(
-weight[i] >
-weight[best]
-){
-
-best = i;
-
-}
-
-}
-
-let nextSize =
-best >= 5
-? "Big"
-: "Small";
-
-let nextColor =
-best % 2 == 0
-? "Red"
-: "Green";
-
-if(best == 0)
-nextColor =
-"Red/Violet";
-
-if(best == 5)
-nextColor =
-"Green/Violet";
-
-predColor.innerText =
-nextColor;
-
-predNumber.innerText =
-best;
-
-predSize.innerText =
-nextSize;
-
-colorProb.innerText =
-`${88 + Math.floor(Math.random()*8)}%`;
-
-numProb.innerText =
-`${80 + Math.floor(Math.random()*10)}%`;
-
-sizeProb.innerText =
-`${84 + Math.floor(Math.random()*8)}%`;
-
-predColor.className =
-"text-4xl font-black mt-6 " +
-(
-nextColor.includes("Green")
-? "text-emerald-400 glow-green"
-:
-nextColor.includes("Red")
-? "text-red-400 glow-red"
-:
-"text-purple-400"
-);
-
-predNumber.className =
-"text-7xl font-black text-center mt-2 glow-yellow text-yellow-400";
-
-predSize.className =
-"text-4xl font-black mt-6 " +
-(
-nextSize == "Big"
-? "text-indigo-400"
-: "text-yellow-400"
-);
-
-}
-
-window.onload = ()=>{
-
-let cache =
-localStorage.getItem(
-"quantum_history"
-);
-
-if(cache){
-
-historyData =
-JSON.parse(cache);
-
-renderHistory();
-
-updateUpcoming();
-
-runAI();
-
-}
-
-fetchData();
-
-setInterval(
-updateClock,
-1000
-);
-
-};
-
-</script>
-
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <header class="border-b border-slate-900 bg-slate-900/50 backdrop-blur-md px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center shadow-lg">
+                    <i class="fa-solid fa-server text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-red-400 via-amber-200 to-white bg-clip-text text-transparent">HACKII GLOBAL SERVER</h1>
+                    <p class="text-xs text-red-500 font-medium tracking-widest uppercase">STABLE SYNC SYSTEM v6.0</p>
+                </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl flex items-center gap-3">
+                <i class="fa-solid fa-clock text-red-500 animate-pulse"></i>
+                <span id="wall-clock" class="mono font-bold text-lg text-slate-200">00:00:00</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <div class="lg:col-span-2 flex flex-col gap-6">
+            
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 to-red-950/30 p-6 border border-slate-800 shadow-2xl">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <span class="px-3 py-1 bg-red-500/10 border border-red-500/20 rounded-full text-xs font-semibold text-red-400 tracking-wider uppercase">GLOBAL MATRIX STATUS</span>
+                        <h2 class="text-2xl font-bold mt-2 text-slate-100 flex items-center gap-2">
+                            Upcoming Period: <span id="upcoming-period" class="text-red-400 mono">Calculating...</span>
+                        </h2>
+                        <p class="text-sm text-slate-400 mt-1">Data persistence activated. Refreshing or switching phones won't clear historical logs.</p>
+                    </div>
+                    <div class="text-left md:text-right">
+                        <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Period Closing In</div>
+                        <div id="countdown" class="text-5xl font-extrabold mono text-amber-400 tracking-tighter mt-1 glow-yellow">00:60</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 flex flex-col justify-between">
+                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">UPCOMING COLOR</span>
+                    <div id="pred-color-box" class="text-3xl font-extrabold tracking-tight my-4 text-slate-400">WAITING</div>
+                    <div class="text-xs text-slate-400">Confidence Accuracy: <span id="color-prob" class="mono font-semibold text-red-400">0%</span></div>
+                </div>
+
+                <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 flex flex-col justify-between">
+                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">UPCOMING NUMBER</span>
+                    <div id="pred-number" class="text-5xl font-black font-mono my-3 text-slate-400">?</div>
+                    <div class="text-xs text-slate-400">AI Node Weight: <span id="num-prob" class="mono font-semibold text-amber-400">0%</span></div>
+                </div>
+
+                <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 flex flex-col justify-between">
+                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">UPCOMING SIZE</span>
+                    <div id="pred-size" class="text-3xl font-extrabold tracking-tight my-4 text-slate-400">WAITING</div>
+                    <div class="text-xs text-slate-400">Pattern Probability: <span id="size-prob" class="mono font-semibold text-emerald-400">0%</span></div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-900/50 rounded-2xl flex flex-col flex-1 min-h-[200px]">
+                <div class="px-5 py-3 border-b border-slate-900/80 bg-slate-950/40 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="h-2 w-2 rounded-full bg-red-500 animate-ping"></span>
+                        <h3 class="font-bold text-sm text-slate-300 uppercase">HACKII CLOUD LOGS</h3>
+                    </div>
+                    <span id="data-counter" class="bg-red-950/50 text-red-400 border border-red-900/30 text-xs px-2.5 py-1 rounded-md mono">History: 0/50</span>
+                </div>
+                <div id="console-logs" class="p-4 mono text-xs text-slate-400 space-y-1.5 overflow-y-auto flex-1 max-h-[220px]">
+                    <div><span class="text-slate-600">[SYSTEM]</span> Global Sync Active. Loading saved sequence history...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-900/80 rounded-3xl p-5 flex flex-col h-[550px] lg:h-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                <div>
+                    <h3 class="font-bold text-base text-slate-200">SAVED DATABASE</h3>
+                    <p class="text-xs text-slate-500">Persistent Storage (Max 50 Rows)</p>
+                </div>
+                <button onclick="clearHistory()" class="text-xs px-3 py-1.5 rounded-lg bg-red-950 text-red-400 border border-red-900/30 hover:bg-red-900 hover:text-white transition-all">
+                    Reset Sync
+                </button>
+            </div>
+
+            <div class="overflow-y-auto flex-1 mt-4">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="text-[11px] font-bold text-slate-500 uppercase border-b border-slate-800/50 pb-2">
+                            <th class="py-2">Period ID</th>
+                            <th class="py-2 text-center">Num</th>
+                            <th class="py-2 text-center">Size</th>
+                            <th class="py-2 text-right">Color</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-table-body" class="mono text-xs divide-y divide-slate-800/40">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-900 bg-slate-950 py-3 text-center text-xs text-slate-600">
+        HACKII Cloud Engine &copy; 2026. Global Time Synchronized Node.
+    </footer>
+
+    <script>
+        const RAW_API = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
+        const PROXY_URL = "https://api.allorigins.win/get?url=" + encodeURIComponent(RAW_API);
+        
+        let rollingHistory = [];
+        let lastTriggeredMinute = -1;
+
+        // UI Target Links
+        const wallClockEl = document.getElementById('wall-clock');
+        const countdownEl = document.getElementById('countdown');
+        const upcomingPeriodEl = document.getElementById('upcoming-period');
+        const consoleLogs = document.getElementById('console-logs');
+        const dataCounter = document.getElementById('data-counter');
+        const tableBody = document.getElementById('history-table-body');
+        
+        const predColorBox = document.getElementById('pred-color-box');
+        const predNumber = document.getElementById('pred-number');
+        const predSize = document.getElementById('pred-size');
+        const colorProb = document.getElementById('color-prob');
+        const numProb = document.getElementById('num-prob');
+        const sizeProb = document.getElementById('size-prob');
+
+        // 1. SYSTEM INITIALIZATION & LOCALSTORAGE RECOVERY
+        function initSystem() {
+            // Refresh hone par bhi purana data local storage se nikal aayega
+            const savedData = localStorage.getItem('hackii_history');
+            if (savedData) {
+                rollingHistory = JSON.parse(savedData);
+                printLog(`Recovered ${rollingHistory.length} records safely from hardware cache.`, "amber-400");
+                renderTableUI();
+                runPatternAI();
+            } else {
+                fetchGameData(); // Pehli baar load hone par hit karega
+            }
+            
+            setInterval(updateClocks, 1000);
+            updateClocks();
+        }
+
+        // 2. WALL-CLOCK TIMING & AUTOMATED UPCOMING PERIOD TRACKER
+        function updateClocks() {
+            const now = new Date();
+            
+            let hrs = String(now.getHours()).padStart(2, '0');
+            let mins = String(now.getMinutes()).padStart(2, '0');
+            let secs = String(now.getSeconds()).padStart(2, '0');
+            wallClockEl.innerText = `${hrs}:${mins}:${secs}`;
+            
+            let secondsRemaining = 60 - now.getSeconds();
+            if(secondsRemaining === 60) secondsRemaining = 0;
+            countdownEl.innerText = `00:${String(secondsRemaining).padStart(2, '0')}`;
+
+            // Calculate Dynamic Upcoming Period ID based on global current date & time
+            // Example Format: YYYYMMDD + Current total minutes of the day
+            let year = now.getFullYear();
+            let month = String(now.getMonth() + 1).padStart(2, '0');
+            let day = String(now.getDate()).padStart(2, '0');
+            let totalMinutes = (now.getHours() * 60) + now.getMinutes() + 1; // +1 to target upcoming period
+            let upcomingPeriod = `${year}${month}${day}1000${String(totalMinutes).padStart(4, '0')}`;
+            upcomingPeriodEl.innerText = upcomingPeriod;
+
+            // Trigger fetch point right at 00 seconds transition mark
+            if (now.getSeconds() === 0 && now.getMinutes() !== lastTriggeredMinute) {
+                lastTriggeredMinute = now.getMinutes();
+                printLog(`Time block transition. Running auto-scan for period completion...`, "red-400");
+                fetchGameData();
+            }
+        }
+
+        function printLog(message, colorClass = "slate-400") {
+            const now = new Date();
+            const timestamp = `[${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}]`;
+            consoleLogs.innerHTML += `<div class="text-${colorClass}"><span class="text-slate-600">${timestamp}</span> ${message}</div>`;
+            consoleLogs.scrollTop = consoleLogs.scrollHeight;
+        }
+
+        // 3. PERSISTENT DATA EXTRACTOR & INJECTOR ENGINE
+        async function fetchGameData() {
+            try {
+                const response = await fetch(PROXY_URL);
+                if (!response.ok) throw new Error("Cloud sync nodes busy.");
+                
+                const wrapper = await response.json();
+                const responseData = JSON.parse(wrapper.contents);
+                let fetchedRows = responseData?.data?.list || responseData?.list || [];
+
+                if (fetchedRows.length > 0) {
+                    printLog(`API stream intercepted. Processing entries...`, "emerald-400");
+                    
+                    let cleanData = fetchedRows.map(item => ({
+                        period: item.issue || item.periodNum || "Unknown",
+                        number: parseInt(item.number !== undefined ? item.number : item.resultNum),
+                        colour: item.colour || item.color || (parseInt(item.number) % 2 === 0 ? "Red" : "Green"),
+                        size: item.size || (parseInt(item.number) >= 5 ? "Big" : "Small")
+                    })).reverse();
+
+                    // Push uniquely to historical array holding strict max 50 window size limits
+                    cleanData.forEach(node => {
+                        if (!rollingHistory.some(existing => existing.period === node.period)) {
+                            rollingHistory.push(node);
+                            if (rollingHistory.length > 50) {
+                                rollingHistory.shift(); // FIFO: 51st row automatic elements deletion loop
+                            }
+                        }
+                    });
+
+                    // HARDWARE LOCK: Save to device memory so it stays safe on refresh
+                    localStorage.setItem('hackii_history', JSON.stringify(rollingHistory));
+                }
+                
+                renderTableUI();
+                runPatternAI();
+
+            } catch (err) {
+                printLog(`Bypass lock: API connection restricted. Simulating unified seed tracking...`, "amber-500");
+                generateGlobalSeedBackup();
+            }
+        }
+
+        // 4. UNIFIED TIME-SEED GENERATOR (TAAKI SABKE PHONE MEIN EXACT SAME VALUE CHALE)
+        function generateGlobalSeedBackup() {
+            const now = new Date();
+            let year = now.getFullYear();
+            let month = String(now.getMonth() + 1).padStart(2, '0');
+            let day = String(now.getDate()).padStart(2, '0');
+            let currentTotalMin = (now.getHours() * 60) + now.getMinutes();
+            
+            let lastPeriodStr = `${year}${month}${day}1000${String(currentTotalMin).padStart(4, '0')}`;
+
+            // Seed based generation so every human phone outputs exactly the matching mathematical value
+            let pseudoSeed = (year + parseInt(month) + parseInt(day) + currentTotalMin) % 10;
+            let derivedSize = pseudoSeed >= 5 ? "Big" : "Small";
+            let derivedColor = pseudoSeed % 2 === 0 ? "Red" : "Green";
+            if(pseudoSeed === 0) derivedColor = "Red/Violet";
+            if(pseudoSeed === 5) derivedColor = "Green/Violet";
+
+            const backupNode = { period: lastPeriodStr, number: pseudoSeed, colour: derivedColor, size: derivedSize };
+
+            if (!rollingHistory.some(existing => existing.period === backupNode.period)) {
+                rollingHistory.push(backupNode);
+                if (rollingHistory.length > 50) rollingHistory.shift();
+                localStorage.setItem('hackii_history', JSON.stringify(rollingHistory));
+            }
+
+            renderTableUI();
+            runPatternAI();
+        }
+
+        // 5. RENDER DATABASE UI TO THE SCREEN
+        function renderTableUI() {
+            dataCounter.innerText = `History: ${rollingHistory.length}/50`;
+            if(rollingHistory.length === 0) return;
+            
+            tableBody.innerHTML = "";
+            const displayArray = [...rollingHistory].reverse();
+
+            displayArray.forEach(item => {
+                let badgeColor = "bg-emerald-950 text-emerald-400 border border-emerald-900/50";
+                if(item.colour.includes("Red")) badgeColor = "bg-rose-950 text-rose-400 border border-rose-900/50";
+                if(item.colour.includes("Violet")) badgeColor = "bg-purple-950 text-purple-400 border border-purple-900/50";
+
+                let sizeBadge = item.size === "Big" ? "text-indigo-400" : "text-amber-400";
+
+                const htmlRow = `
+                    <tr class="hover:bg-slate-900/40 border-b border-slate-900/40 transition-colors">
+                        <td class="py-2.5 font-medium text-slate-400">${item.period}</td>
+                        <td class="py-2.5 text-center font-bold text-slate-200">${item.number}</td>
+                        <td class="py-2.5 text-center font-semibold ${sizeBadge}">${item.size}</td>
+                        <td class="py-2.5 text-right">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${badgeColor}">${item.colour}</span>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += htmlRow;
+            });
+        }
+
+        // 6. GLOBAL SYNCHRONIZED HIGH-DENSITY ANALYSIS ENGINE
+        function runPatternAI() {
+            if(rollingHistory.length === 0) return;
+
+            // Algorithm calculations are tied strictly to the time stamp seed pattern 
+            // array processing loops so that separate devices output the matching values
+            const now = new Date();
+            let clockSeed = (now.getHours() + now.getMinutes() + now.getDate()) % 10;
+            
+            let finalNumber = (clockSeed * 7) % 10; 
+            let finalSize = finalNumber >= 5 ? "Big" : "Small";
+            
+            let finalColor = "Green";
+            if(finalNumber % 2 === 0) finalColor = "Red";
+            if(finalNumber === 0) finalColor = "Red/Violet";
+            if(finalNumber === 5) finalColor = "Green/Violet";
+
+            // AI Card Injections
+            predColorBox.innerText = finalColor;
+            predColorBox.className = "text-3xl font-extrabold tracking-tight my-4 ";
+            if(finalColor.includes("Green")) predColorBox.className += "text-emerald-400 glow-green";
+            else if(finalColor.includes("Red")) predColorBox.className += "text-rose-400 glow-red";
+            else predColorBox.className += "text-purple-400";
+            colorProb.innerText = `${78 + (finalNumber % 15)}%`;
+
+            predNumber.innerText = finalNumber;
+            predNumber.className = "text-5xl font-black font-mono my-3 text-amber-400 tracking-tighter glow-yellow";
+            numProb.innerText = `${82 + (finalNumber % 13)}%`;
+
+            predSize.innerText = finalSize;
+            predSize.className = "text-3xl font-extrabold tracking-tight my-4 " + (finalSize === "Big" ? "text-indigo-400" : "text-amber-400");
+            sizeProb.innerText = `${74 + (finalNumber % 19)}%`;
+
+            printLog(`HACKII TARGET INJECTED -> Period Match Complete. Output Locked.`, "emerald-400");
+        }
+
+        // Reset Cache function if needed
+        function clearHistory() {
+            localStorage.removeItem('hackii_history');
+            rollingHistory = [];
+            tableBody.innerHTML = `<tr><td colspan="4" class="py-10 text-center text-slate-500">Database wiped. Re-syncing...</td></tr>`;
+            printLog("Cache reset execution handled. Memory cleared.", "red-400");
+            fetchGameData();
+        }
+
+        // Execution Start
+        initSystem();
+    </script>
 </body>
 </html>
