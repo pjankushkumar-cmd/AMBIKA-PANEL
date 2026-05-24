@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>HACKII AI</title>
 
@@ -21,7 +19,7 @@ font-family:Arial,sans-serif;
 body{
 background:#16153d;
 padding:10px;
-color:white;
+color:#fff;
 overflow-x:hidden;
 }
 
@@ -42,7 +40,7 @@ box-shadow:0 0 25px rgba(0,0,0,.35);
 font-size:34px;
 font-weight:bold;
 text-align:center;
-color:#d5b3ff;
+color:#d7b5ff;
 margin-bottom:20px;
 }
 
@@ -55,17 +53,18 @@ text-align:center;
 
 .smallTitle{
 font-size:18px;
-color:#eee;
+color:#ddd;
 }
 
 .period{
-font-size:54px;
+font-size:56px;
 font-weight:bold;
 margin-top:10px;
+color:#fff;
 }
 
 .predict{
-font-size:135px;
+font-size:130px;
 font-weight:bold;
 line-height:1;
 margin-top:10px;
@@ -85,8 +84,8 @@ text-shadow:0 0 18px #00ff9d;
 .ai{
 font-size:18px;
 color:#ffd86a;
-margin-top:15px;
-line-height:1.6;
+margin-top:18px;
+line-height:1.7;
 }
 
 .status{
@@ -225,7 +224,7 @@ UPCOMING PERIOD
 
 <div class="period"
 id="upcomingPeriod">
-----
+0000
 </div>
 
 <div class="predict"
@@ -235,7 +234,7 @@ id="predictNum">
 
 <div class="ai"
 id="aiText">
-ULTRA AI ANALYZING LIVE TREND...
+LIVE AI ANALYZING...
 </div>
 
 <div class="status"
@@ -343,7 +342,7 @@ return [0,2,4,6,8]
 }
 
 /* =========================
-   MEMORY STORE
+   MEMORY
 ========================= */
 
 function updateMemory(data){
@@ -376,7 +375,7 @@ memoryStore.slice(0,500);
 }
 
 /* =========================
-   CREATE 50 BATCH
+   BATCHES
 ========================= */
 
 function makeBatches(){
@@ -432,13 +431,13 @@ score[n]+=2;
 
 /* RECENT */
 
-let w = 1;
+let weight = 1;
 
 for(let i=0;i<nums.length;i++){
 
-score[nums[i]] += w;
+score[nums[i]] += weight;
 
-w += 0.08;
+weight += 0.08;
 
 }
 
@@ -547,7 +546,7 @@ score[i]+=10;
 
 score[last] *= 0.10;
 
-/* SORT */
+/* FINAL */
 
 let sorted =
 Object.entries(score)
@@ -561,8 +560,6 @@ Number(sorted[1][0]);
 
 let third =
 Number(sorted[2][0]);
-
-/* PERCENT */
 
 let total =
 Object.values(score)
@@ -579,8 +576,6 @@ let p2 =
 let p3 =
 ((score[third]/total)*100)
 .toFixed(1);
-
-/* UPDATE */
 
 document.getElementById(
 "predictNum"
@@ -743,7 +738,7 @@ remain + "s";
 }
 
 /* =========================
-   FETCH DATA
+   FETCH
 ========================= */
 
 async function fetchData(){
@@ -753,12 +748,6 @@ if(fetching) return;
 fetching = true;
 
 try{
-
-document.getElementById(
-"status"
-).innerHTML =
-
-"LIVE SERVER CONNECTED";
 
 const res =
 await fetch(
@@ -787,27 +776,31 @@ Number(b.issueNumber)
 Number(a.issueNumber)
 );
 
-let latest =
-String(list[0].issueNumber);
+/* CURRENT ISSUE */
+
+let latestIssue =
+String(list[0].issueNumber)
+.trim();
+
+/* SAVE */
+
+currentIssue = latestIssue;
 
 /* UPCOMING */
 
-let next =
+let nextIssue =
 (
-BigInt(latest)+1n
+BigInt(latestIssue)
++ 1n
 ).toString();
 
 document.getElementById(
 "upcomingPeriod"
 ).innerHTML =
 
-next.slice(-4);
+nextIssue.slice(-4);
 
-/* ONLY NEW */
-
-if(latest !== currentIssue){
-
-currentIssue = latest;
+/* FORMAT */
 
 let formatted =
 list.map(x=>({
@@ -832,18 +825,22 @@ renderPage();
 
 advancedAI();
 
-}
+document.getElementById(
+"status"
+).innerHTML =
+"LIVE SERVER CONNECTED";
 
 fetching = false;
 
 }catch(e){
+
+console.log(e);
 
 fetching = false;
 
 document.getElementById(
 "status"
 ).innerHTML =
-
 "SERVER RECONNECTING...";
 
 }
@@ -864,16 +861,19 @@ setTimeout(autoLoop,2000);
 
 autoLoop();
 
-/* TAB */
+/* TAB ACTIVE */
 
 document.addEventListener(
 "visibilitychange",
 ()=>{
 
+if(!document.hidden){
+
 fetchData();
 
 }
-);
+
+});
 
 /* NETWORK */
 
@@ -883,8 +883,7 @@ window.addEventListener(
 
 fetchData();
 
-}
-);
+});
 
 /* START */
 
