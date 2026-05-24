@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -33,20 +34,21 @@ background:#221f67;
 border-radius:24px;
 padding:16px;
 margin-bottom:15px;
+box-shadow:0 0 20px rgba(0,0,0,.3);
 }
 
 .title{
 font-size:32px;
 font-weight:bold;
 text-align:center;
-color:#c8a2ff;
+color:#d3b0ff;
 margin-bottom:20px;
 }
 
 .predictBox{
 background:#342f8f;
 padding:18px;
-border-radius:18px;
+border-radius:20px;
 text-align:center;
 }
 
@@ -56,33 +58,33 @@ color:#eee;
 }
 
 .period{
-font-size:42px;
+font-size:46px;
 font-weight:bold;
 margin-top:10px;
 }
 
 .predict{
-font-size:110px;
+font-size:120px;
 font-weight:bold;
 margin-top:10px;
 transition:.3s;
 }
 
 .redText{
-color:#ff4b5c;
-text-shadow:0 0 15px #ff4b5c;
+color:#ff4d5f;
+text-shadow:0 0 18px #ff4d5f;
 }
 
 .greenText{
-color:#00ff99;
-text-shadow:0 0 15px #00ff99;
+color:#00ff9d;
+text-shadow:0 0 18px #00ff9d;
 }
 
 .ai{
 font-size:20px;
 color:#ffd86a;
 margin-top:15px;
-line-height:1.5;
+line-height:1.6;
 }
 
 .time{
@@ -91,14 +93,14 @@ font-size:20px;
 }
 
 .clock{
-font-size:38px;
+font-size:40px;
 font-weight:bold;
-color:#00ffd5;
+color:#00ffe5;
 margin-top:10px;
 }
 
 .count{
-font-size:75px;
+font-size:80px;
 font-weight:bold;
 color:#ffd54f;
 margin-top:10px;
@@ -108,23 +110,24 @@ margin-top:10px;
 background:#221f67;
 border-radius:24px;
 overflow:hidden;
+box-shadow:0 0 20px rgba(0,0,0,.3);
 }
 
 .header{
-background:#5a53b5;
+background:#5d56bf;
 display:grid;
-grid-template-columns:1.5fr .7fr .9fr .6fr;
-padding:15px 10px;
-font-weight:bold;
+grid-template-columns:1.4fr .7fr .9fr .6fr;
+padding:16px 10px;
 font-size:16px;
+font-weight:bold;
 }
 
 .row{
 display:grid;
-grid-template-columns:1.5fr .7fr .9fr .6fr;
+grid-template-columns:1.4fr .7fr .9fr .6fr;
 padding:14px 10px;
 align-items:center;
-border-bottom:1px solid rgba(255,255,255,.05);
+border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .periodText{
@@ -133,7 +136,7 @@ font-weight:bold;
 }
 
 .num{
-font-size:56px;
+font-size:58px;
 font-weight:bold;
 text-align:center;
 }
@@ -146,6 +149,7 @@ text-align:center;
 .colorWrap{
 display:flex;
 justify-content:center;
+align-items:center;
 gap:8px;
 }
 
@@ -156,13 +160,13 @@ border-radius:50%;
 }
 
 .red{
-background:#ff4b5c;
-box-shadow:0 0 10px #ff4b5c;
+background:#ff4d5f;
+box-shadow:0 0 10px #ff4d5f;
 }
 
 .green{
-background:#00ff99;
-box-shadow:0 0 10px #00ff99;
+background:#00ff9d;
+box-shadow:0 0 10px #00ff9d;
 }
 
 .pagination{
@@ -190,6 +194,12 @@ cursor:pointer;
 .page{
 font-size:24px;
 font-weight:bold;
+}
+
+.status{
+margin-top:12px;
+font-size:15px;
+color:#8cffb2;
 }
 
 .loader{
@@ -235,6 +245,11 @@ id="predictNum">
 <div class="ai"
 id="aiText">
 AI ANALYZING LIVE TREND...
+</div>
+
+<div class="status"
+id="status">
+LIVE SERVER CONNECTED
 </div>
 
 <div class="time">
@@ -301,21 +316,22 @@ const API =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
 let historyData = [];
+let memoryStore = [];
 let batches = [];
 let currentPage = 0;
 let lastPeriod = "";
 
 /* =========================
-   KEEP SCREEN ACTIVE
+   WAKE LOCK
 ========================= */
 
 async function keepAwake(){
 
 try{
 
-if('wakeLock' in navigator){
+if("wakeLock" in navigator){
 
-await navigator.wakeLock.request('screen');
+await navigator.wakeLock.request("screen");
 
 }
 
@@ -356,38 +372,68 @@ return [0,2,4,6,8]
 }
 
 /* =========================
-   BATCH SYSTEM
+   STORE MEMORY
 ========================= */
 
-function makeBatches(arr){
+function updateMemory(newData){
 
-let temp = [];
+newData.forEach(item=>{
 
-for(let i=0;i<arr.length;i+=10){
-
-temp.push(
-arr.slice(i,i+10)
+let exists =
+memoryStore.find(x=>
+x.issueNumber ===
+item.issueNumber
 );
 
-}
+if(!exists){
 
-while(temp.length > 50){
-
-temp.shift();
+memoryStore.unshift(item);
 
 }
 
-batches = temp;
+});
+
+memoryStore.sort((a,b)=>
+Number(b.issueNumber)
+-
+Number(a.issueNumber)
+);
+
+memoryStore =
+memoryStore.slice(0,500);
 
 }
 
 /* =========================
-   ADVANCED AI
+   CREATE 50 BATCHES
+========================= */
+
+function makeBatches(){
+
+batches = [];
+
+for(let i=0;i<500;i+=10){
+
+let batch =
+memoryStore.slice(i,i+10);
+
+if(batch.length){
+
+batches.push(batch);
+
+}
+
+}
+
+}
+
+/* =========================
+   AI ENGINE
 ========================= */
 
 function advancedAI(){
 
-if(historyData.length < 30){
+if(memoryStore.length < 30){
 
 document.getElementById(
 "predictNum"
@@ -398,22 +444,24 @@ return;
 }
 
 let nums =
-historyData.map(x=>x.number);
+memoryStore.map(x=>x.number);
 
 let score = {};
 let transitions = {};
-let recent = {};
-let cycles = {};
-let repeats = {};
 let hot = {};
+let repeat = {};
+let recent = {};
+let cycle = {};
+let antiRepeat = {};
 
 for(let i=0;i<=9;i++){
 
 score[i]=0;
-recent[i]=0;
-cycles[i]=0;
-repeats[i]=0;
 hot[i]=0;
+repeat[i]=0;
+recent[i]=0;
+cycle[i]=0;
+antiRepeat[i]=0;
 
 }
 
@@ -440,15 +488,27 @@ transitions[a][b]++;
 
 }
 
-/* RECENT */
+/* RECENT WEIGHT */
 
-let w = 1;
+let weight = 1;
 
 for(let i=nums.length-1;i>=0;i--){
 
-recent[nums[i]] += w;
+recent[nums[i]] += weight;
 
-w += 0.15;
+weight += 0.12;
+
+}
+
+/* HOT ZONE */
+
+for(let i=0;i<20;i++){
+
+if(nums[i] !== undefined){
+
+hot[nums[i]] += 4;
+
+}
 
 }
 
@@ -456,9 +516,9 @@ w += 0.15;
 
 for(let i=1;i<nums.length;i++){
 
-if(nums[i]===nums[i-1]){
+if(nums[i] === nums[i-1]){
 
-repeats[nums[i]] += 5;
+repeat[nums[i]] += 5;
 
 }
 
@@ -468,37 +528,25 @@ repeats[nums[i]] += 5;
 
 for(let i=2;i<nums.length;i++){
 
-if(nums[i]===nums[i-2]){
+if(nums[i] === nums[i-2]){
 
-cycles[nums[i]] += 4;
-
-}
-
-}
-
-/* HOT */
-
-for(let i=nums.length-10;i<nums.length;i++){
-
-if(nums[i]!==undefined){
-
-hot[nums[i]] += 3;
+cycle[nums[i]] += 4;
 
 }
 
 }
 
-/* LAST FLOW */
+/* LAST TRANSITION */
 
 let last =
-nums[nums.length-1];
+nums[0];
 
 if(transitions[last]){
 
 for(let n in transitions[last]){
 
 score[n] +=
-transitions[last][n] * 10;
+transitions[last][n] * 12;
 
 }
 
@@ -508,18 +556,44 @@ transitions[last][n] * 10;
 
 for(let i=0;i<=9;i++){
 
-score[i] += recent[i];
-score[i] += repeats[i];
-score[i] += cycles[i];
 score[i] += hot[i];
+score[i] += repeat[i];
+score[i] += recent[i];
+score[i] += cycle[i];
 
 }
 
 /* AVOID SAME */
 
-score[last] *= 0.25;
+score[last] *= 0.15;
 
-/* BEST */
+/* BALANCE */
+
+let big =
+nums.filter(x=>x>=5).length;
+
+let small =
+nums.filter(x=>x<=4).length;
+
+if(big > small){
+
+for(let i=0;i<=4;i++){
+
+score[i]+=6;
+
+}
+
+}else{
+
+for(let i=5;i<=9;i++){
+
+score[i]+=6;
+
+}
+
+}
+
+/* FINAL */
 
 let sorted =
 Object.entries(score)
@@ -527,8 +601,6 @@ Object.entries(score)
 
 let best =
 Number(sorted[0][0]);
-
-/* CONFIDENCE */
 
 let total =
 Object.values(score)
@@ -539,11 +611,9 @@ Math.min(
 96,
 (
 (score[best]/total)*100
-+ 40
++ 42
 ).toFixed(1)
 );
-
-/* UI */
 
 document.getElementById(
 "predictNum"
@@ -564,12 +634,14 @@ ${getBigSmall(best)}
  •
 ${getColor(best).toUpperCase()}
  •
-${conf}% Confidence`;
+${conf}% Confidence
+ •
+LIVE 50 BATCH ANALYSIS`;
 
 }
 
 /* =========================
-   RENDER
+   RENDER PAGE
 ========================= */
 
 function renderPage(){
@@ -630,7 +702,7 @@ document.getElementById(
 }
 
 /* =========================
-   PAGES
+   PAGE NAVIGATION
 ========================= */
 
 function nextPage(){
@@ -663,7 +735,7 @@ renderPage();
 }
 
 /* =========================
-   CLOCK
+   LIVE CLOCK
 ========================= */
 
 function startClock(){
@@ -717,6 +789,12 @@ async function fetchData(){
 
 try{
 
+document.getElementById(
+"status"
+).innerHTML =
+
+"LIVE SERVER CONNECTED";
+
 const res =
 await fetch(
 API + "?t=" + Date.now(),
@@ -743,7 +821,7 @@ Number(b.issueNumber)
 Number(a.issueNumber)
 );
 
-/* DUPLICATE CHECK */
+/* DUPLICATE FIX */
 
 if(
 lastPeriod ===
@@ -758,7 +836,7 @@ return;
 lastPeriod =
 list[0]?.issueNumber;
 
-/* SAVE HISTORY */
+/* FORMAT */
 
 historyData =
 list.map(x=>({
@@ -775,22 +853,13 @@ Number(x.number)
 
 }));
 
-/* FILL MEMORY */
+/* MEMORY STORE */
 
-while(historyData.length < 500){
+updateMemory(historyData);
 
-historyData.push(
-...historyData
-);
+/* BATCH */
 
-}
-
-historyData =
-historyData.slice(0,500);
-
-/* CREATE BATCH */
-
-makeBatches(historyData);
+makeBatches();
 
 /* RENDER */
 
@@ -800,10 +869,10 @@ renderPage();
 
 advancedAI();
 
-/* NEXT PERIOD */
+/* UPCOMING */
 
 let latest =
-historyData[0]
+memoryStore[0]
 ?.issueNumber || "0";
 
 let next =
@@ -822,7 +891,7 @@ next.slice(-4);
 console.log(e);
 
 document.getElementById(
-"aiText"
+"status"
 ).innerHTML =
 
 "SERVER RECONNECTING...";
@@ -832,7 +901,7 @@ document.getElementById(
 }
 
 /* =========================
-   BACKGROUND UPDATE
+   AUTO BACKGROUND
 ========================= */
 
 setInterval(()=>{
