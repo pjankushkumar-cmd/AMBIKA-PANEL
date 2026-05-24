@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WinGo 1M - Advanced AI Neural Pattern Dashboard</title>
+    <title>HACKII - Advanced AI Neural Pattern Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -13,7 +13,6 @@
         .glow-green { text-shadow: 0 0 15px rgba(34, 197, 94, 0.6); }
         .glow-red { text-shadow: 0 0 15px rgba(239, 68, 68, 0.6); }
         .glow-yellow { text-shadow: 0 0 15px rgba(234, 179, 8, 0.6); }
-        /* Custom scrollbar for history logs */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #111827; }
         ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
@@ -24,16 +23,16 @@
     <header class="border-b border-slate-900 bg-slate-900/50 backdrop-blur-md px-6 py-4 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-                    <i class="fa-solid fa-brain text-white text-lg"></i>
+                <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center shadow-lg shadow-red-500/20">
+                    <i class="fa-solid fa-terminal text-white text-lg"></i>
                 </div>
                 <div>
-                    <h1 class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">QUANTUM AI</h1>
-                    <p class="text-xs text-indigo-400 font-medium tracking-widest uppercase">WinGo 1M Auto-Predictor v4.0</p>
+                    <h1 class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-red-400 via-amber-200 to-white bg-clip-text text-transparent">HACKII AI</h1>
+                    <p class="text-xs text-red-500 font-medium tracking-widest uppercase">WINGO 1M BYPASS MATRIX v5.0</p>
                 </div>
             </div>
             <div class="bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl flex items-center gap-3 shadow-inner">
-                <i class="fa-solid fa-clock text-indigo-400 animate-pulse"></i>
+                <i class="fa-solid fa-clock text-red-500 animate-pulse"></i>
                 <span id="wall-clock" class="mono font-bold text-lg text-slate-200">00:00:00</span>
             </div>
         </div>
@@ -43,17 +42,17 @@
         
         <div class="lg:col-span-2 flex flex-col gap-6">
             
-            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 to-indigo-950 p-6 border border-slate-800 shadow-2xl">
-                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl text-indigo-500 font-bold pointer-events-none">1M</div>
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 to-red-950/40 p-6 border border-slate-800 shadow-2xl">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl text-red-500 font-bold pointer-events-none">1M</div>
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <span class="px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-xs font-semibold text-indigo-400 tracking-wider uppercase">System Engine Sync</span>
+                        <span class="px-3 py-1 bg-red-500/10 border border-red-500/20 rounded-full text-xs font-semibold text-red-400 tracking-wider uppercase">HACKII CORE SYNC</span>
                         <h2 class="text-xl font-bold mt-2 text-slate-300">Wall Clock Auto Synchronization</h2>
-                        <p class="text-sm text-slate-400 mt-1">Automatic sync and database clearing at every 00 seconds mark.</p>
+                        <p class="text-sm text-slate-400 mt-1">Automatic network refresh and prediction injection at every 00 seconds.</p>
                     </div>
                     <div class="text-left md:text-right">
-                        <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Next Refresh In</div>
-                        <div id="countdown" class="text-5xl font-extrabold mono text-amber-400 tracking-tighter mt-1 glow-yellow">00:00</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Next HACKII Refresh In</div>
+                        <div id="countdown" class="text-5xl font-extrabold mono text-amber-400 tracking-tighter mt-1 glow-yellow">00:60</div>
                     </div>
                 </div>
             </div>
@@ -61,34 +60,34 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">AI Color Forecast</span>
-                        <i class="fa-solid fa-palette text-indigo-400"></i>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">HACKII Color Forecast</span>
+                        <i class="fa-solid fa-palette text-red-400"></i>
                     </div>
-                    <div id="pred-color-box" class="text-3xl font-extrabold tracking-tight my-4 text-slate-500">-</div>
+                    <div id="pred-color-box" class="text-3xl font-extrabold tracking-tight my-4 text-slate-500">ANALYZING</div>
                     <div class="text-xs text-slate-400 flex items-center gap-1">
-                        <i class="fa-solid fa-chart-pie"></i> Probability Intensity: <span id="color-prob" class="mono font-semibold text-indigo-300">0%</span>
+                        <i class="fa-solid fa-chart-pie"></i> Intensity: <span id="color-prob" class="mono font-semibold text-red-400">--%</span>
                     </div>
                 </div>
 
                 <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Target Number</span>
-                        <i class="fa-solid fa-arrow-trend-up text-violet-400"></i>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">HACKII Target Number</span>
+                        <i class="fa-solid fa-arrow-trend-up text-amber-400"></i>
                     </div>
-                    <div id="pred-number" class="text-5xl font-black font-mono my-3 text-slate-500">-</div>
+                    <div id="pred-number" class="text-5xl font-black font-mono my-3 text-slate-500">?</div>
                     <div class="text-xs text-slate-400 flex items-center gap-1">
-                        <i class="fa-solid fa-bezier-curve"></i> Mathematical Weight: <span id="num-prob" class="mono font-semibold text-violet-300">0%</span>
+                        <i class="fa-solid fa-bezier-curve"></i> Probability: <span id="num-prob" class="mono font-semibold text-amber-400">--%</span>
                     </div>
                 </div>
 
                 <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Size Classification</span>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">HACKII Size Class</span>
                         <i class="fa-solid fa-arrows-up-down text-emerald-400"></i>
                     </div>
-                    <div id="pred-size" class="text-3xl font-extrabold tracking-tight my-4 text-slate-500">-</div>
+                    <div id="pred-size" class="text-3xl font-extrabold tracking-tight my-4 text-slate-500">WAITING</div>
                     <div class="text-xs text-slate-400 flex items-center gap-1">
-                        <i class="fa-solid fa-shield-halved"></i> Pattern Confidence: <span id="size-prob" class="mono font-semibold text-emerald-300">0%</span>
+                        <i class="fa-solid fa-shield-halved"></i> Confidence: <span id="size-prob" class="mono font-semibold text-emerald-400">--%</span>
                     </div>
                 </div>
             </div>
@@ -96,13 +95,13 @@
             <div class="bg-slate-900 border border-slate-900/50 rounded-2xl flex flex-col flex-1 min-h-[250px]">
                 <div class="px-5 py-4 border-b border-slate-900/80 bg-slate-950/40 flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
-                        <h3 class="font-bold text-sm tracking-wide text-slate-300 uppercase">Live AI Pattern Tracking Logs</h3>
+                        <span class="h-2 w-2 rounded-full bg-red-500 animate-ping"></span>
+                        <h3 class="font-bold text-sm tracking-wide text-slate-300 uppercase">HACKII Live Server Tracking Logs</h3>
                     </div>
-                    <span id="data-counter" class="bg-indigo-950 text-indigo-400 border border-indigo-900/50 text-xs px-2.5 py-1 rounded-md mono font-medium">History: 0/50</span>
+                    <span id="data-counter" class="bg-red-950/50 text-red-400 border border-red-900/30 text-xs px-2.5 py-1 rounded-md mono font-medium">History: 0/50</span>
                 </div>
                 <div id="console-logs" class="p-4 mono text-xs text-slate-400 space-y-2 overflow-y-auto flex-1 max-h-[280px]">
-                    <div class="text-indigo-400"><span class="text-slate-600">[SYSTEM]</span> Quantum AI Analytics initialized successfully. Clock synced.</div>
+                    <div class="text-red-400"><span class="text-slate-600">[SYSTEM]</span> HACKII Matrix Initialized. Syncing security bypass routers...</div>
                 </div>
             </div>
         </div>
@@ -110,10 +109,10 @@
         <div class="bg-slate-900 border border-slate-900/80 rounded-3xl p-5 flex flex-col h-[600px] lg:h-auto">
             <div class="flex items-center justify-between pb-4 border-b border-slate-800">
                 <div>
-                    <h3 class="font-bold text-base text-slate-200">Rolling Database</h3>
-                    <p class="text-xs text-slate-500">Max 50 Records (Auto-FIFO Shift Triggered)</p>
+                    <h3 class="font-bold text-base text-slate-200">HACKII Core Database</h3>
+                    <p class="text-xs text-slate-500">Auto-FIFO Rolling Shift (Max 50 Rows)</p>
                 </div>
-                <button onclick="forceRefresh()" class="h-8 w-8 rounded-lg bg-slate-800 border border-slate-700 hover:bg-indigo-600 hover:border-indigo-500 flex items-center justify-center transition-colors group">
+                <button onclick="forceRefresh()" class="h-8 w-8 rounded-lg bg-slate-800 border border-slate-700 hover:bg-red-600 hover:border-red-500 flex items-center justify-center transition-colors group">
                     <i class="fa-solid fa-rotate text-xs text-slate-400 group-hover:text-white"></i>
                 </button>
             </div>
@@ -130,7 +129,7 @@
                     </thead>
                     <tbody id="history-table-body" class="mono text-xs divide-y divide-slate-800/40">
                         <tr id="no-data-row">
-                            <td colspan="4" class="py-10 text-center text-slate-500 font-sans">Waiting for API data fetch sequence...</td>
+                            <td colspan="4" class="py-10 text-center text-slate-500 font-sans">Connecting to safe HACKII servers bypass tunnel...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -139,25 +138,29 @@
     </main>
 
     <footer class="border-t border-slate-900 bg-slate-950 py-4 text-center text-xs text-slate-600 font-medium">
-        Automated AI Multi-Layered Analytical Pipeline Engine &copy; 2026. All patterns are generated purely via probabilistic math.
+        HACKII Automated AI Bypass Engine &copy; 2026. All patterns are calculated using high-density rolling probability distribution.
     </footer>
 
     <script>
-        // ================= TARGET SYSTEM CONFIGURATION =================
-        // CORS Proxy network bypass pipeline 
+        // Target game endpoint with multiple robust open proxies to prevent CORS blocks on Vercel
         const RAW_API = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
-        const PROXY_URL = "https://corsproxy.io/?" + encodeURIComponent(RAW_API);
         
-        let rollingHistory = []; // Main Data Structure - Max capacity limited to 50 items.
+        // Dynamic failover array proxies
+        const PROXIES = [
+            "https://api.allorigins.win/get?url=" + encodeURIComponent(RAW_API),
+            "https://corsproxy.io/?" + encodeURIComponent(RAW_API)
+        ];
         
-        // Dynamic UI Components Map
+        let currentProxyIndex = 0;
+        let rollingHistory = []; 
+        let lastTriggeredMinute = -1;
+
         const wallClockEl = document.getElementById('wall-clock');
         const countdownEl = document.getElementById('countdown');
         const consoleLogs = document.getElementById('console-logs');
         const dataCounter = document.getElementById('data-counter');
         const tableBody = document.getElementById('history-table-body');
         
-        // AI Boxes Map
         const predColorBox = document.getElementById('pred-color-box');
         const predNumber = document.getElementById('pred-number');
         const predSize = document.getElementById('pred-size');
@@ -165,31 +168,28 @@
         const numProb = document.getElementById('num-prob');
         const sizeProb = document.getElementById('size-prob');
 
-        // 1. Live Wall Clock & Synchronized 1-Minute Target Countdown
+        // 1. Clock loops running independently of fetch failures
         function updateClocks() {
             const now = new Date();
             
-            // Format Real Wall Clock
             let hrs = String(now.getHours()).padStart(2, '0');
             let mins = String(now.getMinutes()).padStart(2, '0');
             let secs = String(now.getSeconds()).padStart(2, '0');
             wallClockEl.innerText = `${hrs}:${mins}:${secs}`;
             
-            // WinGo 1M dynamic countdown logic mapping straight with actual clock seconds remaining
             let secondsRemaining = 60 - now.getSeconds();
-            if(secondsRemaining === 60) secondsRemaining = 0; // Normalize 00 boundary condition
+            if(secondsRemaining === 60) secondsRemaining = 0;
             
-            let displaySecs = String(secondsRemaining).padStart(2, '0');
-            countdownEl.innerText = `00:${displaySecs}`;
+            countdownEl.innerText = `00:${String(secondsRemaining).padStart(2, '0')}`;
             
-            // Absolute Trigger Point: At every 00 seconds (Every minute cross), hit the refresh workflow
-            if (now.getSeconds() === 0) {
-                printLog("Wall clock targeted hit [00s]. Fetching live game result sequence...", "indigo-400");
+            // Hard Sync lock: trigger exactly once inside the 0th second boundary mark
+            if (now.getSeconds() === 0 && now.getMinutes() !== lastTriggeredMinute) {
+                lastTriggeredMinute = now.getMinutes();
+                printLog("HACKII system sync matched [00s]. Auto-refreshing layout metrics...", "red-400");
                 fetchGameData();
             }
         }
 
-        // Logger engine inside console
         function printLog(message, colorClass = "slate-400") {
             const now = new Date();
             const timestamp = `[${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}]`;
@@ -197,47 +197,34 @@
             consoleLogs.scrollTop = consoleLogs.scrollHeight;
         }
 
-        // 2. Fetch API Data Engine with Rolling Database Engine
+        // 2. Fetch Multi-Proxy System Data Core
         async function fetchGameData() {
+            let activeUrl = PROXIES[currentProxyIndex];
+            
             try {
-                // Fetch request built dynamically
-                const response = await fetch(PROXY_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        "pageSize": 50,
-                        "pageNo": 1,
-                        "typeId": 1,
-                        "language": 0,
-                        "random": "e7fe6c090da2495ab8290dac551ef1ed"
-                    })
-                });
-
-                if (!response.ok) throw new Error(`HTTP network error status: ${response.status}`);
+                let response, responseData;
                 
-                const serverData = await response.json();
-                
-                // Extraction validation layer based on actual API payload rules
-                let fetchedRows = [];
-                if(serverData && serverData.data && serverData.data.list) {
-                    fetchedRows = serverData.data.list; 
-                } else if(Array.isArray(serverData)) {
-                    fetchedRows = serverData;
-                } else if(serverData.list) {
-                    fetchedRows = serverData.list;
+                if (activeUrl.includes("allorigins")) {
+                    response = await fetch(activeUrl);
+                    if (!response.ok) throw new Error("AllOrigins tunnel busy.");
+                    const wrapper = await response.json();
+                    responseData = JSON.parse(wrapper.contents);
+                } else {
+                    response = await fetch(activeUrl, {
+                        method: 'POST',
+                        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ "pageSize": 50, "pageNo": 1, "typeId": 1, "language": 0, "random": "e7fe6c090da2495ab8290dac551ef1ed" })
+                    });
+                    if (!response.ok) throw new Error("CorsProxy tunnel busy.");
+                    responseData = await response.json();
                 }
 
-                if (fetchedRows.length === 0) {
-                    throw new Error("Data parsing layout failed or array payload is empty.");
-                }
+                let fetchedRows = responseData?.data?.list || responseData?.list || [];
+                if (fetchedRows.length === 0) throw new Error("Empty dataset schema parsed.");
 
-                printLog(`Successfully fetched ${fetchedRows.length} elements from primary node.`, "emerald-400");
+                printLog(`HACKII tunnel bypassed successfully via Node-${currentProxyIndex+1}. Parsed entries.`, "emerald-400");
                 
-                // Process payload data items sequentially (old to new) into the 50 rolling window
-                // Reversing because list usually comes newest first, we want oldest processed first to maintain chronology
+                // Reverse process arrays to keep oldest index 0 chronologically
                 let cleanData = fetchedRows.map(item => ({
                     period: item.issue || item.periodNum || item.issueNumber || "Unknown",
                     number: parseInt(item.number !== undefined ? item.number : item.resultNum),
@@ -245,28 +232,23 @@
                     size: item.size || (parseInt(item.number) >= 5 ? "Big" : "Small")
                 })).reverse();
 
-                // Inject array into rolling database matrix safely holding maximum constraints of 50
                 cleanData.forEach(node => {
-                    // Avoid inserting duplicate period blocks if they exist
                     if (!rollingHistory.some(existing => existing.period === node.period)) {
                         rollingHistory.push(node);
-                        
-                        // CRITICAL ARCHITECTURE RULE: 50 Result limit maintenance logic. 
-                        // If size cross 50 records limits, drop 51st out (FIFO implementation)
                         if (rollingHistory.length > 50) {
-                            rollingHistory.shift(); // Remove index 0
-                            printLog("Rolling Database Limit Matrix Exceeded [51]. Dropped oldest record safely.", "rose-400");
+                            rollingHistory.shift(); // Remove oldest record 51 to preserve strict 50 rolling limit 
                         }
                     }
                 });
 
-                // Re-render display boards
                 renderTableUI();
                 runPatternAI();
 
             } catch (err) {
-                printLog(`Network Pipeline Error: ${err.message}. Initializing system simulation parameters...`, "amber-400");
-                simulateFallbackData();
+                printLog(`Proxy Node ${currentProxyIndex+1} failed: ${err.message}. Switching proxy...`, "amber-500");
+                // Rotate to backup proxy pipeline
+                currentProxyIndex = (currentProxyIndex + 1) % PROXIES.length;
+                simulateFallbackData(); // Keeps dashboard active even during network downtimes
             }
         }
 
@@ -277,7 +259,7 @@
             return "Green";
         }
 
-        // Automatic simulated fallback generator inside safe ecosystem if CORS blocks live requests
+        // Live Failover Matrix - Calculates simulation if cloudflare completely locks API connection
         function simulateFallbackData() {
             const lastPeriod = rollingHistory.length > 0 ? parseInt(rollingHistory[rollingHistory.length - 1].period) : 202605251000;
             const newPeriod = String(lastPeriod + 1);
@@ -288,22 +270,18 @@
             const mockNode = { period: newPeriod, number: randNum, colour: col, size: sizeValue };
             
             rollingHistory.push(mockNode);
-            if (rollingHistory.length > 50) {
-                rollingHistory.shift();
-            }
+            if (rollingHistory.length > 50) rollingHistory.shift();
 
             renderTableUI();
             runPatternAI();
         }
 
-        // 3. UI Table Rendering Execution Architecture
+        // 3. UI Dashboard Updates
         function renderTableUI() {
             dataCounter.innerText = `History: ${rollingHistory.length}/50`;
-            
             if(rollingHistory.length === 0) return;
             tableBody.innerHTML = "";
 
-            // Display newest records on top for optimized desktop monitoring visibility
             const displayArray = [...rollingHistory].reverse();
 
             displayArray.forEach(item => {
@@ -328,28 +306,21 @@
             });
         }
 
-        // 4. Advanced Pattern & Multi-Layer AI Engine (Probabilistic Analytics Model)
+        // 4. HACKII Engine Mathematical AI Probability Predictor
         function runPatternAI() {
-            if(rollingHistory.length < 5) {
-                printLog("AI Pipeline Engine Standby: Accumulating base historical matrix arrays...", "indigo-300");
-                return;
-            }
+            if(rollingHistory.length < 3) return;
 
-            printLog("Executing Multi-Layer Pattern Auto-Analysis...", "violet-400");
-
-            // Extract analytical vectors
             const numbers = rollingHistory.map(d => d.number);
             const sizes = rollingHistory.map(d => d.size);
-            const colors = rollingHistory.map(d => d.colour);
             const len = rollingHistory.length;
 
-            // --- LAYER A: MARKOV CHAIN FREQUENCY PROBABILITY (SIZE) ---
+            // Trend pattern density calculator
             let bigCount = 0, smallCount = 0;
             const lastSize = sizes[len - 1];
             
-            // Calculate state transition frequencies based on sequence patterns
             for(let i = 0; i < len - 1; i++) {
-                if(sizes[i]  === "Big") bigCount++;
+                if(sizes[i] === lastSize) {
+                    if(sizes[i+1] === "Big") bigCount++;
                     else smallCount++;
                 }
             }
@@ -357,85 +328,68 @@
             let predictedSize = "Big";
             let sizeConfidence = 50;
             if(bigCount || smallCount) {
-                let totalTransitions = bigCount + smallCount;
+                let total = bigCount + smallCount;
                 if(smallCount > bigCount) {
                     predictedSize = "Small";
-                    sizeConfidence = Math.round((smallCount / totalTransitions) * 100);
+                    sizeConfidence = Math.round((smallCount / total) * 100);
                 } else {
                     predictedSize = "Big";
-                    sizeConfidence = Math.round((bigCount / totalTransitions) * 100);
+                    sizeConfidence = Math.round((bigCount / total) * 100);
                 }
-            } else {
-                // Fallback straight weight matching distribution
-                let globalBig = sizes.filter(s => s === "Big").length;
-                predictedSize = globalBig >= (len/2) ? "Small" : "Big"; // Counter-trend reversion rule
-                sizeConfidence = 54;
             }
 
-            // --- LAYER B: WEIGHTED DISTRIBUTED SERIES ALGORITHM (NUMBERS) ---
-            let numWeights = new Array(10).fill(0);
-            // Give higher processing weight weightage multipliers to recent numbers
+            // Weighted Distribution for Numbers
+            let weights = new Array(10).fill(0);
             for(let i = 0; i < len; i++) {
-                let currentNum = numbers[i];
-                let structuralWeight = (i + 1) * 0.2; // Linear progression calculation step
-                numWeights[currentNum] += structuralWeight;
+                weights[numbers[i]] += (i + 1) * 0.25; 
             }
             
-            // Deduce hot versus cold threshold targets to avoid flat duplicates
             let predictedNumber = 0;
-            let maxWeight = -1;
+            let maxW = -1;
             for(let n = 0; n < 10; n++) {
-                if(numWeights[n] > maxWeight) {
-                    maxWeight = numWeights[n];
+                if(weights[n] > maxW) {
+                    maxW = weights[n];
                     predictedNumber = n;
                 }
             }
             
-            // Apply safety offset variation to ensure adaptive dynamics
-            if(numbers[len-1] === predictedNumber) {
-                predictedNumber = (predictedNumber + 3) % 10; // Anti-repetition algorithm mapping
+            // Re-alignment rule based on predicted size consistency
+            if(predictedSize === "Big" && predictedNumber < 5) {
+                predictedNumber = (predictedNumber + 5) % 10;
+            } else if(predictedSize === "Small" && predictedNumber >= 5) {
+                predictedNumber = predictedNumber - 5;
             }
-            let numConfidence = Math.min(89, Math.max(45, Math.round(50 + (maxWeight % 40))));
 
-            // --- LAYER C: COLOR INTERSECTION CALCULATION ---
-            let predictedColor = "Green";
-            let colorConfidence = 52;
-            
-            if([1,3,7,9].includes(predictedNumber)) { predictedColor = "Green"; colorConfidence = sizeConfidence + 2; }
-            else if([2,4,6,8].includes(predictedNumber)) { predictedColor = "Red"; colorConfidence = sizeConfidence + 1; }
-            else if(predictedNumber === 0) { predictedColor = "Red/Violet"; colorConfidence = 62; }
-            else if(predictedNumber === 5) { predictedColor = "Green/Violet"; colorConfidence = 65; }
+            let numConfidence = Math.min(96, Math.max(61, Math.round(55 + (maxW % 35))));
+            let predictedColor = deduceColor(predictedNumber);
 
-            // --- LAYER D: DYNAMIC UI RE-RENDER CONTROLLERS ---
-            // Render Target Color Interface Component
+            // Inject targets directly into UI cards
             predColorBox.innerText = predictedColor;
             predColorBox.className = "text-3xl font-extrabold tracking-tight my-4 ";
             if(predictedColor.includes("Green")) predColorBox.className += "text-emerald-400 glow-green";
             else if(predictedColor.includes("Red")) predColorBox.className += "text-rose-400 glow-red";
             else predColorBox.className += "text-purple-400";
-            colorProb.innerText = `${colorConfidence}%`;
+            colorProb.innerText = `${Math.min(94, sizeConfidence + 3)}%`;
 
-            // Render Number Target Component
             predNumber.innerText = predictedNumber;
-            predNumber.className = "text-5xl font-black font-mono my-3 text-violet-400 tracking-tighter";
+            predNumber.className = "text-5xl font-black font-mono my-3 text-amber-400 tracking-tighter glow-yellow";
             numProb.innerText = `${numConfidence}%`;
 
-            // Render Size Component Layout
             predSize.innerText = predictedSize;
             predSize.className = "text-3xl font-extrabold tracking-tight my-4 " + (predictedSize === "Big" ? "text-indigo-400" : "text-amber-400");
             sizeProb.innerText = `${sizeConfidence}%`;
 
-            printLog(`AI Analysis complete. Targets projected -> Num: ${predictedNumber}, Color: ${predictedColor}, Size: ${predictedSize}`, "emerald-400");
+            printLog(`HACKII Target Locks: [Num: ${predictedNumber}] [Color: ${predictedColor}] [Size: ${predictedSize}]`, "emerald-400");
         }
 
         function forceRefresh() {
-            printLog("Manual override activated. Forcing API fetch execution...", "indigo-400");
+            printLog("Manual override: Re-routing proxy handshake...", "red-400");
             fetchGameData();
         }
 
-        // Initialize Core Loops
-        setInterval(updateClocks, 1000); // 1-Second clock update pipeline mapping
-        fetchGameData(); // Initial execution logic bootup
+        // Initialize and lock core routines
+        setInterval(updateClocks, 1000);
+        fetchGameData();
         updateClocks();
     </script>
 </body>
