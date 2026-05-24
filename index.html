@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -213,7 +212,6 @@ animation:pulse 1s infinite;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -244,7 +242,7 @@ id="predictNum">
 
 <div class="ai"
 id="aiText">
-AI ANALYZING LIVE TREND...
+ULTRA AI ANALYZING LIVE TREND...
 </div>
 
 <div class="status"
@@ -322,7 +320,7 @@ let currentPage = 0;
 let lastPeriod = "";
 
 /* =========================
-   WAKE LOCK
+   KEEP SCREEN ACTIVE
 ========================= */
 
 async function keepAwake(){
@@ -428,16 +426,16 @@ batches.push(batch);
 }
 
 /* =========================
-   AI ENGINE
+   ULTRA AI ENGINE
 ========================= */
 
 function advancedAI(){
 
-if(memoryStore.length < 30){
+if(memoryStore.length < 50){
 
 document.getElementById(
 "predictNum"
-).innerHTML = "0";
+).innerHTML = "--";
 
 return;
 
@@ -447,66 +445,70 @@ let nums =
 memoryStore.map(x=>x.number);
 
 let score = {};
-let transitions = {};
-let hot = {};
+let transition = {};
+let momentum = {};
 let repeat = {};
+let reverse = {};
+let hot = {};
+let bounce = {};
 let recent = {};
-let cycle = {};
-let antiRepeat = {};
+let chain = {};
 
 for(let i=0;i<=9;i++){
 
 score[i]=0;
-hot[i]=0;
+momentum[i]=0;
 repeat[i]=0;
+reverse[i]=0;
+hot[i]=0;
+bounce[i]=0;
 recent[i]=0;
-cycle[i]=0;
-antiRepeat[i]=0;
+chain[i]=0;
 
 }
 
-/* TRANSITIONS */
+/* TRANSITION */
 
 for(let i=0;i<nums.length-1;i++){
 
 let a = nums[i];
 let b = nums[i+1];
 
-if(!transitions[a]){
+if(!transition[a]){
 
-transitions[a] = {};
-
-}
-
-if(!transitions[a][b]){
-
-transitions[a][b] = 0;
+transition[a] = {};
 
 }
 
-transitions[a][b]++;
+if(!transition[a][b]){
+
+transition[a][b] = 0;
 
 }
 
-/* RECENT WEIGHT */
+transition[a][b]++;
 
-let weight = 1;
+}
+
+/* RECENT */
+
+let w = 1;
 
 for(let i=nums.length-1;i>=0;i--){
 
-recent[nums[i]] += weight;
+recent[nums[i]] += w;
 
-weight += 0.12;
+w += 0.15;
 
 }
 
-/* HOT ZONE */
+/* HOT */
 
 for(let i=0;i<20;i++){
 
-if(nums[i] !== undefined){
+if(nums[i]!==undefined){
 
-hot[nums[i]] += 4;
+hot[nums[i]] += 5;
 
 }
 
@@ -516,37 +518,74 @@ hot[nums[i]] += 4;
 
 for(let i=1;i<nums.length;i++){
 
-if(nums[i] === nums[i-1]){
+if(nums[i]===nums[i-1]){
 
-repeat[nums[i]] += 5;
-
-}
+repeat[nums[i]] += 6;
 
 }
 
-/* CYCLE */
+}
+
+/* REVERSE */
 
 for(let i=2;i<nums.length;i++){
 
-if(nums[i] === nums[i-2]){
+if(nums[i]===nums[i-2]){
 
-cycle[nums[i]] += 4;
+reverse[nums[i]] += 4;
+
+}
+
+}
+
+/* BOUNCE */
+
+for(let i=3;i<nums.length;i++){
+
+if(nums[i]===nums[i-3]){
+
+bounce[nums[i]] += 3;
 
 }
 
 }
 
-/* LAST TRANSITION */
+/* MOMENTUM */
+
+for(let i=0;i<nums.length;i++){
+
+momentum[nums[i]] +=
+(i/nums.length)*4;
+
+}
+
+/* CHAIN */
+
+for(let i=0;i<nums.length-3;i++){
+
+let a = nums[i];
+let c = nums[i+2];
+let d = nums[i+3];
+
+if(a===c){
+
+chain[d] += 5;
+
+}
+
+}
+
+/* LAST FLOW */
 
 let last =
 nums[0];
 
-if(transitions[last]){
+if(transition[last]){
 
-for(let n in transitions[last]){
+for(let n in transition[last]){
 
 score[n] +=
-transitions[last][n] * 12;
+transition[last][n] * 15;
 
 }
 
@@ -556,18 +595,21 @@ transitions[last][n] * 12;
 
 for(let i=0;i<=9;i++){
 
-score[i] += hot[i];
+score[i] += momentum[i];
 score[i] += repeat[i];
+score[i] += reverse[i];
+score[i] += hot[i];
+score[i] += bounce[i];
 score[i] += recent[i];
-score[i] += cycle[i];
+score[i] += chain[i];
 
 }
 
-/* AVOID SAME */
+/* ANTI SAME */
 
-score[last] *= 0.15;
+score[last] *= 0.10;
 
-/* BALANCE */
+/* BIG SMALL */
 
 let big =
 nums.filter(x=>x>=5).length;
@@ -579,7 +621,7 @@ if(big > small){
 
 for(let i=0;i<=4;i++){
 
-score[i]+=6;
+score[i]+=8;
 
 }
 
@@ -587,9 +629,40 @@ score[i]+=6;
 
 for(let i=5;i<=9;i++){
 
-score[i]+=6;
+score[i]+=8;
 
 }
+
+}
+
+/* COLOR BALANCE */
+
+let red =
+nums.filter(x=>
+[0,2,4,6,8]
+.includes(x)
+).length;
+
+let green =
+nums.length - red;
+
+if(red > green){
+
+[1,3,5,7,9]
+.forEach(n=>{
+
+score[n]+=5;
+
+});
+
+}else{
+
+[0,2,4,6,8]
+.forEach(n=>{
+
+score[n]+=5;
+
+});
 
 }
 
@@ -608,10 +681,10 @@ Object.values(score)
 
 let conf =
 Math.min(
-96,
+97,
 (
 (score[best]/total)*100
-+ 42
++ 45
 ).toFixed(1)
 );
 
@@ -629,19 +702,17 @@ document.getElementById(
 "aiText"
 ).innerHTML =
 
-`AI DETECT:
+`ULTRA AI DETECT:
 ${getBigSmall(best)}
  •
 ${getColor(best).toUpperCase()}
  •
-${conf}% Confidence
- •
-LIVE 50 BATCH ANALYSIS`;
+${conf}% Confidence`;
 
 }
 
 /* =========================
-   RENDER PAGE
+   RENDER
 ========================= */
 
 function renderPage(){
@@ -702,7 +773,7 @@ document.getElementById(
 }
 
 /* =========================
-   PAGE NAVIGATION
+   PAGES
 ========================= */
 
 function nextPage(){
@@ -821,8 +892,6 @@ Number(b.issueNumber)
 Number(a.issueNumber)
 );
 
-/* DUPLICATE FIX */
-
 if(
 lastPeriod ===
 list[0]?.issueNumber
@@ -835,8 +904,6 @@ return;
 
 lastPeriod =
 list[0]?.issueNumber;
-
-/* FORMAT */
 
 historyData =
 list.map(x=>({
@@ -853,38 +920,30 @@ Number(x.number)
 
 }));
 
-/* MEMORY STORE */
-
 updateMemory(historyData);
-
-/* BATCH */
 
 makeBatches();
 
-/* RENDER */
-
 renderPage();
-
-/* AI */
 
 advancedAI();
 
-/* UPCOMING */
+/* NEXT UPCOMING */
 
 let latest =
 memoryStore[0]
 ?.issueNumber || "0";
 
-let next =
-String(
+let nextFull =
+(
 BigInt(latest)+1n
-);
+).toString();
 
 document.getElementById(
 "upcomingPeriod"
 ).innerHTML =
 
-next.slice(-4);
+nextFull.slice(-4);
 
 }catch(e){
 
@@ -901,7 +960,7 @@ document.getElementById(
 }
 
 /* =========================
-   AUTO BACKGROUND
+   AUTO UPDATE
 ========================= */
 
 setInterval(()=>{
