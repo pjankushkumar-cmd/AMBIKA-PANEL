@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HACKII A</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>HACKII AI</title>
 
 <style>
 
@@ -19,7 +21,7 @@ font-family:Arial,sans-serif;
 body{
 background:#16153d;
 padding:10px;
-color:#fff;
+color:white;
 overflow-x:hidden;
 }
 
@@ -69,6 +71,10 @@ font-weight:bold;
 line-height:1;
 margin-top:10px;
 transition:.3s;
+min-height:130px;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 .redText{
@@ -229,7 +235,7 @@ id="upcomingPeriod">
 
 <div class="predict"
 id="predictNum">
---
+0
 </div>
 
 <div class="ai"
@@ -308,12 +314,9 @@ const API =
 let memoryStore = [];
 let batches = [];
 let currentPage = 0;
-let currentIssue = "";
 let fetching = false;
 
-/* =========================
-   HELPERS
-========================= */
+/* HELPERS */
 
 function getBigSmall(n){
 
@@ -341,9 +344,7 @@ return [0,2,4,6,8]
 
 }
 
-/* =========================
-   MEMORY
-========================= */
+/* MEMORY */
 
 function updateMemory(data){
 
@@ -374,9 +375,7 @@ memoryStore.slice(0,500);
 
 }
 
-/* =========================
-   BATCHES
-========================= */
+/* BATCHES */
 
 function makeBatches(){
 
@@ -397,27 +396,35 @@ batches.push(batch);
 
 }
 
-/* =========================
-   AI ENGINE
-========================= */
+/* AI ENGINE */
 
 function advancedAI(){
 
-if(memoryStore.length < 30){
+if(memoryStore.length < 10){
+
+document.getElementById(
+"predictNum"
+).innerHTML = "?";
 
 return;
 
 }
 
 let nums =
-memoryStore.map(x=>x.number);
+memoryStore.map(x=>
+Number(x.number)
+);
+
+nums = nums.filter(x=>
+!isNaN(x)
+);
 
 let score = {};
 let transitions = {};
 
 for(let i=0;i<=9;i++){
 
-score[i]=0;
+score[i]=1;
 
 }
 
@@ -431,47 +438,17 @@ score[n]+=2;
 
 /* RECENT */
 
-let weight = 1;
+let weight = 20;
 
 for(let i=0;i<nums.length;i++){
 
 score[nums[i]] += weight;
 
-weight += 0.08;
+weight -= 0.3;
 
-}
+if(weight < 1){
 
-/* HOT */
-
-for(let i=0;i<20;i++){
-
-if(nums[i]!==undefined){
-
-score[nums[i]] += 5;
-
-}
-
-}
-
-/* REPEAT */
-
-for(let i=1;i<nums.length;i++){
-
-if(nums[i]===nums[i-1]){
-
-score[nums[i]] += 6;
-
-}
-
-}
-
-/* GAP */
-
-for(let i=2;i<nums.length;i++){
-
-if(nums[i]===nums[i-2]){
-
-score[nums[i]] += 4;
+weight = 1;
 
 }
 
@@ -481,29 +458,28 @@ score[nums[i]] += 4;
 
 for(let i=0;i<nums.length-1;i++){
 
-let a = nums[i];
-let b = nums[i+1];
+let current = nums[i];
+let next = nums[i+1];
 
-if(!transitions[a]){
+if(!transitions[current]){
 
-transitions[a] = {};
-
-}
-
-if(!transitions[a][b]){
-
-transitions[a][b] = 0;
+transitions[current] = {};
 
 }
 
-transitions[a][b]++;
+if(!transitions[current][next]){
+
+transitions[current][next] = 0;
+
+}
+
+transitions[current][next]++;
 
 }
 
 /* LAST FLOW */
 
-let last =
-nums[0];
+let last = nums[0];
 
 if(transitions[last]){
 
@@ -516,27 +492,37 @@ transitions[last][n] * 15;
 
 }
 
-/* BIG SMALL */
+/* REPEAT */
 
-let big =
-nums.filter(x=>x>=5).length;
+for(let i=1;i<nums.length;i++){
 
-let small =
-nums.filter(x=>x<=4).length;
+if(nums[i]===nums[i-1]){
 
-if(big > small){
-
-for(let i=0;i<=4;i++){
-
-score[i]+=10;
+score[nums[i]] += 8;
 
 }
 
-}else{
+}
 
-for(let i=5;i<=9;i++){
+/* GAP */
 
-score[i]+=10;
+for(let i=2;i<nums.length;i++){
+
+if(nums[i]===nums[i-2]){
+
+score[nums[i]] += 5;
+
+}
+
+}
+
+/* HOT */
+
+for(let i=0;i<15;i++){
+
+if(nums[i]!==undefined){
+
+score[nums[i]] += 5;
 
 }
 
@@ -561,6 +547,12 @@ Number(sorted[1][0]);
 let third =
 Number(sorted[2][0]);
 
+if(isNaN(best)){
+
+best = 0;
+
+}
+
 let total =
 Object.values(score)
 .reduce((a,b)=>a+b,0);
@@ -576,6 +568,8 @@ let p2 =
 let p3 =
 ((score[third]/total)*100)
 .toFixed(1);
+
+/* UI */
 
 document.getElementById(
 "predictNum"
@@ -605,9 +599,7 @@ ${getColor(best).toUpperCase()}
 
 }
 
-/* =========================
-   RENDER
-========================= */
+/* RENDER */
 
 function renderPage(){
 
@@ -657,9 +649,7 @@ document.getElementById(
 
 }
 
-/* =========================
-   PAGES
-========================= */
+/* PAGES */
 
 function nextPage(){
 
@@ -690,9 +680,7 @@ renderPage();
 
 }
 
-/* =========================
-   CLOCK
-========================= */
+/* CLOCK */
 
 function startClock(){
 
@@ -737,9 +725,7 @@ remain + "s";
 
 }
 
-/* =========================
-   FETCH
-========================= */
+/* FETCH */
 
 async function fetchData(){
 
@@ -776,23 +762,21 @@ Number(b.issueNumber)
 Number(a.issueNumber)
 );
 
-/* CURRENT ISSUE */
+/* CURRENT */
 
 let latestIssue =
 String(list[0].issueNumber)
 .trim();
 
-/* SAVE */
-
-currentIssue = latestIssue;
-
-/* UPCOMING */
+/* NEXT */
 
 let nextIssue =
 (
 BigInt(latestIssue)
 + 1n
 ).toString();
+
+/* UPCOMING FIX */
 
 document.getElementById(
 "upcomingPeriod"
@@ -828,6 +812,7 @@ advancedAI();
 document.getElementById(
 "status"
 ).innerHTML =
+
 "LIVE SERVER CONNECTED";
 
 fetching = false;
@@ -841,15 +826,14 @@ fetching = false;
 document.getElementById(
 "status"
 ).innerHTML =
+
 "SERVER RECONNECTING...";
 
 }
 
 }
 
-/* =========================
-   AUTO LOOP
-========================= */
+/* AUTO */
 
 async function autoLoop(){
 
@@ -861,7 +845,7 @@ setTimeout(autoLoop,2000);
 
 autoLoop();
 
-/* TAB ACTIVE */
+/* TAB */
 
 document.addEventListener(
 "visibilitychange",
