@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>HACKII AI</title>
 
@@ -35,14 +33,14 @@ background:#221f67;
 border-radius:24px;
 padding:16px;
 margin-bottom:15px;
-box-shadow:0 0 20px rgba(0,0,0,.3);
+box-shadow:0 0 25px rgba(0,0,0,.35);
 }
 
 .title{
 font-size:34px;
 font-weight:bold;
 text-align:center;
-color:#d3b0ff;
+color:#d5b3ff;
 margin-bottom:20px;
 }
 
@@ -59,16 +57,16 @@ color:#eee;
 }
 
 .period{
-font-size:50px;
+font-size:54px;
 font-weight:bold;
 margin-top:10px;
 }
 
 .predict{
-font-size:130px;
+font-size:135px;
 font-weight:bold;
-margin-top:10px;
 line-height:1;
+margin-top:10px;
 transition:.3s;
 }
 
@@ -108,7 +106,7 @@ margin-top:10px;
 }
 
 .count{
-font-size:80px;
+font-size:85px;
 font-weight:bold;
 color:#ffd54f;
 margin-top:10px;
@@ -158,7 +156,6 @@ text-align:center;
 display:flex;
 justify-content:center;
 align-items:center;
-gap:8px;
 }
 
 .dot{
@@ -205,7 +202,6 @@ font-weight:bold;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -226,7 +222,7 @@ UPCOMING PERIOD
 
 <div class="period"
 id="upcomingPeriod">
-0000
+----
 </div>
 
 <div class="predict"
@@ -236,7 +232,7 @@ id="predictNum">
 
 <div class="ai"
 id="aiText">
-ULTRA AI ANALYZING...
+ULTRA AI ANALYZING LIVE TREND...
 </div>
 
 <div class="status"
@@ -310,7 +306,9 @@ const API =
 let memoryStore = [];
 let batches = [];
 let currentPage = 0;
-let lastIssue = "";
+let currentIssue = "";
+let nextIssue = "";
+let fetching = false;
 
 /* =========================
    HELPERS
@@ -350,7 +348,7 @@ function updateMemory(data){
 
 data.forEach(item=>{
 
-const exists =
+let exists =
 memoryStore.find(x=>
 x.issueNumber ===
 item.issueNumber
@@ -358,21 +356,17 @@ item.issueNumber
 
 if(!exists){
 
-memoryStore.push(item);
+memoryStore.unshift(item);
 
 }
 
 });
-
-/* SORT NEWEST FIRST */
 
 memoryStore.sort((a,b)=>
 Number(b.issueNumber)
 -
 Number(a.issueNumber)
 );
-
-/* ONLY 500 */
 
 memoryStore =
 memoryStore.slice(0,500);
@@ -408,11 +402,7 @@ batches.push(batch);
 
 function advancedAI(){
 
-if(memoryStore.length < 20){
-
-document.getElementById(
-"predictNum"
-).innerHTML = "--";
+if(memoryStore.length < 30){
 
 return;
 
@@ -429,15 +419,12 @@ score[i] = 0;
 
 }
 
-/* RECENT TREND */
-
-let weight = 1;
+/* TREND */
 
 for(let i=0;i<nums.length;i++){
 
-score[nums[i]] += weight;
-
-weight += 0.15;
+score[nums[i]] +=
+(500-i)/20;
 
 }
 
@@ -447,13 +434,13 @@ for(let i=1;i<nums.length;i++){
 
 if(nums[i]===nums[i-1]){
 
-score[nums[i]] += 6;
+score[nums[i]] += 7;
 
 }
 
 }
 
-/* GAP TREND */
+/* GAP */
 
 for(let i=2;i<nums.length;i++){
 
@@ -467,11 +454,37 @@ score[nums[i]] += 4;
 
 /* HOT */
 
-for(let i=0;i<15;i++){
+for(let i=0;i<20;i++){
 
 if(nums[i]!==undefined){
 
-score[nums[i]] += 5;
+score[nums[i]] += 6;
+
+}
+
+}
+
+/* BIG SMALL BALANCE */
+
+let big =
+nums.filter(x=>x>=5).length;
+
+let small =
+nums.filter(x=>x<=4).length;
+
+if(big > small){
+
+for(let i=0;i<=4;i++){
+
+score[i]+=10;
+
+}
+
+}else{
+
+for(let i=5;i<=9;i++){
+
+score[i]+=10;
 
 }
 
@@ -482,9 +495,9 @@ score[nums[i]] += 5;
 let last =
 nums[0];
 
-score[last] *= 0.15;
+score[last] *= 0.10;
 
-/* BEST */
+/* FINAL */
 
 let sorted =
 Object.entries(score)
@@ -493,18 +506,16 @@ Object.entries(score)
 let best =
 Number(sorted[0][0]);
 
-/* CONF */
-
 let total =
 Object.values(score)
 .reduce((a,b)=>a+b,0);
 
 let conf =
 Math.min(
-97,
+98,
 (
 (score[best]/total)*100
-+ 45
++ 50
 ).toFixed(1)
 );
 
@@ -554,27 +565,19 @@ box.innerHTML += `
 <div class="row">
 
 <div class="periodText">
-
 ${item.shortPeriod}
-
 </div>
 
 <div class="num ${getClass(item.number)}">
-
 ${item.number}
-
 </div>
 
 <div class="bs">
-
 ${getBigSmall(item.number)}
-
 </div>
 
 <div class="colorWrap">
-
 <div class="dot ${getColor(item.number)}"></div>
-
 </div>
 
 </div>
@@ -652,8 +655,6 @@ document.getElementById(
 
 `${h}:${m}:${s}`;
 
-/* REAL COUNTDOWN */
-
 let remain =
 60 - now.getSeconds();
 
@@ -669,9 +670,9 @@ document.getElementById(
 
 remain + "s";
 
-/* EXACT FETCH */
+/* EXACT UPDATE */
 
-if(now.getSeconds() === 1){
+if(remain <= 2){
 
 fetchData();
 
@@ -682,10 +683,14 @@ fetchData();
 }
 
 /* =========================
-   FETCH API
+   FETCH
 ========================= */
 
 async function fetchData(){
+
+if(fetching) return;
+
+fetching = true;
 
 try{
 
@@ -695,7 +700,7 @@ document.getElementById(
 
 "LIVE SERVER CONNECTED";
 
-const res =
+const response =
 await fetch(
 API + "?t=" + Date.now(),
 {
@@ -704,18 +709,17 @@ cache:"no-store"
 );
 
 const json =
-await res.json();
+await response.json();
 
 let list =
 json?.data?.list || [];
 
 if(!list.length){
 
+fetching = false;
 return;
 
 }
-
-/* SORT */
 
 list.sort((a,b)=>
 Number(b.issueNumber)
@@ -723,23 +727,29 @@ Number(b.issueNumber)
 Number(a.issueNumber)
 );
 
-/* CURRENT */
-
-let latestIssue =
+let latest =
 String(list[0].issueNumber);
 
-/* IF SAME */
+/* REAL NEXT PERIOD */
 
-if(latestIssue === lastIssue){
+nextIssue =
+(
+BigInt(latest) + 1n
+).toString();
 
-advancedAI();
-return;
+/* ALWAYS UPDATE */
 
-}
+document.getElementById(
+"upcomingPeriod"
+).innerHTML =
 
-lastIssue = latestIssue;
+nextIssue.slice(-4);
 
-/* FORMAT */
+/* ONLY NEW RESULT */
+
+if(latest !== currentIssue){
+
+currentIssue = latest;
 
 let formatted =
 list.map(x=>({
@@ -756,45 +766,21 @@ Number(x.number)
 
 }));
 
-/* SAVE */
-
 updateMemory(formatted);
-
-/* CREATE */
 
 makeBatches();
 
-/* RENDER */
-
 renderPage();
-
-/* AI */
 
 advancedAI();
 
-/* =========================
-   REAL UPCOMING
-========================= */
+}
 
-/*
-IF CURRENT = 1103
-UPCOMING = 1104
-*/
-
-let nextPeriod =
-(
-BigInt(latestIssue) + 1n
-).toString();
-
-document.getElementById(
-"upcomingPeriod"
-).innerHTML =
-
-nextPeriod.slice(-4);
+fetching = false;
 
 }catch(e){
 
-console.log(e);
+fetching = false;
 
 document.getElementById(
 "status"
@@ -807,14 +793,14 @@ document.getElementById(
 }
 
 /* =========================
-   AUTO UPDATE
+   BACKGROUND UPDATE
 ========================= */
 
 setInterval(()=>{
 
 fetchData();
 
-},5000);
+},3000);
 
 /* TAB RETURN */
 
@@ -828,8 +814,7 @@ fetchData();
 
 }
 
-}
-);
+});
 
 /* NETWORK */
 
@@ -839,12 +824,9 @@ window.addEventListener(
 
 fetchData();
 
-}
-);
+});
 
-/* =========================
-   START
-========================= */
+/* START */
 
 startClock();
 
