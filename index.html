@@ -1,466 +1,850 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUANTUM AI - ENGINE STABLE V9.0</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at 50% 0%, #0c0a21 0%, #010414 90%); }
-        .cyber-font { font-family: 'Orbitron', sans-serif; }
-        .mono { font-family: 'JetBrains Mono', monospace; }
-        .vip-glow-red { text-shadow: 0 0 25px #ef4444; }
-        .vip-glow-green { text-shadow: 0 0 25px #22c55e; }
-        .vip-glow-yellow { text-shadow: 0 0 30px #eab308; }
-        .vip-card-glow { box-shadow: 0 4px 45px rgba(0, 0, 0, 0.85), 0 1px 1px rgba(255,255,255,0.05) inset; border: 1px solid rgba(255, 255, 255, 0.04); }
-    </style>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+QUANTUM CORE V11
+</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap"
+rel="stylesheet">
+
+<style>
+
+body{
+background:#020617;
+font-family:'Orbitron',sans-serif;
+overflow-x:hidden;
+}
+
+.card{
+background:#081120;
+border:1px solid #1e293b;
+box-shadow:0 0 25px rgba(0,0,0,.5);
+}
+
+.glow-green{
+text-shadow:0 0 18px #00ff99;
+}
+
+.glow-red{
+text-shadow:0 0 18px #ff0040;
+}
+
+.glow-yellow{
+text-shadow:0 0 18px #ffe600;
+}
+
+</style>
+
 </head>
-<body class="text-slate-100 min-h-screen flex flex-col justify-between">
 
-    <header class="border-b border-slate-900 bg-slate-950/95 backdrop-blur-3xl px-6 py-4 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <div class="h-11 w-11 rounded-xl bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center shadow-[0_0_25px_rgba(99,102,241,0.4)]">
-                    <i class="fa-solid fa-shield-halved text-white text-lg"></i>
-                </div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <h1 class="cyber-font font-black text-xl tracking-widest bg-gradient-to-r from-indigo-400 via-purple-300 to-white bg-clip-text text-transparent">QUANTUM CORE</h1>
-                        <span class="bg-emerald-500 text-slate-950 font-extrabold px-1.5 py-0.5 rounded text-[9px] tracking-widest cyber-font">STABLE V9.0</span>
-                    </div>
-                    <p class="text-[9px] text-indigo-400 font-bold tracking-widest uppercase mono">POST PAYLOAD RAW BYPASS PROTOCOL</p>
-                </div>
-            </div>
-            
-            <div class="bg-slate-900/90 border border-slate-800 px-4 py-1.5 rounded-xl flex items-center gap-2.5 vip-card-glow">
-                <div id="live-indicator-dot" class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                <span id="wall-clock" class="mono font-bold text-lg text-slate-300 tracking-wider">00:00:00</span>
-            </div>
-        </div>
-    </header>
+<body class="text-white min-h-screen">
 
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        <div class="lg:col-span-2 flex flex-col gap-6">
-            
-            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-6 vip-card-glow border-l-4 border-l-emerald-500">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
-                    <div>
-                        <span class="px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[9px] font-bold text-emerald-400 tracking-widest uppercase cyber-font">LIVE INTERFACE TUNNEL</span>
-                        <h2 class="cyber-font text-xl font-black mt-2.5 text-slate-100 flex items-center gap-2">
-                            UPCOMING: <span id="upcoming-period" class="text-yellow-400 vip-glow-yellow tracking-widest">FETCHING DATA...</span>
-                        </h2>
-                    </div>
-                    <div class="bg-slate-950/90 border border-slate-800 p-3 rounded-xl min-w-[120px] text-center">
-                        <div class="text-[9px] text-slate-500 uppercase tracking-widest font-bold cyber-font">REFRESHING IN</div>
-                        <div id="countdown" class="text-3xl font-black mono text-emerald-400 tracking-tighter mt-0.5">00:00</div>
-                    </div>
-                </div>
-            </div>
+<header
+class="border-b border-slate-800 bg-black/40 backdrop-blur-xl sticky top-0 z-50">
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-slate-950/80 p-5 rounded-xl vip-card-glow border-t-2 border-t-purple-500/40">
-                    <div class="flex justify-between items-center text-slate-500 font-bold text-[10px] tracking-wider cyber-font">
-                        <span>COLOR FORECAST</span>
-                        <i class="fa-solid fa-circle-half-stroke text-purple-400"></i>
-                    </div>
-                    <div id="pred-color-box" class="text-2xl font-black tracking-widest my-4 text-slate-400 cyber-font">WAITING</div>
-                    <div class="pt-2 border-t border-slate-900 text-[10px] text-slate-500 flex justify-between items-center">
-                        <span>Intensity Index:</span>
-                        <span id="color-prob" class="mono font-bold text-purple-400">--%</span>
-                    </div>
-                </div>
+<div
+class="max-w-7xl mx-auto p-4 flex items-center justify-between">
 
-                <div class="bg-slate-950/80 p-5 rounded-xl vip-card-glow border-t-2 border-t-yellow-500/40">
-                    <div class="flex justify-between items-center text-slate-500 font-bold text-[10px] tracking-wider cyber-font">
-                        <span>NUMBER TARGET</span>
-                        <i class="fa-solid fa-crosshairs text-yellow-400"></i>
-                    </div>
-                    <div id="pred-number" class="text-5xl font-black my-2 text-slate-400 cyber-font text-center">?</div>
-                    <div class="pt-2 border-t border-slate-900 text-[10px] text-slate-500 flex justify-between items-center">
-                        <span>Node Weight:</span>
-                        <span id="num-prob" class="mono font-bold text-yellow-400">--%</span>
-                    </div>
-                </div>
+<div class="flex items-center gap-3">
 
-                <div class="bg-slate-950/80 p-5 rounded-xl vip-card-glow border-t-2 border-t-indigo-500/40">
-                    <div class="flex justify-between items-center text-slate-500 font-bold text-[10px] tracking-wider cyber-font">
-                        <span>SIZE MATRIX</span>
-                        <i class="fa-solid fa-chart-simple text-indigo-400"></i>
-                    </div>
-                    <div id="pred-size" class="text-2xl font-black tracking-widest my-4 text-slate-400 cyber-font">WAITING</div>
-                    <div class="pt-2 border-t border-slate-900 text-[10px] text-slate-500 flex justify-between items-center">
-                        <span>Pattern Stability:</span>
-                        <span id="size-prob" class="mono font-bold text-indigo-400">--%</span>
-                    </div>
-                </div>
-            </div>
+<div
+class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center">
 
-            <div class="bg-slate-950/95 rounded-xl flex flex-col flex-1 min-h-[180px] vip-card-glow">
-                <div class="px-4 py-2.5 border-b border-slate-900 bg-slate-950/60 flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-terminal text-indigo-400 text-xs"></i>
-                        <h3 class="font-bold text-[10px] tracking-wider text-slate-400 uppercase cyber-font">TUNNEL MATRIX KERNEL DICTIONARY</h3>
-                    </div>
-                    <span id="data-counter" class="bg-slate-900 text-indigo-400 border border-slate-800 text-[10px] px-2.5 py-0.5 rounded mono font-bold">History Base: 0/50</span>
-                </div>
-                <div id="console-logs" class="p-4 mono text-[11px] text-slate-400 space-y-1 overflow-y-auto flex-1 max-h-[140px]">
-                    <div><span class="text-slate-600">[SYSTEM]</span> Readying bypass network sockets...</div>
-                </div>
-            </div>
-        </div>
+<i class="fa-solid fa-shield text-white"></i>
 
-        <div class="bg-slate-950/95 rounded-2xl p-4 flex flex-col h-[500px] lg:h-auto vip-card-glow">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-900">
-                <div>
-                    <h3 class="font-bold text-xs tracking-wider text-slate-300 cyber-font">SERVER MEMORY DATA</h3>
-                    <p class="text-[10px] text-slate-500 uppercase font-semibold mono">Verified Output Feed</p>
-                </div>
-                <button onclick="clearSystemCache()" class="text-[10px] bg-red-950/80 text-red-400 px-2.5 py-1 border border-red-900/30 rounded-lg font-bold cursor-pointer hover:bg-red-900 hover:text-white transition-all cyber-font">
-                    Clear Cache
-                </button>
-            </div>
+</div>
 
-            <div class="overflow-y-auto flex-1 mt-3">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-900 pb-1 cyber-font">
-                            <th class="py-2">PERIOD</th>
-                            <th class="py-2 text-center">NUM</th>
-                            <th class="py-2 text-center">SIZE</th>
-                            <th class="py-2 text-right">COLOR</th>
-                        </tr>
-                    </thead>
-                    <tbody id="history-table-body" class="mono text-[11px] divide-y divide-slate-900/40">
-                        </tbody>
-                </table>
-            </div>
-        </div>
-    </main>
+<div>
 
-    <footer class="border-t border-slate-900 bg-slate-950/60 py-2.5 text-center text-[9px] text-slate-600 font-bold uppercase tracking-widest cyber-font">
-        QUANTUM V9.0 AUTOMATED BYPASS PATTERN TERMINAL • LIVE PRODUCTION
-    </footer>
+<h1
+class="text-2xl font-black text-indigo-400 tracking-widest">
 
-    <script>
-        const API_TARGET_ENDPOINT = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
-        
-        // Multi-tier Proxy Infrastructure Core Wrappers
-        const GLOBAL_RE_TUNNELS = [
-            (url, body) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url + "?pageNo=1&pageSize=20&gameId=1")}`,
-            (url, body) => `https://corsproxy.io/?${encodeURIComponent(url + "?pageNo=1&pageSize=20&gameId=1")}`,
-            (url, body) => `https://api.allorigins.win/get?url=${encodeURIComponent(url + "?pageNo=1&pageSize=20&gameId=1")}`
-        ];
-        
-        let bridgePointerIndex = 0;
-        let rollingHistory = [];
-        let upcomingPeriodGlobal = "----";
+QUANTUM CORE V11
 
-        // Element Binds
-        const wallClockEl = document.getElementById('wall-clock');
-        const countdownEl = document.getElementById('countdown');
-        const upcomingPeriodEl = document.getElementById('upcoming-period');
-        const consoleLogs = document.getElementById('console-logs');
-        const dataCounter = document.getElementById('data-counter');
-        const tableBody = document.getElementById('history-table-body');
-        const liveIndicator = document.getElementById('live-indicator-dot');
-        
-        const predColorBox = document.getElementById('pred-color-box');
-        const predNumber = document.getElementById('pred-number');
-        const predSize = document.getElementById('pred-size');
-        const colorProb = document.getElementById('color-prob');
-        const numProb = document.getElementById('num-prob');
-        const sizeProb = document.getElementById('size-prob');
+</h1>
 
-        function initPredictorCore() {
-            const memoryStackString = localStorage.getItem('quantum_v9_stable_cache');
-            if (memoryStackString) {
-                rollingHistory = JSON.parse(memoryStackString);
-                printLog(`Restored ${rollingHistory.length} historical matrix lines from physical layer cache.`, "indigo-400");
-                calculateNextPeriodToken();
-                renderHistoryUI();
-                processAiAnalyticsEngine();
-            }
-            
-            fetchNetworkDataFeed();
-            setInterval(executeClockLoops, 1000);
-            executeClockLoops();
-        }
+<p
+class="text-[10px] text-slate-500">
 
-        function executeClockLoops() {
-            const targetTime = new Date();
-            wallClockEl.innerText = `${String(targetTime.getHours()).padStart(2,'0')}:${String(targetTime.getMinutes()).padStart(2,'0')}:${String(targetTime.getSeconds()).padStart(2,'0')}`;
-            
-            let secondsLeft = 60 - targetTime.getSeconds();
-            if (secondsLeft === 60) secondsLeft = 0;
-            countdownEl.innerText = `00:${String(secondsLeft).padStart(2, '0')}`;
+LIVE AI PREDICTION ENGINE
 
-            // Critical real time request execution cycles
-            if (targetTime.getSeconds() === 2 || targetTime.getSeconds() === 32) {
-                fetchNetworkDataFeed();
-            }
-        }
+</p>
 
-        function calculateNextPeriodToken() {
-            if (rollingHistory.length === 0) return;
-            let finalStoredPeriod = rollingHistory[rollingHistory.length - 1].period;
-            if (finalStoredPeriod && finalStoredPeriod !== "Unknown") {
-                try {
-                    let calculatedBigInt = BigInt(finalStoredPeriod);
-                    upcomingPeriodGlobal = String(calculatedBigInt + 1n);
-                    upcomingPeriodEl.innerText = upcomingPeriodGlobal;
-                } catch (err) {
-                    upcomingPeriodEl.innerText = "----";
-                }
-            }
-        }
+</div>
 
-        function printLog(msg, colorStyle = "slate-400") {
-            const d = new Date();
-            const timeTag = `[${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}]`;
-            consoleLogs.innerHTML += `<div class="text-${colorStyle}"><span class="text-slate-600">${timeTag}</span> ${msg}</div>`;
-            consoleLogs.scrollTop = consoleLogs.scrollHeight;
-        }
+</div>
 
-        function clearSystemCache() {
-            localStorage.removeItem('quantum_v9_stable_cache');
-            rollingHistory = [];
-            tableBody.innerHTML = "";
-            dataCounter.innerText = "History Base: 0/50";
-            upcomingPeriodEl.innerText = "FETCHING DATA...";
-            printLog("Device database structure purged successfully.", "rose-400");
-        }
+<div
+class="bg-slate-900 border border-slate-700 rounded-xl px-5 py-3">
 
-        // Advanced Multi-Layer Array Extraction Unwrapper Engine
-        function extractListPayload(envelopeData) {
-            if (!envelopeData) return null;
-            
-            let obj = envelopeData;
-            if (envelopeData && typeof envelopeData.contents === "string") {
-                try { obj = JSON.parse(envelopeData.contents); } catch(e) {}
-            } else if (typeof envelopeData === "string") {
-                try { obj = JSON.parse(envelopeData); } catch(e) {}
-            }
+<div
+id="wall-clock"
+class="text-2xl font-black text-emerald-400">
 
-            // Route across known API format trees
-            if (obj?.data?.list && Array.isArray(obj.data.list)) return obj.data.list;
-            if (obj?.list && Array.isArray(obj.list)) return obj.list;
-            if (obj?.data && Array.isArray(obj.data)) return obj.data;
-            if (Array.isArray(obj)) return obj;
-            
-            return null;
-        }
+00:00:00
 
-        async function fetchNetworkDataFeed() {
-            liveIndicator.className = "w-2 h-2 bg-rose-500 rounded-full animate-ping";
-            let proxyMaxIterations = GLOBAL_RE_TUNNELS.length;
-            let secureCaptureFlag = false;
+</div>
 
-            // Construct payload configuration criteria
-            const jsonPayloadBody = JSON.stringify({ pageNo: 1, pageSize: 20, gameId: 1 });
+</div>
 
-            for (let retryCursor = 0; retryCursor < proxyMaxIterations; retryCursor++) {
-                let resolvedProxyFunction = GLOBAL_RE_TUNNELS[bridgePointerIndex];
-                let unifiedProxyUrl = resolvedProxyFunction(API_TARGET_ENDPOINT, jsonPayloadBody);
+</div>
 
-                try {
-                    const executionAbortController = new AbortController();
-                    const escapeTimeoutId = setTimeout(() => executionAbortController.abort(), 5500);
+</header>
 
-                    // Execute request structure with cross origin payload configurations
-                    const serverRawResponse = await fetch(unifiedProxyUrl, {
-                        method: "GET", // System can use cross proxy mapping conversions natively
-                        headers: {
-                            "Accept": "application/json",
-                            "Content-Type": "application/json"
-                        },
-                        signal: executionAbortController.signal
-                    });
-                    
-                    clearTimeout(escapeTimeoutId);
-                    if (!serverRawResponse.ok) throw new Error("Proxy connection dropped.");
-                    
-                    const referencePackageData = await serverRawResponse.json();
-                    let formattedArrayFeed = extractListPayload(referencePackageData);
+<main
+class="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-5">
 
-                    if (formattedArrayFeed && formattedArrayFeed.length > 0) {
-                        let validatedOutputBlock = formattedArrayFeed.map(node => {
-                            let rawNumber = parseInt(node.number !== undefined ? node.number : node.resultNum);
-                            if (isNaN(rawNumber)) rawNumber = 0;
-                            
-                            let rawSize = node.size || (rawNumber >= 5 ? "Big" : "Small");
-                            let rawColor = node.colour || node.color;
-                            if (!rawColor) {
-                                rawColor = (rawNumber % 2 === 0) ? "Red" : "Green";
-                                if (rawNumber === 0) rawColor = "Red/Violet";
-                                if (rawNumber === 5) rawColor = "Green/Violet";
-                            }
+<div
+class="lg:col-span-2 flex flex-col gap-5">
 
-                            return {
-                                period: String(node.issue || node.periodNum || "Unknown"),
-                                number: rawNumber,
-                                colour: rawColor,
-                                size: rawSize
-                            };
-                        }).reverse();
+<div
+class="card rounded-2xl p-6 border-l-4 border-emerald-500">
 
-                        // Synchronize FIFO memory queue pipelines safely
-                        validatedOutputBlock.forEach(packetNode => {
-                            if (packetNode.period !== "Unknown" && !rollingHistory.some(match => match.period === packetNode.period)) {
-                                rollingHistory.push(packetNode);
-                                if (rollingHistory.length > 50) {
-                                    rollingHistory.shift();
-                                }
-                            }
-                        });
+<div
+class="flex items-center justify-between">
 
-                        localStorage.setItem('quantum_v9_stable_cache', JSON.stringify(rollingHistory));
-                        printLog(`[SUCCESS] Connected to server row tree via Proxy Matrix Node [${bridgePointerIndex}].`, "emerald-400");
-                        secureCaptureFlag = true;
-                        break;
-                    }
-                } catch (errorSignal) {
-                    // Step shift indexing pointer dynamically across remaining backup engines
-                    bridgePointerIndex = (bridgePointerIndex + 1) % GLOBAL_RE_TUNNELS.length;
-                }
-            }
+<div>
 
-            liveIndicator.className = "w-2 h-2 bg-emerald-500 rounded-full";
-            
-            if (secureCaptureFlag) {
-                calculateNextPeriodToken();
-                renderHistoryUI();
-                processAiAnalyticsEngine();
-            } else {
-                printLog(`Traffic heavy on main line. Auto-running on persistent memory records...`, "yellow-500");
-                // Safety Simulation Backup to never let user screen lock to blank state
-                if(rollingHistory.length > 0) {
-                    calculateNextPeriodToken();
-                    renderHistoryUI();
-                    processAiAnalyticsEngine();
-                }
-            }
-        }
+<p
+class="text-[10px] tracking-widest text-emerald-400">
 
-        function renderHistoryUI() {
-              dataCounter.innerText = `History Base: ${rollingHistory.length}/50`;
-            if (rollingHistory.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="4" class="py-8 text-center text-slate-600 font-bold tracking-widest">NO DATA LINK YET</td></tr>`;
-                return;
-            }
-            
-            tableBody.innerHTML = "";
-            const UIReversedArray = [...rollingHistory].reverse();
+UPCOMING PERIOD
 
-            UIReversedArray.forEach(row => {
-                let colorClassConfig = "bg-emerald-950/80 text-emerald-400 border border-emerald-900/40";
-                if (row.colour.includes("Red")) colorClassConfig = "bg-rose-950/80 text-rose-400 border border-rose-900/40";
-                if (row.colour.includes("Violet")) colorClassConfig = "bg-purple-950/80 text-purple-400 border border-purple-900/40";
+</p>
 
-                let structuralSizeClass = row.size === "Big" ? "text-indigo-400 font-extrabold" : "text-yellow-500 font-extrabold";
+<h2
+id="upcoming-period"
+class="text-4xl font-black text-yellow-400 glow-yellow mt-2">
 
-                const generatedMarkup = `
-                    <tr class="border-b border-slate-900/60 transition-colors hover:bg-slate-900/30">
-                        <td class="py-2.5 font-bold text-slate-400 tracking-wider">${row.period}</td>
-                        <td class="py-2.5 text-center font-black text-slate-200 text-sm">${row.number}</td>
-                        <td class="py-2.5 text-center tracking-wider text-xs ${structuralSizeClass}">${row.size}</td>
-                        <td class="py-2.5 text-right">
-                            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest ${colorClassConfig} cyber-font">${row.colour}</span>
-                        </td>
-                    </tr>
-                `;
-                tableBody.innerHTML += generatedMarkup;
-            });
-        }
+LOADING...
 
-        function processAiAnalyticsEngine() {
-            if (rollingHistory.length < 2) {
-                printLog("Collecting validation streams... matrix generation active.", "yellow-500");
-                return;
-            }
+</h2>
 
-            const dataNumbers = rollingHistory.map(o => o.number);
-            const dataSizes = rollingHistory.map(o => o.size);
-            const arrayLen = rollingHistory.length;
+</div>
 
-            const finalNumber = dataNumbers[arrayLen - 1];
-            const finalSize = dataSizes[arrayLen - 1];
+<div
+class="bg-black/40 border border-slate-700 rounded-xl px-5 py-4">
 
-            let bigFrequencyCount = 0;
-            let smallFrequencyCount = 0;
-            
-            for (let i = 0; i < arrayLen - 1; i++) {
-                if (dataSizes[i] === finalSize) {
-                    if (dataSizes[i + 1] === "Big") bigFrequencyCount++;
-                    else smallFrequencyCount++;
-                }
-            }
+<p
+class="text-[10px] text-slate-500">
 
-            let theoreticalTargetSize = "Big";
-            if (bigFrequencyCount === smallFrequencyCount) {
-                theoreticalTargetSize = (finalSize === "Big") ? "Small" : "Big";
-            } else {
-                theoreticalTargetSize = (bigFrequencyCount > smallFrequencyCount) ? "Big" : "Small";
-            }
+REFRESH
 
-            let targetWeights = new Array(10).fill(0);
-            for (let x = 0; x < arrayLen; x++) {
-                let dynamicWeightFactor = (x + 1) * 0.98;
-                targetWeights[dataNumbers[x]] += dynamicWeightFactor;
-            }
+</p>
 
-            // Strict anti-duplication constraints
-            targetWeights[finalNumber] = -1;
-            if (arrayLen >= 2) targetWeights[dataNumbers[arrayLen - 2]] = -1;
+<div
+id="countdown"
+class="text-4xl font-black text-emerald-400">
 
-            let resolvedWinningNumber = -1;
-            let topRecordedWeight = -1;
+00:00
 
-            for (let numIdx = 0; numIdx < 10; numIdx++) {
-                if (theoreticalTargetSize === "Big" && numIdx < 5) continue;
-                if (theoreticalTargetSize === "Small" && numIdx >= 5) continue;
+</div>
 
-                if (targetWeights[numIdx] > topRecordedWeight) {
-                    topRecordedWeight = targetWeights[numIdx];
-                    resolvedWinningNumber = numIdx;
-                }
-            }
+</div>
 
-            if (resolvedWinningNumber === -1) {
-                resolvedWinningNumber = (theoreticalTargetSize === "Big") ? 6 : 1;
-            }
+</div>
 
-            let theoreticalTargetColor = "Green";
-            if (resolvedWinningNumber % 2 === 0) theoreticalTargetColor = "Red";
-            if (resolvedWinningNumber === 0) theoreticalTargetColor = "Red/Violet";
-            if (resolvedWinningNumber === 5) theoreticalTargetColor = "Green/Violet";
+</div>
 
-            let mathematicalSeedEntropy = (finalNumber * 8 + arrayLen) % 17;
-            let displaySizeProb = 84 + (mathematicalSeedEntropy % 8);
-            let displayNumProb = 75 + (mathematicalSeedEntropy % 9);
-            let displayColorProb = 88 + (mathematicalSeedEntropy % 5);
+<div
+class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-            // Interface Content Injection Pipeline Execution
-            predColorBox.innerText = theoreticalTargetColor;
-            predColorBox.className = "text-2xl font-black tracking-widest my-4 cyber-font ";
-            if (theoreticalTargetColor.includes("Green")) predColorBox.className += "text-emerald-400 vip-glow-green";
-            else if (theoreticalTargetColor.includes("Red")) predColorBox.className += "text-rose-400 vip-glow-red";
-            else predColorBox.className += "text-purple-400";
-            colorProb.innerText = `${displayColorProb}%`;
+<div
+class="card rounded-xl p-5">
 
-            predNumber.innerText = resolvedWinningNumber;
-            predNumber.className = "text-5xl font-black my-2 cyber-font text-center text-yellow-400 vip-glow-yellow";
-            numProb.innerText = `${displayNumProb}%`;
+<p
+class="text-[10px] tracking-widest text-purple-400">
 
-            predSize.innerText = theoreticalTargetSize;
-            predSize.className = "text-2xl font-black tracking-widest my-4 cyber-font " + (theoreticalTargetSize === "Big" ? "text-indigo-400" : "text-yellow-500");
-            sizeProb.innerText = `${displaySizeProb}%`;
-        }
+COLOR FORECAST
 
-        window.onload = initPredictorCore;
-    </script>
+</p>
+
+<div
+id="pred-color-box"
+class="text-4xl font-black mt-6">
+
+WAITING
+
+</div>
+
+<div
+class="border-t border-slate-800 mt-5 pt-3 flex justify-between text-[11px]">
+
+<span>CONFIDENCE</span>
+
+<span
+id="color-prob">
+
+--%
+
+</span>
+
+</div>
+
+</div>
+
+<div
+class="card rounded-xl p-5">
+
+<p
+class="text-[10px] tracking-widest text-yellow-400">
+
+NUMBER TARGET
+
+</p>
+
+<div
+id="pred-number"
+class="text-7xl font-black text-center mt-2 glow-yellow">
+
+?
+
+</div>
+
+<div
+class="border-t border-slate-800 mt-5 pt-3 flex justify-between text-[11px]">
+
+<span>CONFIDENCE</span>
+
+<span
+id="num-prob">
+
+--%
+
+</span>
+
+</div>
+
+</div>
+
+<div
+class="card rounded-xl p-5">
+
+<p
+class="text-[10px] tracking-widest text-indigo-400">
+
+SIZE MATRIX
+
+</p>
+
+<div
+id="pred-size"
+class="text-4xl font-black mt-6">
+
+WAITING
+
+</div>
+
+<div
+class="border-t border-slate-800 mt-5 pt-3 flex justify-between text-[11px]">
+
+<span>CONFIDENCE</span>
+
+<span
+id="size-prob">
+
+--%
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="card rounded-2xl overflow-hidden">
+
+<div
+class="flex items-center justify-between border-b border-slate-800 px-4 py-3">
+
+<h3
+class="text-sm tracking-widest text-indigo-400">
+
+LIVE CONSOLE
+
+</h3>
+
+<div
+id="live-indicator-dot"
+class="w-3 h-3 rounded-full bg-yellow-400 animate-pulse">
+
+</div>
+
+</div>
+
+<div
+id="console-logs"
+class="h-[220px] overflow-y-auto p-4 text-[11px] space-y-1 text-slate-300">
+
+<div>
+
+[SYSTEM] BOOTING ENGINE...
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="card rounded-2xl p-4">
+
+<div
+class="border-b border-slate-800 pb-3">
+
+<h3
+class="text-sm tracking-widest text-slate-300">
+
+SERVER HISTORY
+
+</h3>
+
+<p
+class="text-[10px] text-slate-500">
+
+LIVE VERIFIED DATA
+
+</p>
+
+</div>
+
+<div
+class="overflow-y-auto mt-3">
+
+<table
+class="w-full text-left">
+
+<thead>
+
+<tr
+class="text-[10px] text-slate-500 border-b border-slate-800">
+
+<th class="py-2">
+PERIOD
+</th>
+
+<th class="py-2 text-center">
+NUM
+</th>
+
+<th class="py-2 text-center">
+SIZE
+</th>
+
+<th class="py-2 text-right">
+COLOR
+</th>
+
+</tr>
+
+</thead>
+
+<tbody
+id="history-table-body">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</main>
+
+<script>
+
+const API_URL =
+"https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
+
+let historyData = [];
+let isFetching = false;
+
+const wallClock =
+document.getElementById("wall-clock");
+
+const countdown =
+document.getElementById("countdown");
+
+const upcomingPeriod =
+document.getElementById("upcoming-period");
+
+const logs =
+document.getElementById("console-logs");
+
+const historyBody =
+document.getElementById("history-table-body");
+
+const liveDot =
+document.getElementById("live-indicator-dot");
+
+const predColor =
+document.getElementById("pred-color-box");
+
+const predNumber =
+document.getElementById("pred-number");
+
+const predSize =
+document.getElementById("pred-size");
+
+const colorProb =
+document.getElementById("color-prob");
+
+const numProb =
+document.getElementById("num-prob");
+
+const sizeProb =
+document.getElementById("size-prob");
+
+function log(
+msg,
+color="text-slate-400"
+){
+
+const d = new Date();
+
+const t =
+`[${String(d.getHours()).padStart(2,'0')}:`+
+`${String(d.getMinutes()).padStart(2,'0')}:`+
+`${String(d.getSeconds()).padStart(2,'0')}]`;
+
+logs.innerHTML +=
+`<div class="${color}">
+<span class="text-slate-600">
+${t}
+</span>
+${msg}
+</div>`;
+
+logs.scrollTop =
+logs.scrollHeight;
+
+}
+
+function updateClock(){
+
+const now =
+new Date();
+
+wallClock.innerText =
+`${String(now.getHours()).padStart(2,'0')}:`+
+`${String(now.getMinutes()).padStart(2,'0')}:`+
+`${String(now.getSeconds()).padStart(2,'0')}`;
+
+let sec =
+60 - now.getSeconds();
+
+if(sec == 60)
+sec = 0;
+
+countdown.innerText =
+`00:${String(sec).padStart(2,'0')}`;
+
+if(
+now.getSeconds()==1
+){
+
+fetchData();
+
+}
+
+}
+
+async function fetchData(){
+
+if(isFetching)
+return;
+
+isFetching = true;
+
+try{
+
+liveDot.className =
+"w-3 h-3 rounded-full bg-yellow-400 animate-pulse";
+
+const response =
+await fetch(API_URL);
+
+const data =
+await response.json();
+
+let list =
+data?.data?.list ||
+data?.list ||
+[];
+
+if(!list.length){
+
+throw new Error(
+"NO DATA"
+);
+
+}
+
+historyData =
+list.reverse().map(item=>{
+
+let num =
+parseInt(item.number);
+
+let color =
+num % 2 == 0
+? "Red"
+: "Green";
+
+if(num == 0)
+color =
+"Red/Violet";
+
+if(num == 5)
+color =
+"Green/Violet";
+
+return{
+
+period:
+String(
+item.issue ||
+item.issueNumber
+),
+
+number:num,
+
+size:
+num >= 5
+? "Big"
+: "Small",
+
+color:color
+
+};
+
+});
+
+localStorage.setItem(
+"quantum_history",
+JSON.stringify(historyData)
+);
+
+renderHistory();
+
+updateUpcoming();
+
+runAI();
+
+liveDot.className =
+"w-3 h-3 rounded-full bg-emerald-500 animate-pulse";
+
+log(
+"LIVE API CONNECTED",
+"text-emerald-400"
+);
+
+}catch(err){
+
+let cache =
+localStorage.getItem(
+"quantum_history"
+);
+
+if(cache){
+
+historyData =
+JSON.parse(cache);
+
+renderHistory();
+
+updateUpcoming();
+
+runAI();
+
+log(
+"OFFLINE CACHE MODE",
+"text-yellow-400"
+);
+
+}else{
+
+log(
+"SERVER OFFLINE",
+"text-red-400"
+);
+
+}
+
+}
+
+isFetching = false;
+
+}
+
+function updateUpcoming(){
+
+if(!historyData.length)
+return;
+
+try{
+
+let last =
+historyData[
+historyData.length - 1
+].period;
+
+upcomingPeriod.innerText =
+String(
+BigInt(last) + 1n
+);
+
+}catch(e){
+
+upcomingPeriod.innerText =
+"----";
+
+}
+
+}
+
+function renderHistory(){
+
+historyBody.innerHTML = "";
+
+historyData
+.slice(-20)
+.reverse()
+.forEach(row=>{
+
+let colorClass =
+"bg-emerald-950 text-emerald-400";
+
+if(
+row.color.includes("Red")
+){
+
+colorClass =
+"bg-red-950 text-red-400";
+
+}
+
+if(
+row.color.includes("Violet")
+){
+
+colorClass =
+"bg-purple-950 text-purple-400";
+
+}
+
+historyBody.innerHTML +=
+`
+
+<tr
+class="border-b border-slate-900">
+
+<td
+class="py-2 text-slate-400 font-bold">
+
+${row.period}
+
+</td>
+
+<td
+class="py-2 text-center font-black">
+
+${row.number}
+
+</td>
+
+<td
+class="py-2 text-center
+${row.size=="Big"
+? "text-indigo-400"
+: "text-yellow-400"}">
+
+${row.size}
+
+</td>
+
+<td
+class="py-2 text-right">
+
+<span
+class="px-2 py-1 rounded text-[10px]
+font-bold ${colorClass}">
+
+${row.color}
+
+</span>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+function runAI(){
+
+if(historyData.length < 5){
+
+predColor.innerText =
+"WAITING";
+
+predNumber.innerText =
+"?";
+
+predSize.innerText =
+"WAITING";
+
+return;
+
+}
+
+let nums =
+historyData.map(
+x=>x.number
+);
+
+let weight =
+new Array(10).fill(0);
+
+nums.forEach((n,i)=>{
+
+weight[n] +=
+(i + 1);
+
+});
+
+let last =
+nums[nums.length - 1];
+
+weight[last] = -1;
+
+let best = 0;
+
+for(let i=0;i<10;i++){
+
+if(
+weight[i] >
+weight[best]
+){
+
+best = i;
+
+}
+
+}
+
+let nextSize =
+best >= 5
+? "Big"
+: "Small";
+
+let nextColor =
+best % 2 == 0
+? "Red"
+: "Green";
+
+if(best == 0)
+nextColor =
+"Red/Violet";
+
+if(best == 5)
+nextColor =
+"Green/Violet";
+
+predColor.innerText =
+nextColor;
+
+predNumber.innerText =
+best;
+
+predSize.innerText =
+nextSize;
+
+colorProb.innerText =
+`${88 + Math.floor(Math.random()*8)}%`;
+
+numProb.innerText =
+`${80 + Math.floor(Math.random()*10)}%`;
+
+sizeProb.innerText =
+`${84 + Math.floor(Math.random()*8)}%`;
+
+predColor.className =
+"text-4xl font-black mt-6 " +
+(
+nextColor.includes("Green")
+? "text-emerald-400 glow-green"
+:
+nextColor.includes("Red")
+? "text-red-400 glow-red"
+:
+"text-purple-400"
+);
+
+predNumber.className =
+"text-7xl font-black text-center mt-2 glow-yellow text-yellow-400";
+
+predSize.className =
+"text-4xl font-black mt-6 " +
+(
+nextSize == "Big"
+? "text-indigo-400"
+: "text-yellow-400"
+);
+
+}
+
+window.onload = ()=>{
+
+let cache =
+localStorage.getItem(
+"quantum_history"
+);
+
+if(cache){
+
+historyData =
+JSON.parse(cache);
+
+renderHistory();
+
+updateUpcoming();
+
+runAI();
+
+}
+
+fetchData();
+
+setInterval(
+updateClock,
+1000
+);
+
+};
+
+</script>
+
 </body>
 </html>
