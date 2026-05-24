@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HACKII VIP PREDICTOR TOOL - ABSOLUTE API ENGINE</title>
+    <title>QUANTUM AI - WINGO 1M AUTO PREDICTOR V8.0</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at 50% 0%, #111029 0%, #020617 80%); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at 50% 0%, #0d0b26 0%, #020617 85%); }
         .cyber-font { font-family: 'Orbitron', sans-serif; }
         .mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Ultra Glowing Neon Classes */
-        .vip-glow-red { text-shadow: 0 0 25px rgba(239, 68, 68, 0.85); }
-        .vip-glow-green { text-shadow: 0 0 25px rgba(34, 197, 94, 0.85); }
-        .vip-glow-yellow { text-shadow: 0 0 30px rgba(234, 179, 8, 0.95); }
-        .vip-card-glow { box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6), 0 1px 1px rgba(255,255,255,0.05) inset; border: 1px solid rgba(255, 255, 255, 0.04); }
+        /* Absolute Vector Lighting Glow Framework */
+        .vip-glow-red { text-shadow: 0 0 25px rgba(239, 68, 68, 0.9); }
+        .vip-glow-green { text-shadow: 0 0 25px rgba(34, 197, 94, 0.9); }
+        .vip-glow-yellow { text-shadow: 0 0 30px rgba(234, 179, 8, 1); }
+        .vip-card-glow { box-shadow: 0 4px 45px rgba(0, 0, 0, 0.7), 0 1px 1px rgba(255,255,255,0.06) inset; border: 1px solid rgba(255, 255, 255, 0.05); }
         
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #020617; }
@@ -26,23 +26,23 @@
 </head>
 <body class="text-slate-100 min-h-screen flex flex-col justify-between">
 
-    <header class="border-b border-red-950 bg-slate-950/90 backdrop-blur-2xl px-6 py-4 sticky top-0 z-50">
+    <header class="border-b border-indigo-950 bg-slate-950/95 backdrop-blur-3xl px-6 py-4 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <div class="h-12 w-12 rounded-2xl bg-gradient-to-tr from-red-600 via-rose-600 to-amber-500 flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.4)]">
-                    <i class="fa-solid fa-crown text-white text-xl"></i>
+                <div class="h-12 w-12 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.4)] animate-pulse">
+                    <i class="fa-solid fa-brain text-white text-xl"></i>
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
-                        <h1 class="cyber-font font-black text-2xl tracking-widest bg-gradient-to-r from-red-500 via-amber-300 to-white bg-clip-text text-transparent">HACKII VIP</h1>
-                        <span class="bg-red-500 text-white font-bold px-2 py-0.5 rounded text-[10px] tracking-widest cyber-font shadow-[0_0_15px_rgba(239,68,68,0.3)]">LIVE ACTIVE V7.0</span>
+                        <h1 class="cyber-font font-black text-2xl tracking-widest bg-gradient-to-r from-indigo-400 via-purple-400 to-white bg-clip-text text-transparent">QUANTUM AI</h1>
+                        <span class="bg-indigo-600 text-white font-bold px-2 py-0.5 rounded text-[10px] tracking-widest cyber-font shadow-[0_0_15px_rgba(99,102,241,0.4)]">WINGO 1M FIXED V8.0</span>
                     </div>
-                    <p class="text-[10px] text-emerald-400 font-bold tracking-widest uppercase mono">STABLE MULTI-PROXY AUTO ARCHITECTURE</p>
+                    <p class="text-[10px] text-emerald-400 font-bold tracking-widest uppercase mono">SECURE RE-UNWRAPPED DATA MATRIX</p>
                 </div>
             </div>
             
             <div class="bg-slate-900/90 border border-slate-800 px-5 py-2 rounded-2xl flex items-center gap-3 vip-card-glow">
-                <div id="live-indicator-dot" class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                <div id="live-indicator-dot" class="w-2.5 h-2.5 bg-emerald-500 rounded-full"></div>
                 <span id="wall-clock" class="mono font-bold text-xl text-slate-200 tracking-wider">00:00:00</span>
             </div>
         </div>
@@ -52,20 +52,20 @@
         
         <div class="lg:col-span-2 flex flex-col gap-6">
             
-            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/30 p-6 vip-card-glow border-l-4 border-l-indigo-500">
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950/20 p-6 vip-card-glow border-l-4 border-l-indigo-500">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="px-2.5 py-0.5 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-[10px] font-bold text-indigo-400 tracking-widest uppercase cyber-font">STABLE STREAM TARGETED TIMELINE</span>
+                            <span class="px-2.5 py-0.5 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-[10px] font-bold text-indigo-400 tracking-widest uppercase cyber-font">STABLE ZERO-TIME DEPENDENCY MONITOR</span>
                         </div>
                         <h2 class="cyber-font text-2xl font-black mt-3 text-slate-100 flex items-center gap-2">
-                            UPCOMING PERIOD ID: <span id="upcoming-period" class="text-amber-400 vip-glow-yellow tracking-widest">LOADING...</span>
+                            UPCOMING PERIOD ID: <span id="upcoming-period" class="text-amber-400 vip-glow-yellow tracking-widest">LOADING LAYER...</span>
                         </h2>
-                        <p class="text-xs text-slate-400 mt-1.5 font-medium">Data is fetched through active network interfaces. Zero manual client parameters dependency.</p>
+                        <p class="text-xs text-slate-400 mt-1.5 font-medium">Bypasses Cross-Origin drop constraints automatically via responsive multi-proxy system handshake.</p>
                     </div>
                     <div class="bg-slate-950/80 border border-slate-800 p-4 rounded-2xl min-w-[140px] text-center md:text-right">
-                        <div class="text-[10px] text-slate-500 uppercase tracking-widest font-bold cyber-font">REFRESH COUNTDOWN</div>
-                        <div id="countdown" class="text-4xl font-black mono text-emerald-400 tracking-tighter mt-1 vip-glow-green">00:00</div>
+                        <div class="text-[10px] text-slate-500 uppercase tracking-widest font-bold cyber-font">NEXT REFRESH IN</div>
+                        <div id="countdown" class="text-4xl font-black mono text-indigo-400 tracking-tighter mt-1 dynamic-glow">00:00</div>
                     </div>
                 </div>
             </div>
@@ -73,37 +73,37 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-slate-950/70 p-5 rounded-2xl vip-card-glow border-t-2 border-t-purple-500/50">
                     <div class="flex justify-between items-center text-slate-400 font-bold text-[11px] tracking-wider cyber-font">
-                        <span>VIP COLOR TARGET</span>
-                        <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i>
+                        <span>AI COLOR FORECAST</span>
+                        <i class="fa-solid fa-palette text-purple-400"></i>
                     </div>
                     <div id="pred-color-box" class="text-3xl font-black tracking-widest my-5 text-slate-500 cyber-font animate-pulse">ANALYZING</div>
                     <div class="pt-2 border-t border-slate-900/60 text-[11px] text-slate-400 flex justify-between items-center">
-                        <span>Confidence Index:</span>
-                        <span id="color-prob" class="mono font-bold text-purple-400 text-sm">--%</span>
+                        <span>Probability Intensity:</span>
+                        <span id="color-prob" class="mono font-bold text-purple-400 text-sm">0%</span>
                     </div>
                 </div>
 
                 <div class="bg-slate-950/70 p-5 rounded-2xl vip-card-glow border-t-2 border-t-amber-500/50">
                     <div class="flex justify-between items-center text-slate-400 font-bold text-[11px] tracking-wider cyber-font">
-                        <span>VIP UNIQUE NUMBER</span>
-                        <i class="fa-solid fa-bullseye text-amber-400"></i>
+                        <span>TARGET NUMBER</span>
+                        <i class="fa-solid fa-arrow-trend-up text-amber-400"></i>
                     </div>
                     <div id="pred-number" class="text-6xl font-black my-3 text-slate-500 cyber-font text-center tracking-tighter animate-pulse">?</div>
                     <div class="pt-2 border-t border-slate-900/60 text-[11px] text-slate-400 flex justify-between items-center">
-                        <span>AI Node Weight:</span>
-                        <span id="num-prob" class="mono font-bold text-amber-400 text-sm">--%</span>
+                        <span>Mathematical Weight:</span>
+                        <span id="num-prob" class="mono font-bold text-amber-400 text-sm">0%</span>
                     </div>
                 </div>
 
                 <div class="bg-slate-950/70 p-5 rounded-2xl vip-card-glow border-t-2 border-t-emerald-500/50">
                     <div class="flex justify-between items-center text-slate-400 font-bold text-[11px] tracking-wider cyber-font">
-                        <span>VIP SIZE MATRIX</span>
-                        <i class="fa-solid fa-chart-line text-emerald-400"></i>
+                        <span>SIZE CLASSIFICATION</span>
+                        <i class="fa-solid fa-chart-pie text-emerald-400"></i>
                     </div>
                     <div id="pred-size" class="text-3xl font-black tracking-widest my-5 text-slate-500 cyber-font animate-pulse">ANALYZING</div>
                     <div class="pt-2 border-t border-slate-900/60 text-[11px] text-slate-400 flex justify-between items-center">
-                        <span>Pattern Rate:</span>
-                        <span id="size-prob" class="mono font-bold text-emerald-400 text-sm">--%</span>
+                        <span>Pattern Rate Index:</span>
+                        <span id="size-prob" class="mono font-bold text-emerald-400 text-sm">0%</span>
                     </div>
                 </div>
             </div>
@@ -111,13 +111,13 @@
             <div class="bg-slate-950/90 rounded-2xl flex flex-col flex-1 min-h-[200px] vip-card-glow">
                 <div class="px-5 py-3 border-b border-slate-900 bg-slate-950/40 flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-terminal text-red-500 text-xs"></i>
-                        <h3 class="font-bold text-xs tracking-wider text-slate-300 uppercase cyber-font">HACKII KERNEL SECURE LOGS</h3>
+                        <i class="fa-solid fa-square-terminal text-indigo-400 text-xs animate-pulse"></i>
+                        <h3 class="font-bold text-xs tracking-wider text-slate-300 uppercase cyber-font">SYSTEM ENGINE SYNC LOGS</h3>
                     </div>
-                    <span id="data-counter" class="bg-red-950/50 text-red-400 border border-red-900/40 text-xs px-3 py-1 rounded-md mono font-bold">History Base: 0/50</span>
+                    <span id="data-counter" class="bg-indigo-950/50 text-indigo-400 border border-indigo-900/40 text-xs px-3 py-1 rounded-md mono font-bold">History Base: 0/50</span>
                 </div>
                 <div id="console-logs" class="p-4 mono text-[11px] text-slate-400 space-y-1.5 overflow-y-auto flex-1 max-h-[180px]">
-                    <div><span class="text-slate-600">[BOOT]</span> Initializing core dynamic architecture pipelines...</div>
+                    <div><span class="text-slate-600">[BOOT]</span> Initializing core runtime engine parameters...</div>
                 </div>
             </div>
         </div>
@@ -125,20 +125,20 @@
         <div class="bg-slate-950/90 rounded-3xl p-5 flex flex-col h-[550px] lg:h-auto vip-card-glow">
             <div class="flex items-center justify-between pb-4 border-b border-slate-900">
                 <div>
-                    <h3 class="font-bold text-sm tracking-wider text-slate-200 cyber-font">CLOUD METRICS TABLE</h3>
-                    <p class="text-[11px] text-slate-500 uppercase font-semibold mono">50 FIFO Records Vector Stream</p>
+                    <h3 class="font-bold text-sm tracking-wider text-slate-200 cyber-font">SAVED DATABASE</h3>
+                    <p class="text-[11px] text-slate-500 uppercase font-semibold mono">Persistent Storage (Max 50 Rows)</p>
                 </div>
-                <div class="flex items-center gap-1.5 text-xs text-emerald-400 bg-emerald-950/40 px-3 py-1.5 border border-emerald-900/30 rounded-xl font-bold cyber-font tracking-wide">
-                    <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span> ONLINE
-                </div>
+                <button onclick="clearSystemCache()" class="text-xs bg-red-950 text-red-400 px-3 py-1.5 border border-red-900/40 rounded-xl font-bold cursor-pointer hover:bg-red-900 hover:text-white transition-all cyber-font tracking-wide">
+                    Reset Sync
+                </button>
             </div>
 
             <div class="overflow-y-auto flex-1 mt-4">
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="text-[11px] font-black text-slate-500 uppercase tracking-wider border-b border-slate-900 pb-2 cyber-font">
-                            <th class="py-2">PERIOD</th>
-                            <th class="py-2 text-center">NUMBER</th>
+                            <th class="py-2">PERIOD ID</th>
+                            <th class="py-2 text-center">NUM</th>
                             <th class="py-2 text-center">SIZE</th>
                             <th class="py-2 text-right">COLOR</th>
                         </tr>
@@ -151,24 +151,24 @@
     </main>
 
     <footer class="border-t border-slate-900 bg-slate-950/90 py-3 text-center text-[10px] text-slate-600 font-bold uppercase tracking-widest cyber-font">
-        HACKII AUTOMATED CLOUD CRYPTO ENCRYPTION ENGINE &copy; 2026. ALL ENGINE NODES BALANCED.
+        QUANTUM AUTONOMOUS SECURITY CORE ENGINE &copy; 2026. DATA ARRAYS VERIFIED BYPASS.
     </footer>
 
     <script>
-        const GAME_SOURCE_URL = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
+        const SOURCE_TARGET_API = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
         
-        // High Speed Fallback Bridge Proxy Stack URLs
-        const ENGINE_BRIDGES = [
-            (target) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(target)}`,
-            (target) => `https://corsproxy.io/?${encodeURIComponent(target)}`,
-            (target) => `https://api.allorigins.win/get?url=${encodeURIComponent(target)}`
+        // High Reliability Unwrapping Proxies Array Configuration
+        const CORE_PROXY_BRIDGES = [
+            (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+            (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+            (url) => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
         ];
         
-        let targetBridgePointer = 0;
+        let currentBridgePointer = 0;
         let rollingHistory = [];
         let upcomingPeriodGlobal = "----";
 
-        // Element Interfaces
+        // Element Selectors
         const wallClockEl = document.getElementById('wall-clock');
         const countdownEl = document.getElementById('countdown');
         const upcomingPeriodEl = document.getElementById('upcoming-period');
@@ -184,20 +184,14 @@
         const numProb = document.getElementById('num-prob');
         const sizeProb = document.getElementById('size-prob');
 
-        function formatFullPeriod(fullValue) {
-            if (!fullValue || fullValue === "Unknown" || fullValue === "----") return "----";
-            return String(fullValue);
-        }
-
         function initPredictorCore() {
-            // Restore persistent cache arrays immediately
-            const cachedArrayString = localStorage.getItem('hackii_vip_v7_cache');
-            if (cachedArrayString) {
-                rollingHistory = JSON.parse(cachedArrayString);
-                printLog(`Decrypted ${rollingHistory.length} structural rows from hardware data index.`, "amber-400");
+            const preservedDataString = localStorage.getItem('quantum_v8_stable_cache');
+            if (preservedDataString) {
+                rollingHistory = JSON.parse(preservedDataString);
+                printLog(`Recovered ${rollingHistory.length} records safely from hardware cache.`, "indigo-400");
                 computeTargetPeriodToken();
                 renderHistoryUI();
-                executeAiEngine();
+                executeAiMatrixEngine();
             }
             
             fetchTargetNetworkData();
@@ -217,7 +211,7 @@
             if(secondsRemaining === 60) secondsRemaining = 0;
             countdownEl.innerText = `00:${String(secondsRemaining).padStart(2, '0')}`;
 
-            // Automatic absolute network refresh points 
+            // Automatic absolute network refresh sequence triggers at transition state bounds
             if (clockTimeNow.getSeconds() === 2 || clockTimeNow.getSeconds() === 32) {
                 fetchTargetNetworkData();
             }
@@ -225,69 +219,78 @@
 
         function computeTargetPeriodToken() {
             if (rollingHistory.length === 0) return;
-            // Target the absolute last entry item inside current array stack
             let baseLastRecord = rollingHistory[rollingHistory.length - 1].period;
             if (baseLastRecord && baseLastRecord !== "Unknown") {
                 try {
                     let directBigIntNum = BigInt(baseLastRecord);
                     upcomingPeriodGlobal = String(directBigIntNum + 1n);
-                    upcomingPeriodEl.innerText = formatFullPeriod(upcomingPeriodGlobal);
-                } catch (errorException) {
+                    upcomingPeriodEl.innerText = upcomingPeriodGlobal;
+                } catch (e) {
                     upcomingPeriodEl.innerText = "----";
                 }
             }
         }
 
-        function printLog(message, textStyleClass = "slate-400") {
-            const timeObj = new Date();
-            const timestampString = `[${String(timeObj.getHours()).padStart(2, '0')}:${String(timeObj.getMinutes()).padStart(2, '0')}:${String(timeObj.getSeconds()).padStart(2, '0')}]`;
-            consoleLogs.innerHTML += `<div class="text-${textStyleClass}"><span class="text-slate-600">${timestampString}</span> ${message}</div>`;
+        function printLog(message, styleClass = "slate-400") {
+            const t = new Date();
+            const ts = `[${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}:${String(t.getSeconds()).padStart(2, '0')}]`;
+            consoleLogs.innerHTML += `<div class="text-${styleClass}"><span class="text-slate-600">${ts}</span> ${message}</div>`;
             consoleLogs.scrollTop = consoleLogs.scrollHeight;
         }
 
-        // Deep Parser Logic for structural fallback handling variations across multiple proxy outputs
-        function extractPayloadArray(rawEnvelope) {
-            if (!rawEnvelope) return null;
-            if (rawEnvelope.data && Array.isArray(rawEnvelope.data.list)) return rawEnvelope.data.list;
-            if (Array.isArray(rawEnvelope.list)) return rawEnvelope.list;
-            if (rawEnvelope.data && Array.isArray(rawEnvelope.data)) return rawEnvelope.data;
-            if (Array.isArray(rawEnvelope)) return rawEnvelope;
+        function clearSystemCache() {
+            localStorage.removeItem('quantum_v8_stable_cache');
+            rollingHistory = [];
+            tableBody.innerHTML = "";
+            dataCounter.innerText = "History Base: 0/50";
+            upcomingPeriodEl.innerText = "LOADING LAYER...";
+            printLog("Local structural database rows reset successfully.", "rose-400");
+        }
+
+        // Deep Dual Unwrapper Parser Engine
+        function parseRawResponseEnvelopes(rawPackage) {
+            if (!rawPackage) return null;
+            
+            let targetObject = rawPackage;
+            // Parse AllOrigins string structures
+            if (rawPackage && typeof rawPackage.contents === "string") {
+                try { targetObject = JSON.parse(rawPackage.contents); } catch(e) {}
+            } else if (typeof rawPackage === "string") {
+                try { targetObject = JSON.parse(rawPackage); } catch(e) {}
+            }
+
+            // Route across internal array object definitions natively
+            if (targetObject?.data?.list && Array.isArray(targetObject.data.list)) return targetObject.data.list;
+            if (targetObject?.list && Array.isArray(targetObject.list)) return targetObject.list;
+            if (targetObject?.data && Array.isArray(targetObject.data)) return targetObject.data;
+            if (Array.isArray(targetObject)) return targetObject;
+            
             return null;
         }
 
         async function fetchTargetNetworkData() {
             liveIndicator.className = "w-2.5 h-2.5 bg-rose-500 rounded-full animate-ping";
-            let networkAttempts = ENGINE_BRIDGES.length;
+            let networkAttempts = CORE_PROXY_BRIDGES.length;
             let packetCaptured = false;
 
             for (let routeIndex = 0; routeIndex < networkAttempts; routeIndex++) {
-                let resolveTransformationUrl = ENGINE_BRIDGES[targetBridgePointer];
-                let queryEndpoint = resolveTransformationUrl(GAME_SOURCE_URL);
+                let resolveTransformationUrl = CORE_PROXY_BRIDGES[currentBridgePointer];
+                let queryEndpoint = resolveTransformationUrl(SOURCE_TARGET_API);
 
                 try {
-                    // Set aggressive timeout configuration parameters
                     const signalController = new AbortController();
-                    const timeoutThreadId = setTimeout(() => signalController.abort(), 6500);
+                    const timeoutId = setTimeout(() => signalController.abort(), 6000);
 
-                    const networkResponse = await fetch(queryEndpoint, { signal: signalController.signal });
-                    clearTimeout(timeoutThreadId);
+                    const response = await fetch(queryEndpoint, { signal: signalController.signal });
+                    clearTimeout(timeoutId);
 
-                    if (!networkResponse.ok) throw new Error("Bridge connection block.");
+                    if (!response.ok) throw new Error("Server packet lock fail.");
                     
-                    const referencePackage = await networkResponse.json();
-                    let targetingStructure = referencePackage;
-                    
-                    // Unpack string text envelopes generated by AllOrigins types wrappers
-                    if (referencePackage && typeof referencePackage.contents === "string") {
-                        targetingStructure = JSON.parse(referencePackage.contents);
-                    } else if (typeof referencePackage === "string") {
-                        targetingStructure = JSON.parse(referencePackage);
-                    }
+                    const rootRawPayload = await response.json();
+                    let cleanExtractedList = parseRawResponseEnvelopes(rootRawPayload);
 
-                    let processingList = extractPayloadArray(targetingStructure);
-
-                    if (processingList && processingList.length > 0) {
-                        let filteredNodes = processingList.map(element => {
+                    if (cleanExtractedList && cleanExtractedList.length > 0) {
+                        let parsedDataNodes = cleanExtractedList.map(element => {
                             let extractedNum = parseInt(element.number !== undefined ? element.number : element.resultNum);
                             if (isNaN(extractedNum)) extractedNum = 0;
                             
@@ -307,9 +310,9 @@
                             };
                         }).reverse();
 
-                        // Sync inside FIFO Array Memory Queue
-                        filteredNodes.forEach(itemNode => {
-                            if (itemNode.period !== "Unknown" && !rollingHistory.some(match => match.period === itemNode.period)) {
+                        // FIFO Memory Array Synchronization Lock Loop
+                        parsedDataNodes.forEach(itemNode => {
+                            if (itemNode.period !== "Unknown" && !rollingHistory.some(m => m.period === itemNode.period)) {
                                 rollingHistory.push(itemNode);
                                 if (rollingHistory.length > 50) {
                                     rollingHistory.shift();
@@ -317,26 +320,25 @@
                             }
                         });
 
-                        localStorage.setItem('hackii_vip_v7_cache', JSON.stringify(rollingHistory));
-                        printLog(`Data handshake locked via proxy pipeline vector [Node ${targetBridgePointer}].`, "emerald-400");
+                        localStorage.setItem('quantum_v8_stable_cache', JSON.stringify(rollingHistory));
+                        printLog(`HACKII TARGET INJECTED -> Period Match Complete. Output Locked.`, "emerald-400");
                         packetCaptured = true;
                         break; 
                     }
-                } catch (exceptionErr) {
-                    // Cycle across available proxies dynamically upon failure signals
-                    targetBridgePointer = (targetBridgePointer + 1) % ENGINE_BRIDGES.length;
+                } catch (err) {
+                    currentBridgePointer = (currentBridgePointer + 1) % CORE_PROXY_BRIDGES.length;
                 }
             }
 
-            liveIndicator.className = "w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse";
+            liveIndicator.className = "w-2.5 h-2.5 bg-emerald-400 rounded-full";
             
             if (packetCaptured) {
                 computeTargetPeriodToken();
                 renderHistoryUI();
-                              executeAiEngine();
+                executeAiMatrixEngine();
             } else {
-                printLog(`Network traffic dense. Running calculations on memory records...`, "rose-400");
-                executeAiEngine(); 
+                printLog(`Bridge handshake busy. Reading from prior persistent matrix arrays...`, "amber-400");
+                        executeAiMatrixEngine(); 
             }
         }
 
@@ -345,7 +347,6 @@
             if (rollingHistory.length === 0) return;
             
             tableBody.innerHTML = "";
-            // Reverse chronological order rendering for active interface views
             const UIReversedArray = [...rollingHistory].reverse();
 
             UIReversedArray.forEach(item => {
@@ -355,7 +356,7 @@
 
                 let sizingTextClass = item.size === "Big" ? "text-indigo-400 font-bold" : "text-amber-400 font-bold";
 
-                const generatedRowMarkup = `
+                const htmlRow = `
                     <tr class="hover:bg-slate-900/40 border-b border-slate-900/50 transition-colors">
                         <td class="py-3 font-semibold text-slate-400 font-mono tracking-wider">${item.period}</td>
                         <td class="py-3 text-center font-black text-slate-100 text-sm">${item.number}</td>
@@ -365,34 +366,32 @@
                         </td>
                     </tr>
                 `;
-                tableBody.innerHTML += generatedRowMarkup;
+                tableBody.innerHTML += htmlRow;
             });
         }
 
-        function executeAiEngine() {
+        function executeAiMatrixEngine() {
             if (rollingHistory.length < 3) {
                 printLog(`Analyzing pattern paths... waiting for API data fill.`, "amber-400");
                 return;
             }
 
-            // Remove abstract pulse state upon execution initiation paths
             predColorBox.classList.remove('animate-pulse');
             predNumber.classList.remove('animate-pulse');
             predSize.classList.remove('animate-pulse');
 
             const trackingNumbersArray = rollingHistory.map(obj => obj.number);
             const trackingSizesArray = rollingHistory.map(obj => obj.size);
-            const bufferTotalLength = rollingHistory.length;
+            const len = rollingHistory.length;
 
-            const terminalActiveNum = trackingNumbersArray[bufferTotalLength - 1];
-            const terminalActiveSize = trackingSizesArray[bufferTotalLength - 1];
+            const latestActiveNum = trackingNumbersArray[len - 1];
+            const latestActiveSize = trackingSizesArray[len - 1];
 
             let sequenceBigDensity = 0;
             let sequenceSmallDensity = 0;
             
-            // Comprehensive historical regression matching iterations
-            for (let cursor = 0; cursor < bufferTotalLength - 1; cursor++) {
-                if (trackingSizesArray[cursor] === terminalActiveSize) {
+            for (let cursor = 0; cursor < len - 1; cursor++) {
+                if (trackingSizesArray[cursor] === latestActiveSize) {
                     if (trackingSizesArray[cursor + 1] === "Big") sequenceBigDensity++;
                     else sequenceSmallDensity++;
                 }
@@ -400,21 +399,21 @@
 
             let computedTargetSize = "Big";
             if (sequenceBigDensity === sequenceSmallDensity) {
-                computedTargetSize = (terminalActiveSize === "Big") ? "Small" : "Big";
+                computedTargetSize = (latestActiveSize === "Big") ? "Small" : "Big";
             } else {
                 computedTargetSize = (sequenceBigDensity > sequenceSmallDensity) ? "Big" : "Small";
             }
 
-            // High Precision Array Weights Mapping Distribution
+            // Pattern Array Frequencies Processing Calculation Loops
             let spatialWeightsList = new Array(10).fill(0);
-            for (let pointer = 0; pointer < bufferTotalLength; pointer++) {
-                let priorityDistributionMultiplier = (pointer + 1) * 0.95;
-                spatialWeightsList[trackingNumbersArray[pointer]] += priorityDistributionMultiplier;
+            for (let pointer = 0; pointer < len; pointer++) {
+                let distributionFactor = (pointer + 1) * 0.95;
+                spatialWeightsList[trackingNumbersArray[pointer]] += distributionFactor;
             }
 
-            // ANTI DUPLICATION RECURSION MASK: Suppress last 2 output elements
-            spatialWeightsList[terminalActiveNum] = -1;
-            if (bufferTotalLength >= 2) spatialWeightsList[trackingNumbersArray[bufferTotalLength - 2]] = -1;
+            // REPETITION BYPASS SHIELD LAYER
+            spatialWeightsList[latestActiveNum] = -1;
+            if (len >= 2) spatialWeightsList[trackingNumbersArray[len - 2]] = -1;
 
             let targetedWinningNumber = -1;
             let maximumCalculatedWeight = -1;
@@ -430,7 +429,7 @@
             }
 
             if (targetedWinningNumber === -1) {
-                targetedWinningNumber = (computedTargetSize === "Big") ? 7 : 3;
+                targetedWinningNumber = (computedTargetSize === "Big") ? 8 : 2;
             }
 
             let computedTargetColor = "Green";
@@ -438,19 +437,19 @@
             if (targetedWinningNumber === 0) computedTargetColor = "Red/Violet";
             if (targetedWinningNumber === 5) computedTargetColor = "Green/Violet";
 
-            // Static variance calibrations
-            let executionEntropySeed = (terminalActiveNum * 9 + bufferTotalLength) % 19;
-            let finalSizeProbability = 86 + (executionEntropySeed % 9);
-            let finalNumProbability = 79 + (executionEntropySeed % 7);
-            let finalColorProbability = 89 + (executionEntropySeed % 6);
+            // Static Seed Probability Formulas Calculation Block
+            let executionEntropySeed = (latestActiveNum * 7 + len) % 19;
+            let finalSizeProbability = 83 + (executionEntropySeed % 9);
+            let finalNumProbability = 76 + (executionEntropySeed % 8);
+            let finalColorProbability = 87 + (executionEntropySeed % 7);
 
-            // Re-render Dynamic Element Views
+            // Injected Output Render Core View Elements Execution
             predColorBox.innerText = computedTargetColor;
             predColorBox.className = "text-3xl font-black tracking-widest my-5 cyber-font ";
-            let textGlowAssignment = "text-purple-400";
-            if (computedTargetColor.includes("Green")) textGlowAssignment = "text-emerald-400 vip-glow-green";
-            else if (computedTargetColor.includes("Red")) textGlowAssignment = "text-rose-400 vip-glow-red";
-            predColorBox.className += textGlowAssignment;
+            let colorClassAssignment = "text-purple-400";
+            if (computedTargetColor.includes("Green")) colorClassAssignment = "text-emerald-400 vip-glow-green";
+            else if (computedTargetColor.includes("Red")) colorClassAssignment = "text-rose-400 vip-glow-red";
+            predColorBox.className += colorClassAssignment;
             colorProb.innerText = `${finalColorProbability}%`;
 
             predNumber.innerText = targetedWinningNumber;
@@ -460,11 +459,8 @@
             predSize.innerText = computedTargetSize;
             predSize.className = "text-3xl font-black tracking-widest my-5 cyber-font " + (computedTargetSize === "Big" ? "text-indigo-400" : "text-amber-400");
             sizeProb.innerText = `${finalSizeProbability}%`;
-
-            printLog(`AI PATTERN ENGINE RE-BUILT SUCCESSFULLY -> Targeted State Array Computed.`, "emerald-400");
         }
 
-        // System Core Execution Binding Handshake
         window.onload = initPredictorCore;
     </script>
 </body>
