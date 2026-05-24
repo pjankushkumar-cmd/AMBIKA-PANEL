@@ -9,7 +9,7 @@
 content="width=device-width, initial-scale=1.0">
 
 <title>
-QUANTUM AI - ENGINE STABLE V10
+QUANTUM CORE V11
 </title>
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -23,27 +23,27 @@ rel="stylesheet">
 <style>
 
 body{
-background:#050816;
+background:#020617;
 font-family:'Orbitron',sans-serif;
 overflow-x:hidden;
 }
 
+.card{
+background:#081120;
+border:1px solid #1e293b;
+box-shadow:0 0 25px rgba(0,0,0,.5);
+}
+
 .glow-green{
-text-shadow:0 0 20px #00ff88;
+text-shadow:0 0 18px #00ff99;
 }
 
 .glow-red{
-text-shadow:0 0 20px #ff0040;
+text-shadow:0 0 18px #ff0040;
 }
 
 .glow-yellow{
-text-shadow:0 0 20px #ffe600;
-}
-
-.card{
-background:#0b1023;
-border:1px solid #1e293b;
-box-shadow:0 0 25px rgba(0,0,0,.5);
+text-shadow:0 0 18px #ffe600;
 }
 
 </style>
@@ -53,14 +53,15 @@ box-shadow:0 0 25px rgba(0,0,0,.5);
 <body class="text-white min-h-screen">
 
 <header
-class="w-full border-b border-slate-800 bg-black/40 backdrop-blur-xl p-4 sticky top-0 z-50">
+class="border-b border-slate-800 bg-black/40 backdrop-blur-xl sticky top-0 z-50">
 
-<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div
+class="max-w-7xl mx-auto p-4 flex items-center justify-between">
 
 <div class="flex items-center gap-3">
 
 <div
-class="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center">
+class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center">
 
 <i class="fa-solid fa-shield text-white"></i>
 
@@ -69,9 +70,9 @@ class="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 flex i
 <div>
 
 <h1
-class="text-xl font-black tracking-widest text-indigo-400">
+class="text-2xl font-black text-indigo-400 tracking-widest">
 
-QUANTUM CORE V10
+QUANTUM CORE V11
 
 </h1>
 
@@ -87,10 +88,11 @@ LIVE AI PREDICTION ENGINE
 </div>
 
 <div
-class="bg-slate-900 px-4 py-2 rounded-xl border border-slate-700">
+class="bg-slate-900 border border-slate-700 rounded-xl px-5 py-3">
 
-<div id="wall-clock"
-class="text-xl font-black text-emerald-400">
+<div
+id="wall-clock"
+class="text-2xl font-black text-emerald-400">
 
 00:00:00
 
@@ -105,10 +107,11 @@ class="text-xl font-black text-emerald-400">
 <main
 class="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-5">
 
-<div class="lg:col-span-2 flex flex-col gap-5">
+<div
+class="lg:col-span-2 flex flex-col gap-5">
 
 <div
-class="card rounded-2xl p-5 border-l-4 border-emerald-500">
+class="card rounded-2xl p-6 border-l-4 border-emerald-500">
 
 <div
 class="flex items-center justify-between">
@@ -116,7 +119,7 @@ class="flex items-center justify-between">
 <div>
 
 <p
-class="text-[10px] text-emerald-400 tracking-widest">
+class="text-[10px] tracking-widest text-emerald-400">
 
 UPCOMING PERIOD
 
@@ -124,16 +127,16 @@ UPCOMING PERIOD
 
 <h2
 id="upcoming-period"
-class="text-2xl font-black text-yellow-400 glow-yellow">
+class="text-4xl font-black text-yellow-400 glow-yellow mt-2">
 
-FETCHING...
+LOADING...
 
 </h2>
 
 </div>
 
 <div
-class="bg-black/40 px-5 py-3 rounded-xl border border-slate-700">
+class="bg-black/40 border border-slate-700 rounded-xl px-5 py-4">
 
 <p
 class="text-[10px] text-slate-500">
@@ -144,7 +147,7 @@ REFRESH
 
 <div
 id="countdown"
-class="text-3xl font-black text-emerald-400">
+class="text-4xl font-black text-emerald-400">
 
 00:00
 
@@ -163,7 +166,7 @@ class="grid grid-cols-1 md:grid-cols-3 gap-4">
 class="card rounded-xl p-5">
 
 <p
-class="text-[10px] text-purple-400 tracking-widest">
+class="text-[10px] tracking-widest text-purple-400">
 
 COLOR FORECAST
 
@@ -171,14 +174,14 @@ COLOR FORECAST
 
 <div
 id="pred-color-box"
-class="text-3xl font-black mt-4">
+class="text-4xl font-black mt-6">
 
 WAITING
 
 </div>
 
 <div
-class="mt-4 border-t border-slate-800 pt-2 flex justify-between text-[11px]">
+class="border-t border-slate-800 mt-5 pt-3 flex justify-between text-[11px]">
 
 <span>CONFIDENCE</span>
 
@@ -197,7 +200,7 @@ id="color-prob">
 class="card rounded-xl p-5">
 
 <p
-class="text-[10px] text-yellow-400 tracking-widest">
+class="text-[10px] tracking-widest text-yellow-400">
 
 NUMBER TARGET
 
@@ -205,14 +208,14 @@ NUMBER TARGET
 
 <div
 id="pred-number"
-class="text-6xl font-black mt-2 text-center glow-yellow">
+class="text-7xl font-black text-center mt-2 glow-yellow">
 
 ?
 
 </div>
 
 <div
-class="mt-4 border-t border-slate-800 pt-2 flex justify-between text-[11px]">
+class="border-t border-slate-800 mt-5 pt-3 flex justify-between text-[11px]">
 
 <span>CONFIDENCE</span>
 
@@ -231,7 +234,7 @@ id="num-prob">
 class="card rounded-xl p-5">
 
 <p
-class="text-[10px] text-indigo-400 tracking-widest">
+class="text-[10px] tracking-widest text-indigo-400">
 
 SIZE MATRIX
 
@@ -239,14 +242,14 @@ SIZE MATRIX
 
 <div
 id="pred-size"
-class="text-3xl font-black mt-4">
+class="text-4xl font-black mt-6">
 
 WAITING
 
 </div>
 
 <div
-class="mt-4 border-t border-slate-800 pt-2 flex justify-between text-[11px]">
+class="border-t border-slate-800 mt-5 pt-3 flex justify-between text-[11px]">
 
 <span>CONFIDENCE</span>
 
@@ -264,13 +267,13 @@ id="size-prob">
 </div>
 
 <div
-class="card rounded-xl overflow-hidden">
+class="card rounded-2xl overflow-hidden">
 
 <div
-class="border-b border-slate-800 px-4 py-3 flex justify-between items-center">
+class="flex items-center justify-between border-b border-slate-800 px-4 py-3">
 
 <h3
-class="text-xs tracking-widest text-indigo-400">
+class="text-sm tracking-widest text-indigo-400">
 
 LIVE CONSOLE
 
@@ -278,7 +281,7 @@ LIVE CONSOLE
 
 <div
 id="live-indicator-dot"
-class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse">
+class="w-3 h-3 rounded-full bg-yellow-400 animate-pulse">
 
 </div>
 
@@ -286,11 +289,11 @@ class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse">
 
 <div
 id="console-logs"
-class="h-[200px] overflow-y-auto p-4 text-[11px] space-y-1 text-slate-300">
+class="h-[220px] overflow-y-auto p-4 text-[11px] space-y-1 text-slate-300">
 
 <div>
 
-[SYSTEM] BOOTING QUANTUM ENGINE...
+[SYSTEM] BOOTING ENGINE...
 
 </div>
 
@@ -301,12 +304,10 @@ class="h-[200px] overflow-y-auto p-4 text-[11px] space-y-1 text-slate-300">
 </div>
 
 <div
-class="card rounded-2xl p-4 flex flex-col">
+class="card rounded-2xl p-4">
 
 <div
-class="flex items-center justify-between border-b border-slate-800 pb-3">
-
-<div>
+class="border-b border-slate-800 pb-3">
 
 <h3
 class="text-sm tracking-widest text-slate-300">
@@ -324,18 +325,8 @@ LIVE VERIFIED DATA
 
 </div>
 
-<button
-onclick="clearSystemCache()"
-class="bg-red-950 text-red-400 px-3 py-1 rounded-lg text-[10px] border border-red-900">
-
-CLEAR
-
-</button>
-
-</div>
-
 <div
-class="overflow-y-auto mt-3 flex-1">
+class="overflow-y-auto mt-3">
 
 <table
 class="w-full text-left">
@@ -380,35 +371,31 @@ id="history-table-body">
 
 <script>
 
-const API_TARGET_ENDPOINT =
+const API_URL =
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
 
-let rollingHistory = [];
-let upcomingPeriodGlobal = "----";
-let isFetchingNow = false;
+let historyData = [];
+let isFetching = false;
 
-const wallClockEl =
+const wallClock =
 document.getElementById("wall-clock");
 
-const countdownEl =
+const countdown =
 document.getElementById("countdown");
 
-const upcomingPeriodEl =
+const upcomingPeriod =
 document.getElementById("upcoming-period");
 
-const consoleLogs =
+const logs =
 document.getElementById("console-logs");
 
-const dataCounter =
-document.getElementById("data-counter");
-
-const tableBody =
+const historyBody =
 document.getElementById("history-table-body");
 
-const liveIndicator =
+const liveDot =
 document.getElementById("live-indicator-dot");
 
-const predColorBox =
+const predColor =
 document.getElementById("pred-color-box");
 
 const predNumber =
@@ -426,45 +413,37 @@ document.getElementById("num-prob");
 const sizeProb =
 document.getElementById("size-prob");
 
-function initPredictorCore(){
+function log(
+msg,
+color="text-slate-400"
+){
 
-const saved =
-localStorage.getItem(
-"quantum_v10_cache"
-);
+const d = new Date();
 
-if(saved){
+const t =
+`[${String(d.getHours()).padStart(2,'0')}:`+
+`${String(d.getMinutes()).padStart(2,'0')}:`+
+`${String(d.getSeconds()).padStart(2,'0')}]`;
 
-try{
+logs.innerHTML +=
+`<div class="${color}">
+<span class="text-slate-600">
+${t}
+</span>
+${msg}
+</div>`;
 
-rollingHistory =
-JSON.parse(saved);
-
-renderHistoryUI();
-
-calculateNextPeriodToken();
-
-processAiAnalyticsEngine();
-
-}catch(e){}
-
-}
-
-fetchNetworkDataFeed();
-
-setInterval(
-executeClockLoops,
-1000
-);
+logs.scrollTop =
+logs.scrollHeight;
 
 }
 
-function executeClockLoops(){
+function updateClock(){
 
 const now =
 new Date();
 
-wallClockEl.innerText =
+wallClock.innerText =
 `${String(now.getHours()).padStart(2,'0')}:`+
 `${String(now.getMinutes()).padStart(2,'0')}:`+
 `${String(now.getSeconds()).padStart(2,'0')}`;
@@ -475,139 +454,33 @@ let sec =
 if(sec == 60)
 sec = 0;
 
-countdownEl.innerText =
+countdown.innerText =
 `00:${String(sec).padStart(2,'0')}`;
 
 if(
-now.getSeconds()==1 ||
-now.getSeconds()==15 ||
-now.getSeconds()==30 ||
-now.getSeconds()==45
+now.getSeconds()==1
 ){
 
-fetchNetworkDataFeed();
+fetchData();
 
 }
 
 }
 
-function printLog(
-msg,
-color="text-slate-400"
-){
+async function fetchData(){
 
-const d =
-new Date();
-
-const time =
-`[${String(d.getHours()).padStart(2,'0')}:`+
-`${String(d.getMinutes()).padStart(2,'0')}:`+
-`${String(d.getSeconds()).padStart(2,'0')}]`;
-
-consoleLogs.innerHTML +=
-`<div class="${color}">
-<span class="text-slate-600">
-${time}
-</span>
-${msg}
-</div>`;
-
-consoleLogs.scrollTop =
-consoleLogs.scrollHeight;
-
-}
-
-function clearSystemCache(){
-
-localStorage.removeItem(
-"quantum_v10_cache"
-);
-
-rollingHistory = [];
-
-tableBody.innerHTML = "";
-
-printLog(
-"CACHE CLEARED",
-"text-red-400"
-);
-
-}
-
-function calculateNextPeriodToken(){
-
-if(!rollingHistory.length)
+if(isFetching)
 return;
+
+isFetching = true;
 
 try{
 
-let last =
-rollingHistory[
-rollingHistory.length - 1
-].period;
-
-upcomingPeriodGlobal =
-String(
-BigInt(last) + 1n
-);
-
-upcomingPeriodEl.innerText =
-upcomingPeriodGlobal;
-
-}catch(e){
-
-upcomingPeriodEl.innerText =
-"----";
-
-}
-
-}
-
-async function fetchNetworkDataFeed(){
-
-if(isFetchingNow)
-return;
-
-isFetchingNow = true;
-
-try{
-
-liveIndicator.className =
+liveDot.className =
 "w-3 h-3 rounded-full bg-yellow-400 animate-pulse";
 
 const response =
-await fetch(
-API_TARGET_ENDPOINT,
-{
-method:"POST",
-
-headers:{
-"Content-Type":
-"application/json;charset=UTF-8",
-
-"Accept":
-"application/json"
-},
-
-body:JSON.stringify({
-
-pageSize:20,
-pageNo:1,
-gameId:1,
-language:0,
-random:Math.random()
-
-})
-}
-);
-
-if(!response.ok){
-
-throw new Error(
-"API FAILED"
-);
-
-}
+await fetch(API_URL);
 
 const data =
 await response.json();
@@ -620,24 +493,16 @@ data?.list ||
 if(!list.length){
 
 throw new Error(
-"EMPTY DATA"
+"NO DATA"
 );
 
 }
 
-let formatted =
-list.map(item=>{
+historyData =
+list.reverse().map(item=>{
 
 let num =
 parseInt(item.number);
-
-if(isNaN(num))
-num = 0;
-
-let size =
-num >= 5
-? "Big"
-: "Small";
 
 let color =
 num % 2 == 0
@@ -656,113 +521,112 @@ return{
 
 period:
 String(
-item.issueNumber ||
 item.issue ||
-"0"
+item.issueNumber
 ),
 
 number:num,
 
-size:size,
+size:
+num >= 5
+? "Big"
+: "Small",
 
-colour:color
+color:color
 
 };
 
-}).reverse();
-
-formatted.forEach(row=>{
-
-if(
-!rollingHistory.some(
-x=>x.period ==
-row.period
-)
-){
-
-rollingHistory.push(
-row
-);
-
-}
-
 });
 
-if(
-rollingHistory.length > 50
-){
-
-rollingHistory =
-rollingHistory.slice(-50);
-
-}
-
 localStorage.setItem(
-"quantum_v10_cache",
-JSON.stringify(
-rollingHistory
-)
+"quantum_history",
+JSON.stringify(historyData)
 );
 
-calculateNextPeriodToken();
+renderHistory();
 
-renderHistoryUI();
+updateUpcoming();
 
-processAiAnalyticsEngine();
+runAI();
 
-liveIndicator.className =
+liveDot.className =
 "w-3 h-3 rounded-full bg-emerald-500 animate-pulse";
 
-printLog(
+log(
 "LIVE API CONNECTED",
 "text-emerald-400"
 );
 
 }catch(err){
 
-liveIndicator.className =
-"w-3 h-3 rounded-full bg-red-500 animate-ping";
+let cache =
+localStorage.getItem(
+"quantum_history"
+);
 
-printLog(
-"API ERROR → AUTO RETRY",
+if(cache){
+
+historyData =
+JSON.parse(cache);
+
+renderHistory();
+
+updateUpcoming();
+
+runAI();
+
+log(
+"OFFLINE CACHE MODE",
+"text-yellow-400"
+);
+
+}else{
+
+log(
+"SERVER OFFLINE",
 "text-red-400"
 );
 
-setTimeout(()=>{
-
-fetchNetworkDataFeed();
-
-},4000);
+}
 
 }
 
-isFetchingNow = false;
+isFetching = false;
 
 }
 
-function renderHistoryUI(){
+function updateUpcoming(){
 
-if(!rollingHistory.length){
-
-tableBody.innerHTML =
-`<tr>
-
-<td colspan="4"
-class="py-8 text-center text-slate-600">
-
-WAITING DATA...
-
-</td>
-
-</tr>`;
-
+if(!historyData.length)
 return;
 
+try{
+
+let last =
+historyData[
+historyData.length - 1
+].period;
+
+upcomingPeriod.innerText =
+String(
+BigInt(last) + 1n
+);
+
+}catch(e){
+
+upcomingPeriod.innerText =
+"----";
+
 }
 
-tableBody.innerHTML = "";
+}
 
-[...rollingHistory]
+function renderHistory(){
+
+historyBody.innerHTML = "";
+
+historyData
+.slice(-20)
 .reverse()
 .forEach(row=>{
 
@@ -770,7 +634,7 @@ let colorClass =
 "bg-emerald-950 text-emerald-400";
 
 if(
-row.colour.includes("Red")
+row.color.includes("Red")
 ){
 
 colorClass =
@@ -779,7 +643,7 @@ colorClass =
 }
 
 if(
-row.colour.includes("Violet")
+row.color.includes("Violet")
 ){
 
 colorClass =
@@ -787,7 +651,7 @@ colorClass =
 
 }
 
-tableBody.innerHTML +=
+historyBody.innerHTML +=
 `
 
 <tr
@@ -801,14 +665,14 @@ ${row.period}
 </td>
 
 <td
-class="py-2 text-center font-black text-white">
+class="py-2 text-center font-black">
 
 ${row.number}
 
 </td>
 
 <td
-class="py-2 text-center font-bold
+class="py-2 text-center
 ${row.size=="Big"
 ? "text-indigo-400"
 : "text-yellow-400"}">
@@ -824,7 +688,7 @@ class="py-2 text-right">
 class="px-2 py-1 rounded text-[10px]
 font-bold ${colorClass}">
 
-${row.colour}
+${row.color}
 
 </span>
 
@@ -838,52 +702,50 @@ ${row.colour}
 
 }
 
-function processAiAnalyticsEngine(){
+function runAI(){
 
-if(
-rollingHistory.length < 5
-){
+if(historyData.length < 5){
 
-predColorBox.innerText =
-"ANALYZING";
+predColor.innerText =
+"WAITING";
 
 predNumber.innerText =
 "?";
 
 predSize.innerText =
-"WAIT";
+"WAITING";
 
 return;
 
 }
 
-const nums =
-rollingHistory.map(
+let nums =
+historyData.map(
 x=>x.number
 );
 
-const last =
-nums[nums.length - 1];
-
-let weights =
+let weight =
 new Array(10).fill(0);
 
 nums.forEach((n,i)=>{
 
-weights[n] +=
+weight[n] +=
 (i + 1);
 
 });
 
-weights[last] = -1;
+let last =
+nums[nums.length - 1];
+
+weight[last] = -1;
 
 let best = 0;
 
 for(let i=0;i<10;i++){
 
 if(
-weights[i] >
-weights[best]
+weight[i] >
+weight[best]
 ){
 
 best = i;
@@ -910,7 +772,7 @@ if(best == 5)
 nextColor =
 "Green/Violet";
 
-predColorBox.innerText =
+predColor.innerText =
 nextColor;
 
 predNumber.innerText =
@@ -928,8 +790,8 @@ numProb.innerText =
 sizeProb.innerText =
 `${84 + Math.floor(Math.random()*8)}%`;
 
-predColorBox.className =
-"text-3xl font-black mt-4 " +
+predColor.className =
+"text-4xl font-black mt-6 " +
 (
 nextColor.includes("Green")
 ? "text-emerald-400 glow-green"
@@ -941,10 +803,10 @@ nextColor.includes("Red")
 );
 
 predNumber.className =
-"text-6xl font-black mt-2 text-center glow-yellow text-yellow-400";
+"text-7xl font-black text-center mt-2 glow-yellow text-yellow-400";
 
 predSize.className =
-"text-3xl font-black mt-4 " +
+"text-4xl font-black mt-6 " +
 (
 nextSize == "Big"
 ? "text-indigo-400"
@@ -953,21 +815,34 @@ nextSize == "Big"
 
 }
 
-window.onload =
-initPredictorCore;
+window.onload = ()=>{
 
-setInterval(()=>{
-
-if(!navigator.onLine){
-
-printLog(
-"INTERNET DISCONNECTED",
-"text-red-400"
+let cache =
+localStorage.getItem(
+"quantum_history"
 );
+
+if(cache){
+
+historyData =
+JSON.parse(cache);
+
+renderHistory();
+
+updateUpcoming();
+
+runAI();
 
 }
 
-},5000);
+fetchData();
+
+setInterval(
+updateClock,
+1000
+);
+
+};
 
 </script>
 
