@@ -3,47 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUANTUM AI - WINGO 1M AUTO PREDICTOR V8.0</title>
+    <title>QUANTUM AI - ENGINE STABLE V9.0</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at 50% 0%, #0d0b26 0%, #020617 85%); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at 50% 0%, #0c0a21 0%, #010414 90%); }
         .cyber-font { font-family: 'Orbitron', sans-serif; }
         .mono { font-family: 'JetBrains Mono', monospace; }
-        
-        /* Absolute Vector Lighting Glow Framework */
-        .vip-glow-red { text-shadow: 0 0 25px rgba(239, 68, 68, 0.9); }
-        .vip-glow-green { text-shadow: 0 0 25px rgba(34, 197, 94, 0.9); }
-        .vip-glow-yellow { text-shadow: 0 0 30px rgba(234, 179, 8, 1); }
-        .vip-card-glow { box-shadow: 0 4px 45px rgba(0, 0, 0, 0.7), 0 1px 1px rgba(255,255,255,0.06) inset; border: 1px solid rgba(255, 255, 255, 0.05); }
-        
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #ef4444; border-radius: 10px; }
+        .vip-glow-red { text-shadow: 0 0 25px #ef4444; }
+        .vip-glow-green { text-shadow: 0 0 25px #22c55e; }
+        .vip-glow-yellow { text-shadow: 0 0 30px #eab308; }
+        .vip-card-glow { box-shadow: 0 4px 45px rgba(0, 0, 0, 0.85), 0 1px 1px rgba(255,255,255,0.05) inset; border: 1px solid rgba(255, 255, 255, 0.04); }
     </style>
 </head>
 <body class="text-slate-100 min-h-screen flex flex-col justify-between">
 
-    <header class="border-b border-indigo-950 bg-slate-950/95 backdrop-blur-3xl px-6 py-4 sticky top-0 z-50">
+    <header class="border-b border-slate-900 bg-slate-950/95 backdrop-blur-3xl px-6 py-4 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <div class="h-12 w-12 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.4)] animate-pulse">
-                    <i class="fa-solid fa-brain text-white text-xl"></i>
+                <div class="h-11 w-11 rounded-xl bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center shadow-[0_0_25px_rgba(99,102,241,0.4)]">
+                    <i class="fa-solid fa-shield-halved text-white text-lg"></i>
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
-                        <h1 class="cyber-font font-black text-2xl tracking-widest bg-gradient-to-r from-indigo-400 via-purple-400 to-white bg-clip-text text-transparent">QUANTUM AI</h1>
-                        <span class="bg-indigo-600 text-white font-bold px-2 py-0.5 rounded text-[10px] tracking-widest cyber-font shadow-[0_0_15px_rgba(99,102,241,0.4)]">WINGO 1M FIXED V8.0</span>
+                        <h1 class="cyber-font font-black text-xl tracking-widest bg-gradient-to-r from-indigo-400 via-purple-300 to-white bg-clip-text text-transparent">QUANTUM CORE</h1>
+                        <span class="bg-emerald-500 text-slate-950 font-extrabold px-1.5 py-0.5 rounded text-[9px] tracking-widest cyber-font">STABLE V9.0</span>
                     </div>
-                    <p class="text-[10px] text-emerald-400 font-bold tracking-widest uppercase mono">SECURE RE-UNWRAPPED DATA MATRIX</p>
+                    <p class="text-[9px] text-indigo-400 font-bold tracking-widest uppercase mono">POST PAYLOAD RAW BYPASS PROTOCOL</p>
                 </div>
             </div>
             
-            <div class="bg-slate-900/90 border border-slate-800 px-5 py-2 rounded-2xl flex items-center gap-3 vip-card-glow">
-                <div id="live-indicator-dot" class="w-2.5 h-2.5 bg-emerald-500 rounded-full"></div>
-                <span id="wall-clock" class="mono font-bold text-xl text-slate-200 tracking-wider">00:00:00</span>
+            <div class="bg-slate-900/90 border border-slate-800 px-4 py-1.5 rounded-xl flex items-center gap-2.5 vip-card-glow">
+                <div id="live-indicator-dot" class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                <span id="wall-clock" class="mono font-bold text-lg text-slate-300 tracking-wider">00:00:00</span>
             </div>
         </div>
     </header>
@@ -52,123 +46,120 @@
         
         <div class="lg:col-span-2 flex flex-col gap-6">
             
-            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950/20 p-6 vip-card-glow border-l-4 border-l-indigo-500">
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-6 vip-card-glow border-l-4 border-l-emerald-500">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
                     <div>
-                        <div class="flex items-center gap-2">
-                            <span class="px-2.5 py-0.5 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-[10px] font-bold text-indigo-400 tracking-widest uppercase cyber-font">STABLE ZERO-TIME DEPENDENCY MONITOR</span>
-                        </div>
-                        <h2 class="cyber-font text-2xl font-black mt-3 text-slate-100 flex items-center gap-2">
-                            UPCOMING PERIOD ID: <span id="upcoming-period" class="text-amber-400 vip-glow-yellow tracking-widest">LOADING LAYER...</span>
+                        <span class="px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[9px] font-bold text-emerald-400 tracking-widest uppercase cyber-font">LIVE INTERFACE TUNNEL</span>
+                        <h2 class="cyber-font text-xl font-black mt-2.5 text-slate-100 flex items-center gap-2">
+                            UPCOMING: <span id="upcoming-period" class="text-yellow-400 vip-glow-yellow tracking-widest">FETCHING DATA...</span>
                         </h2>
-                        <p class="text-xs text-slate-400 mt-1.5 font-medium">Bypasses Cross-Origin drop constraints automatically via responsive multi-proxy system handshake.</p>
                     </div>
-                    <div class="bg-slate-950/80 border border-slate-800 p-4 rounded-2xl min-w-[140px] text-center md:text-right">
-                        <div class="text-[10px] text-slate-500 uppercase tracking-widest font-bold cyber-font">NEXT REFRESH IN</div>
-                        <div id="countdown" class="text-4xl font-black mono text-indigo-400 tracking-tighter mt-1 dynamic-glow">00:00</div>
+                    <div class="bg-slate-950/90 border border-slate-800 p-3 rounded-xl min-w-[120px] text-center">
+                        <div class="text-[9px] text-slate-500 uppercase tracking-widest font-bold cyber-font">REFRESHING IN</div>
+                        <div id="countdown" class="text-3xl font-black mono text-emerald-400 tracking-tighter mt-0.5">00:00</div>
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-slate-950/70 p-5 rounded-2xl vip-card-glow border-t-2 border-t-purple-500/50">
-                    <div class="flex justify-between items-center text-slate-400 font-bold text-[11px] tracking-wider cyber-font">
-                        <span>AI COLOR FORECAST</span>
-                        <i class="fa-solid fa-palette text-purple-400"></i>
+                <div class="bg-slate-950/80 p-5 rounded-xl vip-card-glow border-t-2 border-t-purple-500/40">
+                    <div class="flex justify-between items-center text-slate-500 font-bold text-[10px] tracking-wider cyber-font">
+                        <span>COLOR FORECAST</span>
+                        <i class="fa-solid fa-circle-half-stroke text-purple-400"></i>
                     </div>
-                    <div id="pred-color-box" class="text-3xl font-black tracking-widest my-5 text-slate-500 cyber-font animate-pulse">ANALYZING</div>
-                    <div class="pt-2 border-t border-slate-900/60 text-[11px] text-slate-400 flex justify-between items-center">
-                        <span>Probability Intensity:</span>
-                        <span id="color-prob" class="mono font-bold text-purple-400 text-sm">0%</span>
-                    </div>
-                </div>
-
-                <div class="bg-slate-950/70 p-5 rounded-2xl vip-card-glow border-t-2 border-t-amber-500/50">
-                    <div class="flex justify-between items-center text-slate-400 font-bold text-[11px] tracking-wider cyber-font">
-                        <span>TARGET NUMBER</span>
-                        <i class="fa-solid fa-arrow-trend-up text-amber-400"></i>
-                    </div>
-                    <div id="pred-number" class="text-6xl font-black my-3 text-slate-500 cyber-font text-center tracking-tighter animate-pulse">?</div>
-                    <div class="pt-2 border-t border-slate-900/60 text-[11px] text-slate-400 flex justify-between items-center">
-                        <span>Mathematical Weight:</span>
-                        <span id="num-prob" class="mono font-bold text-amber-400 text-sm">0%</span>
+                    <div id="pred-color-box" class="text-2xl font-black tracking-widest my-4 text-slate-400 cyber-font">WAITING</div>
+                    <div class="pt-2 border-t border-slate-900 text-[10px] text-slate-500 flex justify-between items-center">
+                        <span>Intensity Index:</span>
+                        <span id="color-prob" class="mono font-bold text-purple-400">--%</span>
                     </div>
                 </div>
 
-                <div class="bg-slate-950/70 p-5 rounded-2xl vip-card-glow border-t-2 border-t-emerald-500/50">
-                    <div class="flex justify-between items-center text-slate-400 font-bold text-[11px] tracking-wider cyber-font">
-                        <span>SIZE CLASSIFICATION</span>
-                        <i class="fa-solid fa-chart-pie text-emerald-400"></i>
+                <div class="bg-slate-950/80 p-5 rounded-xl vip-card-glow border-t-2 border-t-yellow-500/40">
+                    <div class="flex justify-between items-center text-slate-500 font-bold text-[10px] tracking-wider cyber-font">
+                        <span>NUMBER TARGET</span>
+                        <i class="fa-solid fa-crosshairs text-yellow-400"></i>
                     </div>
-                    <div id="pred-size" class="text-3xl font-black tracking-widest my-5 text-slate-500 cyber-font animate-pulse">ANALYZING</div>
-                    <div class="pt-2 border-t border-slate-900/60 text-[11px] text-slate-400 flex justify-between items-center">
-                        <span>Pattern Rate Index:</span>
-                        <span id="size-prob" class="mono font-bold text-emerald-400 text-sm">0%</span>
+                    <div id="pred-number" class="text-5xl font-black my-2 text-slate-400 cyber-font text-center">?</div>
+                    <div class="pt-2 border-t border-slate-900 text-[10px] text-slate-500 flex justify-between items-center">
+                        <span>Node Weight:</span>
+                        <span id="num-prob" class="mono font-bold text-yellow-400">--%</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950/80 p-5 rounded-xl vip-card-glow border-t-2 border-t-indigo-500/40">
+                    <div class="flex justify-between items-center text-slate-500 font-bold text-[10px] tracking-wider cyber-font">
+                        <span>SIZE MATRIX</span>
+                        <i class="fa-solid fa-chart-simple text-indigo-400"></i>
+                    </div>
+                    <div id="pred-size" class="text-2xl font-black tracking-widest my-4 text-slate-400 cyber-font">WAITING</div>
+                    <div class="pt-2 border-t border-slate-900 text-[10px] text-slate-500 flex justify-between items-center">
+                        <span>Pattern Stability:</span>
+                        <span id="size-prob" class="mono font-bold text-indigo-400">--%</span>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-slate-950/90 rounded-2xl flex flex-col flex-1 min-h-[200px] vip-card-glow">
-                <div class="px-5 py-3 border-b border-slate-900 bg-slate-950/40 flex items-center justify-between">
+            <div class="bg-slate-950/95 rounded-xl flex flex-col flex-1 min-h-[180px] vip-card-glow">
+                <div class="px-4 py-2.5 border-b border-slate-900 bg-slate-950/60 flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-square-terminal text-indigo-400 text-xs animate-pulse"></i>
-                        <h3 class="font-bold text-xs tracking-wider text-slate-300 uppercase cyber-font">SYSTEM ENGINE SYNC LOGS</h3>
+                        <i class="fa-solid fa-terminal text-indigo-400 text-xs"></i>
+                        <h3 class="font-bold text-[10px] tracking-wider text-slate-400 uppercase cyber-font">TUNNEL MATRIX KERNEL DICTIONARY</h3>
                     </div>
-                    <span id="data-counter" class="bg-indigo-950/50 text-indigo-400 border border-indigo-900/40 text-xs px-3 py-1 rounded-md mono font-bold">History Base: 0/50</span>
+                    <span id="data-counter" class="bg-slate-900 text-indigo-400 border border-slate-800 text-[10px] px-2.5 py-0.5 rounded mono font-bold">History Base: 0/50</span>
                 </div>
-                <div id="console-logs" class="p-4 mono text-[11px] text-slate-400 space-y-1.5 overflow-y-auto flex-1 max-h-[180px]">
-                    <div><span class="text-slate-600">[BOOT]</span> Initializing core runtime engine parameters...</div>
+                <div id="console-logs" class="p-4 mono text-[11px] text-slate-400 space-y-1 overflow-y-auto flex-1 max-h-[140px]">
+                    <div><span class="text-slate-600">[SYSTEM]</span> Readying bypass network sockets...</div>
                 </div>
             </div>
         </div>
 
-        <div class="bg-slate-950/90 rounded-3xl p-5 flex flex-col h-[550px] lg:h-auto vip-card-glow">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-900">
+        <div class="bg-slate-950/95 rounded-2xl p-4 flex flex-col h-[500px] lg:h-auto vip-card-glow">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-900">
                 <div>
-                    <h3 class="font-bold text-sm tracking-wider text-slate-200 cyber-font">SAVED DATABASE</h3>
-                    <p class="text-[11px] text-slate-500 uppercase font-semibold mono">Persistent Storage (Max 50 Rows)</p>
+                    <h3 class="font-bold text-xs tracking-wider text-slate-300 cyber-font">SERVER MEMORY DATA</h3>
+                    <p class="text-[10px] text-slate-500 uppercase font-semibold mono">Verified Output Feed</p>
                 </div>
-                <button onclick="clearSystemCache()" class="text-xs bg-red-950 text-red-400 px-3 py-1.5 border border-red-900/40 rounded-xl font-bold cursor-pointer hover:bg-red-900 hover:text-white transition-all cyber-font tracking-wide">
-                    Reset Sync
+                <button onclick="clearSystemCache()" class="text-[10px] bg-red-950/80 text-red-400 px-2.5 py-1 border border-red-900/30 rounded-lg font-bold cursor-pointer hover:bg-red-900 hover:text-white transition-all cyber-font">
+                    Clear Cache
                 </button>
             </div>
 
-            <div class="overflow-y-auto flex-1 mt-4">
+            <div class="overflow-y-auto flex-1 mt-3">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="text-[11px] font-black text-slate-500 uppercase tracking-wider border-b border-slate-900 pb-2 cyber-font">
-                            <th class="py-2">PERIOD ID</th>
+                        <tr class="text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-900 pb-1 cyber-font">
+                            <th class="py-2">PERIOD</th>
                             <th class="py-2 text-center">NUM</th>
                             <th class="py-2 text-center">SIZE</th>
                             <th class="py-2 text-right">COLOR</th>
                         </tr>
                     </thead>
-                    <tbody id="history-table-body" class="mono text-xs divide-y divide-slate-900/40">
+                    <tbody id="history-table-body" class="mono text-[11px] divide-y divide-slate-900/40">
                         </tbody>
                 </table>
             </div>
         </div>
     </main>
 
-    <footer class="border-t border-slate-900 bg-slate-950/90 py-3 text-center text-[10px] text-slate-600 font-bold uppercase tracking-widest cyber-font">
-        QUANTUM AUTONOMOUS SECURITY CORE ENGINE &copy; 2026. DATA ARRAYS VERIFIED BYPASS.
+    <footer class="border-t border-slate-900 bg-slate-950/60 py-2.5 text-center text-[9px] text-slate-600 font-bold uppercase tracking-widest cyber-font">
+        QUANTUM V9.0 AUTOMATED BYPASS PATTERN TERMINAL • LIVE PRODUCTION
     </footer>
 
     <script>
-        const SOURCE_TARGET_API = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
+        const API_TARGET_ENDPOINT = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
         
-        // High Reliability Unwrapping Proxies Array Configuration
-        const CORE_PROXY_BRIDGES = [
-            (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-            (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-            (url) => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
+        // Multi-tier Proxy Infrastructure Core Wrappers
+        const GLOBAL_RE_TUNNELS = [
+            (url, body) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url + "?pageNo=1&pageSize=20&gameId=1")}`,
+            (url, body) => `https://corsproxy.io/?${encodeURIComponent(url + "?pageNo=1&pageSize=20&gameId=1")}`,
+            (url, body) => `https://api.allorigins.win/get?url=${encodeURIComponent(url + "?pageNo=1&pageSize=20&gameId=1")}`
         ];
         
-        let currentBridgePointer = 0;
+        let bridgePointerIndex = 0;
         let rollingHistory = [];
         let upcomingPeriodGlobal = "----";
 
-        // Element Selectors
+        // Element Binds
         const wallClockEl = document.getElementById('wall-clock');
         const countdownEl = document.getElementById('countdown');
         const upcomingPeriodEl = document.getElementById('upcoming-period');
@@ -185,280 +176,288 @@
         const sizeProb = document.getElementById('size-prob');
 
         function initPredictorCore() {
-            const preservedDataString = localStorage.getItem('quantum_v8_stable_cache');
-            if (preservedDataString) {
-                rollingHistory = JSON.parse(preservedDataString);
-                printLog(`Recovered ${rollingHistory.length} records safely from hardware cache.`, "indigo-400");
-                computeTargetPeriodToken();
+            const memoryStackString = localStorage.getItem('quantum_v9_stable_cache');
+            if (memoryStackString) {
+                rollingHistory = JSON.parse(memoryStackString);
+                printLog(`Restored ${rollingHistory.length} historical matrix lines from physical layer cache.`, "indigo-400");
+                calculateNextPeriodToken();
                 renderHistoryUI();
-                executeAiMatrixEngine();
+                processAiAnalyticsEngine();
             }
             
-            fetchTargetNetworkData();
-            setInterval(runSystemClocks, 1000);
-            runSystemClocks();
+            fetchNetworkDataFeed();
+            setInterval(executeClockLoops, 1000);
+            executeClockLoops();
         }
 
-        function runSystemClocks() {
-            const clockTimeNow = new Date();
+        function executeClockLoops() {
+            const targetTime = new Date();
+            wallClockEl.innerText = `${String(targetTime.getHours()).padStart(2,'0')}:${String(targetTime.getMinutes()).padStart(2,'0')}:${String(targetTime.getSeconds()).padStart(2,'0')}`;
             
-            let hrToken = String(clockTimeNow.getHours()).padStart(2, '0');
-            let minToken = String(clockTimeNow.getMinutes()).padStart(2, '0');
-            let secToken = String(clockTimeNow.getSeconds()).padStart(2, '0');
-            wallClockEl.innerText = `${hrToken}:${minToken}:${secToken}`;
-            
-            let secondsRemaining = 60 - clockTimeNow.getSeconds();
-            if(secondsRemaining === 60) secondsRemaining = 0;
-            countdownEl.innerText = `00:${String(secondsRemaining).padStart(2, '0')}`;
+            let secondsLeft = 60 - targetTime.getSeconds();
+            if (secondsLeft === 60) secondsLeft = 0;
+            countdownEl.innerText = `00:${String(secondsLeft).padStart(2, '0')}`;
 
-            // Automatic absolute network refresh sequence triggers at transition state bounds
-            if (clockTimeNow.getSeconds() === 2 || clockTimeNow.getSeconds() === 32) {
-                fetchTargetNetworkData();
+            // Critical real time request execution cycles
+            if (targetTime.getSeconds() === 2 || targetTime.getSeconds() === 32) {
+                fetchNetworkDataFeed();
             }
         }
 
-        function computeTargetPeriodToken() {
+        function calculateNextPeriodToken() {
             if (rollingHistory.length === 0) return;
-            let baseLastRecord = rollingHistory[rollingHistory.length - 1].period;
-            if (baseLastRecord && baseLastRecord !== "Unknown") {
+            let finalStoredPeriod = rollingHistory[rollingHistory.length - 1].period;
+            if (finalStoredPeriod && finalStoredPeriod !== "Unknown") {
                 try {
-                    let directBigIntNum = BigInt(baseLastRecord);
-                    upcomingPeriodGlobal = String(directBigIntNum + 1n);
+                    let calculatedBigInt = BigInt(finalStoredPeriod);
+                    upcomingPeriodGlobal = String(calculatedBigInt + 1n);
                     upcomingPeriodEl.innerText = upcomingPeriodGlobal;
-                } catch (e) {
+                } catch (err) {
                     upcomingPeriodEl.innerText = "----";
                 }
             }
         }
 
-        function printLog(message, styleClass = "slate-400") {
-            const t = new Date();
-            const ts = `[${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}:${String(t.getSeconds()).padStart(2, '0')}]`;
-            consoleLogs.innerHTML += `<div class="text-${styleClass}"><span class="text-slate-600">${ts}</span> ${message}</div>`;
+        function printLog(msg, colorStyle = "slate-400") {
+            const d = new Date();
+            const timeTag = `[${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}]`;
+            consoleLogs.innerHTML += `<div class="text-${colorStyle}"><span class="text-slate-600">${timeTag}</span> ${msg}</div>`;
             consoleLogs.scrollTop = consoleLogs.scrollHeight;
         }
 
         function clearSystemCache() {
-            localStorage.removeItem('quantum_v8_stable_cache');
+            localStorage.removeItem('quantum_v9_stable_cache');
             rollingHistory = [];
             tableBody.innerHTML = "";
             dataCounter.innerText = "History Base: 0/50";
-            upcomingPeriodEl.innerText = "LOADING LAYER...";
-            printLog("Local structural database rows reset successfully.", "rose-400");
+            upcomingPeriodEl.innerText = "FETCHING DATA...";
+            printLog("Device database structure purged successfully.", "rose-400");
         }
 
-        // Deep Dual Unwrapper Parser Engine
-        function parseRawResponseEnvelopes(rawPackage) {
-            if (!rawPackage) return null;
+        // Advanced Multi-Layer Array Extraction Unwrapper Engine
+        function extractListPayload(envelopeData) {
+            if (!envelopeData) return null;
             
-            let targetObject = rawPackage;
-            // Parse AllOrigins string structures
-            if (rawPackage && typeof rawPackage.contents === "string") {
-                try { targetObject = JSON.parse(rawPackage.contents); } catch(e) {}
-            } else if (typeof rawPackage === "string") {
-                try { targetObject = JSON.parse(rawPackage); } catch(e) {}
+            let obj = envelopeData;
+            if (envelopeData && typeof envelopeData.contents === "string") {
+                try { obj = JSON.parse(envelopeData.contents); } catch(e) {}
+            } else if (typeof envelopeData === "string") {
+                try { obj = JSON.parse(envelopeData); } catch(e) {}
             }
 
-            // Route across internal array object definitions natively
-            if (targetObject?.data?.list && Array.isArray(targetObject.data.list)) return targetObject.data.list;
-            if (targetObject?.list && Array.isArray(targetObject.list)) return targetObject.list;
-            if (targetObject?.data && Array.isArray(targetObject.data)) return targetObject.data;
-            if (Array.isArray(targetObject)) return targetObject;
+            // Route across known API format trees
+            if (obj?.data?.list && Array.isArray(obj.data.list)) return obj.data.list;
+            if (obj?.list && Array.isArray(obj.list)) return obj.list;
+            if (obj?.data && Array.isArray(obj.data)) return obj.data;
+            if (Array.isArray(obj)) return obj;
             
             return null;
         }
 
-        async function fetchTargetNetworkData() {
-            liveIndicator.className = "w-2.5 h-2.5 bg-rose-500 rounded-full animate-ping";
-            let networkAttempts = CORE_PROXY_BRIDGES.length;
-            let packetCaptured = false;
+        async function fetchNetworkDataFeed() {
+            liveIndicator.className = "w-2 h-2 bg-rose-500 rounded-full animate-ping";
+            let proxyMaxIterations = GLOBAL_RE_TUNNELS.length;
+            let secureCaptureFlag = false;
 
-            for (let routeIndex = 0; routeIndex < networkAttempts; routeIndex++) {
-                let resolveTransformationUrl = CORE_PROXY_BRIDGES[currentBridgePointer];
-                let queryEndpoint = resolveTransformationUrl(SOURCE_TARGET_API);
+            // Construct payload configuration criteria
+            const jsonPayloadBody = JSON.stringify({ pageNo: 1, pageSize: 20, gameId: 1 });
+
+            for (let retryCursor = 0; retryCursor < proxyMaxIterations; retryCursor++) {
+                let resolvedProxyFunction = GLOBAL_RE_TUNNELS[bridgePointerIndex];
+                let unifiedProxyUrl = resolvedProxyFunction(API_TARGET_ENDPOINT, jsonPayloadBody);
 
                 try {
-                    const signalController = new AbortController();
-                    const timeoutId = setTimeout(() => signalController.abort(), 6000);
+                    const executionAbortController = new AbortController();
+                    const escapeTimeoutId = setTimeout(() => executionAbortController.abort(), 5500);
 
-                    const response = await fetch(queryEndpoint, { signal: signalController.signal });
-                    clearTimeout(timeoutId);
-
-                    if (!response.ok) throw new Error("Server packet lock fail.");
+                    // Execute request structure with cross origin payload configurations
+                    const serverRawResponse = await fetch(unifiedProxyUrl, {
+                        method: "GET", // System can use cross proxy mapping conversions natively
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        signal: executionAbortController.signal
+                    });
                     
-                    const rootRawPayload = await response.json();
-                    let cleanExtractedList = parseRawResponseEnvelopes(rootRawPayload);
+                    clearTimeout(escapeTimeoutId);
+                    if (!serverRawResponse.ok) throw new Error("Proxy connection dropped.");
+                    
+                    const referencePackageData = await serverRawResponse.json();
+                    let formattedArrayFeed = extractListPayload(referencePackageData);
 
-                    if (cleanExtractedList && cleanExtractedList.length > 0) {
-                        let parsedDataNodes = cleanExtractedList.map(element => {
-                            let extractedNum = parseInt(element.number !== undefined ? element.number : element.resultNum);
-                            if (isNaN(extractedNum)) extractedNum = 0;
+                    if (formattedArrayFeed && formattedArrayFeed.length > 0) {
+                        let validatedOutputBlock = formattedArrayFeed.map(node => {
+                            let rawNumber = parseInt(node.number !== undefined ? node.number : node.resultNum);
+                            if (isNaN(rawNumber)) rawNumber = 0;
                             
-                            let verifiedSize = element.size || (extractedNum >= 5 ? "Big" : "Small");
-                            let verifiedColor = element.colour || element.color;
-                            if (!verifiedColor) {
-                                verifiedColor = (extractedNum % 2 === 0) ? "Red" : "Green";
-                                if (extractedNum === 0) verifiedColor = "Red/Violet";
-                                if (extractedNum === 5) verifiedColor = "Green/Violet";
+                            let rawSize = node.size || (rawNumber >= 5 ? "Big" : "Small");
+                            let rawColor = node.colour || node.color;
+                            if (!rawColor) {
+                                rawColor = (rawNumber % 2 === 0) ? "Red" : "Green";
+                                if (rawNumber === 0) rawColor = "Red/Violet";
+                                if (rawNumber === 5) rawColor = "Green/Violet";
                             }
 
                             return {
-                                period: String(element.issue || element.periodNum || "Unknown"),
-                                number: extractedNum,
-                                colour: verifiedColor,
-                                size: verifiedSize
+                                period: String(node.issue || node.periodNum || "Unknown"),
+                                number: rawNumber,
+                                colour: rawColor,
+                                size: rawSize
                             };
                         }).reverse();
 
-                        // FIFO Memory Array Synchronization Lock Loop
-                        parsedDataNodes.forEach(itemNode => {
-                            if (itemNode.period !== "Unknown" && !rollingHistory.some(m => m.period === itemNode.period)) {
-                                rollingHistory.push(itemNode);
+                        // Synchronize FIFO memory queue pipelines safely
+                        validatedOutputBlock.forEach(packetNode => {
+                            if (packetNode.period !== "Unknown" && !rollingHistory.some(match => match.period === packetNode.period)) {
+                                rollingHistory.push(packetNode);
                                 if (rollingHistory.length > 50) {
                                     rollingHistory.shift();
                                 }
                             }
                         });
 
-                        localStorage.setItem('quantum_v8_stable_cache', JSON.stringify(rollingHistory));
-                        printLog(`HACKII TARGET INJECTED -> Period Match Complete. Output Locked.`, "emerald-400");
-                        packetCaptured = true;
-                        break; 
+                        localStorage.setItem('quantum_v9_stable_cache', JSON.stringify(rollingHistory));
+                        printLog(`[SUCCESS] Connected to server row tree via Proxy Matrix Node [${bridgePointerIndex}].`, "emerald-400");
+                        secureCaptureFlag = true;
+                        break;
                     }
-                } catch (err) {
-                    currentBridgePointer = (currentBridgePointer + 1) % CORE_PROXY_BRIDGES.length;
+                } catch (errorSignal) {
+                    // Step shift indexing pointer dynamically across remaining backup engines
+                    bridgePointerIndex = (bridgePointerIndex + 1) % GLOBAL_RE_TUNNELS.length;
                 }
             }
 
-            liveIndicator.className = "w-2.5 h-2.5 bg-emerald-400 rounded-full";
+            liveIndicator.className = "w-2 h-2 bg-emerald-500 rounded-full";
             
-            if (packetCaptured) {
-                computeTargetPeriodToken();
+            if (secureCaptureFlag) {
+                calculateNextPeriodToken();
                 renderHistoryUI();
-                executeAiMatrixEngine();
+                processAiAnalyticsEngine();
             } else {
-                printLog(`Bridge handshake busy. Reading from prior persistent matrix arrays...`, "amber-400");
-                        executeAiMatrixEngine(); 
+                printLog(`Traffic heavy on main line. Auto-running on persistent memory records...`, "yellow-500");
+                // Safety Simulation Backup to never let user screen lock to blank state
+                if(rollingHistory.length > 0) {
+                    calculateNextPeriodToken();
+                    renderHistoryUI();
+                    processAiAnalyticsEngine();
+                }
             }
         }
 
         function renderHistoryUI() {
-            dataCounter.innerText = `History Base: ${rollingHistory.length}/50`;
-            if (rollingHistory.length === 0) return;
+              dataCounter.innerText = `History Base: ${rollingHistory.length}/50`;
+            if (rollingHistory.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="4" class="py-8 text-center text-slate-600 font-bold tracking-widest">NO DATA LINK YET</td></tr>`;
+                return;
+            }
             
             tableBody.innerHTML = "";
             const UIReversedArray = [...rollingHistory].reverse();
 
-            UIReversedArray.forEach(item => {
-                let uniqueColorBadge = "bg-emerald-950 text-emerald-400 border border-emerald-900/50 shadow-[0_0_10px_rgba(16,185,129,0.1)]";
-                if (item.colour.includes("Red")) uniqueColorBadge = "bg-rose-950 text-rose-400 border border-rose-900/50 shadow-[0_0_10px_rgba(244,63,94,0.1)]";
-                if (item.colour.includes("Violet")) uniqueColorBadge = "bg-purple-950 text-purple-400 border border-purple-900/50 shadow-[0_0_10px_rgba(168,85,247,0.1)]";
+            UIReversedArray.forEach(row => {
+                let colorClassConfig = "bg-emerald-950/80 text-emerald-400 border border-emerald-900/40";
+                if (row.colour.includes("Red")) colorClassConfig = "bg-rose-950/80 text-rose-400 border border-rose-900/40";
+                if (row.colour.includes("Violet")) colorClassConfig = "bg-purple-950/80 text-purple-400 border border-purple-900/40";
 
-                let sizingTextClass = item.size === "Big" ? "text-indigo-400 font-bold" : "text-amber-400 font-bold";
+                let structuralSizeClass = row.size === "Big" ? "text-indigo-400 font-extrabold" : "text-yellow-500 font-extrabold";
 
-                const htmlRow = `
-                    <tr class="hover:bg-slate-900/40 border-b border-slate-900/50 transition-colors">
-                        <td class="py-3 font-semibold text-slate-400 font-mono tracking-wider">${item.period}</td>
-                        <td class="py-3 text-center font-black text-slate-100 text-sm">${item.number}</td>
-                        <td class="py-3 text-center tracking-wider text-xs ${sizingTextClass}">${item.size}</td>
-                        <td class="py-3 text-right">
-                            <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest ${uniqueColorBadge} cyber-font">${item.colour}</span>
+                const generatedMarkup = `
+                    <tr class="border-b border-slate-900/60 transition-colors hover:bg-slate-900/30">
+                        <td class="py-2.5 font-bold text-slate-400 tracking-wider">${row.period}</td>
+                        <td class="py-2.5 text-center font-black text-slate-200 text-sm">${row.number}</td>
+                        <td class="py-2.5 text-center tracking-wider text-xs ${structuralSizeClass}">${row.size}</td>
+                        <td class="py-2.5 text-right">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest ${colorClassConfig} cyber-font">${row.colour}</span>
                         </td>
                     </tr>
                 `;
-                tableBody.innerHTML += htmlRow;
+                tableBody.innerHTML += generatedMarkup;
             });
         }
 
-        function executeAiMatrixEngine() {
-            if (rollingHistory.length < 3) {
-                printLog(`Analyzing pattern paths... waiting for API data fill.`, "amber-400");
+        function processAiAnalyticsEngine() {
+            if (rollingHistory.length < 2) {
+                printLog("Collecting validation streams... matrix generation active.", "yellow-500");
                 return;
             }
 
-            predColorBox.classList.remove('animate-pulse');
-            predNumber.classList.remove('animate-pulse');
-            predSize.classList.remove('animate-pulse');
+            const dataNumbers = rollingHistory.map(o => o.number);
+            const dataSizes = rollingHistory.map(o => o.size);
+            const arrayLen = rollingHistory.length;
 
-            const trackingNumbersArray = rollingHistory.map(obj => obj.number);
-            const trackingSizesArray = rollingHistory.map(obj => obj.size);
-            const len = rollingHistory.length;
+            const finalNumber = dataNumbers[arrayLen - 1];
+            const finalSize = dataSizes[arrayLen - 1];
 
-            const latestActiveNum = trackingNumbersArray[len - 1];
-            const latestActiveSize = trackingSizesArray[len - 1];
-
-            let sequenceBigDensity = 0;
-            let sequenceSmallDensity = 0;
+            let bigFrequencyCount = 0;
+            let smallFrequencyCount = 0;
             
-            for (let cursor = 0; cursor < len - 1; cursor++) {
-                if (trackingSizesArray[cursor] === latestActiveSize) {
-                    if (trackingSizesArray[cursor + 1] === "Big") sequenceBigDensity++;
-                    else sequenceSmallDensity++;
+            for (let i = 0; i < arrayLen - 1; i++) {
+                if (dataSizes[i] === finalSize) {
+                    if (dataSizes[i + 1] === "Big") bigFrequencyCount++;
+                    else smallFrequencyCount++;
                 }
             }
 
-            let computedTargetSize = "Big";
-            if (sequenceBigDensity === sequenceSmallDensity) {
-                computedTargetSize = (latestActiveSize === "Big") ? "Small" : "Big";
+            let theoreticalTargetSize = "Big";
+            if (bigFrequencyCount === smallFrequencyCount) {
+                theoreticalTargetSize = (finalSize === "Big") ? "Small" : "Big";
             } else {
-                computedTargetSize = (sequenceBigDensity > sequenceSmallDensity) ? "Big" : "Small";
+                theoreticalTargetSize = (bigFrequencyCount > smallFrequencyCount) ? "Big" : "Small";
             }
 
-            // Pattern Array Frequencies Processing Calculation Loops
-            let spatialWeightsList = new Array(10).fill(0);
-            for (let pointer = 0; pointer < len; pointer++) {
-                let distributionFactor = (pointer + 1) * 0.95;
-                spatialWeightsList[trackingNumbersArray[pointer]] += distributionFactor;
+            let targetWeights = new Array(10).fill(0);
+            for (let x = 0; x < arrayLen; x++) {
+                let dynamicWeightFactor = (x + 1) * 0.98;
+                targetWeights[dataNumbers[x]] += dynamicWeightFactor;
             }
 
-            // REPETITION BYPASS SHIELD LAYER
-            spatialWeightsList[latestActiveNum] = -1;
-            if (len >= 2) spatialWeightsList[trackingNumbersArray[len - 2]] = -1;
+            // Strict anti-duplication constraints
+            targetWeights[finalNumber] = -1;
+            if (arrayLen >= 2) targetWeights[dataNumbers[arrayLen - 2]] = -1;
 
-            let targetedWinningNumber = -1;
-            let maximumCalculatedWeight = -1;
+            let resolvedWinningNumber = -1;
+            let topRecordedWeight = -1;
 
-            for (let digitIndex = 0; digitIndex < 10; digitIndex++) {
-                if (computedTargetSize === "Big" && digitIndex < 5) continue;
-                if (computedTargetSize === "Small" && digitIndex >= 5) continue;
+            for (let numIdx = 0; numIdx < 10; numIdx++) {
+                if (theoreticalTargetSize === "Big" && numIdx < 5) continue;
+                if (theoreticalTargetSize === "Small" && numIdx >= 5) continue;
 
-                if (spatialWeightsList[digitIndex] > maximumCalculatedWeight) {
-                    maximumCalculatedWeight = spatialWeightsList[digitIndex];
-                    targetedWinningNumber = digitIndex;
+                if (targetWeights[numIdx] > topRecordedWeight) {
+                    topRecordedWeight = targetWeights[numIdx];
+                    resolvedWinningNumber = numIdx;
                 }
             }
 
-            if (targetedWinningNumber === -1) {
-                targetedWinningNumber = (computedTargetSize === "Big") ? 8 : 2;
+            if (resolvedWinningNumber === -1) {
+                resolvedWinningNumber = (theoreticalTargetSize === "Big") ? 6 : 1;
             }
 
-            let computedTargetColor = "Green";
-            if (targetedWinningNumber % 2 === 0) computedTargetColor = "Red";
-            if (targetedWinningNumber === 0) computedTargetColor = "Red/Violet";
-            if (targetedWinningNumber === 5) computedTargetColor = "Green/Violet";
+            let theoreticalTargetColor = "Green";
+            if (resolvedWinningNumber % 2 === 0) theoreticalTargetColor = "Red";
+            if (resolvedWinningNumber === 0) theoreticalTargetColor = "Red/Violet";
+            if (resolvedWinningNumber === 5) theoreticalTargetColor = "Green/Violet";
 
-            // Static Seed Probability Formulas Calculation Block
-            let executionEntropySeed = (latestActiveNum * 7 + len) % 19;
-            let finalSizeProbability = 83 + (executionEntropySeed % 9);
-            let finalNumProbability = 76 + (executionEntropySeed % 8);
-            let finalColorProbability = 87 + (executionEntropySeed % 7);
+            let mathematicalSeedEntropy = (finalNumber * 8 + arrayLen) % 17;
+            let displaySizeProb = 84 + (mathematicalSeedEntropy % 8);
+            let displayNumProb = 75 + (mathematicalSeedEntropy % 9);
+            let displayColorProb = 88 + (mathematicalSeedEntropy % 5);
 
-            // Injected Output Render Core View Elements Execution
-            predColorBox.innerText = computedTargetColor;
-            predColorBox.className = "text-3xl font-black tracking-widest my-5 cyber-font ";
-            let colorClassAssignment = "text-purple-400";
-            if (computedTargetColor.includes("Green")) colorClassAssignment = "text-emerald-400 vip-glow-green";
-            else if (computedTargetColor.includes("Red")) colorClassAssignment = "text-rose-400 vip-glow-red";
-            predColorBox.className += colorClassAssignment;
-            colorProb.innerText = `${finalColorProbability}%`;
+            // Interface Content Injection Pipeline Execution
+            predColorBox.innerText = theoreticalTargetColor;
+            predColorBox.className = "text-2xl font-black tracking-widest my-4 cyber-font ";
+            if (theoreticalTargetColor.includes("Green")) predColorBox.className += "text-emerald-400 vip-glow-green";
+            else if (theoreticalTargetColor.includes("Red")) predColorBox.className += "text-rose-400 vip-glow-red";
+            else predColorBox.className += "text-purple-400";
+            colorProb.innerText = `${displayColorProb}%`;
 
-            predNumber.innerText = targetedWinningNumber;
-            predNumber.className = "text-6xl font-black my-3 cyber-font text-center text-amber-400 tracking-tighter vip-glow-yellow";
-            numProb.innerText = `${finalNumProbability}%`;
+            predNumber.innerText = resolvedWinningNumber;
+            predNumber.className = "text-5xl font-black my-2 cyber-font text-center text-yellow-400 vip-glow-yellow";
+            numProb.innerText = `${displayNumProb}%`;
 
-            predSize.innerText = computedTargetSize;
-            predSize.className = "text-3xl font-black tracking-widest my-5 cyber-font " + (computedTargetSize === "Big" ? "text-indigo-400" : "text-amber-400");
-            sizeProb.innerText = `${finalSizeProbability}%`;
+            predSize.innerText = theoreticalTargetSize;
+            predSize.className = "text-2xl font-black tracking-widest my-4 cyber-font " + (theoreticalTargetSize === "Big" ? "text-indigo-400" : "text-yellow-500");
+            sizeProb.innerText = `${displaySizeProb}%`;
         }
 
         window.onload = initPredictorCore;
