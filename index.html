@@ -1,236 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HACKII PANEL V19 - PREMIUM SYNC</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
-    <style>
-        body { background: #020617; font-family: 'Orbitron', sans-serif; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
-        .card { background: rgba(6, 14, 30, 0.95); border: 1px solid #1e293b; backdrop-filter: blur(20px); box-shadow: 0 0 35px rgba(0, 0, 0, 0.8); }
-        .glow-green { text-shadow: 0 0 25px #00ffaa; color: #00ffaa; }
-        .glow-red { text-shadow: 0 0 25px #ff0055; color: #ff0055; }
-        .glow-yellow { text-shadow: 0 0 25px #ffea00; color: #ffea00; }
-        .glow-cyan { text-shadow: 0 0 25px #00f0ff; color: #00f0ff; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 5px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HACKII PANEL V19 - PREMIUM SYNC</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+<style>
+body{
+background:#020617;
+font-family:'Orbitron',sans-serif;
+overflow-x:hidden;
+-webkit-tap-highlight-color:transparent;
+}
+
+.card{
+background:rgba(6,14,30,.95);
+border:1px solid #1e293b;
+backdrop-filter:blur(20px);
+box-shadow:0 0 35px rgba(0,0,0,.8);
+}
+
+.glow-green{
+text-shadow:0 0 25px #00ffaa;
+color:#00ffaa;
+}
+
+.glow-red{
+text-shadow:0 0 25px #ff0055;
+color:#ff0055;
+}
+
+.glow-yellow{
+text-shadow:0 0 25px #ffea00;
+color:#ffea00;
+}
+
+.glow-cyan{
+text-shadow:0 0 25px #00f0ff;
+color:#00f0ff;
+}
+
+::-webkit-scrollbar{
+width:4px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#1e293b;
+border-radius:5px;
+}
+</style>
 </head>
+
 <body class="text-white min-h-screen pb-8">
 
 <header class="border-b border-slate-800 bg-black/70 backdrop-blur-3xl sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto p-4 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-cyan-500/20">
-                <i class="fa-solid fa-bolt text-white text-xl animate-bounce"></i>
-            </div>
-            <div>
-                <h1 class="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-emerald-400 tracking-widest">HACKII PANEL V19</h1>
-                <p class="text-[9px] text-emerald-400 font-bold tracking-widest uppercase">High-Fidelity Server Cluster Synchronization Architecture</p>
-            </div>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl px-4 py-2">
-            <div id="wall-clock" class="text-xl md:text-2xl font-black text-emerald-400 font-mono tracking-wider">00:00:00</div>
-        </div>
-    </div>
+<div class="max-w-7xl mx-auto p-4 flex items-center justify-between">
+
+<div class="flex items-center gap-3">
+
+<div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+<i class="fa-solid fa-bolt text-white text-xl animate-bounce"></i>
+</div>
+
+<div>
+<h1 class="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-emerald-400 tracking-widest">
+HACKII PANEL V19
+</h1>
+
+<p class="text-[9px] text-emerald-400 font-bold tracking-widest uppercase">
+High-Fidelity Server Cluster Synchronization Architecture
+</p>
+</div>
+</div>
+
+<div class="bg-slate-900 border border-slate-800 rounded-xl px-4 py-2">
+<div id="wall-clock" class="text-xl md:text-2xl font-black text-emerald-400 font-mono tracking-wider">
+00:00:00
+</div>
+</div>
+
+</div>
 </header>
 
 <main class="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-5">
-    <div class="lg:col-span-2 flex flex-col gap-5">
-        
-        <div class="card rounded-2xl p-5 border-l-4 border-cyan-500 bg-gradient-to-r from-slate-950/70 to-transparent">
-            <div class="flex items-center justify-between gap-4">
-                <div>
-                    <p class="text-[10px] tracking-widest text-cyan-400 font-bold uppercase">Cloud Synchronized Period Node</p>
-                    <h2 id="upcoming-period" class="text-2xl md:text-4xl font-black text-white glow-yellow mt-1 tracking-widest">CONNECTING...</h2>
-                </div>
-                <div class="bg-black/60 border border-slate-800 rounded-xl px-4 py-2.5 text-center min-w-[100px]">
-                    <p class="text-[9px] text-slate-500 font-bold mb-0.5 tracking-wider">SEC REFRESH</p>
-                    <div id="countdown" class="text-2xl md:text-3xl font-black text-emerald-400 font-mono">00:00</div>
-                </div>
-            </div>
-        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="card rounded-xl p-5 flex flex-col justify-between min-h-[165px]">
-                <div>
-                    <p class="text-[10px] tracking-widest text-purple-400 font-bold uppercase">Color Predictive State</p>
-                    <div id="pred-color-box" class="text-3xl font-black mt-5 tracking-wide uppercase text-slate-500">PROCESSING</div>
-                </div>
-                <div class="border-t border-slate-800/80 pt-3 flex justify-between text-[11px] text-slate-400">
-                    <span>SPECTRUM MODEL</span><span id="color-prob" class="font-bold text-white font-mono">--%</span>
-                </div>
-            </div>
-            
-            <div class="card rounded-xl p-5 flex flex-col justify-between min-h-[165px] bg-gradient-to-b from-slate-900/40 to-transparent">
-                <div>
-                    <p class="text-[10px] tracking-widest text-yellow-400 font-bold uppercase">Neural Targeted Value</p>
-                    <div id="pred-number" class="text-6xl font-black text-center mt-2 glow-yellow font-mono">?</div>
-                </div>
-                <div class="border-t border-slate-800/80 pt-3 flex justify-between text-[11px] text-slate-400">
-                    <span>ACCURACY MATCH</span><span id="num-prob" class="font-bold text-white font-mono">--%</span>
-                </div>
-            </div>
+<div class="lg:col-span-2 flex flex-col gap-5">
 
-            <div class="card rounded-xl p-5 flex flex-col justify-between min-h-[165px]">
-                <div>
-                    <p class="text-[10px] tracking-widest text-cyan-400 font-bold uppercase">Size Optimized State</p>
-                    <div id="pred-size" class="text-3xl font-black mt-5 tracking-wide uppercase text-slate-500">PROCESSING</div>
-                </div>
-                <div class="border-t border-slate-800/80 pt-3 flex justify-between text-[11px] text-slate-400">
-                    <span>MATRIX TREND</span><span id="size-prob" class="font-bold text-white font-mono">--%</span>
-                </div>
-            </div>
-        </div>
+<div class="card rounded-2xl p-5 border-l-4 border-cyan-500 bg-gradient-to-r from-slate-950/70 to-transparent">
 
-        <div class="card rounded-2xl overflow-hidden">
-            <div class="flex items-center justify-between border-b border-slate-800 px-4 py-3 bg-slate-950/60">
-                <h3 class="text-xs tracking-widest text-cyan-400 font-bold uppercase">HACKII SYSTEM NETWORK DIAGNOSTIC CORE</h3>
-                <span id="system-status-text" class="text-[10px] text-yellow-400 font-mono font-bold">CONNECTING_TO_HUB</span>
-            </div>
-            <div id="console-logs" class="h-[150px] overflow-y-auto p-4 text-[11px] space-y-1.5 text-slate-300 font-mono bg-black/30">
-                <div>[SYSTEM] INITIALIZING SECURE GLOBAL HUB FLOW PIPELINE...</div>
-            </div>
-        </div>
-    </div>
+<div class="flex items-center justify-between gap-4">
 
-    <div class="card rounded-2xl p-4 flex flex-col">
-        <div class="border-b border-slate-800 pb-3 flex justify-between items-center">
-            <div>
-                <h3 class="text-xs tracking-widest text-slate-300 font-bold uppercase">Central Database Records</h3>
-                <p class="text-[10px] text-slate-500 font-medium">Synced Global Matrix Viewport</p>
-            </div>
-            <span id="memory-counter" class="text-[10px] bg-slate-900 border border-slate-800 text-cyan-400 px-2 py-0.5 rounded font-mono font-bold">0 / 50 NODES</span>
-        </div>
-        <div class="overflow-y-auto mt-2 flex-grow max-h-[440px]">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="text-[10px] text-slate-500 border-b border-slate-800 uppercase font-bold tracking-widest">
-                        <th class="py-2.5">Period ID</th>
-                        <th class="py-2.5 text-center">Num</th>
-                        <th class="py-2.5 text-center">Size</th>
-                        <th class="py-2.5 text-right">Color Map</th>
-                    </tr>
-                </thead>
-                <tbody id="history-table-body" class="divide-y divide-slate-900 font-mono text-xs">
-                    </tbody>
-            </table>
-        </div>
-    </div>
+<div>
+<p class="text-[10px] tracking-widest text-cyan-400 font-bold uppercase">
+Cloud Synchronized Period Node
+</p>
+
+<h2 id="upcoming-period" class="text-2xl md:text-4xl font-black text-white glow-yellow mt-1 tracking-widest">
+CONNECTING...
+</h2>
+</div>
+
+<div class="bg-black/60 border border-slate-800 rounded-xl px-4 py-2.5 text-center min-w-[100px]">
+<p class="text-[9px] text-slate-500 font-bold mb-0.5 tracking-wider">
+SEC REFRESH
+</p>
+
+<div id="countdown" class="text-2xl md:text-3xl font-black text-emerald-400 font-mono">
+00:00
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+<div class="card rounded-xl p-5 flex flex-col justify-between min-h-[165px]">
+<div>
+<p class="text-[10px] tracking-widest text-purple-400 font-bold uppercase">
+Color Predictive State
+</p>
+
+<div id="pred-color-box" class="text-3xl font-black mt-5 tracking-wide uppercase text-slate-500">
+PROCESSING
+</div>
+</div>
+
+<div class="border-t border-slate-800/80 pt-3 flex justify-between text-[11px] text-slate-400">
+<span>SPECTRUM MODEL</span>
+<span id="color-prob" class="font-bold text-white font-mono">--%</span>
+</div>
+</div>
+
+<div class="card rounded-xl p-5 flex flex-col justify-between min-h-[165px] bg-gradient-to-b from-slate-900/40 to-transparent">
+
+<div>
+<p class="text-[10px] tracking-widest text-yellow-400 font-bold uppercase">
+Neural Targeted Value
+</p>
+
+<div id="pred-number" class="text-6xl font-black text-center mt-2 glow-yellow font-mono">
+?
+</div>
+</div>
+
+<div class="border-t border-slate-800/80 pt-3 flex justify-between text-[11px] text-slate-400">
+<span>ACCURACY MATCH</span>
+<span id="num-prob" class="font-bold text-white font-mono">--%</span>
+</div>
+</div>
+
+<div class="card rounded-xl p-5 flex flex-col justify-between min-h-[165px]">
+
+<div>
+<p class="text-[10px] tracking-widest text-cyan-400 font-bold uppercase">
+Size Optimized State
+</p>
+
+<div id="pred-size" class="text-3xl font-black mt-5 tracking-wide uppercase text-slate-500">
+PROCESSING
+</div>
+</div>
+
+<div class="border-t border-slate-800/80 pt-3 flex justify-between text-[11px] text-slate-400">
+<span>MATRIX TREND</span>
+<span id="size-prob" class="font-bold text-white font-mono">--%</span>
+</div>
+</div>
+
+</div>
+
+<div class="card rounded-2xl overflow-hidden">
+
+<div class="flex items-center justify-between border-b border-slate-800 px-4 py-3 bg-slate-950/60">
+<h3 class="text-xs tracking-widest text-cyan-400 font-bold uppercase">
+HACKII SYSTEM NETWORK DIAGNOSTIC CORE
+</h3>
+
+<span id="system-status-text" class="text-[10px] text-yellow-400 font-mono font-bold">
+CONNECTING_TO_HUB
+</span>
+</div>
+
+<div id="console-logs" class="h-[150px] overflow-y-auto p-4 text-[11px] space-y-1.5 text-slate-300 font-mono bg-black/30">
+<div>[SYSTEM] INITIALIZING SECURE GLOBAL HUB FLOW PIPELINE...</div>
+</div>
+
+</div>
+</div>
+
+<div class="card rounded-2xl p-4 flex flex-col">
+
+<div class="border-b border-slate-800 pb-3 flex justify-between items-center">
+
+<div>
+<h3 class="text-xs tracking-widest text-slate-300 font-bold uppercase">
+Central Database Records
+</h3>
+
+<p class="text-[10px] text-slate-500 font-medium">
+Synced Global Matrix Viewport
+</p>
+</div>
+
+<span id="memory-counter" class="text-[10px] bg-slate-900 border border-slate-800 text-cyan-400 px-2 py-0.5 rounded font-mono font-bold">
+0 / 50 NODES
+</span>
+
+</div>
+
+<div class="overflow-y-auto mt-2 flex-grow max-h-[440px]">
+
+<table class="w-full text-left border-collapse">
+
+<thead>
+<tr class="text-[10px] text-slate-500 border-b border-slate-800 uppercase font-bold tracking-widest">
+<th class="py-2.5">Period ID</th>
+<th class="py-2.5 text-center">Num</th>
+<th class="py-2.5 text-center">Size</th>
+<th class="py-2.5 text-right">Color Map</th>
+</tr>
+</thead>
+
+<tbody id="history-table-body" class="divide-y divide-slate-900 font-mono text-xs">
+</tbody>
+
+</table>
+</div>
+</div>
 </main>
 
 <script>
-// IMPORTANT CONFIGURATION: Replace this string with your live Render app api url!
-const CENTRAL_BACKEND_URL = "https://your-panel-app.onrender.com/api/matrix-data";
+
+const CENTRAL_BACKEND_URL = "https://ambika-panel.onrender.com/api/matrix-data";
 
 const wallClock = document.getElementById("wall-clock");
 const countdown = document.getElementById("countdown");
 const upcomingPeriod = document.getElementById("upcoming-period");
-const logs = document.getElementById("console-logs");
+
 const historyBody = document.getElementById("history-table-body");
+
 const statusText = document.getElementById("system-status-text");
+
 const memoryCounter = document.getElementById("memory-counter");
 
 const predColor = document.getElementById("pred-color-box");
 const predNumber = document.getElementById("pred-number");
 const predSize = document.getElementById("pred-size");
+
 const colorProb = document.getElementById("color-prob");
 const numProb = document.getElementById("num-prob");
 const sizeProb = document.getElementById("size-prob");
 
-function log(msg, color="text-slate-400") {
-    const d = new Date();
-    const t = `[${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}]`;
-    logs.innerHTML += `<div class="${color}"><span class="text-slate-600 font-bold">${t}</span> ${msg}</div>`;
-    logs.scrollTop = logs.scrollHeight;
-    if(logs.children.length > 15) logs.removeChild(logs.children[0]);
+function updateClock(){
+
+const now = new Date();
+
+wallClock.innerText =
+`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+
+let sec = 60 - now.getSeconds();
+
+if(sec === 60) sec = 0;
+
+countdown.innerText = `00:${String(sec).padStart(2,'0')}`;
 }
 
-function updateClock() {
-    const now = new Date();
-    wallClock.innerText = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
-    let sec = 60 - now.getSeconds();
-    if(sec === 60) sec = 0;
-    countdown.innerText = `00:${String(sec).padStart(2,'0')}`;
+async function loadData(){
 
-    // Request fresh synchronization updates from backend server every single second
-    processCentralCloudSync();
+try{
+
+const response = await fetch(
+CENTRAL_BACKEND_URL + "?t=" + Date.now(),
+{
+method:"GET",
+cache:"no-store"
+}
+);
+
+if(!response.ok){
+throw new Error("SERVER_ERROR");
 }
 
-async function processCentralCloudSync() {
-    try {
-        const response = await fetch(CENTRAL_BACKEND_URL);
-        if(!response.ok) throw new Error("BAD_STREAM_OR_CORS");
-        const serverPayload = await response.json();
-        
-        const historyList = serverPayload.history || [];
-        const predictNode = serverPayload.prediction || {};
+const data = await response.json();
 
-        if(!historyList.length) return;
+renderData(data.history || [], data.prediction || {});
 
-        // Persist arrays securely inside browser context memory to ensure offline immunity
-        localStorage.setItem("h19_cloud_backup_history", JSON.stringify(historyList));
-        localStorage.setItem("h19_cloud_backup_predict", JSON.stringify(predictNode));
+statusText.innerText = "CLUSTER_SYNCHRONIZED_OK";
 
-        renderDataMatrix(historyList, predictNode);
-        
-        statusText.innerText = "CLUSTER_SYNCHRONIZED_OK";
-        statusText.className = "text-[10px] text-emerald-400 font-mono font-bold";
-    } catch (e) {
-        // AUTOMATIC OFFLINE RETENTION SYSTEM CORES
-        const cachedHistory = localStorage.getItem("h19_cloud_backup_history");
-        const cachedPredict = localStorage.getItem("h19_cloud_backup_predict");
+statusText.className =
+"text-[10px] text-emerald-400 font-mono font-bold";
 
-        if(cachedHistory && cachedPredict) {
-            renderDataMatrix(JSON.parse(cachedHistory), JSON.parse(cachedPredict));
-            statusText.innerText = "LOCAL_OFFLINE_REDUNDANCY_RUNNING";
-            statusText.className = "text-[10px] text-yellow-500 font-mono font-bold";
-        } else {
-            statusText.innerText = "SERVER_CONNECTION_INTERRUPTED_RETRYING";
-            statusText.className = "text-[10px] text-red-500 font-mono font-bold";
-        }
-    }
+}catch(e){
+
+statusText.innerText =
+"SERVER_CONNECTION_INTERRUPTED_RETRYING";
+
+statusText.className =
+"text-[10px] text-red-500 font-mono font-bold";
+}
 }
 
-function renderDataMatrix(history, pred) {
-    historyBody.innerHTML = "";
-    let displayArray = [...history].reverse();
-    memoryCounter.innerText = `${displayArray.length} / 50 NODES`;
+function renderData(history,pred){
 
-    displayArray.forEach(row => {
-        let colorClass = "bg-emerald-950/60 text-emerald-400 border border-emerald-800/30";
-        if(row.color.includes("Red")) colorClass = "bg-red-950/60 text-red-400 border border-red-800/30";
-        if(row.color.includes("Violet")) colorClass = "bg-purple-950/60 text-purple-400 border border-purple-800/30";
+historyBody.innerHTML = "";
 
-        historyBody.innerHTML += `
-        <tr class="border-b border-slate-900/80 hover:bg-slate-900/50 transition-all">
-            <td class="py-3 text-slate-400 font-bold font-mono">${row.period}</td>
-            <td class="py-3 text-center font-black text-white text-sm font-mono">${row.number}</td>
-            <td class="py-3 text-center font-bold ${row.size === "Big" ? "text-indigo-400" : "text-yellow-500"}">${row.size}</td>
-            <td class="py-3 text-right"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${colorClass}">${row.color}</span></td>
-        </tr>`;
-    });
+let displayArray = [...history].reverse();
 
-    upcomingPeriod.innerText = pred.upcomingPeriod || "ANALYZING...";
-    predColor.innerText = pred.color || "WAITING";
-    predNumber.innerText = pred.number !== undefined ? pred.number : "?";
-    predSize.innerText = pred.size || "WAITING";
+memoryCounter.innerText =
+`${displayArray.length} / 50 NODES`;
 
-    colorProb.innerText = pred.colorConf || "--%";
-    numProb.innerText = pred.numConf || "--%";
-    sizeProb.innerText = pred.sizeConf || "--%";
+displayArray.forEach(row=>{
 
-    predColor.className = "text-3xl font-black mt-5 tracking-wide uppercase transition-all duration-300 " + 
-        (pred.color.includes("Green") ? "text-emerald-400 glow-green" : pred.color.includes("Red") ? "text-red-400 glow-red" : "text-purple-400");
-    predSize.className = "text-3xl font-black mt-5 tracking-wide uppercase transition-all duration-300 " + 
-        (pred.size === "Big" ? "text-indigo-400 glow-cyan" : "text-yellow-400 glow-yellow");
+let colorClass =
+"bg-emerald-950/60 text-emerald-400 border border-emerald-800/30";
+
+if(row.color.includes("Red")){
+colorClass =
+"bg-red-950/60 text-red-400 border border-red-800/30";
 }
 
-window.onload = () => {
-    setInterval(updateClock, 1000);
-};
+if(row.color.includes("Violet")){
+colorClass =
+"bg-purple-950/60 text-purple-400 border border-purple-800/30";
+}
+
+historyBody.innerHTML += `
+<tr class="border-b border-slate-900/80 hover:bg-slate-900/50 transition-all">
+
+<td class="py-3 text-slate-400 font-bold font-mono">
+${row.period}
+</td>
+
+<td class="py-3 text-center font-black text-white text-sm font-mono">
+${row.number}
+</td>
+
+<td class="py-3 text-center font-bold ${row.size === "Big" ? "text-indigo-400" : "text-yellow-500"}">
+${row.size}
+</td>
+
+<td class="py-3 text-right">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold ${colorClass}">
+${row.color}
+</span>
+</td>
+
+</tr>
+`;
+});
+
+upcomingPeriod.innerText =
+pred.upcomingPeriod || "ANALYZING...";
+
+predColor.innerText =
+pred.color || "WAITING";
+
+predNumber.innerText =
+pred.number ?? "?";
+
+predSize.innerText =
+pred.size || "WAITING";
+
+colorProb.innerText =
+pred.colorConf || "--%";
+
+numProb.innerText =
+pred.numConf || "--%";
+
+sizeProb.innerText =
+pred.sizeConf || "--%";
+
+predColor.className =
+"text-3xl font-black mt-5 tracking-wide uppercase transition-all duration-300 " +
+(pred.color?.includes("Green")
+? "text-emerald-400 glow-green"
+: pred.color?.includes("Red")
+? "text-red-400 glow-red"
+: "text-purple-400");
+
+predSize.className =
+"text-3xl font-black mt-5 tracking-wide uppercase transition-all duration-300 " +
+(pred.size === "Big"
+? "text-indigo-400 glow-cyan"
+: "text-yellow-400 glow-yellow");
+}
+
+setInterval(()=>{
+updateClock();
+loadData();
+},1000);
+
+loadData();
+
 </script>
 </body>
 </html>
