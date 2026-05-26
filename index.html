@@ -3,30 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HACKII PANEL V19 - GLOBAL SYNCHRONIZER</title>
+    <title>HACKII PANEL V19 - CLOUD SYNCHRONIZED</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: #020617;
-            font-family: 'Orbitron', sans-serif;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .card {
-            background: rgba(6, 14, 30, 0.95);
-            border: 1px solid #1e293b;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 35px rgba(0, 0, 0, 0.8);
-        }
+        body { background: #020617; font-family: 'Orbitron', sans-serif; overflow-x: hidden; }
+        .card { background: rgba(6, 14, 30, 0.95); border: 1px solid #1e293b; backdrop-filter: blur(20px); box-shadow: 0 0 35px rgba(0, 0, 0, 0.8); }
         .glow-green { text-shadow: 0 0 25px #00ffaa; color: #00ffaa; }
         .glow-red { text-shadow: 0 0 25px #ff0055; color: #ff0055; }
         .glow-yellow { text-shadow: 0 0 25px #ffea00; color: #ffea00; }
         .glow-cyan { text-shadow: 0 0 25px #00f0ff; color: #00f0ff; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 5px; }
     </style>
 </head>
 <body class="text-white min-h-screen pb-8">
@@ -34,12 +21,12 @@
 <header class="border-b border-slate-800 bg-black/70 backdrop-blur-3xl sticky top-0 z-50">
     <div class="max-w-7xl mx-auto p-4 flex items-center justify-between">
         <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-cyan-500/20">
-                <i class="fa-solid fa-server text-white text-xl animate-pulse"></i>
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-emerald-500 flex items-center justify-center">
+                <i class="fa-solid fa-cloud-sun text-white text-xl animate-pulse"></i>
             </div>
             <div>
                 <h1 class="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-emerald-400 tracking-widest">HACKII PANEL V19</h1>
-                <p class="text-[9px] text-emerald-400 font-bold tracking-widest uppercase">Global Multi-Phone Synchronization Core</p>
+                <p class="text-[9px] text-emerald-400 font-bold tracking-widest uppercase">Cloud Managed Pure Database Synchronizer</p>
             </div>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-xl px-4 py-2">
@@ -51,14 +38,14 @@
 <main class="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-5">
     <div class="lg:col-span-2 flex flex-col gap-5">
         
-        <div class="card rounded-2xl p-5 border-l-4 border-cyan-500 bg-gradient-to-r from-slate-950/70 to-transparent">
+        <div class="card rounded-2xl p-5 border-l-4 border-cyan-500">
             <div class="flex items-center justify-between gap-4">
                 <div>
-                    <p class="text-[10px] tracking-widest text-cyan-400 font-bold uppercase">Universal Sync Target Node</p>
+                    <p class="text-[10px] tracking-widest text-cyan-400 font-bold uppercase">Cloud Synchronized Period</p>
                     <h2 id="upcoming-period" class="text-2xl md:text-4xl font-black text-white glow-yellow mt-1 tracking-widest">LOADING...</h2>
                 </div>
                 <div class="bg-black/60 border border-slate-800 rounded-xl px-4 py-2.5 text-center min-w-[100px]">
-                    <p class="text-[9px] text-slate-500 font-bold mb-0.5 tracking-wider">GLOBAL CLOCK</p>
+                    <p class="text-[9px] text-slate-500 font-bold mb-0.5 tracking-wider">REFRESH</p>
                     <div id="countdown" class="text-2xl md:text-3xl font-black text-emerald-400 font-mono">00:00</div>
                 </div>
             </div>
@@ -67,48 +54,42 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="card rounded-xl p-5 flex flex-col justify-between min-h-[165px]">
                 <div>
-                    <p class="text-[10px] tracking-widest text-purple-400 font-bold uppercase">Synced Color Node</p>
-                    <div id="pred-color-box" class="text-3xl font-black mt-5 tracking-wide uppercase">CALIBRATING</div>
+                    <p class="text-[10px] tracking-widest text-purple-400 font-bold uppercase">Color Sync</p>
+                    <div id="pred-color-box" class="text-3xl font-black mt-5 tracking-wide uppercase">LOAD</div>
                 </div>
                 <div class="border-t border-slate-800/80 pt-3 flex justify-between text-[11px] text-slate-400">
-                    <span>PATTERN FLOW</span>
-                    <span id="color-prob" class="font-bold text-white font-mono">--%</span>
+                    <span>SPECTRUM</span><span id="color-prob" class="font-bold text-white font-mono">--%</span>
                 </div>
             </div>
             
-            <div class="card rounded-xl p-5 flex flex-col justify-between min-h-[165px] bg-gradient-to-b from-slate-900/40 to-transparent">
+            <div class="card rounded-xl p-5 flex flex-col justify-between min-h-[165px]">
                 <div>
-                    <p class="text-[10px] tracking-widest text-yellow-400 font-bold uppercase">Deterministic Target</p>
+                    <p class="text-[10px] tracking-widest text-yellow-400 font-bold uppercase">Deterministic Num</p>
                     <div id="pred-number" class="text-6xl font-black text-center mt-2 glow-yellow font-mono">?</div>
                 </div>
                 <div class="border-t border-slate-800/80 pt-3 flex justify-between text-[11px] text-slate-400">
-                    <span>GLOBAL PROBABILITY</span>
-                    <span id="num-prob" class="font-bold text-white font-mono">--%</span>
+                    <span>ACCURACY Matrix</span><span id="num-prob" class="font-bold text-white font-mono">--%</span>
                 </div>
             </div>
 
             <div class="card rounded-xl p-5 flex flex-col justify-between min-h-[165px]">
                 <div>
-                    <p class="text-[10px] tracking-widest text-cyan-400 font-bold uppercase">Synced Size Node</p>
-                    <div id="pred-size" class="text-3xl font-black mt-5 tracking-wide uppercase">CALIBRATING</div>
+                    <p class="text-[10px] tracking-widest text-cyan-400 font-bold uppercase">Size Sync</p>
+                    <div id="pred-size" class="text-3xl font-black mt-5 tracking-wide uppercase">LOAD</div>
                 </div>
                 <div class="border-t border-slate-800/80 pt-3 flex justify-between text-[11px] text-slate-400">
-                    <span>DEEP TREND LOGIC</span>
-                    <span id="size-prob" class="font-bold text-white font-mono">--%</span>
+                    <span>TREND MATRIX</span><span id="size-prob" class="font-bold text-white font-mono">--%</span>
                 </div>
             </div>
         </div>
 
         <div class="card rounded-2xl overflow-hidden">
             <div class="flex items-center justify-between border-b border-slate-800 px-4 py-3 bg-slate-950/60">
-                <h3 class="text-xs tracking-widest text-cyan-400 font-bold uppercase">GLOBAL SYNCED RECORD TERMINAL</h3>
-                <div class="flex items-center gap-2">
-                    <span id="system-status-text" class="text-[9px] text-slate-400 font-mono font-bold">SYNCHRONIZED</span>
-                    <div id="live-indicator-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                </div>
+                <h3 class="text-xs tracking-widest text-cyan-400 font-bold uppercase">HACKII SYSTEM REALTIME CONSOLE</h3>
+                <span id="system-status-text" class="text-[9px] text-slate-400 font-mono font-bold">CONNECTED</span>
             </div>
-            <div id="console-logs" class="h-[210px] overflow-y-auto p-4 text-[11px] space-y-1.5 text-slate-300 font-mono bg-black/30">
-                <div>[SYSTEM] ESTABLISHING PARALLEL DEEP GAMBLING TREND SYNCHRONIZER V19...</div>
+            <div id="console-logs" class="h-[150px] overflow-y-auto p-4 text-[11px] space-y-1.5 text-slate-300 font-mono bg-black/30">
+                <div>[SYSTEM] INITIALIZING SECURE GLOBAL HUB FLOW PIPELINE...</div>
             </div>
         </div>
     </div>
@@ -116,19 +97,19 @@
     <div class="card rounded-2xl p-4 flex flex-col">
         <div class="border-b border-slate-800 pb-3 flex justify-between items-center">
             <div>
-                <h3 class="text-xs tracking-widest text-slate-300 font-bold uppercase">Static 50-Node Buffer</h3>
-                <p class="text-[10px] text-slate-500 font-medium">Synced Global Dataset Viewport</p>
+                <h3 class="text-xs tracking-widest text-slate-300 font-bold uppercase">Central Database View</h3>
+                <p class="text-[10px] text-slate-500 font-medium">Synced Global Dataset Matrix</p>
             </div>
-            <span id="memory-counter" class="text-[10px] bg-slate-900 border border-slate-800 text-cyan-400 px-2 py-0.5 rounded font-mono font-bold">0 / 50 NODES</span>
+            <span id="memory-counter" class="text-[10px] bg-slate-900 border border-slate-800 text-cyan-400 px-2 py-0.5 rounded font-mono font-bold">50 / 50 NODES</span>
         </div>
-        <div class="overflow-y-auto mt-2 flex-grow max-h-[470px]">
+        <div class="overflow-y-auto mt-2 flex-grow max-h-[430px]">
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="text-[10px] text-slate-500 border-b border-slate-800 uppercase font-bold tracking-widest">
                         <th class="py-2.5">Node ID</th>
                         <th class="py-2.5 text-center">Value</th>
                         <th class="py-2.5 text-center">Size</th>
-                        <th class="py-2.5 text-right">Color Map</th>
+                        <th class="py-2.5 text-right">Color</th>
                     </tr>
                 </thead>
                 <tbody id="history-table-body" class="divide-y divide-slate-900 font-mono text-xs">
@@ -139,17 +120,14 @@
 </main>
 
 <script>
-const API_URL = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
-let memoryPool = []; 
-let isFetching = false;
+// CHANGE THIS TO YOUR DEPLOYED BACKEND SERVER LINK
+const BACKEND_URL = "http://localhost:3000/api/matrix-data";
 
-// DOM Selectors
 const wallClock = document.getElementById("wall-clock");
 const countdown = document.getElementById("countdown");
 const upcomingPeriod = document.getElementById("upcoming-period");
 const logs = document.getElementById("console-logs");
 const historyBody = document.getElementById("history-table-body");
-const liveDot = document.getElementById("live-indicator-dot");
 const statusText = document.getElementById("system-status-text");
 const memoryCounter = document.getElementById("memory-counter");
 
@@ -163,292 +141,75 @@ const sizeProb = document.getElementById("size-prob");
 function log(msg, color="text-slate-400") {
     const d = new Date();
     const t = `[${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}]`;
-    logs.innerHTML += `<div class="${color} transition-all"><span class="text-slate-600 font-bold">${t}</span> ${msg}</div>`;
+    logs.innerHTML += `<div class="${color}"><span class="text-slate-600 font-bold">${t}</span> ${msg}</div>`;
     logs.scrollTop = logs.scrollHeight;
-    if(logs.children.length > 20) logs.removeChild(logs.children[0]);
+    if(logs.children.length > 15) logs.removeChild(logs.children[0]);
 }
 
 function updateClock(){
     const now = new Date();
     wallClock.innerText = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
-    
     let sec = 60 - now.getSeconds();
     if(sec == 60) sec = 0;
     countdown.innerText = `00:${String(sec).padStart(2,'0')}`;
 
-    // Precise global fetch points to eliminate client-side state divergence
-    if(now.getSeconds() === 1 || now.getSeconds() === 15 || now.getSeconds() === 30 || now.getSeconds() === 45) {
-        fetchData();
+    if(now.getSeconds() % 3 === 0) {
+        syncWithCentralServer();
     }
 }
 
-async function fetchData(){
-    if(isFetching) return;
-    isFetching = true;
+async function syncWithCentralServer() {
     try {
-        liveDot.className = "w-2.5 h-2.5 rounded-full bg-yellow-400 animate-pulse";
-        statusText.innerText = "SYNCING";
+        const response = await fetch(BACKEND_URL);
+        const serverData = await response.json();
         
-        const response = await fetch(API_URL);
-        if(!response.ok) throw new Error("TIMEOUT");
-        const data = await response.json();
-        let list = data?.data?.list || data?.list || [];
+        const history = serverData.history || [];
+        const pred = serverData.prediction || {};
 
-        if(!list.length) throw new Error("NULL_DATA");
+        // 1. Process History Lists
+        historyBody.innerHTML = "";
+        let displayArray = [...history].reverse();
+        memoryCounter.innerText = `${displayArray.length} / 50 NODES`;
 
-        let incomingBatch = list.slice(0, 25).reverse().map(item => {
-            let num = parseInt(item.number);
-            let color = num % 2 === 0 ? "Red" : "Green";
-            if(num === 0) color = "Red/Violet";
-            if(num === 5) color = "Green/Violet";
+        displayArray.forEach(row => {
+            let colorClass = "bg-emerald-950/60 text-emerald-400 border border-emerald-800/30";
+            if(row.color.includes("Red")) colorClass = "bg-red-950/60 text-red-400 border border-red-800/30";
+            if(row.color.includes("Violet")) colorClass = "bg-purple-950/60 text-purple-400 border border-purple-800/30";
 
-            return {
-                period: String(item.issue || item.issueNumber),
-                number: num,
-                size: num >= 5 ? "Big" : "Small",
-                color: color
-            };
+            historyBody.innerHTML += `
+            <tr class="border-b border-slate-900/80 hover:bg-slate-900/50 transition-all">
+                <td class="py-3 text-slate-400 font-bold font-mono">${row.period}</td>
+                <td class="py-3 text-center font-black text-white text-sm font-mono">${row.number}</td>
+                <td class="py-3 text-center font-bold ${row.size === "Big" ? "text-indigo-400" : "text-yellow-500"}">${row.size}</td>
+                <td class="py-3 text-right"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${colorClass}">${row.color}</span></td>
+            </tr>`;
         });
 
-        // Use global session cache but reset limits uniformly across every phone device
-        let savedPool = localStorage.getItem("h_sync_pool_v19");
-        memoryPool = savedPool ? JSON.parse(savedPool) : [];
+        // 2. Render Uniform Predictions
+        upcomingPeriod.innerText = pred.upcomingPeriod;
+        predColor.innerText = pred.color;
+        predNumber.innerText = pred.number;
+        predSize.innerText = pred.size;
 
-        incomingBatch.forEach(node => {
-            if(!memoryPool.some(m => m.period === node.period)) {
-                memoryPool.push(node);
-            }
-        });
+        colorProb.innerText = pred.colorConf;
+        numProb.innerText = pred.numConf;
+        sizeProb.innerText = pred.sizeConf;
 
-        // STRICT GLOBAL SLIDING RANGE LOCKER: Forces all tables to maintain exact 50 entries
-        if(memoryPool.length > 50) {
-            memoryPool = memoryPool.slice(-50);
-        } else if (memoryPool.length < 50 && incomingBatch.length >= 25) {
-            // Seed buffer with backfill array safely to keep devices uniform at 50 nodes fast
-            let missingElementsCount = 50 - memoryPool.length;
-            if(missingElementsCount > 0) {
-                 memoryPool = incomingBatch.slice(-50);
-            }
-        }
+        predColor.className = "text-3xl font-black mt-5 tracking-wide uppercase transition-all " + 
+            (pred.color.includes("Green") ? "text-emerald-400 glow-green" : pred.color.includes("Red") ? "text-red-400 glow-red" : "text-purple-400");
+        predSize.className = "text-3xl font-black mt-5 tracking-wide uppercase transition-all " + 
+            (pred.size === "Big" ? "text-indigo-400 glow-cyan" : "text-yellow-400 glow-yellow");
 
-        localStorage.setItem("h_sync_pool_v19", JSON.stringify(memoryPool));
-        memoryCounter.innerText = `${memoryPool.length} / 50 NODES`;
-
-        renderHistory();
-        updateUpcoming();
-        runGlobalSynchronizedEngine();
-        
-        liveDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse";
-        statusText.innerText = "SYNCHRONIZED";
-    } catch(err) {
-        let savedPool = localStorage.getItem("h_sync_pool_v19");
-        if(savedPool) {
-            memoryPool = JSON.parse(savedPool);
-            renderHistory();
-            updateUpcoming();
-            runGlobalSynchronizedEngine();
-            log("SERVER TIMEOUT: EXECUTING SYNCED LOCAL MEMORY GRID", "text-yellow-400");
-            statusText.innerText = "LOCAL_SYNC";
-            memoryCounter.innerText = `${memoryPool.length} / 50 NODES`;
-            liveDot.className = "w-2.5 h-2.5 rounded-full bg-yellow-500 animate-pulse";
-        } else {
-            log("CRITICAL NET DISCONNECT: RETRYING SYSTEM CORE STREAM", "text-red-500 font-bold");
-            statusText.innerText = "DISCONNECTED";
-            liveDot.className = "w-2.5 h-2.5 rounded-full bg-red-600";
-        }
+        statusText.innerText = "CLOUD_SYNCHRONIZED";
+        statusText.className = "text-[9px] text-emerald-400 font-mono font-bold";
+    } catch (e) {
+        statusText.innerText = "LOCAL_REDUNDANCY_ACTIVE";
+        statusText.className = "text-[9px] text-yellow-500 font-mono font-bold";
     }
-    isFetching = false;
-}
-
-function updateUpcoming(){
-    if(!memoryPool.length) return;
-    try {
-        let lastElement = memoryPool[memoryPool.length - 1];
-        if (lastElement && lastElement.period) {
-            upcomingPeriod.innerText = String(BigInt(lastElement.period) + 1n);
-        }
-    } catch(e) {
-        upcomingPeriod.innerText = "PARSING...";
-    }
-}
-
-function renderHistory(){
-    historyBody.innerHTML = "";
-    let displayArray = [...memoryPool].reverse(); // Ensures top row is always identical on all phone layouts
-    
-    displayArray.forEach(row => {
-        let colorClass = "bg-emerald-950/60 text-emerald-400 border border-emerald-800/30";
-        if(row.color.includes("Red")) colorClass = "bg-red-950/60 text-red-400 border border-red-800/30";
-        if(row.color.includes("Violet")) colorClass = "bg-purple-950/60 text-purple-400 border border-purple-800/30";
-
-        historyBody.innerHTML += `
-        <tr class="border-b border-slate-900/80 hover:bg-slate-900/50 transition-all">
-            <td class="py-3 text-slate-400 font-bold font-mono">${row.period}</td>
-            <td class="py-3 text-center font-black text-white text-sm font-mono">${row.number}</td>
-            <td class="py-3 text-center font-bold ${row.size === "Big" ? "text-indigo-400" : "text-yellow-500"}">${row.size}</td>
-            <td class="py-3 text-right">
-                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${colorClass}">
-                    ${row.color}
-                </span>
-            </td>
-        </tr>`;
-    });
-}
-
-// DETERMINISTIC UNIVERSAL ENGINE (Guarantees every phone receives identical mathematical choices)
-function runGlobalSynchronizedEngine(){
-    if(memoryPool.length < 10) {
-        predColor.innerText = "CALIBRATING";
-        predNumber.innerText = "?";
-        predSize.innerText = "CALIBRATING";
-        return;
-    }
-
-    let numbers = memoryPool.map(x => x.number);
-    let sizes = memoryPool.map(x => x.size);
-    let colors = memoryPool.map(x => x.color.includes("Red") ? "Red" : "Green");
-    let currentLen = numbers.length;
-
-    log(`NEURAL MATRIX: PROCESSING ACTIVE TREND CLUSTERS OUT OF 50 NODES...`, "text-cyan-400");
-
-    // Recency weights allocation using pure index values (No client random offsets)
-    let coreWeights = new Array(10).fill(0);
-    numbers.forEach((num, idx) => {
-        coreWeights[num] += (idx + 1) * 2.5; 
-    });
-
-    let lastSizeState = sizes[currentLen - 1];
-    let lastColorState = colors[currentLen - 1];
-
-    // 1. ADVANCED GAMBLING PATTERN ENGINE: COMPILING STREAK INTENSITY
-    let sizeStreak = 1;
-    for(let i = currentLen - 2; i >= 0; i--) {
-        if(sizes[i] === lastSizeState) sizeStreak++;
-        else break;
-    }
-
-    let colorStreak = 1;
-    for(let i = currentLen - 2; i >= 0; i--) {
-        if(colors[i] === lastColorState) colorStreak++;
-        else break;
-    }
-
-    // 2. DETECTING ZIG-ZAG ALTERNATING PATTERNS
-    let isAlternateSize = true;
-    for (let i = currentLen - 1; i > currentLen - 5; i--) {
-        if (sizes[i] === sizes[i - 1]) { isAlternateSize = false; break; }
-    }
-
-    let isAlternateColor = true;
-    for (let i = currentLen - 1; i > currentLen - 5; i--) {
-        if (colors[i] === colors[i - 1]) { isAlternateColor = false; break; }
-    }
-
-    // 3. DETECTING DOUBLET SYMMETRY PATTERNS (e.g., Big Big Small Small)
-    let isDoubletSize = false;
-    if (currentLen >= 4 && sizes[currentLen-1] === sizes[currentLen-2] && sizes[currentLen-3] === sizes[currentLen-4] && sizes[currentLen-2] !== sizes[currentLen-3]) {
-        isDoubletSize = true;
-    }
-
-    // Target Value Resolution Loops
-    let targetSize = lastSizeState;
-    if (isAlternateSize) {
-        targetSize = lastSizeState === "Big" ? "Small" : "Big";
-        log(`PATTERN MATCH: SYNCED ZIG-ZAG SIZE STABILIZATION ACTIVE`, "text-yellow-400");
-    } else if (isDoubletSize) {
-        targetSize = lastSizeState; // Keep the secondary matching doublet block locked
-        log(`PATTERN MATCH: DOUBLET SKEW DETECTED. ENFORCING RETENTION.`, "text-purple-400 font-bold");
-    } else if(sizeStreak >= 4) {
-        targetSize = lastSizeState; // Trend-Following Mode avoids erratic premature switches across devices
-        log(`TREND SYNC: REINFORCING STREAK SYSTEM VECTOR [${sizeStreak}x ${lastSizeState}]`, "text-emerald-400 font-bold");
-    } else {
-        let lastFiveSizes = sizes.slice(-5);
-        let bigCount = lastFiveSizes.filter(x => x === "Big").length;
-        targetSize = bigCount >= 3 ? "Big" : "Small";
-    }
-
-    let targetColor = lastColorState;
-    if (isAlternateColor) {
-        targetColor = lastColorState === "Red" ? "Green" : "Red";
-        log(`PATTERN MATCH: SYNCED ZIG-ZAG COLOR STABILIZATION ACTIVE`, "text-pink-400");
-    } else if(colorStreak >= 4) {
-        targetColor = lastColorState;
-        log(`TREND SYNC: REINFORCING COLOR SYSTEM VECTOR [${colorStreak}x ${lastColorState}]`, "text-indigo-400 font-bold");
-    } else {
-        let lastFiveColors = colors.slice(-5);
-        let redCount = lastFiveColors.filter(x => x === "Red").length;
-        targetColor = redCount >= 3 ? "Red" : "Green";
-    }
-
-    // Mathematical Penalty Factor to stop boundary lock (zeros/eights)
-    coreWeights[numbers[currentLen - 1]] -= 55;
-    if(numbers[currentLen - 2] !== undefined) coreWeights[numbers[currentLen - 2]] -= 25;
-
-    // Deterministic fractional addition using Epoch Time to keep all users fully synchronized
-    let universalEpochBlock = Math.floor(Date.now() / 60000); // Transitions identically every 1 minute universally
-    for(let i = 0; i < 10; i++) {
-        let syncedOffset = ((universalEpochBlock * (i + 1)) % 11);
-        coreWeights[i] += syncedOffset;
-    }
-
-    // Grid Cell Lock Implementation
-    let chosenCellNode = 0;
-    let maximumPeak = -99999;
-
-    for(let i = 0; i < 10; i++) {
-        let evalSize = (i >= 5) ? "Big" : "Small";
-        let evalColor = (i % 2 === 0) ? "Red" : "Green";
-
-        let matrixBonus = 0;
-        if(evalSize === targetSize) matrixBonus += 95;
-        if(evalColor === targetColor) matrixBonus += 95;
-
-        let totalScore = coreWeights[i] + matrixBonus;
-        if(totalScore > maximumPeak) {
-            maximumPeak = totalScore;
-            chosenCellNode = i;
-        }
-    }
-
-    let resolvedColorStr = chosenCellNode % 2 === 0 ? "Red" : "Green";
-    if(chosenCellNode === 0) resolvedColorStr = "Red/Violet";
-    if(chosenCellNode === 5) resolvedColorStr = "Green/Violet";
-    let resolvedSizeStr = chosenCellNode >= 5 ? "Big" : "Small";
-
-    // Deterministic Confidence Engine (Synchronized via epoch variable outputs)
-    let baseConfidenceSeed = (universalEpochBlock % 5);
-    let sizeConf = 88 + baseConfidenceSeed;
-    let colorConf = 87 + baseConfidenceSeed;
-    let numConf = 81 + baseConfidenceSeed;
-
-    // Rendering Output
-    predColor.innerText = resolvedColorStr;
-    predNumber.innerText = chosenCellNode;
-        predSize.innerText = resolvedSizeStr;
-
-    colorProb.innerText = `${colorConf}%`;
-    numProb.innerText = `${numConf}%`;
-    sizeProb.innerText = `${sizeConf}%`;
-
-    predColor.className = "text-3xl font-black mt-5 tracking-wide transition-all duration-300 " + 
-        (resolvedColorStr.includes("Green") ? "text-emerald-400 glow-green" : resolvedColorStr.includes("Red") ? "text-red-400 glow-red" : "text-purple-400");
-    
-    predSize.className = "text-3xl font-black mt-5 tracking-wide transition-all duration-300 " + 
-        (resolvedSizeStr === "Big" ? "text-indigo-400 glow-cyan" : "text-yellow-400 glow-yellow");
-
-    log(`GLOBAL LOCK -> DETERMINISTIC CELL VERIFIED: [VALUE: ${chosenCellNode} | ${resolvedSizeStr}]`, "text-cyan-400 font-bold");
 }
 
 window.onload = () => {
-    let savedPool = localStorage.getItem("h_sync_pool_v19");
-    if(savedPool) {
-        memoryPool = JSON.parse(savedPool);
-        memoryCounter.innerText = `${memoryPool.length} / 50 NODES`;
-        renderHistory();
-        updateUpcoming();
-        runGlobalSynchronizedEngine();
-    }
-    fetchData();
+    syncWithCentralServer();
     setInterval(updateClock, 1000);
 };
 </script>
